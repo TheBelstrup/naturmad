@@ -659,7 +659,13 @@
                 iconCont.classList.remove('text-green-800');
                 label.classList.add('text-stone-600');
             }
-            render();
+
+			const appContent = document.getElementById('app-content');
+		    if (appContent.innerHTML.includes('Mine Fund')) {
+		        renderMySpots(); // Opdater listen med det samme
+		    } else {
+		        render(); // Ellers kør din normale forside-render
+		    }
         }
 
 		function initOverviewMap(spots) {
@@ -1355,30 +1361,44 @@
 		    const spots = JSON.parse(localStorage.getItem('mySpots')) || [];
 		    const container = document.getElementById('app-content');
 		    
-		    // FILTRERING: Bruger den måned du har valgt i handleSeasonChange (f.eks. currentMonth)
+		    // FILTRERING: Vi kigger på databasens sæson-data for det gemte ID
 		    const filteredSpots = spots.filter(spot => {
-		        const plant = database[spot.id];
-		        return plant && plant.months.includes(currentMonth);
+		        const plantInfo = database[spot.id];
+		        
+		        // 1. Hvis planten ikke findes i databasen (sikkerhed), skjul den
+		        if (!plantInfo) return false;
+		
+		        // 2. Hvis filteret er 'all', vis alt
+		        if (activeSeason === 'all') return true;
+		
+		        // 3. BIOLOGISK LOGIK: Vis spottet hvis den valgte måned er i plantens måned-liste
+		        // Dette lader dig se spottet i hele dens levetid, ikke kun da du fandt den.
+		        return plantInfo.months && plantInfo.months.includes(activeSeason);
 		    });
 		
 		    if (filteredSpots.length === 0) {
 		        container.innerHTML = `
 		            <div class="text-center py-20 fade-in px-8">
-		                <p class="text-stone-400 italic">Ingen fund i sæson (${currentMonth})...</p>
-		                <button onclick="renderHome()" class="mt-4 text-[10px] font-black uppercase tracking-widest text-green-800">Se alle arter</button>
+		                <p class="text-stone-400 italic">Ingen af dine gemte arter gror i ${activeSeason.toUpperCase()}...</p>
+		                <button onclick="renderHome()" class="mt-4 text-[10px] font-black uppercase text-green-800 tracking-widest">Se hvad der er i sæson nu</button>
 		            </div>`;
 		        return;
 		    }
 		
 		    container.innerHTML = `
 		        <div class="fade-in space-y-6 pb-20">
-		            <div class="text-center">
+		            <div class="text-center px-4">
 		                <h2 class="text-3xl font-black text-stone-900 uppercase italic tracking-tighter">Mine Fund 📍</h2>
-		                <p class="text-[10px] text-green-800 font-bold uppercase tracking-widest mt-1 italic">${currentMonth} Sæson</p>
+		                <p class="text-[10px] text-green-800 font-bold uppercase tracking-widest mt-1 italic">
+		                    Viser fund mulige i: ${activeSeason === 'all' ? 'HELE ÅRET' : activeSeason.toUpperCase()}
+		                </p>
 		            </div>
 		
-		            <div class="card overflow-hidden shadow-xl border-stone-100 mx-4">
+		            <div class="card overflow-hidden shadow-xl border-stone-100 mx-4 relative">
 		                <div id="overview-map" style="width: 100%; height: 350px;"></div>
+		                <div class="absolute top-4 right-4 z-[1000] bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[8px] font-black uppercase shadow-sm border border-stone-100">
+		                    ${filteredSpots.length} aktive spots
+		                </div>
 		            </div>
 		
 		            <div class="space-y-3 px-4">
@@ -1387,12 +1407,21 @@
 		                    return `
 		                    <div class="card p-5 border-stone-100 flex justify-between items-center active:scale-[0.98] transition-transform" 
 		                         onclick="renderResult('${spot.id}')">
-		                        <div>
-		                            <div class="id-label !mb-0 text-[8px] opacity-40">${new Date(spot.location.timestamp).toLocaleDateString('da-DK')}</div>
+		                        <div class="flex-1">
+		                            <div class="flex items-center gap-2 mb-1">
+		                                <span class="id-label !mb-0 text-[8px] opacity-40">Oprindeligt fundet: ${new Date(spot.location.timestamp).toLocaleDateString('da-DK')}</span>
+		                            </div>
 		                            <h4 class="text-xl font-black uppercase italic tracking-tighter text-stone-900">${info.name}</h4>
-		                            <p class="text-[9px] text-green-700 font-bold uppercase tracking-widest">Læs om fundet →</p>
+		                            <div class="flex gap-1 mt-1">
+		                                ${info.months.map(m => `
+		                                    <span class="text-[7px] font-bold uppercase px-1 rounded ${m === activeSeason ? 'bg-green-800 text-white' : 'bg-stone-100 text-stone-400'}">${m}</span>
+		                                `).join('')}
+		                            </div>
 		                        </div>
-		                        <button onclick="event.stopPropagation(); deleteSpot(${spots.length - 1 - index})" class="w-8 h-8 rounded-full bg-red-50 text-red-400 text-xs">✕</button>
+		                        <button onclick="event.stopPropagation(); deleteSpot(${spots.length - 1 - index})" 
+		                                class="ml-4 w-10 h-10 rounded-full bg-red-50 text-red-400 flex items-center justify-center text-xs">
+		                            ✕
+		                        </button>
 		                    </div>
 		                `}).join('')}
 		            </div>
@@ -1426,6 +1455,7 @@
     </script>
 </body>
 </html>
+
 
 
 
