@@ -3,12 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-	<link rel="manifest" href="manifest.json">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="#064e3b">
     <title>SikkerNatur Pro</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+	<link rel="manifest" href="manifest.json">
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+	<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+	<script src="https://cdn.tailwindcss.com"></script>
     <style>
         :root { --ios-bg: #fdfcfb; }
         body { 
@@ -841,6 +843,83 @@
             `;
         }
 
+		let map; // Global variabel til kortet
+
+		function showLocationEditor(name, loc) {
+		    const modalHtml = `
+		        <div id="location-editor" class="fixed inset-0 z-[110] flex flex-col bg-white">
+		            <div class="p-6 flex justify-between items-center border-b">
+		                <div>
+		                    <h3 class="font-black uppercase italic tracking-tighter leading-none">Præcisér sted</h3>
+		                    <p class="text-[10px] text-stone-400 font-bold uppercase mt-1">${name}</p>
+		                </div>
+		                <button onclick="closeLocationEditor()" class="text-stone-400 font-bold text-sm">Annuller</button>
+		            </div>
+		            
+		            <div class="relative flex-1 bg-stone-100">
+		                <div id="map-container" class="w-full h-full"></div>
+		                
+		                <div class="absolute inset-0 flex items-center justify-center pointer-events-none z-[1000]">
+		                    <div class="flex flex-col items-center translate-y-[-20px]">
+		                        <div class="bg-stone-900 text-white text-[8px] font-bold px-2 py-1 rounded mb-1 uppercase tracking-widest">Her gemmes fundet</div>
+		                        <span class="text-4xl drop-shadow-2xl">📍</span>
+		                    </div>
+		                </div>
+		
+		                <div class="absolute top-4 left-4 z-[1000] bg-white/90 backdrop-blur px-3 py-2 rounded-full shadow-sm border border-stone-200">
+		                    <p class="text-[9px] font-black text-green-800 uppercase tracking-tighter leading-none">GPS: +/- ${loc.acc}m</p>
+		                </div>
+		            </div>
+		
+		            <div class="p-8 bg-white shadow-[0_-10px_30px_rgba(0,0,0,0.05)]">
+		                <button onclick="saveFinalLocation('${name}', ${loc.acc})" 
+		                        class="w-full p-6 bg-green-800 text-white rounded-[24px] font-black text-xs uppercase tracking-widest shadow-lg active:scale-95 transition-transform">
+		                    Bekræft præcis placering
+		                </button>
+		            </div>
+		        </div>
+		    `;
+		    document.body.insertAdjacentHTML('beforeend', modalHtml);
+		
+		    // Initialiser kortet efter HTML er indsat
+		    setTimeout(() => {
+		        map = L.map('map-container', {
+		            zoomControl: false, // Vi gemmer knapperne for et rent look
+		            attributionControl: false
+		        }).setView([loc.lat, loc.lng], 18); // Zoom niveau 18 er godt til skov
+		
+		        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+		    }, 100);
+		}
+		
+		function saveFinalLocation(mushroomName, accuracy) {
+		    // Hent koordinaterne fra kortets nuværende center
+		    const center = map.getCenter();
+		    
+		    const newDiscovery = { 
+		        name: mushroomName, 
+		        location: { 
+		            lat: center.lat, 
+		            lng: center.lng, 
+		            acc: accuracy, 
+		            timestamp: new Date().toISOString() 
+		        } 
+		    };
+		    
+		    const existing = JSON.parse(localStorage.getItem('myMushroomSpots')) || [];
+		    existing.push(newDiscovery);
+		    localStorage.setItem('myMushroomSpots', JSON.stringify(existing));
+		    
+		    closeLocationEditor();
+		    alert("Dit hemmelige sted er gemt præcist!");
+		}
+		
+		function closeLocationEditor() {
+		    if(map) map.remove(); // Ryd op i hukommelsen
+		    const editor = document.getElementById('location-editor');
+		    if(editor) editor.remove();
+		}
+		
 		// Henter GPS-koordinater med høj præcision
 		const getPreciseLocation = () => {
 			return new Promise((resolve, reject) => {
@@ -862,25 +941,19 @@
 
 		// Håndterer "Gem"-knappen
 		async function handleSaveLocation(mushroomName) {
-			try {
-				const btn = event.currentTarget;
-				const originalText = btn.innerHTML;
-				btn.innerHTML = "Finder GPS..."; // Visuel feedback
-				
-				const location = await getPreciseLocation();
-				
-				const newDiscovery = { name: mushroomName, location: location };
-				const existingDiscoveries = JSON.parse(localStorage.getItem('myMushroomSpots')) || [];
-				existingDiscoveries.push(newDiscovery);
-				localStorage.setItem('myMushroomSpots', JSON.stringify(existingDiscoveries));
-
-				btn.innerHTML = "Lokation gemt! ✓";
-				setTimeout(() => { btn.innerHTML = originalText; }, 3000);
-				
-				alert(`Fundet gemt med en præcision på ${location.acc} meter!`);
-			} catch (error) {
-				alert("Fejl: " + (error.code === 1 ? "Giv venligst appen adgang til GPS." : error.message));
-			}
+		    try {
+		        const btn = event.currentTarget;
+		        btn.innerHTML = "Henter position...";
+		        
+		        const location = await getPreciseLocation();
+		        
+		        // I stedet for at gemme med det samme, åbner vi editoren
+		        showLocationEditor(mushroomName, location);
+		        
+		        btn.innerHTML = "📍 Gem dette sted"; // Reset knaptekst
+		    } catch (error) {
+		        alert("GPS fejl: " + error.message);
+		    }
 		}
 
 		// Hjælpefunktion til at generere Naturbasen-linket
@@ -1321,3 +1394,4 @@
     </script>
 </body>
 </html>
+
