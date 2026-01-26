@@ -669,32 +669,56 @@
         }
 
 		function initOverviewMap(spots) {
-		    setTimeout(() => {
-		        const overviewMap = L.map('overview-map', {
-		            zoomControl: true, // ZOOM TILFØJET
-		            attributionControl: false
-		        });
+			setTimeout(() => {
+				// Initialiser kortet med zoom-knapper (som du bad om tidligere)
+				const overviewMap = L.map('overview-map', {
+					zoomControl: true,
+					attributionControl: false
+				});
 		
-		        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(overviewMap);
+				L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(overviewMap);
 		
-		        const markers = [];
-		        spots.forEach(spot => {
-		            const marker = L.marker([spot.location.lat, spot.location.lng]).addTo(overviewMap);
-		            
-		            // Klik på markør -> renderResult
-		            marker.on('click', () => renderResult(spot.id));
-		            
-		            // Tooltip med navn
-		            marker.bindTooltip(database[spot.id].name, { direction: 'top', className: 'sans font-bold text-[10px] uppercase' });
-		            
-		            markers.push(marker);
-		        });
+				const markers = [];
+				
+				spots.forEach(spot => {
+					const info = database[spot.id];
+					if (!info) return;
 		
-		        if (markers.length > 0) {
-		            const group = new L.featureGroup(markers);
-		            overviewMap.fitBounds(group.getBounds().pad(0.3));
-		        }
-		    }, 100);
+					const marker = L.marker([spot.location.lat, spot.location.lng]).addTo(overviewMap);
+					
+					// Vi bygger indholdet til popuppen
+					// Vi tilføjer en 'onclick' direkte på div'en inde i popuppen
+					const popupContent = `
+						<div class="sans text-center p-2 cursor-pointer" onclick="renderResult('${spot.id}')">
+							<div class="text-[8px] uppercase font-black text-stone-400 mb-1">
+								${new Date(spot.location.timestamp).toLocaleDateString('da-DK')}
+							</div>
+							<div class="text-sm font-black uppercase italic tracking-tighter text-stone-900 mb-1">
+								${info.name}
+							</div>
+							<div class="text-[9px] text-green-700 font-bold uppercase tracking-widest border-t border-stone-100 pt-1">
+								Vis beskrivelse →
+							</div>
+						</div>
+					`;
+		
+					marker.bindPopup(popupContent, {
+						maxWidth: 200,
+						className: 'custom-mushroom-popup'
+					});
+		
+					markers.push(marker);
+				});
+		
+				// Autofit kortet så alle markører er synlige
+				if (markers.length > 0) {
+					const group = new L.featureGroup(markers);
+					overviewMap.fitBounds(group.getBounds().pad(0.3));
+				}
+				
+				// Gem kortet globalt hvis du vil kunne styre det andre steder fra
+				window.currentOverviewMap = overviewMap;
+			}, 100);
 		}
 		
         function renderStart() {
@@ -1456,6 +1480,7 @@
     </script>
 </body>
 </html>
+
 
 
 
