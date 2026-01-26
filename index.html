@@ -662,6 +662,47 @@
             render();
         }
 
+		function initOverviewMap(spots) {
+		    // Giv browseren et millisekund til at tegne div'en
+		    setTimeout(() => {
+		        const overviewMap = L.map('overview-map', {
+		            zoomControl: false,
+		            attributionControl: false
+		        });
+		
+		        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(overviewMap);
+		
+		        const markers = [];
+		        
+		        spots.forEach(spot => {
+		            const marker = L.marker([spot.location.lat, spot.location.lng]).addTo(overviewMap);
+		            marker.bindPopup(`
+		                <div class="sans text-center">
+		                    <strong class="uppercase italic tracking-tighter">${spot.name}</strong><br>
+		                    <span class="text-[10px] text-stone-500">${new Date(spot.location.timestamp).toLocaleDateString('da-DK')}</span>
+		                </div>
+		            `);
+		            markers.push(marker);
+		        });
+		
+		        // Sørg for at alle markører er synlige
+		        const group = new L.featureGroup(markers);
+		        overviewMap.fitBounds(group.getBounds().pad(0.1));
+		        
+		        // Gem kortet globalt så vi kan styre det fra listen
+		        window.currentOverviewMap = overviewMap;
+		    }, 100);
+		}
+		
+		// Hjælpefunktion: Når man trykker på listen, flyver kortet til det punkt
+		function focusSpot(index, lat, lng) {
+		    if (window.currentOverviewMap) {
+		        window.currentOverviewMap.flyTo([lat, lng], 18, {
+		            duration: 1.5
+		        });
+		    }
+		}
+		
         function renderStart() {
             document.getElementById('app-content').innerHTML = `
                 <div class="fade-in space-y-6">
@@ -911,7 +952,7 @@
 		    localStorage.setItem('myMushroomSpots', JSON.stringify(existing));
 		    
 		    closeLocationEditor();
-		    alert("Dit hemmelige sted er gemt præcist!");
+		    alert("Dit hemmelige sted er gemt");
 		}
 		
 		function closeLocationEditor() {
@@ -1325,49 +1366,55 @@
         }
 
 		function renderMySpots() {
-			const spots = JSON.parse(localStorage.getItem('myMushroomSpots')) || [];
-			let content = "";
-
-			if (spots.length === 0) {
-				content = `
-					<div class="text-center py-20">
-						<p class="text-stone-400 italic">Du har ikke gemt nogen hemmelige steder endnu...</p>
-					</div>`;
-			} else {
-				const cards = [...spots].reverse().map((spot, index) => `
-					<div class="card p-6 border-stone-100 mb-4 shadow-sm">
-						<div class="flex justify-between items-start mb-4">
-							<div>
-								<div class="id-label mb-1">${new Date(spot.location.timestamp).toLocaleDateString('da-DK')}</div>
-								<h3 class="text-xl font-black uppercase italic tracking-tighter text-stone-900">${spot.name}</h3>
-								<p class="text-[10px] text-stone-400 font-bold uppercase tracking-widest mt-1">Præcision: +/- ${spot.location.acc}m</p>
-							</div>
-						</div>
-						<div class="grid grid-cols-2 gap-3">
-							<a href="https://www.google.com/maps/search/?api=1&query=${spot.location.lat},${spot.location.lng}" 
-							   target="_blank" 
-							   class="p-4 bg-stone-900 text-white rounded-2xl text-[10px] font-black uppercase tracking-widest text-center">
-								Find vej 📍
-							</a>
-							<button onclick="deleteSpot(${spots.length - 1 - index})" 
-									class="p-4 bg-red-50 text-red-600 rounded-2xl text-[10px] font-black uppercase tracking-widest text-center">
-								Slet
-							</button>
-						</div>
-					</div>
-				`).join('');
-
-				content = `
-					<div class="fade-in space-y-6">
-						<div class="text-center mb-8">
-							<h2 class="text-3xl font-black text-stone-900 uppercase italic tracking-tighter">Mine Fund 📍</h2>
-							<button onclick="clearAllSpots()" class="text-[10px] font-black uppercase text-red-600 tracking-widest mt-2">Slet alle steder</button>
-						</div>
-						${cards}
-					</div>`;
-			}
-			
-			document.getElementById('app-content').innerHTML = content;
+		    const spots = JSON.parse(localStorage.getItem('myMushroomSpots')) || [];
+		    const container = document.getElementById('app-content');
+		    
+		    if (spots.length === 0) {
+		        container.innerHTML = `
+		            <div class="text-center py-20 fade-in">
+		                <p class="text-stone-400 italic">Du har ikke gemt nogen hemmelige steder endnu...</p>
+		                <button onclick="renderHome()" class="mt-4 text-green-800 font-black uppercase text-[10px] tracking-widest">Tilbage til start</button>
+		            </div>`;
+		        return;
+		    }
+		
+		    // Vi bygger layoutet: Først kortet, så listen
+		    container.innerHTML = `
+		        <div class="fade-in space-y-6 pb-20">
+		            <div class="text-center">
+		                <h2 class="text-3xl font-black text-stone-900 uppercase italic tracking-tighter leading-none">Mine Fund 📍</h2>
+		                <p class="text-[10px] text-stone-400 font-bold uppercase tracking-[0.2em] mt-2">Oversigt over dine hemmelige steder</p>
+		            </div>
+		
+		            <div class="card overflow-hidden shadow-xl border-stone-100 relative">
+		                <div id="overview-map" style="width: 100%; height: 350px;" class="bg-stone-100"></div>
+		                <div class="absolute bottom-4 left-4 z-[1000] bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[9px] font-black uppercase shadow-sm border border-stone-200">
+		                    ${spots.length} lokationer fundet
+		                </div>
+		            </div>
+		
+		            <div class="space-y-4 px-2">
+		                <div class="flex justify-between items-center px-2">
+		                    <h3 class="text-xs font-black uppercase tracking-widest text-stone-500 italic">Liste over steder</h3>
+		                    <button onclick="clearAllSpots()" class="text-[9px] font-black uppercase text-red-600 tracking-tighter">Slet alt</button>
+		                </div>
+		                ${[...spots].reverse().map((spot, index) => `
+		                    <div class="card p-5 border-stone-100 flex justify-between items-center group">
+		                        <div onclick="focusSpot(${spots.length - 1 - index}, ${spot.location.lat}, ${spot.location.lng})" class="cursor-pointer flex-1">
+		                            <div class="id-label !mb-0 text-[8px]">${new Date(spot.location.timestamp).toLocaleDateString('da-DK')}</div>
+		                            <h4 class="text-lg font-black uppercase italic tracking-tighter text-stone-900">${spot.name}</h4>
+		                        </div>
+		                        <div class="flex gap-2">
+		                            <button onclick="deleteSpot(${spots.length - 1 - index})" class="w-10 h-10 rounded-full bg-red-50 text-red-500 flex items-center justify-center text-xs">✕</button>
+		                        </div>
+		                    </div>
+		                `).join('')}
+		            </div>
+		        </div>
+		    `;
+		
+		    // Initialiser kortet med alle markører
+		    initOverviewMap(spots);
 		}
 
 		// Hjælpefunktioner til sletning
@@ -1394,4 +1441,5 @@
     </script>
 </body>
 </html>
+
 
