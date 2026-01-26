@@ -1,6 +1,6 @@
 {
-  "short_name": "SikkerNatur",
-  "name": "SikkerNatur Sanke-App",
+  "short_name": "NaturMad",
+  "name": "NaturMad Sanke-App",
   "icons": [
     {
       "src": "https://cdn-icons-png.flaticon.com/512/3571/3571714.png",
@@ -15,3 +15,4 @@
   "theme_color": "#064e3b"
 
 }
+
