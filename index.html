@@ -663,44 +663,32 @@
         }
 
 		function initOverviewMap(spots) {
-		    // Giv browseren et millisekund til at tegne div'en
 		    setTimeout(() => {
 		        const overviewMap = L.map('overview-map', {
-		            zoomControl: false,
+		            zoomControl: true, // ZOOM TILFØJET
 		            attributionControl: false
 		        });
 		
 		        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(overviewMap);
 		
 		        const markers = [];
-		        
 		        spots.forEach(spot => {
 		            const marker = L.marker([spot.location.lat, spot.location.lng]).addTo(overviewMap);
-		            marker.bindPopup(`
-		                <div class="sans text-center">
-		                    <strong class="uppercase italic tracking-tighter">${spot.name}</strong><br>
-		                    <span class="text-[10px] text-stone-500">${new Date(spot.location.timestamp).toLocaleDateString('da-DK')}</span>
-		                </div>
-		            `);
+		            
+		            // Klik på markør -> renderResult
+		            marker.on('click', () => renderResult(spot.id));
+		            
+		            // Tooltip med navn
+		            marker.bindTooltip(database[spot.id].name, { direction: 'top', className: 'sans font-bold text-[10px] uppercase' });
+		            
 		            markers.push(marker);
 		        });
 		
-		        // Sørg for at alle markører er synlige
-		        const group = new L.featureGroup(markers);
-		        overviewMap.fitBounds(group.getBounds().pad(0.1));
-		        
-		        // Gem kortet globalt så vi kan styre det fra listen
-		        window.currentOverviewMap = overviewMap;
+		        if (markers.length > 0) {
+		            const group = new L.featureGroup(markers);
+		            overviewMap.fitBounds(group.getBounds().pad(0.3));
+		        }
 		    }, 100);
-		}
-		
-		// Hjælpefunktion: Når man trykker på listen, flyver kortet til det punkt
-		function focusSpot(index, lat, lng) {
-		    if (window.currentOverviewMap) {
-		        window.currentOverviewMap.flyTo([lat, lng], 18, {
-		            duration: 1.5
-		        });
-		    }
 		}
 		
         function renderStart() {
@@ -913,7 +901,7 @@
 		            </div>
 		
 		            <div class="p-8 bg-white shadow-[0_-10px_30px_rgba(0,0,0,0.05)]">
-		                <button onclick="saveFinalLocation('${name}', ${loc.acc})" 
+		                <button onclick="saveFinalLocation('${id}', ${loc.acc})" 
 		                        class="w-full p-6 bg-green-800 text-white rounded-[24px] font-black text-xs uppercase tracking-widest shadow-lg active:scale-95 transition-transform">
 		                    Bekræft præcis placering
 		                </button>
@@ -933,12 +921,11 @@
 		    }, 100);
 		}
 		
-		function saveFinalLocation(mushroomName, accuracy) {
-		    // Hent koordinaterne fra kortets nuværende center
+		function saveFinalLocation(id, accuracy) {
 		    const center = map.getCenter();
 		    
 		    const newDiscovery = { 
-		        name: mushroomName, 
+		        id: id, // Vi gemmer nu ID'et direkte
 		        location: { 
 		            lat: center.lat, 
 		            lng: center.lng, 
@@ -947,9 +934,9 @@
 		        } 
 		    };
 		    
-		    const existing = JSON.parse(localStorage.getItem('myMushroomSpots')) || [];
+		    const existing = JSON.parse(localStorage.getItem('mySpots')) || [];
 		    existing.push(newDiscovery);
-		    localStorage.setItem('myMushroomSpots', JSON.stringify(existing));
+		    localStorage.setItem('mySpots', JSON.stringify(existing));
 		    
 		    closeLocationEditor();
 		    alert("Dit hemmelige sted er gemt");
@@ -981,17 +968,16 @@
 		};
 
 		// Håndterer "Gem"-knappen
-		async function handleSaveLocation(mushroomName) {
+		async function handleSaveLocation(id) {
 		    try {
 		        const btn = event.currentTarget;
-		        btn.innerHTML = "Henter position...";
-		        
+		        btn.innerHTML = "Finder GPS...";
 		        const location = await getPreciseLocation();
 		        
-		        // I stedet for at gemme med det samme, åbner vi editoren
-		        showLocationEditor(mushroomName, location);
+		        // Åbner editoren og sender ID med
+		        showLocationEditor(id, location);
 		        
-		        btn.innerHTML = "📍 Gem dette sted"; // Reset knaptekst
+		        btn.innerHTML = "<span>📍</span> Gem dette hemmelige sted";
 		    } catch (error) {
 		        alert("GPS fejl: " + error.message);
 		    }
@@ -1240,7 +1226,7 @@
                     </div>
 
 					<div class="mt-6">
-						<button onclick="handleSaveLocation('${res.name}')" 
+						<button onclick="handleSaveLocation('${id}')" 
 								class="w-full p-6 bg-green-800 text-white rounded-[24px] font-black text-[11px] uppercase tracking-widest text-center btn-active sans shadow-lg flex items-center justify-center gap-3">
 							<span>📍</span> Gem dette hemmelige sted
 						</button>
@@ -1366,70 +1352,69 @@
         }
 
 		function renderMySpots() {
-		    const spots = JSON.parse(localStorage.getItem('myMushroomSpots')) || [];
+		    const spots = JSON.parse(localStorage.getItem('mySpots')) || [];
 		    const container = document.getElementById('app-content');
 		    
-		    if (spots.length === 0) {
+		    // FILTRERING: Bruger den måned du har valgt i handleSeasonChange (f.eks. currentMonth)
+		    const filteredSpots = spots.filter(spot => {
+		        const plant = database[spot.id];
+		        return plant && plant.months.includes(currentMonth);
+		    });
+		
+		    if (filteredSpots.length === 0) {
 		        container.innerHTML = `
-		            <div class="text-center py-20 fade-in">
-		                <p class="text-stone-400 italic">Du har ikke gemt nogen hemmelige steder endnu...</p>
-		                <button onclick="renderHome()" class="mt-4 text-green-800 font-black uppercase text-[10px] tracking-widest">Tilbage til start</button>
+		            <div class="text-center py-20 fade-in px-8">
+		                <p class="text-stone-400 italic">Ingen fund i sæson (${currentMonth})...</p>
+		                <button onclick="renderHome()" class="mt-4 text-[10px] font-black uppercase tracking-widest text-green-800">Se alle arter</button>
 		            </div>`;
 		        return;
 		    }
 		
-		    // Vi bygger layoutet: Først kortet, så listen
 		    container.innerHTML = `
 		        <div class="fade-in space-y-6 pb-20">
 		            <div class="text-center">
-		                <h2 class="text-3xl font-black text-stone-900 uppercase italic tracking-tighter leading-none">Mine Fund 📍</h2>
-		                <p class="text-[10px] text-stone-400 font-bold uppercase tracking-[0.2em] mt-2">Oversigt over dine hemmelige steder</p>
+		                <h2 class="text-3xl font-black text-stone-900 uppercase italic tracking-tighter">Mine Fund 📍</h2>
+		                <p class="text-[10px] text-green-800 font-bold uppercase tracking-widest mt-1 italic">${currentMonth} Sæson</p>
 		            </div>
 		
-		            <div class="card overflow-hidden shadow-xl border-stone-100 relative">
-		                <div id="overview-map" style="width: 100%; height: 350px;" class="bg-stone-100"></div>
-		                <div class="absolute bottom-4 left-4 z-[1000] bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[9px] font-black uppercase shadow-sm border border-stone-200">
-		                    ${spots.length} lokationer fundet
-		                </div>
+		            <div class="card overflow-hidden shadow-xl border-stone-100 mx-4">
+		                <div id="overview-map" style="width: 100%; height: 350px;"></div>
 		            </div>
 		
-		            <div class="space-y-4 px-2">
-		                <div class="flex justify-between items-center px-2">
-		                    <h3 class="text-xs font-black uppercase tracking-widest text-stone-500 italic">Liste over steder</h3>
-		                    <button onclick="clearAllSpots()" class="text-[9px] font-black uppercase text-red-600 tracking-tighter">Slet alt</button>
-		                </div>
-		                ${[...spots].reverse().map((spot, index) => `
-		                    <div class="card p-5 border-stone-100 flex justify-between items-center group">
-		                        <div onclick="focusSpot(${spots.length - 1 - index}, ${spot.location.lat}, ${spot.location.lng})" class="cursor-pointer flex-1">
-		                            <div class="id-label !mb-0 text-[8px]">${new Date(spot.location.timestamp).toLocaleDateString('da-DK')}</div>
-		                            <h4 class="text-lg font-black uppercase italic tracking-tighter text-stone-900">${spot.name}</h4>
+		            <div class="space-y-3 px-4">
+		                ${filteredSpots.reverse().map((spot, index) => {
+		                    const info = database[spot.id];
+		                    return `
+		                    <div class="card p-5 border-stone-100 flex justify-between items-center active:scale-[0.98] transition-transform" 
+		                         onclick="renderResult('${spot.id}')">
+		                        <div>
+		                            <div class="id-label !mb-0 text-[8px] opacity-40">${new Date(spot.location.timestamp).toLocaleDateString('da-DK')}</div>
+		                            <h4 class="text-xl font-black uppercase italic tracking-tighter text-stone-900">${info.name}</h4>
+		                            <p class="text-[9px] text-green-700 font-bold uppercase tracking-widest">Læs om fundet →</p>
 		                        </div>
-		                        <div class="flex gap-2">
-		                            <button onclick="deleteSpot(${spots.length - 1 - index})" class="w-10 h-10 rounded-full bg-red-50 text-red-500 flex items-center justify-center text-xs">✕</button>
-		                        </div>
+		                        <button onclick="event.stopPropagation(); deleteSpot(${spots.length - 1 - index})" class="w-8 h-8 rounded-full bg-red-50 text-red-400 text-xs">✕</button>
 		                    </div>
-		                `).join('')}
+		                `}).join('')}
 		            </div>
 		        </div>
 		    `;
 		
-		    // Initialiser kortet med alle markører
-		    initOverviewMap(spots);
+		    initOverviewMap(filteredSpots);
 		}
 
 		// Hjælpefunktioner til sletning
 		function deleteSpot(index) {
 			if (confirm("Vil du slette dette sted?")) {
-				const spots = JSON.parse(localStorage.getItem('myMushroomSpots')) || [];
+				const spots = JSON.parse(localStorage.getItem('mySpots')) || [];
 				spots.splice(index, 1);
-				localStorage.setItem('myMushroomSpots', JSON.stringify(spots));
+				localStorage.setItem('mySpots', JSON.stringify(spots));
 				renderMySpots();
 			}
 		}
 
 		function clearAllSpots() {
 			if (confirm("Er du HELT sikker på, at du vil slette alle dine hemmelige steder?")) {
-				localStorage.removeItem('myMushroomSpots');
+				localStorage.removeItem('mySpots');
 				renderMySpots();
 			}
 		}
@@ -1441,5 +1426,6 @@
     </script>
 </body>
 </html>
+
 
 
