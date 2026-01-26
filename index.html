@@ -974,16 +974,17 @@
 		};
 
 		// Håndterer "Gem"-knappen
-		async function handleSaveLocation(id) {
+		async function handleSaveLocation(id, e) {
 		    try {
-		        const btn = event.currentTarget;
-		        btn.innerHTML = "Finder GPS...";
+		        const btn = e.currentTarget;
+				const originalContent = btn.innerHTML;
+		        btn.innerHTML = "Finder din position...";
 		        const location = await getPreciseLocation();
 		        
 		        // Åbner editoren og sender ID med
 		        showLocationEditor(id, location);
 		        
-		        btn.innerHTML = "<span>📍</span> Gem dette hemmelige sted";
+		        btn.innerHTML = originalContent;
 		    } catch (error) {
 		        alert("GPS fejl: " + error.message);
 		    }
@@ -1232,7 +1233,7 @@
                     </div>
 
 					<div class="mt-6">
-						<button onclick="handleSaveLocation('${id}')" 
+						<button onclick="handleSaveLocation('${id}', event)" 
 								class="w-full p-6 bg-green-800 text-white rounded-[24px] font-black text-[11px] uppercase tracking-widest text-center btn-active sans shadow-lg flex items-center justify-center gap-3">
 							<span>📍</span> Gem dette hemmelige sted
 						</button>
@@ -1455,6 +1456,7 @@
     </script>
 </body>
 </html>
+
 
 
 
