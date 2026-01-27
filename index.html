@@ -667,78 +667,6 @@
 		        render(); // Ellers kør din normale forside-render
 		    }
         }
-
-		function initOverviewMap(spots) {
-		    setTimeout(() => {
-		        // Ryd containeren for at undgå "Map already initialized" fejl
-		        const mapContainer = L.DomUtil.get('overview-map');
-		        if (mapContainer != null) {
-		            mapContainer._leaflet_id = null;
-		        }
-		
-		        const overviewMap = L.map('overview-map', {
-		            zoomControl: true,
-		            attributionControl: false
-		        });
-		
-		        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(overviewMap);
-		
-		        const markers = [];
-		        
-		        spots.forEach(spot => {
-		            const info = database[spot.id];
-		            if (!info) return;
-		
-		            const marker = L.marker([spot.location.lat, spot.location.lng]).addTo(overviewMap);
-		            
-		            // Generer måneds-badges til popup (ligesom i listen)
-		            const monthsHtml = info.months.map(m => `
-		                <span style="
-		                    display: inline-block;
-		                    font-size: 7px;
-		                    font-weight: 800;
-		                    text-transform: uppercase;
-		                    padding: 1px 4px;
-		                    border-radius: 3px;
-		                    margin: 0 1px;
-		                    ${m === activeSeason ? 'background-color: #064e3b; color: white;' : 'background-color: #f5f5f4; color: #a8a29e;'}
-		                ">${m}</span>
-		            `).join('');
-		
-		            const popupContent = `
-		                <div class="sans text-center" style="min-width: 140px; padding: 5px;">
-		                    <div style="font-size: 8px; text-transform: uppercase; font-weight: 900; color: #a8a29e; margin-bottom: 2px;">
-		                        Fundet: ${new Date(spot.location.timestamp).toLocaleDateString('da-DK')}
-		                    </div>
-		                    <div style="font-size: 14px; font-weight: 900; text-transform: uppercase; font-style: italic; letter-spacing: -0.05em; color: #1c1917; margin-bottom: 6px;">
-		                        ${info.name}
-		                    </div>
-		                    
-		                    <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 2px; margin-bottom: 10px;">
-		                        ${monthsHtml}
-		                    </div>
-		
-		                    <button onclick="renderResult('${spot.id}')" 
-		                            style="width: 100%; padding: 8px 0; background-color: #064e3b; color: white; font-size: 9px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.1em; border: none; border-radius: 8px; cursor: pointer;">
-		                        Se Guide →
-		                    </button>
-		                </div>
-		            `;
-		
-		            marker.bindPopup(popupContent, {
-		                closeButton: false,
-		                offset: L.point(0, -15)
-		            });
-		
-		            markers.push(marker);
-		        });
-		
-		        if (markers.length > 0) {
-		            const group = new L.featureGroup(markers);
-		            overviewMap.fitBounds(group.getBounds().pad(0.3));
-		        }
-		    }, 100);
-		}
 		
         function renderStart() {
             document.getElementById('app-content').innerHTML = `
@@ -923,6 +851,72 @@
 
 		let map; // Global variabel til kortet
 
+		function getDistance(lat1, lon1, lat2, lon2) {
+		    const R = 6371; // Jordens radius i km
+		    const dLat = (lat2 - lat1) * Math.PI / 180;
+		    const dLon = (lon2 - lon1) * Math.PI / 180;
+		    const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+		              Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLon/2) * Math.sin(dLon/2);
+		    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+		    const d = R * c;
+		    return d; // Returnerer afstand i km
+		}
+		
+		function initOverviewMap(spots) {
+		    setTimeout(() => {
+		        const mapContainer = L.DomUtil.get('overview-map');
+		        if (mapContainer != null) mapContainer._leaflet_id = null;
+		
+		        const overviewMap = L.map('overview-map', { zoomControl: false, attributionControl: false });
+		        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(overviewMap);
+		
+		        activeMarkers = {}; // Ryd kartoteket
+		        const markerArray = [];
+		
+		        spots.forEach(spot => {
+		            const marker = L.marker([spot.location.lat, spot.location.lng]).addTo(overviewMap);
+		            
+		            // Samme popup-indhold som vi lavede før...
+		            const monthsHtml = spot.info.months.map(m => `
+		                <span style="display:inline-block; font-size:7px; font-weight:800; padding:1px 4px; border-radius:3px; margin:0 1px; ${m === activeSeason ? 'background-color:#064e3b;color:white;' : 'background-color:#f5f5f4;color:#a8a29e;'}">${m}</span>
+		            `).join('');
+		
+		            const popupContent = `
+		                <div class="sans text-center" style="min-width:140px; padding:5px;">
+		                    <div style="font-size:14px; font-weight:900; text-transform:uppercase; font-style:italic; color:#1c1917; margin-bottom:6px;">${spot.info.name}</div>
+		                    <div style="display:flex; justify-content:center; gap:2px; margin-bottom:10px;">${monthsHtml}</div>
+		                    <button onclick="renderResult('${spot.id}')" style="width:100%; padding:8px 0; background-color:#064e3b; color:white; font-size:9px; font-weight:900; text-transform:uppercase; border:none; border-radius:8px;">Se Guide →</button>
+		                </div>
+		            `;
+		
+		            marker.bindPopup(popupContent, { closeButton: false, offset: L.point(0, -15) });
+		            
+		            // Gem markøren i vores kartotek under sit originale index
+		            activeMarkers[spot.originalIndex] = marker;
+		            markerArray.push(marker);
+		        });
+		
+		        if (markerArray.length > 0) {
+		            const group = new L.featureGroup(markerArray);
+		            overviewMap.fitBounds(group.getBounds().pad(0.3));
+		        }
+		        
+		        // Gem selve kortet så vi kan panorere det
+		        window.currentMap = overviewMap;
+		    }, 100);
+		}
+		
+		// Funktionen der kører når du trykker på et punkt i listen
+		function focusSpotOnMap(originalIndex) {
+		    const marker = activeMarkers[originalIndex];
+		    if (marker && window.currentMap) {
+		        window.currentMap.setView(marker.getLatLng(), 15, { animate: true });
+		        marker.openPopup();
+		        // Rul op til kortet så man kan se det
+		        document.getElementById('overview-map').scrollIntoView({ behavior: 'smooth', block: 'center' });
+		    }
+		}		
+		
 		function showLocationEditor(id, loc) {
 		    const modalHtml = `
 		        <div id="location-editor" class="fixed inset-0 z-[110] flex flex-col bg-white">
@@ -1033,6 +1027,116 @@
 		    }
 		}
 
+		let activeMarkers = {}; 
+
+		async function renderMySpots() {
+		    const container = document.getElementById('app-content');
+		    container.innerHTML = `<div class="p-20 text-center animate-pulse text-stone-400">Beregner afstande...</div>`;
+		    
+		    let userPos = null;
+		    try {
+		        userPos = await getPreciseLocation();
+		    } catch (e) {
+		        console.log("GPS ikke tilgængelig for sortering");
+		    }
+		
+		    const spots = JSON.parse(localStorage.getItem('mySpots')) || [];
+		    
+		    // 1. Filtrer og beregn afstande
+		    let processedSpots = spots.map((spot, index) => {
+		        const info = database[spot.id];
+		        let dist = null;
+		        if (userPos && spot.location) {
+		            dist = getDistance(userPos.lat, userPos.lng, spot.location.lat, spot.location.lng);
+		        }
+		        return { ...spot, info, dist, originalIndex: index };
+		    }).filter(s => s.info && (activeSeason === 'all' || s.info.months.includes(activeSeason)));
+		
+		    // 2. Sorter efter afstand (hvis GPS findes)
+		    if (userPos) {
+		        processedSpots.sort((a, b) => a.dist - b.dist);
+		    }
+
+			if (processedSpots.length === 0) {
+				const hasAnySpots = (JSON.parse(localStorage.getItem('mySpots')) || []).length > 0;
+				
+				container.innerHTML = `
+					<div class="flex flex-col items-center justify-center min-h-[60vh] px-8 text-center fade-in">
+						<div class="w-20 h-20 bg-stone-100 rounded-full flex items-center justify-center text-3xl mb-6">📍</div>
+						<h3 class="text-xl font-black uppercase italic tracking-tighter text-stone-900 mb-2">
+							${hasAnySpots ? 'Ingen gemte planter er i sæson' : 'Ingen gemte steder'}
+						</h3>
+						<p class="text-stone-500 text-sm italic leading-relaxed mb-8">
+							${hasAnySpots 
+								? 'Du har gemt fund, men ingen af dem gror i ' + activeSeason.toUpperCase() + '. Prøv at skifte måned i menuen.' 
+								: 'Dit kort er tomt. Når du finder en plante, kan du gemme dens placering direkte i guiden.'}
+						</p>
+						<button onclick="navigate('home')" class="px-8 py-4 bg-green-800 text-white rounded-full font-black text-[10px] uppercase tracking-widest shadow-lg">
+							Gå til forsiden
+						</button>
+					</div>
+				`;
+				return; // Stop funktionen her, så vi ikke prøver at tegne kortet
+			}			
+			
+		    container.innerHTML = `
+		        <div class="fade-in space-y-6 pb-20">
+		            <div class="text-center px-4">
+		                <h2 class="text-3xl font-black text-stone-900 uppercase italic tracking-tighter">Mine Fund 📍</h2>
+		                <p class="text-[10px] text-green-800 font-bold uppercase tracking-widest mt-1">
+		                    ${userPos ? 'Sorteret efter nærmeste' : 'Viser alle fund'}
+		                </p>
+		            </div>
+		
+		            <div class="card overflow-hidden shadow-xl border-stone-100 mx-4">
+		                <div id="overview-map" style="width: 100%; height: 350px;"></div>
+		            </div>
+		
+		            <div class="space-y-3 px-4">
+		                ${processedSpots.map((spot) => `
+		                    <div class="card p-5 border-stone-100 flex justify-between items-center active:scale-[0.98] transition-all" 
+		                         onclick="focusSpotOnMap('${spot.originalIndex}')">
+		                        <div class="flex-1">
+		                            <div class="flex items-center gap-2 mb-1">
+		                                <span class="id-label !mb-0 text-[8px] opacity-40">
+		                                    ${new Date(spot.location.timestamp).toLocaleDateString('da-DK')}
+		                                </span>
+		                                ${spot.dist !== null ? `
+		                                    <span class="bg-amber-100 text-amber-800 text-[8px] font-black px-2 py-0.5 rounded-full uppercase">
+		                                        ${spot.dist < 1 ? Math.round(spot.dist * 1000) + ' m' : spot.dist.toFixed(1) + ' km'} væk
+		                                    </span>
+		                                ` : ''}
+		                            </div>
+		                            <h4 class="text-xl font-black uppercase italic tracking-tighter text-stone-900">${spot.info.name}</h4>
+		                        </div>
+		                        <button onclick="event.stopPropagation(); deleteSpot(${spot.originalIndex})" 
+		                                class="ml-4 w-8 h-8 rounded-full bg-red-50 text-red-300 flex items-center justify-center text-xs">✕</button>
+		                    </div>
+		                `).join('')}
+		            </div>
+		        </div>
+		    `;
+		
+		    initOverviewMap(processedSpots);
+		}
+
+		// Hjælpefunktioner til sletning
+		function deleteSpot(index) {
+			if (confirm("Vil du slette dette sted?")) {
+				const spots = JSON.parse(localStorage.getItem('mySpots')) || [];
+				spots.splice(index, 1);
+				localStorage.setItem('mySpots', JSON.stringify(spots));
+				renderMySpots();
+			}
+		}
+
+		function clearAllSpots() {
+			if (confirm("Er du HELT sikker på, at du vil slette alle dine hemmelige steder?")) {
+				localStorage.removeItem('mySpots');
+				renderMySpots();
+			}
+		}		
+		
 		// Hjælpefunktion til at generere Naturbasen-linket
 		function renderNaturbasenLink(url) {
 			if (!url) return ''; // Hvis der ikke er et link, returneres intet
@@ -1401,97 +1505,6 @@
             window.scrollTo(0,0);
         }
 
-		function renderMySpots() {
-		    const spots = JSON.parse(localStorage.getItem('mySpots')) || [];
-		    const container = document.getElementById('app-content');
-		    
-		    // FILTRERING: Vi kigger på databasens sæson-data for det gemte ID
-		    const filteredSpots = spots.filter(spot => {
-		        const plantInfo = database[spot.id];
-		        
-		        // 1. Hvis planten ikke findes i databasen (sikkerhed), skjul den
-		        if (!plantInfo) return false;
-		
-		        // 2. Hvis filteret er 'all', vis alt
-		        if (activeSeason === 'all') return true;
-		
-		        // 3. BIOLOGISK LOGIK: Vis spottet hvis den valgte måned er i plantens måned-liste
-		        // Dette lader dig se spottet i hele dens levetid, ikke kun da du fandt den.
-		        return plantInfo.months && plantInfo.months.includes(activeSeason);
-		    });
-		
-		    if (filteredSpots.length === 0) {
-		        container.innerHTML = `
-		            <div class="text-center py-20 fade-in px-8">
-		                <p class="text-stone-400 italic">Ingen af dine gemte arter gror i ${activeSeason.toUpperCase()}...</p>
-		                <button onclick="renderHome()" class="mt-4 text-[10px] font-black uppercase text-green-800 tracking-widest">Se hvad der er i sæson nu</button>
-		            </div>`;
-		        return;
-		    }
-		
-		    container.innerHTML = `
-		        <div class="fade-in space-y-6 pb-20">
-		            <div class="text-center px-4">
-		                <h2 class="text-3xl font-black text-stone-900 uppercase italic tracking-tighter">Mine Fund 📍</h2>
-		                <p class="text-[10px] text-green-800 font-bold uppercase tracking-widest mt-1 italic">
-		                    Viser fund mulige i: ${activeSeason === 'all' ? 'HELE ÅRET' : activeSeason.toUpperCase()}
-		                </p>
-		            </div>
-		
-		            <div class="card overflow-hidden shadow-xl border-stone-100 mx-4 relative">
-		                <div id="overview-map" style="width: 100%; height: 350px;"></div>
-		                <div class="absolute top-4 right-4 z-[1000] bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[8px] font-black uppercase shadow-sm border border-stone-100">
-		                    ${filteredSpots.length} aktive spots
-		                </div>
-		            </div>
-		
-		            <div class="space-y-3 px-4">
-		                ${filteredSpots.reverse().map((spot, index) => {
-		                    const info = database[spot.id];
-		                    return `
-		                    <div class="card p-5 border-stone-100 flex justify-between items-center active:scale-[0.98] transition-transform" 
-		                         onclick="renderResult('${spot.id}')">
-		                        <div class="flex-1">
-		                            <div class="flex items-center gap-2 mb-1">
-		                                <span class="id-label !mb-0 text-[8px] opacity-40">Oprindeligt fundet: ${new Date(spot.location.timestamp).toLocaleDateString('da-DK')}</span>
-		                            </div>
-		                            <h4 class="text-xl font-black uppercase italic tracking-tighter text-stone-900">${info.name}</h4>
-		                            <div class="flex gap-1 mt-1">
-		                                ${info.months.map(m => `
-		                                    <span class="text-[7px] font-bold uppercase px-1 rounded ${m === activeSeason ? 'bg-green-800 text-white' : 'bg-stone-100 text-stone-400'}">${m}</span>
-		                                `).join('')}
-		                            </div>
-		                        </div>
-		                        <button onclick="event.stopPropagation(); deleteSpot(${spots.length - 1 - index})" 
-		                                class="ml-4 w-10 h-10 rounded-full bg-red-50 text-red-400 flex items-center justify-center text-xs">
-		                            ✕
-		                        </button>
-		                    </div>
-		                `}).join('')}
-		            </div>
-		        </div>
-		    `;
-		
-		    initOverviewMap(filteredSpots);
-		}
-
-		// Hjælpefunktioner til sletning
-		function deleteSpot(index) {
-			if (confirm("Vil du slette dette sted?")) {
-				const spots = JSON.parse(localStorage.getItem('mySpots')) || [];
-				spots.splice(index, 1);
-				localStorage.setItem('mySpots', JSON.stringify(spots));
-				renderMySpots();
-			}
-		}
-
-		function clearAllSpots() {
-			if (confirm("Er du HELT sikker på, at du vil slette alle dine hemmelige steder?")) {
-				localStorage.removeItem('mySpots');
-				renderMySpots();
-			}
-		}
-
         function navigate(id) { history.push(id); render(); }
         function goBack() { if (history.length > 1) { history.pop(); render(); } }
         function resetApp() { history = ['start']; currentWizardNode = wizardMushroomData; render(); }
@@ -1499,6 +1512,7 @@
     </script>
 </body>
 </html>
+
 
 
 
