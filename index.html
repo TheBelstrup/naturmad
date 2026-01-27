@@ -883,7 +883,7 @@
 		
 		            const popupContent = `
 		                <div class="sans text-center" style="min-width:140px; padding:5px;">
-		                    <div style="font-size:14px; font-weight:900; text-transform:uppercase; font-style:italic; color:#1c1917; margin-bottom:6px;">${spot.info.name}</div>
+		                    <div style="font-size:14px; font-weight:900; text-transform:uppercase; font-style:italic; color:#1c1917; margin-bottom:2px;">${spot.info.name}</div>
 		                    <div style="display:flex; justify-content:center; gap:2px; margin-bottom:10px;">${monthsHtml}</div>
 		                    <button onclick="renderResult('${spot.id}')" style="width:100%; padding:8px 0; background-color:#064e3b; color:white; font-size:9px; font-weight:900; text-transform:uppercase; border:none; border-radius:8px;">Se Guide →</button>
 		                </div>
@@ -1103,11 +1103,16 @@
 		                                </span>
 		                                ${spot.dist !== null ? `
 		                                    <span class="bg-amber-100 text-amber-800 text-[8px] font-black px-2 py-0.5 rounded-full uppercase">
-		                                        ${spot.dist < 1 ? Math.round(spot.dist * 1000) + ' m' : spot.dist.toFixed(1) + ' km'} væk
+		                                        ${spot.dist < 1 ? Math.round(spot.dist * 1000) + ' m' : spot.dist.toFixed(1) + ' km'}
 		                                    </span>
 		                                ` : ''}
 		                            </div>
 		                            <h4 class="text-xl font-black uppercase italic tracking-tighter text-stone-900">${spot.info.name}</h4>
+									<div class="flex gap-1 mt-1">
+		                                ${info.months.map(m => `
+		                                    <span class="text-[7px] font-bold uppercase px-1 rounded ${m === activeSeason ? 'bg-green-800 text-white' : 'bg-stone-100 text-stone-400'}">${m}</span>
+		                                `).join('')}
+		                            </div>
 		                        </div>
 		                        <button onclick="event.stopPropagation(); deleteSpot(${spot.originalIndex})" 
 		                                class="ml-4 w-8 h-8 rounded-full bg-red-50 text-red-300 flex items-center justify-center text-xs">✕</button>
@@ -1512,6 +1517,7 @@
     </script>
 </body>
 </html>
+
 
 
 
