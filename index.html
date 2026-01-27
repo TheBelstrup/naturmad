@@ -1109,7 +1109,7 @@
 		                            </div>
 		                            <h4 class="text-xl font-black uppercase italic tracking-tighter text-stone-900">${spot.info.name}</h4>
 									<div class="flex gap-1 mt-1">
-		                                ${info.months.map(m => `
+		                                ${spot.info.months.map(m => `
 		                                    <span class="text-[7px] font-bold uppercase px-1 rounded ${m === activeSeason ? 'bg-green-800 text-white' : 'bg-stone-100 text-stone-400'}">${m}</span>
 		                                `).join('')}
 		                            </div>
@@ -1517,6 +1517,7 @@
     </script>
 </body>
 </html>
+
 
 
 
