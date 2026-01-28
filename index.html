@@ -687,7 +687,7 @@
 		        renderAll();
 		    } else if (current === 'safety') {
 		        renderSafety();
-		    } else if (current.startsWith('view_')) {
+		    } else if (typeof current === 'string' && current.startsWith('view_')) {
 		        renderHabitat(current.replace('view_', ''));
 		    } else if (database[current]) { // Tjekker om ID findes i databasen (res_...)
 		        renderResult(current);
@@ -1591,6 +1591,7 @@
     </script>
 </body>
 </html>
+
 
 
 
