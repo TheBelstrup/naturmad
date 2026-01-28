@@ -1460,21 +1460,27 @@
         }
 
 		window.handleWizardChoice = function(index) {
-		    // currentWizardNode er den node vi ER på lige nu.
-		    // Vi skal finde den NÆSTE node baseret på valget.
+		    // 1. Tjek at valget er gyldigt
 		    if (currentWizardNode && currentWizardNode.choices && currentWizardNode.choices[index]) {
+		        
+		        // 2. Find det næste trin i træet
 		        const nextNode = currentWizardNode.choices[index];
 		        
-		        // Opdater den globale variabel så renderWizard ved hvor vi er
+		        // 3. Opdater den globale variabel
 		        currentWizardNode = nextNode;
 		        
-		        // Naviger til 'wizard' siden igen, men med den nye node som data
+		        // 4. VIGTIGT: Brug navigate() i stedet for renderWizard()
+		        // Dette gemmer trinnet i historikken, så "Tilbage" virker
 		        navigate('wizard', nextNode);
 		    }
 		};
 		
         function renderWizard(node) {
-            let content = '';
+			// SIKRER AT GLOBALE VARIABLE ER SYNKRONISERET
+		    if (typeof node === 'object') {
+		        currentWizardNode = node;
+		    }
+			let content = '';
 
 			//Template for Option List
             const wrap = (title, desc, options) => `
@@ -1591,6 +1597,7 @@
     </script>
 </body>
 </html>
+
 
 
 
