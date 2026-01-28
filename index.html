@@ -93,7 +93,7 @@
 
     <nav class="fixed bottom-0 left-0 right-0 bg-white/90 backdrop-blur-xl border-t border-stone-100 safe-area-bottom z-50">
         <div class="grid grid-cols-5 h-16">
-            <button onclick="resetApp()" class="flex flex-col items-center justify-center gap-1 btn-active">
+            <button onclick="navigate('start')" class="flex flex-col items-center justify-center gap-1 btn-active">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
                 <span class="text-[9px] font-black uppercase sans text-stone-600">Hjem</span>
             </button>
@@ -101,7 +101,7 @@
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/></svg>
                 <span class="text-[9px] font-black uppercase sans text-stone-600">Bibliotek</span>
             </button>
-            <button onclick="renderWizard('START')" class="flex flex-col items-center justify-center gap-1 btn-active text-green-800">
+            <button onclick="navigate('wizard', 'START')" class="flex flex-col items-center justify-center gap-1 btn-active text-green-800">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h20M12 2v20M4.93 4.93l14.14 14.14M19.07 4.93 4.93 19.07"/></svg>
                 <span class="text-[9px] font-black uppercase sans">Svampe-ID</span>
             </button>
@@ -654,22 +654,45 @@
 		// Global variable to track where we are in the tree
 		let currentWizardNode = wizardMushroomData;
 
-        let history = ['start'];
         let activeSeason = 'all';
         const typeOrder = { "svamp": 1, "bær": 2, "plante": 3, "nød": 4 };
         const monthOrder = ["jan", "feb", "mar", "apr", "maj", "jun", "jul", "aug", "sep", "okt", "nov", "dec"];
 
-        function render() {
-            const current = history[history.length - 1];
-            document.getElementById('back-btn').classList.toggle('hidden', history.length <= 1);
-            if (current === 'start') renderStart();
-            else if (current === 'view_skov_typer') renderForestMenu();
-            else if (current === 'all') renderAll();
-            else if (current === 'safety') renderSafety();
-            else if (current.startsWith('view_')) renderHabitat(current.replace('view_', ''));
-            else if (current.startsWith('res_')) renderResult(current);
-            window.scrollTo(0,0);
-        }
+		function render(pageId, data) {
+		    // Hvis pageId ikke er defineret (f.eks. ved reload), brug 'start'
+		    const current = pageId || 'start';
+		    
+		    // Styr tilbage-knappens synlighed
+		    const backBtn = document.getElementById('back-btn');
+		    if (current === 'start') {
+		        backBtn.classList.add('hidden');
+		    } else {
+		        backBtn.classList.remove('hidden');
+		    }
+		
+		    // Scroll til toppen ved skift
+		    window.scrollTo(0,0);
+		
+		    // Vælg hvad der skal vises
+		    if (current === 'start') {
+		        renderStart();
+		    } else if (current === 'my-spots') {
+		        renderMySpots(); // Nu er kortet med i navigationen!
+		    } else if (current === 'wizard') {
+		        // Vi sender data (noden) med til renderWizard
+		        renderWizard(data || 'START');
+		    } else if (current === 'view_skov_typer') {
+		        renderForestMenu();
+		    } else if (current === 'all') {
+		        renderAll();
+		    } else if (current === 'safety') {
+		        renderSafety();
+		    } else if (current.startsWith('view_')) {
+		        renderHabitat(current.replace('view_', ''));
+		    } else if (database[current]) { // Tjekker om ID findes i databasen (res_...)
+		        renderResult(current);
+		    }
+		}
 
         function handleSeasonChange(val) {
             activeSeason = val;
@@ -730,7 +753,7 @@
                         </div>
                     </button>
 
-					<button onclick="renderMySpots()" 
+					<button onclick="navigate('my-spots')" 
 							class="w-full p-4 border-2 border-stone-200 text-stone-600 rounded-[24px] font-black text-[11px] uppercase tracking-widest text-center mt-4">
 						Mine hemmelige steder 📍
 					</button>
@@ -1437,10 +1460,17 @@
         }
 
 		window.handleWizardChoice = function(index) {
-			if (currentWizardNode && currentWizardNode.choices && currentWizardNode.choices[index]) {
-				currentWizardNode = currentWizardNode.choices[index];
-				renderWizard(currentWizardNode);
-			}
+		    // currentWizardNode er den node vi ER på lige nu.
+		    // Vi skal finde den NÆSTE node baseret på valget.
+		    if (currentWizardNode && currentWizardNode.choices && currentWizardNode.choices[index]) {
+		        const nextNode = currentWizardNode.choices[index];
+		        
+		        // Opdater den globale variabel så renderWizard ved hvor vi er
+		        currentWizardNode = nextNode;
+		        
+		        // Naviger til 'wizard' siden igen, men med den nye node som data
+		        navigate('wizard', nextNode);
+		    }
 		};
 		
         function renderWizard(node) {
@@ -1452,7 +1482,7 @@
                     <h2 class="text-2xl font-black italic sans text-stone-900">${title}</h2>
                     <p class="text-stone-600 italic px-4 font-medium">${desc}</p>
                     <div class="grid grid-cols-1 gap-3">${options}</div>
-                    <button onclick="resetApp()" class="mt-4 text-[10px] uppercase font-bold text-stone-600 tracking-widest">Afbryd</button>
+                    <button onclick="navigate('start')" class="mt-4 text-[10px] uppercase font-bold text-stone-600 tracking-widest">Afbryd</button>
                 </div>`;
                 
 			//Template for Option
@@ -1468,7 +1498,7 @@
 					<div class="text-6xl">⚠️</div>
 					<h3 class="text-3xl font-black text-red-700 uppercase sans tracking-tighter">Advarsel</h3>
 					<p class="font-bold text-red-900 text-lg leading-relaxed">${text}</p>
-					<button onclick="resetApp()" class="w-full p-5 bg-red-700 hover:bg-red-800 text-white rounded-2xl font-bold mt-4 sans uppercase tracking-widest transition-colors shadow-lg">Afslut</button>
+					<button onclick="navigate('start')" class="w-full p-5 bg-red-700 hover:bg-red-800 text-white rounded-2xl font-bold mt-4 sans uppercase tracking-widest transition-colors shadow-lg">Afslut</button>
 				</div>`;
 
 			// Template for Notices (Dead ends)
@@ -1477,13 +1507,13 @@
 					<div class="text-6xl">✋</div>
 					<h3 class="text-3xl font-black text-amber-700 uppercase sans tracking-tighter">Bemærk</h3>
 					<p class="font-bold text-amber-900 text-lg leading-relaxed">${text}</p>
-					<button onclick="resetApp()" class="w-full p-5 bg-amber-700 hover:bg-amber-800 text-white rounded-2xl font-bold mt-4 sans uppercase tracking-widest transition-colors shadow-lg">Forstået</button>
+					<button onclick="navigate('start')" class="w-full p-5 bg-amber-700 hover:bg-amber-800 text-white rounded-2xl font-bold mt-4 sans uppercase tracking-widest transition-colors shadow-lg">Forstået</button>
 				</div>`;
 		
 			if (!node || node === 'START') {
 				content = wrap("Sikkerheds-tjek", "Kig helt nede ved jorden. Sidder stokken i en 'pose' eller knold, og er der en ring på stokken?", `
-					<button onclick="renderWizard('STOP_POISON')" class="p-5 card bg-red-700 text-white font-black sans uppercase btn-active">JA - POSE & RING</button>
-					<button onclick="renderWizard('PROCEED')" class="p-5 card bg-green-700 text-white font-black sans uppercase btn-active">NEJ - INGEN POSE & RING</button>
+					<button onclick="navigate('wizard', 'STOP_POISON')" class="p-5 card bg-red-700 text-white font-black sans uppercase btn-active">JA - POSE & RING</button>
+					<button onclick="navigate('wizard', 'PROCEED')" class="p-5 card bg-green-700 text-white font-black sans uppercase btn-active">NEJ - INGEN POSE & RING</button>
 				`); 
 
 				document.getElementById('app-content').innerHTML = content;
@@ -1491,7 +1521,7 @@
 				return;
 			}
 			else if (node === 'STOP_POISON') {
-				content = `<div class="fade-in p-8 bg-red-50 border-4 border-red-700 rounded-[32px] text-center space-y-4"><h3 class="text-3xl font-black text-red-700 uppercase sans">STOP!</h3><p class="font-bold text-red-900 italic">Dette er kendetegn for dødelige Fluesvampe.</p><button onclick="resetApp()" class="w-full p-4 bg-red-700 text-white rounded-2xl font-bold mt-4 sans uppercase">Afslut</button></div>`; 
+				content = `<div class="fade-in p-8 bg-red-50 border-4 border-red-700 rounded-[32px] text-center space-y-4"><h3 class="text-3xl font-black text-red-700 uppercase sans">STOP!</h3><p class="font-bold text-red-900 italic">Dette er kendetegn for dødelige Fluesvampe.</p><button onclick="navigate('start')" class="w-full p-4 bg-red-700 text-white rounded-2xl font-bold mt-4 sans uppercase">Afslut</button></div>`; 
 
 				document.getElementById('app-content').innerHTML = content;
 				window.scrollTo(0,0);
@@ -1530,19 +1560,38 @@
 			} 
 			else {
 				// Fallback
-				content = `<div class="text-center py-10"><p>Der skete en fejl.</p><button onclick="resetApp()">Genstart</button></div>`;
+				content = `<div class="text-center py-10"><p>Der skete en fejl.</p><button onclick="navigate('start')">Genstart</button></div>`;
 			}
             document.getElementById('app-content').innerHTML = content;
             window.scrollTo(0,0);
         }
 
-        function navigate(id) { history.push(id); render(); }
-        function goBack() { if (history.length > 1) { history.pop(); render(); } }
-        function resetApp() { history = ['start']; currentWizardNode = wizardMushroomData; render(); }
-        window.onload = render;
+        function navigate(pageId, data = null) {
+		    // Gemmer tilstanden i browserens historik
+		    window.history.pushState({ pageId: pageId, data: data }, "", "");
+		    render(pageId, data);
+		}
+		function goBack() {
+		    window.history.back();
+		}
+		function initApp() {
+		    // Erstat den nuværende "tomme" state med startsiden
+		    window.history.replaceState({ pageId: 'start' }, "", "");
+		    render('start');
+		}
+		window.onpopstate = function(event) {
+		    if (event.state) {
+		        render(event.state.pageId, event.state.data);
+		    } else {
+		        // Fallback hvis historikken er tom
+		        render('start');
+		    }
+		};
+		window.onload = render;
     </script>
 </body>
 </html>
+
 
 
 
