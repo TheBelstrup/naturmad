@@ -1226,7 +1226,7 @@
 						</svg>
 					</a>
 					<p class="mt-2 text-[10px] text-stone-600 text-center px-6 italic">
-						Naturbasen er Danmarks nationale artsportal. Se billeder af svampen i forskellige stadier og tjek, om andre har fundet den i dit lokalområde netop nu.
+						Naturbasen er Danmarks nationale artsportal. Se billeder af planten i forskellige stadier og tjek, om andre har fundet den i dit lokalområde netop nu.
 					</p>
 				</div>
 			`;
@@ -1322,7 +1322,7 @@
             const hasTwin = res.twin && res.twin.name && res.twin.name !== "Ingen";
 			const notThisIf = res.not_this_if ? `
 				<div class="bg-white p-2 rounded-2xl my-4 border border-red-100">
-					<p class="text-red-800 text-[10px] font-black uppercase tracking-widest mb-2 px-2 italic">Det er IKKE denne svamp hvis:</p>
+					<p class="text-red-800 text-[10px] font-black uppercase tracking-widest mb-2 px-2 italic">Det er IKKE denne hvis:</p>
 					<ul class="list-none p-0 m-0">
 						${res.not_this_if.map((text) => `
 							<li class="flex items-baseline gap-3 py-1 border-b border-stone-100 last:border-0">
@@ -1609,6 +1609,7 @@
     </script>
 </body>
 </html>
+
 
 
 
