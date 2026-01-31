@@ -1191,7 +1191,7 @@
 		                                `).join('')}
 		                            </div>
 		                        </div>
-		                        <button onclick="event.stopPropagation(); deleteSpot(${spot.originalIndex})" 
+		                        <button onclick="event.stopPropagation(); deleteFullSpot(${spot.uid})" 
 		                                class="ml-4 w-8 h-8 rounded-full bg-red-50 text-red-300 flex items-center justify-center text-xs">✕</button>
 		                    </div>
 		                `).join('')}
@@ -1201,121 +1201,188 @@
 		
 		    initOverviewMap(processedSpots);
 		}
-
-		// Hjælpefunktioner til sletning
-		function deleteSpot(spotUid) {
-		    if (confirm('Er du sikker på, at du vil slette dette fund permanent?')) {
-		        // 1. Hent alle fund
-		        let existing = JSON.parse(localStorage.getItem('mySpots')) || [];
-		        
-		        // 2. Filtrer det specifikke fund fra ved brug af UID
-		        existing = existing.filter(s => s.uid !== spotUid);
-		        
-		        // 3. Gem den opdaterede liste
-		        localStorage.setItem('mySpots', JSON.stringify(existing));
-		        
-		        // 4. Opdater din globale variabel (hvis du bruger mySpots i koden)
-		        if (typeof mySpots !== 'undefined') {
-		            mySpots = existing;
-		        }
 		
-		        // 5. Giv besked og gå tilbage til forsiden/kortet
-		        alert("Fundet er slettet.");
-		        navigate('start');
+		async function clearAllSpots() {
+		    if (confirm("Er du HELT sikker på, at du vil slette ALLE dine hemmelige steder og alle tilhørende billeder? Dette kan ikke fortrydes.")) {
+		        
+		        // 1. Ryd localStorage (kort-markører og metadata)
+		        localStorage.removeItem('mySpots');
+		        
+		        // 2. Ryd IndexedDB (alle billedfiler)
+		        try {
+		            const db = await photoStorage.init();
+		            const tx = db.transaction("photos", "readwrite");
+		            const store = tx.objectStore("photos");
+		            
+		            // .clear() sletter alt indhold i den specifikke Object Store
+		            const request = store.clear();
+		            
+		            request.onsuccess = () => {
+		                console.log("IndexedDB tømt for billeder.");
+		                // 3. Opdater UI
+		                if (typeof mySpots !== 'undefined') mySpots = [];
+		                alert("Alt data er slettet.");
+		                navigate('start');
+		            };
+		        } catch (err) {
+		            console.error("Fejl ved tømning af billeder:", err);
+		            // Vi navigerer stadig, selvom billederne fejlede
+		            navigate('start');
+		        }
 		    }
 		}
-		
-		function clearAllSpots() {
-			if (confirm("Er du HELT sikker på, at du vil slette alle dine hemmelige steder?")) {
-				localStorage.removeItem('mySpots');
-				renderMySpots();
-			}
-		}		
 
-		function renderSpot(spotId) {
-			// Vi leder efter det unikke UID vi lige har lavet
+		async function renderSpot(spotUid) {
 		    const allSpots = JSON.parse(localStorage.getItem('mySpots')) || [];
-		    const spot = allSpots.find(s => s.uid === spotId);
-		    
-		    if (!spot) {
-		        console.error("Fundet blev ikke fundet!");
-		        return navigate('start');
-		    }
-			
+		    const spot = allSpots.find(s => s.uid === spotUid);
+		    if (!spot) return navigate('start');
+		
 		    const plant = database[spot.resId];
 		    const app = document.getElementById('app-content');
 		    
+		    // 1. Tegn selve siden med en tom plads til billederne (photo-grid)
 		    app.innerHTML = `
 		        <div class="p-4 space-y-6 pb-20">
-		            <div class="flex justify-between items-center">
-		                <h1 class="text-2xl font-bold">${plant.name}</h1>
-		                <span class="text-xs text-gray-500">${new Date(spot.timestamp).toLocaleDateString()}</span>
-		            </div>
-		
-		            <div id="spot-map" class="w-full h-48 rounded-xl shadow-inner border border-gray-200"></div>
-		
+		            <h1 class="text-2xl font-bold">${plant.name}</h1>
+		            <div id="spot-map" class="w-full h-48 rounded-xl border"></div>
+		            
 		            <div>
 		                <div class="flex justify-between items-end mb-2">
-		                    <h2 class="text-sm font-semibold uppercase tracking-wider text-gray-500">Dine Billeder</h2>
+		                    <h2 class="text-sm font-semibold text-gray-500 uppercase">Dine Billeder</h2>
 		                    <label class="text-blue-600 text-sm font-medium cursor-pointer">
 		                        + Tilføj
-		                        <input type="file" accept="image/*" class="hidden" onchange="addPhotoToSpot('${spotId}', this)">
+		                        <input type="file" accept="image/*" class="hidden" onchange="addPhotoToSpot('${spotUid}', this)">
 		                    </label>
 		                </div>
 		                <div class="grid grid-cols-3 gap-2" id="photo-grid">
-		                    ${(spot.photos || []).map((img, idx) => `
-		                        <div class="relative aspect-square">
-		                            <img src="${img}" class="w-full h-full object-cover rounded-lg shadow-sm">
-		                            <button onclick="removePhotoFromSpot('${spotId}', ${idx})" class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 text-xs flex items-center justify-center shadow-lg">×</button>
-		                        </div>
-		                    `).join('')}
+		                    <div class="col-span-3 text-center py-4 text-gray-400 text-xs">Henter billeder...</div>
 		                </div>
 		            </div>
 		
-		            <hr class="border-gray-200">
-		
-		            <div class="space-y-3">
-		                <button onclick="navigate('${spot.resId}')" class="w-full bg-emerald-600 text-white py-4 rounded-xl font-bold shadow-md hover:bg-emerald-700 transition">
-		                    Vis artsdetaljer: ${plant.name}
-		                </button>
-		                <button onclick="deleteSpot('${spotId}')" class="w-full text-red-600 py-2 text-sm font-medium">
-		                    Slet dette fund permanent
-		                </button>
-		            </div>
+		            <button onclick="navigate('${spot.resId}')" class="w-full bg-emerald-600 text-white py-4 rounded-xl font-bold shadow-md">
+		                Vis artsdetaljer
+		            </button>
+		            <button onclick="deleteFullSpot('${spotUid}')" class="w-full text-red-600 py-2 text-sm font-medium">
+		                Slet fund
+		            </button>
 		        </div>
 		    `;
 		
-		    // Initialisér mini-kortet
+		    // 2. Initialisér kortet (som før)
 		    setTimeout(() => {
 		        const smap = L.map('spot-map', { zoomControl: false, attributionControl: false }).setView([spot.lat, spot.lng], 15);
 		        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(smap);
 		        L.marker([spot.lat, spot.lng]).addTo(smap);
 		    }, 100);
+		
+		    // 3. HENT BILLEDER FRA INDEXEDDB og opdater gridet
+		    const photos = await photoStorage.getAll(spotUid);
+		    const grid = document.getElementById('photo-grid');
+		    
+		    if (photos.length === 0) {
+		        grid.innerHTML = `<div class="col-span-3 text-center py-4 text-gray-400 text-sm">Ingen billeder endnu.</div>`;
+		    } else {
+		        grid.innerHTML = photos.map(photo => `
+		            <div class="relative aspect-square">
+		                <img src="${photo.data}" class="w-full h-full object-cover rounded-lg shadow-sm">
+		                <button onclick="deleteSinglePhoto('${spotUid}', ${photo.id})" 
+		                        class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 text-xs">×</button>
+		            </div>
+		        `).join('');
+		    }
 		}
 
-		function addPhotoToSpot(spotId, input) {
+		async function addPhotoToSpot(spotUid, input) {
 		    if (input.files && input.files[0]) {
 		        const reader = new FileReader();
-		        reader.onload = function(e) {
-		            const spot = mySpots.find(s => s.id === spotId);
-		            if (!spot.photos) spot.photos = [];
-		            spot.photos.push(e.target.result);
-		            localStorage.setItem('mySpots', JSON.stringify(mySpots));
-		            renderSpot(spotId); // Genindlæs siden
+		        reader.onload = async function(e) {
+		            // Gem billedet i IndexedDB
+		            await photoStorage.add(spotUid, e.target.result);
+		            // Genindlæs siden
+		            renderSpot(spotUid);
 		        };
 		        reader.readAsDataURL(input.files[0]);
 		    }
 		}
 		
-		function removePhotoFromSpot(spotId, index) {
-		    if(confirm('Vil du slette billedet?')) {
-		        const spot = mySpots.find(s => s.id === spotId);
-		        spot.photos.splice(index, 1);
-		        localStorage.setItem('mySpots', JSON.stringify(mySpots));
-		        renderSpot(spotId);
+		async function deleteFullSpot(spotUid) {
+		    if (confirm('Vil du slette dette fund og alle tilhørende billeder?')) {
+		        // 1. Slet fra localStorage (markøren og data)
+		        let existing = JSON.parse(localStorage.getItem('mySpots')) || [];
+		        existing = existing.filter(s => s.uid !== spotUid);
+		        localStorage.setItem('mySpots', JSON.stringify(existing));
+		
+		        // 2. Slet alle billeder i IndexedDB til dette spot
+		        const photos = await photoStorage.getAll(spotUid);
+		        for (let p of photos) {
+		            await photoStorage.delete(p.id);
+		        }
+		
+		        navigate('start');
 		    }
 		}
 		
+		async function deleteSinglePhoto(spotUid, photoId) {
+		    if (confirm('Slet billede?')) {
+		        await photoStorage.delete(photoId);
+		        renderSpot(spotUid); // Opdater visningen
+		    }
+		}
+		
+		const photoStorage = {
+		    dbName: "SikkerNaturDB",
+		    storeName: "photos",
+		
+		    // Åbner databasen
+		    init() {
+		        return new Promise((resolve, reject) => {
+		            const request = indexedDB.open(this.dbName, 1);
+		            request.onupgradeneeded = (e) => {
+		                const db = e.target.result;
+		                if (!db.objectStoreNames.contains(this.storeName)) {
+		                    // Vi opretter et lager hvor hvert billede har et unikt ID
+		                    // og et index så vi hurtigt kan finde alle billeder til ét fund (spotUid)
+		                    const store = db.createObjectStore(this.storeName, { keyPath: "id", autoIncrement: true });
+		                    store.createIndex("spotUid", "spotUid", { unique: false });
+		                }
+		            };
+		            request.onsuccess = () => resolve(request.result);
+		            request.onerror = () => reject("Kunne ikke åbne IndexedDB");
+		        });
+		    },
+		
+		    // Gem et billede til et specifikt fund
+		    async add(spotUid, base64Data) {
+		        const db = await this.init();
+		        return new Promise((resolve, reject) => {
+		            const tx = db.transaction(this.storeName, "readwrite");
+		            const store = tx.objectStore(this.storeName);
+		            const request = store.add({ spotUid, data: base64Data, date: Date.now() });
+		            request.onsuccess = () => resolve();
+		            request.onerror = () => reject();
+		        });
+		    },
+		
+		    // Hent alle billeder til et specifikt fund
+		    async getAll(spotUid) {
+		        const db = await this.init();
+		        return new Promise((resolve) => {
+		            const tx = db.transaction(this.storeName, "readonly");
+		            const store = tx.objectStore(this.storeName);
+		            const index = store.index("spotUid");
+		            const request = index.getAll(spotUid);
+		            request.onsuccess = () => resolve(request.result);
+		        });
+		    },
+		
+		    // Slet et specifikt billede
+		    async delete(photoId) {
+		        const db = await this.init();
+		        const tx = db.transaction(this.storeName, "readwrite");
+		        tx.objectStore(this.storeName).delete(photoId);
+		    }
+		};
+
 		// Hjælpefunktion til at generere Naturbasen-linket
 		function renderNaturbasenLink(url) {
 			if (!url) return ''; // Hvis der ikke er et link, returneres intet
@@ -1737,6 +1804,7 @@
     </script>
 </body>
 </html>
+
 
 
 
