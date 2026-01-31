@@ -1121,7 +1121,7 @@
 		    
 		    // 1. Filtrer og beregn afstande
 		    let processedSpots = spots.map((spot, index) => {
-		        const info = database[spot.id];
+		        const info = database[spot.resId];
 		        let dist = null;
 		        if (userPos && spot.location) {
 		            dist = getDistance(userPos.lat, userPos.lng, spot.location.lat, spot.location.lng);
@@ -1804,6 +1804,7 @@
     </script>
 </body>
 </html>
+
 
 
 
