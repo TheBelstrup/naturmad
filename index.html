@@ -723,7 +723,8 @@
 		};
 		
 		let map; // Global variabel til kortet
-		let activeMarkers = {}; 
+		let activeMarkers = {};
+		let currentPageId = 'start';
 		// Global variable to track where we are in the tree
 		let currentWizardNode = wizardMushroomData;
 		let userSettings = JSON.parse(localStorage.getItem('userSettings')) || {
@@ -855,7 +856,8 @@
 		function render(pageId, data) {
 		    // Hvis pageId ikke er defineret (f.eks. ved reload), brug 'start'
 		    const current = pageId || 'start';
-		    
+			currentPageId = pageId;
+			
 		    // Styr tilbage-knappens synlighed
 		    const backBtn = document.getElementById('back-btn');
 		    if (current === 'start') {
@@ -2103,5 +2105,6 @@
     </script>
 </body>
 </html>
+
 
 
