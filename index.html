@@ -181,8 +181,11 @@
 			</section>
 
 			<nav class="space-y-1">
+				<button onclick="navigate('my-spots')" class="w-full text-left py-3 border-b border-stone-100 flex items-center gap-3">
+				    <span class="text-lg">📍</span> <span class="font-bold text-sm">Mine Fund</span>
+				</button>
 				<button onclick="navigate('safety')" class="w-full text-left py-3 border-b border-stone-100 flex items-center gap-3">
-					<span class="text-lg">⚠</span> <span class="font-bold text-sm">Aktuelle advarsler</span>
+					<span class="text-lg">⚠</span> <span class="font-bold text-sm">Sikkerhed</span>
 				</button>
 				<button onclick="reportBug()" class="w-full text-left py-3 border-b border-stone-100 flex items-center gap-3">
 					<span class="text-lg">✉</span> <span class="font-bold text-sm">Rapportér fejl</span>
@@ -829,8 +832,8 @@
 		}
 		
 		function reportBug() {
-		    const msg = encodeURIComponent("Jeg har fundet en fejl i appen...");
-		    window.location.href = `mailto:support@sikkernatur.dk?subject=Fejlrapport&body=${msg}`;
+			closeMenuIfOpen();
+		    window.location.href = `mailto:support@sikkernatur.dk?subject=Tilbagemelding`;
 		}
 
 		function render(pageId, data) {
@@ -862,8 +865,7 @@
 		        renderAll();
 		    } else if (current === 'view_spot') {
 			    renderSpot(data.spotId);
-			}
-			else if (current === 'safety') {
+			} else if (current === 'safety') {
 		        renderSafety();
 		    } else if (typeof current === 'string' && current.startsWith('view_')) {
 		        renderHabitat(current.replace('view_', ''));
@@ -1985,7 +1987,21 @@
             window.scrollTo(0,0);
         }
 
+		function closeMenuIfOpen() {
+		    const menu = document.getElementById('side-menu');
+		    const overlay = document.getElementById('menu-overlay');
+		    
+		    // Hvis menuen IKKE har klassen '-translate-x-full', betyder det den er synlig
+		    if (menu && !menu.classList.contains('-translate-x-full')) {
+		        menu.classList.add('-translate-x-full');
+		        overlay.classList.add('hidden');
+		        document.body.style.overflow = ''; // Genaktiver scroll
+		    }
+		}
+		
         function navigate(pageId, data = null) {
+			closeMenuIfOpen();
+			
 		    // Gemmer tilstanden i browserens historik
 		    window.history.pushState({ pageId: pageId, data: data }, "", "");
 		    render(pageId, data);
@@ -2070,6 +2086,7 @@
     </script>
 </body>
 </html>
+
 
 
 
