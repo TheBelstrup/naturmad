@@ -1816,12 +1816,13 @@
 			const allSpots = JSON.parse(localStorage.getItem('mySpots')) || [];
 		    const mySpotsOfThisPlant = allSpots.filter(s => s.resId === id);
 		    const hasExistingSpots = mySpotsOfThisPlant.length > 0;
+			
 		    // Lav HTML til "Se mine fund" linket
-		    const mySpotsLink = count > 0 ? `
+		    const mySpotsLink = mySpotsOfThisPlant.length > 0 ? `
 			    <div class="mt-2">
 			        <a href="#" onclick="event.preventDefault(); renderMySpots('${id}')" 
 			           class="text-[11px] font-bold text-green-800 uppercase tracking-widest hover:underline flex items-center justify-center gap-1">
-			            <span>📍</span> Se dine tidligere fund (${count})
+			            <span>📍</span> Se dine tidligere fund (${mySpotsOfThisPlant.length})
 			        </a>
 			    </div>
 			` : '';
@@ -2192,6 +2193,7 @@
     </script>
 </body>
 </html>
+
 
 
 
