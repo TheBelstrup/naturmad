@@ -1199,6 +1199,9 @@
 		            marker.bindPopup(`
 		                <div class="p-2">
 		                    <h3 class="font-bold">${plant.name}</h3>
+							<div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 2px; margin-bottom: 10px;">
+								${monthsHtml}
+							</div>							
 		                    <p class="text-xs text-gray-500 mb-2 font-sans">${new Date(spot.timestamp).toLocaleDateString()}</p>
 		                    <div class="flex flex-col gap-2">
 		                        <button onclick="navigate('view_spot', { spotId: '${spot.uid}' })" class="bg-emerald-600 text-white px-3 py-2 rounded text-xs font-bold">Vis fund</button>
@@ -1356,7 +1359,7 @@
 		    }
 		}
 
-		async function renderMySpots() {
+		async function renderMySpots(filterId = null) {
 		    const container = document.getElementById('app-content');
 		    container.innerHTML = `<div class="p-20 text-center animate-pulse text-stone-400">Beregner afstande...</div>`;
 		    
@@ -1381,7 +1384,11 @@
 		            dist = getDistance(userPos.lat, userPos.lng, lat, lng);
 		        }
 		        return { ...spot, info, dist, originalIndex: index, lat, lng };
-		    }).filter(s => s.info && (activeSeason === 'all' || s.info.months.includes(activeSeason)));
+		    }).filter(s => {
+		        const matchesSeason = (activeSeason === 'all' || s.info.months.includes(activeSeason));
+		        // Hvis der er et filterId, skal resId matche. Ellers bare sæson-tjek.
+		        return s.info && matchesSeason && (!filterId || s.resId === filterId);
+		    });
 		
 		    // 2. Sorter efter afstand
 		    if (userPos) {
@@ -1408,15 +1415,17 @@
 		            </div>
 		        `;
 		        return; 
-		    }           
+		    }
 		    
-		    container.innerHTML = `
+			const title = filterId && processedSpots.length > 0 
+			        ? `Fund af ${processedSpots[0].info.name} 📍` 
+			        : `Mine Fund 📍`;
+			
+			container.innerHTML = `
 		        <div class="fade-in space-y-6 pb-20">
 		            <div class="text-center px-4">
-		                <h2 class="text-3xl font-black text-stone-900 uppercase italic tracking-tighter">Mine Fund 📍</h2>
-		                <p class="text-[10px] text-green-800 font-bold uppercase tracking-widest mt-1">
-		                    ${userPos ? 'Sorteret efter nærmeste' : 'Viser alle fund'}
-		                </p>
+		                <h2 class="text-3xl font-black text-stone-900 uppercase italic tracking-tighter">${title}</h2>
+						${filterId ? `<button onclick="renderMySpots()" class="text-[9px] font-bold text-emerald-600 uppercase">← Vis alle planter</button>` : ''}
 		            </div>
 		
 		            <div class="card overflow-hidden shadow-xl border-stone-100 mx-4">
@@ -1804,7 +1813,19 @@
 
         function renderResult(id) {
             const res = database[id];
-            const hasTwin = res.twin && res.twin.name && res.twin.name !== "Ingen";
+			const allSpots = JSON.parse(localStorage.getItem('mySpots')) || [];
+		    const mySpotsOfThisPlant = allSpots.filter(s => s.resId === id);
+		    const hasExistingSpots = mySpotsOfThisPlant.length > 0;
+		    // Lav HTML til "Se mine fund" linket
+		    const mySpotsLink = count > 0 ? `
+			    <div class="mt-2">
+			        <a href="#" onclick="event.preventDefault(); renderMySpots('${id}')" 
+			           class="text-[11px] font-bold text-green-800 uppercase tracking-widest hover:underline flex items-center justify-center gap-1">
+			            <span>📍</span> Se dine tidligere fund (${count})
+			        </a>
+			    </div>
+			` : '';
+			const hasTwin = res.twin && res.twin.name && res.twin.name !== "Ingen";
 			const notThisIf = res.not_this_if ? `
 				<div class="bg-white p-2 rounded-2xl my-4 border border-red-100">
 					<p class="text-red-800 text-[10px] font-black uppercase tracking-widest mb-2 px-2 italic">Det er IKKE denne hvis:</p>
@@ -1935,6 +1956,7 @@
 								class="w-full p-6 bg-green-800 text-white rounded-[24px] font-black text-[11px] uppercase tracking-widest text-center btn-active sans shadow-lg flex items-center justify-center gap-3">
 							<span>📍</span> Gem dette hemmelige sted
 						</button>
+						${mySpotsLink}
 					</div>
 
 					${renderNaturbasenLink(res.naturbasen)}
@@ -2161,7 +2183,7 @@
 		        localStorage.setItem('mySpots', JSON.stringify([]));
 		        mySpots = [];
 		    }
-		}		
+		}
 		// Kald den når appen starter
 		validateDataStructure();
 		document.addEventListener('DOMContentLoaded', () => {
@@ -2170,6 +2192,7 @@
     </script>
 </body>
 </html>
+
 
 
 
