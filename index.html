@@ -1255,21 +1255,16 @@
 		    
 		    app.innerHTML = `
 		        <div class="p-4 space-y-6 pb-20 fade-in">
-		            <div class="flex items-center justify-between">
-		                <button onclick="navigate('start')" class="text-emerald-700 flex items-center gap-1 font-medium text-sm">
-		                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
-		                    Tilbage
-		                </button>
-		                <span class="text-xs text-stone-400 font-sans">${new Date(spot.timestamp).toLocaleDateString()}</span>
-		            </div>
-		
-		            <h1 class="text-3xl font-black text-stone-900 uppercase italic tracking-tighter">${plantInfo.name}</h1>
+		            <p class="text-[10px] text-emerald-800 font-bold uppercase tracking-widest mb-1">
+					    ${new Date(spot.timestamp).toLocaleDateString()}
+					</p>
+					<h1 class="text-3xl font-black text-stone-900 uppercase italic tracking-tighter">${plantInfo.name}</h1>
 		            
 		            <div id="spot-map" class="w-full h-48 rounded-2xl border border-stone-200 shadow-inner"></div>
 		            
 		            <div>
 		                <div class="flex justify-between items-end mb-3">
-		                    <h2 class="text-sm font-bold text-stone-500 uppercase tracking-wider">Dokumentation</h2>
+		                    <h2 class="text-sm font-bold text-stone-500 uppercase tracking-wider">Billeder</h2>
 		                    
 		                    <div class="flex gap-3">
 		                        <label class="flex items-center justify-center w-10 h-10 bg-emerald-100 text-emerald-700 rounded-full cursor-pointer active:scale-90 transition-transform shadow-sm">
@@ -1871,6 +1866,7 @@
     </script>
 </body>
 </html>
+
 
 
 
