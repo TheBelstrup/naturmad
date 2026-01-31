@@ -934,29 +934,36 @@
 		        const overviewMap = L.map('overview-map', { zoomControl: false, attributionControl: false });
 		        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(overviewMap);
 		
-		        activeMarkers = {}; // Ryd kartoteket
+		        activeMarkers = {}; 
 		        const markerArray = [];
 		
 		        spots.forEach(spot => {
-		            const marker = L.marker([spot.location.lat, spot.location.lng]).addTo(overviewMap);
+		            // RETTELSE 1: Håndter både nye (flade) og gamle (nested) koordinater
+		            const lat = spot.lat || (spot.location ? spot.location.lat : null);
+		            const lng = spot.lng || (spot.location ? spot.location.lng : null);
+		
+		            if (!lat || !lng) return; // Spring over hvis ingen data
+		
+		            const marker = L.marker([lat, lng]).addTo(overviewMap);
 		            
-		            // Samme popup-indhold som vi lavede før...
+		            // RETTELSE 2: Definer 'plant' så popup'en virker
+		            const plant = spot.info; 
+		
 		            const monthsHtml = spot.info.months.map(m => `
 		                <span style="display:inline-block; font-size:7px; font-weight:800; padding:1px 4px; border-radius:3px; margin:0 1px; ${m === activeSeason ? 'background-color:#064e3b;color:white;' : 'background-color:#f5f5f4;color:#a8a29e;'}">${m}</span>
 		            `).join('');
 		
-					marker.bindPopup(`
-					    <div class="p-2">
-					        <h3 class="font-bold">${plant.name}</h3>
-					        <p class="text-xs text-gray-500 mb-2 font-sans">${new Date(spot.timestamp).toLocaleDateString()}</p>
-					        <div class="flex flex-col gap-2">
-					            <button onclick="navigate('view_spot', { spotId: '${spot.uid}' })" class="bg-emerald-600 text-white px-3 py-2 rounded text-xs font-bold">Vis fund</button>
-					            <button onclick="navigate('${spot.resId}')" class="border border-emerald-600 text-emerald-600 px-3 py-1 rounded text-xs">Arts-info</button>
-					        </div>
-					    </div>
-					`);
-					
-		            // Gem markøren i vores kartotek under sit originale index
+		            marker.bindPopup(`
+		                <div class="p-2">
+		                    <h3 class="font-bold">${plant.name}</h3>
+		                    <p class="text-xs text-gray-500 mb-2 font-sans">${new Date(spot.timestamp).toLocaleDateString()}</p>
+		                    <div class="flex flex-col gap-2">
+		                        <button onclick="navigate('view_spot', { spotId: '${spot.uid}' })" class="bg-emerald-600 text-white px-3 py-2 rounded text-xs font-bold">Vis fund</button>
+		                        <button onclick="navigate('${spot.resId}')" class="border border-emerald-600 text-emerald-600 px-3 py-1 rounded text-xs">Arts-info</button>
+		                    </div>
+		                </div>
+		            `);
+		            
 		            activeMarkers[spot.originalIndex] = marker;
 		            markerArray.push(marker);
 		        });
@@ -966,21 +973,21 @@
 		            overviewMap.fitBounds(group.getBounds().pad(0.3));
 		        }
 		        
-		        // Gem selve kortet så vi kan panorere det
 		        window.currentMap = overviewMap;
 		    }, 100);
 		}
-		
+
 		// Funktionen der kører når du trykker på et punkt i listen
 		function focusSpotOnMap(originalIndex) {
 		    const marker = activeMarkers[originalIndex];
 		    if (marker && window.currentMap) {
 		        window.currentMap.setView(marker.getLatLng(), 15, { animate: true });
 		        marker.openPopup();
-		        // Rul op til kortet så man kan se det
-		        document.getElementById('overview-map').scrollIntoView({ behavior: 'smooth', block: 'center' });
+		        
+		        const mapEl = document.getElementById('overview-map');
+		        if(mapEl) mapEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
 		    }
-		}		
+		}
 		
 		function showLocationEditor(id, loc) {
 		    const modalHtml = `
@@ -1121,41 +1128,45 @@
 		    
 		    // 1. Filtrer og beregn afstande
 		    let processedSpots = spots.map((spot, index) => {
-		        const info = database[spot.resId];
+		        const info = database[spot.resId]; 
+		        
+		        const lat = spot.lat || (spot.location ? spot.location.lat : null);
+		        const lng = spot.lng || (spot.location ? spot.location.lng : null);
+		
 		        let dist = null;
-		        if (userPos && spot.location) {
-		            dist = getDistance(userPos.lat, userPos.lng, spot.location.lat, spot.location.lng);
+		        if (userPos && lat && lng) {
+		            dist = getDistance(userPos.lat, userPos.lng, lat, lng);
 		        }
-		        return { ...spot, info, dist, originalIndex: index };
+		        return { ...spot, info, dist, originalIndex: index, lat, lng };
 		    }).filter(s => s.info && (activeSeason === 'all' || s.info.months.includes(activeSeason)));
 		
-		    // 2. Sorter efter afstand (hvis GPS findes)
+		    // 2. Sorter efter afstand
 		    if (userPos) {
 		        processedSpots.sort((a, b) => a.dist - b.dist);
 		    }
-
-			if (processedSpots.length === 0) {
-				const hasAnySpots = (JSON.parse(localStorage.getItem('mySpots')) || []).length > 0;
-				
-				container.innerHTML = `
-					<div class="flex flex-col items-center justify-center min-h-[60vh] px-8 text-center fade-in">
-						<div class="w-20 h-20 bg-stone-100 rounded-full flex items-center justify-center text-3xl mb-6">📍</div>
-						<h3 class="text-xl font-black uppercase italic tracking-tighter text-stone-900 mb-2">
-							${hasAnySpots ? 'Ingen gemte planter er i sæson' : 'Ingen gemte steder'}
-						</h3>
-						<p class="text-stone-500 text-sm italic leading-relaxed mb-8">
-							${hasAnySpots 
-								? 'Du har gemt fund, men ingen af dem gror i ' + activeSeason.toUpperCase() + '. Prøv at skifte måned i menuen.' 
-								: 'Dit kort er tomt. Når du finder en plante, kan du gemme dens placering direkte i guiden.'}
-						</p>
-						<button onclick="navigate('start')" class="px-8 py-4 bg-green-800 text-white rounded-full font-black text-[10px] uppercase tracking-widest shadow-lg">
-							Gå til forsiden
-						</button>
-					</div>
-				`;
-				return; // Stop funktionen her, så vi ikke prøver at tegne kortet
-			}			
-			
+		
+		    if (processedSpots.length === 0) {
+		        // ... (behold din eksisterende 'tom liste' HTML herfra) ...
+		        const hasAnySpots = (JSON.parse(localStorage.getItem('mySpots')) || []).length > 0;
+		        container.innerHTML = `
+		            <div class="flex flex-col items-center justify-center min-h-[60vh] px-8 text-center fade-in">
+		                <div class="w-20 h-20 bg-stone-100 rounded-full flex items-center justify-center text-3xl mb-6">📍</div>
+		                <h3 class="text-xl font-black uppercase italic tracking-tighter text-stone-900 mb-2">
+		                    ${hasAnySpots ? 'Ingen planter i denne sæson' : 'Ingen gemte steder'}
+		                </h3>
+		                <p class="text-stone-500 text-sm italic leading-relaxed mb-8">
+		                    ${hasAnySpots 
+		                        ? 'Skift måned i menuen for at se dine andre fund.' 
+		                        : 'Dit kort er tomt. Gå ud og find noget!'}
+		                </p>
+		                <button onclick="navigate('start')" class="px-8 py-4 bg-green-800 text-white rounded-full font-black text-[10px] uppercase tracking-widest shadow-lg">
+		                    Gå til forsiden
+		                </button>
+		            </div>
+		        `;
+		        return; 
+		    }           
+		    
 		    container.innerHTML = `
 		        <div class="fade-in space-y-6 pb-20">
 		            <div class="text-center px-4">
@@ -1176,7 +1187,7 @@
 		                        <div class="flex-1">
 		                            <div class="flex items-center gap-2 mb-1">
 		                                <span class="id-label !mb-0 text-[8px] opacity-40">
-		                                    ${new Date(spot.location.timestamp).toLocaleDateString('da-DK')}
+		                                    ${new Date(spot.timestamp).toLocaleDateString('da-DK')}
 		                                </span>
 		                                ${spot.dist !== null ? `
 		                                    <span class="bg-amber-100 text-amber-800 text-[8px] font-black px-2 py-0.5 rounded-full uppercase">
@@ -1185,13 +1196,13 @@
 		                                ` : ''}
 		                            </div>
 		                            <h4 class="text-xl font-black uppercase italic tracking-tighter text-stone-900">${spot.info.name}</h4>
-									<div class="flex gap-1 mt-1">
+		                            <div class="flex gap-1 mt-1">
 		                                ${spot.info.months.map(m => `
 		                                    <span class="text-[7px] font-bold uppercase px-1 rounded ${m === activeSeason ? 'bg-green-800 text-white' : 'bg-stone-100 text-stone-400'}">${m}</span>
 		                                `).join('')}
 		                            </div>
 		                        </div>
-		                        <button onclick="event.stopPropagation(); deleteFullSpot(${spot.uid})" 
+		                        <button onclick="event.stopPropagation(); deleteFullSpot('${spot.uid}')" 
 		                                class="ml-4 w-8 h-8 rounded-full bg-red-50 text-red-300 flex items-center justify-center text-xs">✕</button>
 		                    </div>
 		                `).join('')}
@@ -1804,6 +1815,7 @@
     </script>
 </body>
 </html>
+
 
 
 
