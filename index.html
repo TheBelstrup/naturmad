@@ -697,7 +697,10 @@
 		        renderForestMenu();
 		    } else if (current === 'all') {
 		        renderAll();
-		    } else if (current === 'safety') {
+		    } else if (current === 'view_spot') {
+			    renderSpot(data.spotId);
+			}
+			else if (current === 'safety') {
 		        renderSafety();
 		    } else if (typeof current === 'string' && current.startsWith('view_')) {
 		        renderHabitat(current.replace('view_', ''));
@@ -942,16 +945,17 @@
 		                <span style="display:inline-block; font-size:7px; font-weight:800; padding:1px 4px; border-radius:3px; margin:0 1px; ${m === activeSeason ? 'background-color:#064e3b;color:white;' : 'background-color:#f5f5f4;color:#a8a29e;'}">${m}</span>
 		            `).join('');
 		
-		            const popupContent = `
-		                <div class="sans text-center" style="min-width:140px; padding:5px;">
-		                    <div style="font-size:14px; font-weight:900; text-transform:uppercase; font-style:italic; color:#1c1917; margin-bottom:2px;">${spot.info.name}</div>
-		                    <div style="display:flex; justify-content:center; gap:2px; margin-bottom:10px;">${monthsHtml}</div>
-		                    <button onclick="renderResult('${spot.id}')" style="width:100%; padding:8px 0; background-color:#064e3b; color:white; font-size:9px; font-weight:900; text-transform:uppercase; border:none; border-radius:8px;">Se Guide →</button>
-		                </div>
-		            `;
-		
-		            marker.bindPopup(popupContent, { closeButton: false, offset: L.point(0, -5) });
-		            
+					marker.bindPopup(`
+					    <div class="p-2">
+					        <h3 class="font-bold">${plant.name}</h3>
+					        <p class="text-xs text-gray-500 mb-2 font-sans">${new Date(spot.timestamp).toLocaleDateString()}</p>
+					        <div class="flex flex-col gap-2">
+					            <button onclick="navigate('view_spot', { spotId: '${spot.uid}' })" class="bg-emerald-600 text-white px-3 py-2 rounded text-xs font-bold">Vis fund</button>
+					            <button onclick="navigate('${spot.resId}')" class="border border-emerald-600 text-emerald-600 px-3 py-1 rounded text-xs">Arts-info</button>
+					        </div>
+					    </div>
+					`);
+					
 		            // Gem markøren i vores kartotek under sit originale index
 		            activeMarkers[spot.originalIndex] = marker;
 		            markerArray.push(marker);
@@ -1025,25 +1029,37 @@
 		    }, 100);
 		}
 		
-		function saveFinalLocation(id, accuracy) {
+		function saveFinalLocation(resId, accuracy) {
 		    const center = map.getCenter();
 		    
+		    // 1. Skab et unikt ID for dette specifikke fund
+		    const spotUid = 'spot_' + Date.now();
+		    
 		    const newDiscovery = { 
-		        id: id, // Vi gemmer nu ID'et direkte
-		        location: { 
-		            lat: center.lat, 
-		            lng: center.lng, 
-		            acc: accuracy, 
-		            timestamp: new Date().toISOString() 
-		        } 
+		        uid: spotUid,           // Unikt ID for fundet
+		        resId: resId,           // ID på planten (f.eks. res_tragt)
+		        lat: center.lat, 
+		        lng: center.lng, 
+		        acc: accuracy, 
+		        timestamp: new Date().toISOString(),
+		        photos: []              // Gør plads til billeder
 		    };
 		    
+		    // 2. Hent eksisterende fund og tilføj det nye
 		    const existing = JSON.parse(localStorage.getItem('mySpots')) || [];
 		    existing.push(newDiscovery);
 		    localStorage.setItem('mySpots', JSON.stringify(existing));
 		    
+		    // 3. Opdater den globale variabel (hvis du bruger en)
+		    if (typeof mySpots !== 'undefined') {
+		        mySpots = existing;
+		    }
+		    
+		    // 4. Luk editoren og naviger direkte til den nye fund-side
 		    closeLocationEditor();
-		    alert("Dit hemmelige sted er gemt");
+		    
+		    // Vi bruger 'view_spot' og sender vores nye unikke spotUid med
+		    navigate('view_spot', { spotId: spotUid });
 		}
 		
 		function closeLocationEditor() {
@@ -1187,21 +1203,118 @@
 		}
 
 		// Hjælpefunktioner til sletning
-		function deleteSpot(index) {
-			if (confirm("Vil du slette dette sted?")) {
-				const spots = JSON.parse(localStorage.getItem('mySpots')) || [];
-				spots.splice(index, 1);
-				localStorage.setItem('mySpots', JSON.stringify(spots));
-				renderMySpots();
-			}
+		function deleteSpot(spotUid) {
+		    if (confirm('Er du sikker på, at du vil slette dette fund permanent?')) {
+		        // 1. Hent alle fund
+		        let existing = JSON.parse(localStorage.getItem('mySpots')) || [];
+		        
+		        // 2. Filtrer det specifikke fund fra ved brug af UID
+		        existing = existing.filter(s => s.uid !== spotUid);
+		        
+		        // 3. Gem den opdaterede liste
+		        localStorage.setItem('mySpots', JSON.stringify(existing));
+		        
+		        // 4. Opdater din globale variabel (hvis du bruger mySpots i koden)
+		        if (typeof mySpots !== 'undefined') {
+		            mySpots = existing;
+		        }
+		
+		        // 5. Giv besked og gå tilbage til forsiden/kortet
+		        alert("Fundet er slettet.");
+		        navigate('start');
+		    }
 		}
-
+		
 		function clearAllSpots() {
 			if (confirm("Er du HELT sikker på, at du vil slette alle dine hemmelige steder?")) {
 				localStorage.removeItem('mySpots');
 				renderMySpots();
 			}
 		}		
+
+		function renderSpot(spotId) {
+			// Vi leder efter det unikke UID vi lige har lavet
+		    const allSpots = JSON.parse(localStorage.getItem('mySpots')) || [];
+		    const spot = allSpots.find(s => s.uid === spotId);
+		    
+		    if (!spot) {
+		        console.error("Fundet blev ikke fundet!");
+		        return navigate('start');
+		    }
+			
+		    const plant = database[spot.resId];
+		    const app = document.getElementById('app-content');
+		    
+		    app.innerHTML = `
+		        <div class="p-4 space-y-6 pb-20">
+		            <div class="flex justify-between items-center">
+		                <h1 class="text-2xl font-bold">${plant.name}</h1>
+		                <span class="text-xs text-gray-500">${new Date(spot.timestamp).toLocaleDateString()}</span>
+		            </div>
+		
+		            <div id="spot-map" class="w-full h-48 rounded-xl shadow-inner border border-gray-200"></div>
+		
+		            <div>
+		                <div class="flex justify-between items-end mb-2">
+		                    <h2 class="text-sm font-semibold uppercase tracking-wider text-gray-500">Dine Billeder</h2>
+		                    <label class="text-blue-600 text-sm font-medium cursor-pointer">
+		                        + Tilføj
+		                        <input type="file" accept="image/*" class="hidden" onchange="addPhotoToSpot('${spotId}', this)">
+		                    </label>
+		                </div>
+		                <div class="grid grid-cols-3 gap-2" id="photo-grid">
+		                    ${(spot.photos || []).map((img, idx) => `
+		                        <div class="relative aspect-square">
+		                            <img src="${img}" class="w-full h-full object-cover rounded-lg shadow-sm">
+		                            <button onclick="removePhotoFromSpot('${spotId}', ${idx})" class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 text-xs flex items-center justify-center shadow-lg">×</button>
+		                        </div>
+		                    `).join('')}
+		                </div>
+		            </div>
+		
+		            <hr class="border-gray-200">
+		
+		            <div class="space-y-3">
+		                <button onclick="navigate('${spot.resId}')" class="w-full bg-emerald-600 text-white py-4 rounded-xl font-bold shadow-md hover:bg-emerald-700 transition">
+		                    Vis artsdetaljer: ${plant.name}
+		                </button>
+		                <button onclick="deleteSpot('${spotId}')" class="w-full text-red-600 py-2 text-sm font-medium">
+		                    Slet dette fund permanent
+		                </button>
+		            </div>
+		        </div>
+		    `;
+		
+		    // Initialisér mini-kortet
+		    setTimeout(() => {
+		        const smap = L.map('spot-map', { zoomControl: false, attributionControl: false }).setView([spot.lat, spot.lng], 15);
+		        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(smap);
+		        L.marker([spot.lat, spot.lng]).addTo(smap);
+		    }, 100);
+		}
+
+		function addPhotoToSpot(spotId, input) {
+		    if (input.files && input.files[0]) {
+		        const reader = new FileReader();
+		        reader.onload = function(e) {
+		            const spot = mySpots.find(s => s.id === spotId);
+		            if (!spot.photos) spot.photos = [];
+		            spot.photos.push(e.target.result);
+		            localStorage.setItem('mySpots', JSON.stringify(mySpots));
+		            renderSpot(spotId); // Genindlæs siden
+		        };
+		        reader.readAsDataURL(input.files[0]);
+		    }
+		}
+		
+		function removePhotoFromSpot(spotId, index) {
+		    if(confirm('Vil du slette billedet?')) {
+		        const spot = mySpots.find(s => s.id === spotId);
+		        spot.photos.splice(index, 1);
+		        localStorage.setItem('mySpots', JSON.stringify(mySpots));
+		        renderSpot(spotId);
+		    }
+		}
 		
 		// Hjælpefunktion til at generere Naturbasen-linket
 		function renderNaturbasenLink(url) {
@@ -1605,10 +1718,26 @@
 		        render('start');
 		    }
 		};
+
+		function validateDataStructure() {
+		    const raw = localStorage.getItem('mySpots');
+		    if (!raw) return;
+		    
+		    const spots = JSON.parse(raw);
+		    // Hvis et spot mangler 'uid', er det af den gamle type
+		    if (spots.length > 0 && !spots[0].uid) {
+		        console.warn("Gammel datastruktur fundet. Nulstiller fund for at undgå fejl.");
+		        localStorage.setItem('mySpots', JSON.stringify([]));
+		        mySpots = [];
+		    }
+		}
+		// Kald den når appen starter
+		validateDataStructure();
 		window.onload = initApp;
     </script>
 </body>
 </html>
+
 
 
 
