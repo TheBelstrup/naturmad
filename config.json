@@ -1,0 +1,36 @@
+Det er en meget logisk tilgang. Ved at lade brugeren vælge sprog først, sikrer vi, at resten af opsætningen (land og region) bliver præsenteret på et sprog, de faktisk forstår.
+
+Her er den reviderede struktur og logik, hvor sproget er "nøglen", der åbner op for de næste valg.
+
+1. Den nye config.json struktur
+Her organiserer vi landene under de sprog, de er tilgængelige på.
+
+JSON
+{
+  "languages": {
+    "da": {
+      "label": "Dansk",
+      "countries": {
+        "DK": {
+          "name": "Danmark",
+          "regions": ["Hele landet", "Jylland", "Sjælland", "Bornholm"]
+        }
+      }
+    },
+    "en": {
+      "label": "English",
+      "countries": {
+        "DK": { "name": "Denmark", "regions": ["All regions", "Jutland", "Zealand", "Bornholm"] },
+        "DE": { "name": "Germany", "regions": ["All regions", "Bavaria", "Berlin"] },
+        "UK": { "name": "United Kingdom", "regions": ["All regions", "Scotland", "Wales"] }
+      }
+    },
+    "de": {
+      "label": "Deutsch",
+      "countries": {
+        "DK": { "name": "Dänemark", "regions": ["Ganzes Land", "Jütland", "Seeland", "Borhholm"] },
+        "DE": { "name": "Deutschland", "regions": ["Bundesweit", "Bayern", "Berlin"] }
+      }
+    }
+  }
+}
