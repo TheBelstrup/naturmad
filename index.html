@@ -1248,56 +1248,96 @@
 		    const spot = allSpots.find(s => s.uid === spotUid);
 		    if (!spot) return navigate('start');
 		
-		    const plant = database[spot.resId];
+		    // Håndter nyt vs gammelt data format for navn
+		    const plantInfo = database[spot.resId] || { name: "Ukendt plante" };
+		    
 		    const app = document.getElementById('app-content');
 		    
-		    // 1. Tegn selve siden med en tom plads til billederne (photo-grid)
 		    app.innerHTML = `
-		        <div class="p-4 space-y-6 pb-20">
-		            <h1 class="text-2xl font-bold">${plant.name}</h1>
-		            <div id="spot-map" class="w-full h-48 rounded-xl border"></div>
+		        <div class="p-4 space-y-6 pb-20 fade-in">
+		            <div class="flex items-center justify-between">
+		                <button onclick="navigate('start')" class="text-emerald-700 flex items-center gap-1 font-medium text-sm">
+		                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+		                    Tilbage
+		                </button>
+		                <span class="text-xs text-stone-400 font-sans">${new Date(spot.timestamp).toLocaleDateString()}</span>
+		            </div>
+		
+		            <h1 class="text-3xl font-black text-stone-900 uppercase italic tracking-tighter">${plantInfo.name}</h1>
+		            
+		            <div id="spot-map" class="w-full h-48 rounded-2xl border border-stone-200 shadow-inner"></div>
 		            
 		            <div>
-		                <div class="flex justify-between items-end mb-2">
-		                    <h2 class="text-sm font-semibold text-gray-500 uppercase">Dine Billeder</h2>
-		                    <label class="text-blue-600 text-sm font-medium cursor-pointer">
-		                        + Tilføj
-		                        <input type="file" accept="image/*" class="hidden" onchange="addPhotoToSpot('${spotUid}', this)">
-		                    </label>
+		                <div class="flex justify-between items-end mb-3">
+		                    <h2 class="text-sm font-bold text-stone-500 uppercase tracking-wider">Dokumentation</h2>
+		                    
+		                    <div class="flex gap-3">
+		                        <label class="flex items-center justify-center w-10 h-10 bg-emerald-100 text-emerald-700 rounded-full cursor-pointer active:scale-90 transition-transform shadow-sm">
+		                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+		                            <input type="file" accept="image/*" capture="environment" class="hidden" onchange="addPhotoToSpot('${spotUid}', this)">
+		                        </label>
+		                        
+		                        <label class="flex items-center justify-center w-10 h-10 bg-stone-100 text-stone-600 rounded-full cursor-pointer active:scale-90 transition-transform shadow-sm">
+		                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+		                            <input type="file" accept="image/*" class="hidden" onchange="addPhotoToSpot('${spotUid}', this)">
+		                        </label>
+		                    </div>
 		                </div>
+		
 		                <div class="grid grid-cols-3 gap-2" id="photo-grid">
-		                    <div class="col-span-3 text-center py-4 text-gray-400 text-xs">Henter billeder...</div>
+		                    <div class="col-span-3 text-center py-8 text-stone-300 animate-pulse">Henter billeder...</div>
 		                </div>
 		            </div>
 		
-		            <button onclick="navigate('${spot.resId}')" class="w-full bg-emerald-600 text-white py-4 rounded-xl font-bold shadow-md">
-		                Vis artsdetaljer
-		            </button>
-		            <button onclick="deleteFullSpot('${spotUid}')" class="w-full text-red-600 py-2 text-sm font-medium">
-		                Slet fund
-		            </button>
+		            <div class="pt-6 space-y-3">
+		                <button onclick="navigate('${spot.resId}')" class="w-full bg-emerald-800 text-white py-4 rounded-xl font-bold shadow-lg active:scale-[0.98] transition-transform">
+		                    Læs om ${plantInfo.name}
+		                </button>
+		                <button onclick="deleteFullSpot('${spotUid}')" class="w-full text-red-400 py-3 text-xs font-bold uppercase tracking-widest hover:text-red-600">
+		                    Slet dette fund
+		                </button>
+		            </div>
 		        </div>
 		    `;
 		
-		    // 2. Initialisér kortet (som før)
+		    // Initialisér kort (håndterer både nye flade coords og gamle nested coords)
 		    setTimeout(() => {
-		        const smap = L.map('spot-map', { zoomControl: false, attributionControl: false }).setView([spot.lat, spot.lng], 15);
-		        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(smap);
-		        L.marker([spot.lat, spot.lng]).addTo(smap);
+		        const lat = spot.lat || (spot.location ? spot.location.lat : 0);
+		        const lng = spot.lng || (spot.location ? spot.location.lng : 0);
+		        
+		        if (lat && lng) {
+		            const smap = L.map('spot-map', { zoomControl: false, attributionControl: false }).setView([lat, lng], 15);
+		            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(smap);
+		            const m = L.marker([lat, lng]).addTo(smap);
+		            // Deaktiver interaktion så det bare er et "billede"
+		            smap.dragging.disable();
+		            smap.touchZoom.disable();
+		            smap.doubleClickZoom.disable();
+		            smap.scrollWheelZoom.disable();
+		        }
 		    }, 100);
 		
-		    // 3. HENT BILLEDER FRA INDEXEDDB og opdater gridet
+		    // Hent billeder
 		    const photos = await photoStorage.getAll(spotUid);
 		    const grid = document.getElementById('photo-grid');
 		    
 		    if (photos.length === 0) {
-		        grid.innerHTML = `<div class="col-span-3 text-center py-4 text-gray-400 text-sm">Ingen billeder endnu.</div>`;
+		        grid.innerHTML = `
+		            <div class="col-span-3 bg-stone-50 rounded-xl border border-dashed border-stone-300 p-8 flex flex-col items-center justify-center text-stone-400 gap-2">
+		                <svg class="w-8 h-8 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path></svg>
+		                <span class="text-xs font-medium">Ingen billeder endnu</span>
+		            </div>`;
 		    } else {
 		        grid.innerHTML = photos.map(photo => `
-		            <div class="relative aspect-square">
-		                <img src="${photo.data}" class="w-full h-full object-cover rounded-lg shadow-sm">
-		                <button onclick="deleteSinglePhoto('${spotUid}', ${photo.id})" 
-		                        class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 text-xs">×</button>
+		            <div class="relative aspect-square group">
+		                <img src="${photo.data}" 
+		                     onclick="openFullImage(this.src)"
+		                     class="w-full h-full object-cover rounded-xl shadow-sm border border-stone-100 cursor-zoom-in active:opacity-80 transition-opacity">
+		                
+		                <button onclick="event.stopPropagation(); deleteSinglePhoto('${spotUid}', ${photo.id})" 
+		                        class="absolute -top-2 -right-2 bg-white text-red-500 rounded-full w-6 h-6 shadow-md flex items-center justify-center font-bold z-10 border border-stone-100">
+		                        ×
+		                </button>
 		            </div>
 		        `).join('');
 		    }
@@ -1315,7 +1355,23 @@
 		        reader.readAsDataURL(input.files[0]);
 		    }
 		}
-		
+
+		function openFullImage(imgSrc) {
+		    // Lav elementet dynamisk
+		    const overlay = document.createElement('div');
+		    overlay.className = 'fixed inset-0 bg-black z-[2000] flex items-center justify-center animate-in fade-in duration-200';
+		    overlay.onclick = () => document.body.removeChild(overlay); // Luk når man trykker
+		    
+		    overlay.innerHTML = `
+		        <div class="relative w-full h-full p-4 flex items-center justify-center">
+		            <img src="${imgSrc}" class="max-w-full max-h-full object-contain shadow-2xl rounded-lg">
+		            <button class="absolute top-4 right-4 text-white bg-black/50 w-10 h-10 rounded-full flex items-center justify-center text-xl font-bold">✕</button>
+		        </div>
+		    `;
+		    
+		    document.body.appendChild(overlay);
+		}
+
 		async function deleteFullSpot(spotUid) {
 		    if (confirm('Vil du slette dette fund og alle tilhørende billeder?')) {
 		        // 1. Slet fra localStorage (markøren og data)
@@ -1815,6 +1871,7 @@
     </script>
 </body>
 </html>
+
 
 
 
