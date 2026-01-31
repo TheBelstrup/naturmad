@@ -172,23 +172,14 @@
 			    </div>
 			</section>
 
-			<section class="bg-emerald-900 text-white p-4 rounded-2xl shadow-lg">
-				<h3 class="font-black italic uppercase text-sm mb-1">Gem i skyen</h3>
-				<p class="text-[10px] opacity-80 mb-3">Log ind for at sikre dine fund på tværs af enheder.</p>
-				<button onclick="handleLogin()" class="w-full bg-white text-emerald-900 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest">
-					Log ind / Opret
-				</button>
-			</section>
-
 			<nav class="space-y-1">
-				<button onclick="navigate('my-spots')" class="w-full text-left py-3 border-b border-stone-100 flex items-center gap-3">
-				    <span class="text-lg">📍</span> <span class="font-bold text-sm">Mine Fund</span>
-				</button>
+				<div id="user-section" class="bg-stone-100 rounded-3xl p-2 space-y-1">
+    			</div>
 				<button onclick="navigate('safety')" class="w-full text-left py-3 border-b border-stone-100 flex items-center gap-3">
 					<span class="text-lg">⚠</span> <span class="font-bold text-sm">Sikkerhed</span>
 				</button>
 				<button onclick="reportBug()" class="w-full text-left py-3 border-b border-stone-100 flex items-center gap-3">
-					<span class="text-lg">✉</span> <span class="font-bold text-sm">Rapportér fejl</span>
+					<span class="text-lg">✉</span> <span class="font-bold text-sm">Giv tilbagemelding</span>
 				</button>
 			</nav>
 		</div>
@@ -842,17 +833,79 @@
 		function saveSettings() {
 		    localStorage.setItem('userSettings', JSON.stringify(userSettings));
 		}
+
+		function renderUserSection() {
+		    const container = document.getElementById('user-section');
+		    if (!container) return;
 		
+		    const count = getSpotCount();
+		    const countBadge = `<span class="ml-auto bg-emerald-100 text-emerald-700 text-[10px] font-black px-2 py-0.5 rounded-full">${count}</span>`;
+		
+		    if (!isLoggedIn) {
+		        container.innerHTML = `
+		            <section class="bg-emerald-900 text-white p-4 rounded-2xl shadow-md mb-2">
+		                <h3 class="font-black italic uppercase text-sm mb-1">Gem i skyen</h3>
+		                <p class="text-[10px] opacity-80 mb-3">Log ind for at sikre dine fund på tværs af enheder.</p>
+		                <button onclick="handleLogin()" class="w-full bg-white text-emerald-900 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest">
+		                    Log ind / Opret
+		                </button>
+		            </section>
+		            
+		            <button onclick="navigate('my-spots')" class="w-full text-left py-3 px-3 flex items-center gap-3">
+		                <span class="text-lg">📍</span> 
+		                <div class="flex flex-col">
+		                    <span class="font-bold text-sm">Mine Fund</span>
+		                    <span class="text-[9px] text-stone-500 uppercase">Gemt på denne telefon</span>
+		                </div>
+		                ${count > 0 ? countBadge : ''}
+		            </button>
+		        `;
+		    } else {
+		        container.innerHTML = `
+		            <div class="flex items-center gap-3 p-3 bg-white rounded-2xl shadow-sm mb-1">
+		                <div class="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center text-emerald-700 font-bold italic">
+		                    ${userSettings.name ? userSettings.name[0] : 'U'}
+		                </div>
+		                <div class="flex flex-col">
+		                    <span class="font-bold text-sm italic">Profil synkroniseret</span>
+		                    <span class="text-[9px] text-emerald-600 uppercase font-black tracking-tight">Sky-status: Aktiv</span>
+		                </div>
+		            </div>
+		
+		            <button onclick="navigate('my-spots')" class="w-full text-left py-3 px-3 flex items-center gap-3 bg-white rounded-xl">
+		                <span class="text-lg">📍</span> 
+		                <div class="flex flex-col text-emerald-900">
+		                    <span class="font-bold text-sm">Mine Fund</span>
+		                    <span class="text-[9px] text-stone-400 uppercase">Synkroniserede fund</span>
+		                </div>
+		                ${countBadge}
+		            </button>
+		        `;
+		    }
+		}
+
 		function handleLogin() {
 		    alert("Her åbnes Stripe / Google Login vindue...");
 		    // Her integreres senere Firebase Auth eller lignende.
-		}
-		
-		function reportBug() {
-			closeMenuIfOpen();
-		    window.location.href = `mailto:support@sikkernatur.dk?subject=Tilbagemelding`;
-		}
 
+			// Her ville din rigtige login-kode være
+		    console.log("Logger ind...");
+		    
+		    // For test: Lad os lade som om login lykkedes
+		    isLoggedIn = true;
+		    renderUserSection(); // Opdaterer menuen med det samme uden at genindlæse siden
+		}
+	
+		function reportBug() {
+		    closeMenuIfOpen();
+		    
+		    // Vi gør emnet og teksten lidt mere generel
+		    const subject = encodeURIComponent("Tilbagemelding fra NaturMad app");
+		    const body = encodeURIComponent("Hej NaturMad,\n\nJeg har følgende tilbagemelding/idé:\n\n");
+		    
+		    window.location.href = `mailto:support@naturmad.dk?subject=${subject}&body=${body}`;
+		}
+	
 		function render(pageId, data) {
 		    // Hvis pageId ikke er defineret (f.eks. ved reload), brug 'start'
 		    const current = pageId || 'start';
@@ -1106,8 +1159,19 @@
 		    const d = R * c;
 		    return d; // Returnerer afstand i km
 		}
-		
-		function initOverviewMap(spots) {
+
+		function getSpotCount() {
+		    try {
+		        const savedSpots = localStorage.getItem('mySpots'); // Antager dine fund hedder 'mySpots'
+		        if (!savedSpots) return 0;
+		        const spots = JSON.parse(savedSpots);
+		        return Array.isArray(spots) ? spots.length : 0;
+		    } catch (e) {
+		        return 0;
+		    }
+		}
+
+	function initOverviewMap(spots) {
 		    setTimeout(() => {
 		        const mapContainer = L.DomUtil.get('overview-map');
 		        if (mapContainer != null) mapContainer._leaflet_id = null;
@@ -1245,7 +1309,9 @@
 		    
 		    // 4. Luk editoren og naviger direkte til den nye fund-side
 		    closeLocationEditor();
-		    
+
+			renderUserSection();
+	
 		    // Vi bruger 'view_spot' og sender vores nye unikke spotUid med
 		    navigate('view_spot', { spotId: spotUid });
 		}
@@ -2065,7 +2131,8 @@
 					saveSettings(); // Gem de gættede indstillinger
 				}
 				
-				renderLanguageOptions();				
+				renderLanguageOptions();
+				renderUserSection();
 				await handleLangChange(userSettings.lang, false); // false = genindlæs ikke hele siden endnu		
 			} catch (err) {
 				console.error("Fejl under opstart:", err);
@@ -2105,6 +2172,7 @@
     </script>
 </body>
 </html>
+
 
 
 
