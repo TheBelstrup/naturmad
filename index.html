@@ -152,24 +152,24 @@
 		</div>
 	
 		<div class="space-y-6 flex-1 overflow-y-auto">
-			<section class="space-y-4">
-				<div>
-					<label class="text-[10px] font-bold uppercase tracking-widest text-emerald-800">1. Vælg Sprog</label>
-					<select id="lang-select" onchange="handleLangChange(this.value)" class="w-full p-3 bg-stone-100 rounded-lg text-sm font-bold">
-						</select>
-				</div>
+			<section class="bg-stone-100 rounded-2xl overflow-hidden divide-y divide-stone-200">
+			    <div class="flex items-center px-4 py-2 justify-between">
+			        <span class="text-[10px] font-bold uppercase tracking-widest text-stone-500">Sprog</span>
+			        <select id="lang-select" onchange="handleLangChange(this.value)" class="bg-transparent text-sm font-bold text-emerald-900 border-none focus:ring-0 py-1 text-right">
+			        </select>
+			    </div>
 			
-				<div>
-					<label class="text-[10px] font-bold uppercase tracking-widest text-emerald-800">2. Vælg Land</label>
-					<select id="country-select" onchange="handleCountryChange(this.value)" class="w-full p-3 bg-stone-100 rounded-lg text-sm font-bold">
-						</select>
-				</div>
+			    <div class="flex items-center px-4 py-2 justify-between">
+			        <span class="text-[10px] font-bold uppercase tracking-widest text-stone-500">Land</span>
+			        <select id="country-select" onchange="handleCountryChange(this.value)" class="bg-transparent text-sm font-bold text-emerald-900 border-none focus:ring-0 py-1 text-right">
+			        </select>
+			    </div>
 			
-				<div>
-					<label class="text-[10px] font-bold uppercase tracking-widest text-emerald-800">3. Vælg Region</label>
-					<select id="region-select" onchange="updateSetting('region', this.value)" class="w-full p-3 bg-stone-100 rounded-lg text-sm font-bold">
-						</select>
-				</div>
+			    <div class="flex items-center px-4 py-2 justify-between">
+			        <span class="text-[10px] font-bold uppercase tracking-widest text-stone-500">Region</span>
+			        <select id="region-select" onchange="updateSetting('region', this.value)" class="bg-transparent text-sm font-bold text-emerald-900 border-none focus:ring-0 py-1 text-right">
+			        </select>
+			    </div>
 			</section>
 
 			<section class="bg-emerald-900 text-white p-4 rounded-2xl shadow-lg">
@@ -751,15 +751,25 @@
 		        document.body.style.overflow = 'hidden'; // Lås scroll
 		    }
 		}
-		
-		function handleLangChange(langCode, shouldReload = true) {
+
+		function closeMenuIfOpen() {
+		    const menu = document.getElementById('side-menu');
+		    const overlay = document.getElementById('menu-overlay');
+		    if (menu && !menu.classList.contains('-translate-x-full')) {
+		        menu.classList.add('-translate-x-full');
+		        overlay.classList.add('hidden');
+		        document.body.style.overflow = '';
+		    }
+		}
+
+		async function handleLangChange(langCode, shouldRender = true) {
 		    userSettings.lang = langCode;
 		    const langData = appConfig.languages[langCode];
 		    
-		    // Skift automatisk til det nye sprogs default land
+		    // Sæt automatisk til det nye sprogs standardland
 		    const newCountry = langData.defaultCountry;
 		    
-		    // Opdater lande-dropdown
+		    // Opdater lande-vælgeren i menuen
 		    const countrySelect = document.getElementById('country-select');
 		    if (countrySelect) {
 		        countrySelect.innerHTML = Object.keys(langData.countries).map(code => 
@@ -769,9 +779,8 @@
 		        ).join('');
 		    }
 		
-		    // Kør lande-skiftet (som også henter den rigtige JSON database)
-		    handleCountryChange(newCountry, shouldReload);
-		}
+		    await handleCountryChange(newCountry, shouldRender);
+		}	
 		
 		async function handleCountryChange(countryCode, shouldRender = true) {
 		    // 1. Opdater indstillingerne
@@ -803,29 +812,23 @@
 		        render('start');
 		    }
 		}
+
+		async function loadDatabase(countryCode) {
+		    try {
+		        const response = await fetch(`data_${countryCode.toLowerCase()}.json`);
+		        if (!response.ok) throw new Error("Fil ikke fundet");
+		        database = await response.json();
+		    } catch (err) {
+		        console.error("Database fejl:", err);
+		        database = {}; 
+		    }
+		}
 		
 		// Hjælpefunktion til at gemme i localStorage
 		function saveSettings() {
 		    localStorage.setItem('userSettings', JSON.stringify(userSettings));
 		}
 		
-		// Hjælpefunktion til at hente den fysiske JSON-fil
-		async function loadDatabase(countryCode) {
-		    try {
-		        const fileName = `data_${countryCode.toLowerCase()}.json`;
-		        const response = await fetch(fileName);
-		        
-		        if (!response.ok) throw new Error(`Kunne ikke finde ${fileName}`);
-		        
-		        database = await response.json();
-		        console.log(`✅ Database indlæst: ${fileName}`);
-		    } catch (err) {
-		        console.error("❌ Fejl ved indlæsning af database:", err);
-		        // Her kan du evt. indsætte en tom database {} for at undgå at appen crasher
-		        database = {};
-		    }
-		}
-
 		function handleLogin() {
 		    alert("Her åbnes Stripe / Google Login vindue...");
 		    // Her integreres senere Firebase Auth eller lignende.
@@ -1986,18 +1989,6 @@
             document.getElementById('app-content').innerHTML = content;
             window.scrollTo(0,0);
         }
-
-		function closeMenuIfOpen() {
-		    const menu = document.getElementById('side-menu');
-		    const overlay = document.getElementById('menu-overlay');
-		    
-		    // Hvis menuen IKKE har klassen '-translate-x-full', betyder det den er synlig
-		    if (menu && !menu.classList.contains('-translate-x-full')) {
-		        menu.classList.add('-translate-x-full');
-		        overlay.classList.add('hidden');
-		        document.body.style.overflow = ''; // Genaktiver scroll
-		    }
-		}
 		
         function navigate(pageId, data = null) {
 			closeMenuIfOpen();
@@ -2058,9 +2049,8 @@
 					
 					saveSettings(); // Gem de gættede indstillinger
 				}
-		
-				handleLangChange(userSettings.lang, false); // false = genindlæs ikke hele siden endnu
-		
+				
+				await handleLangChange(userSettings.lang, false); // false = genindlæs ikke hele siden endnu		
 			} catch (err) {
 				console.error("Fejl under opstart:", err);
 			}
@@ -2099,3 +2089,4 @@
     </script>
 </body>
 </html>
+
