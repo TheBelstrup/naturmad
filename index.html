@@ -2042,10 +2042,6 @@
 					saveSettings(); // Gem de gættede indstillinger
 				}
 		
-				// 3. Opdater UI (Sprog-vælgeren)
-				renderLanguageOptions();
-				
-				// 4. Kør den kædede opdatering (Sprog -> Land -> Region -> Database)
 				handleLangChange(userSettings.lang, false); // false = genindlæs ikke hele siden endnu
 		
 			} catch (err) {
@@ -2086,6 +2082,7 @@
     </script>
 </body>
 </html>
+
 
 
 
