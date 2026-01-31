@@ -762,6 +762,19 @@
 		    }
 		}
 
+		function renderLanguageOptions() {
+		    const langSelect = document.getElementById('lang-select');
+		    if (!langSelect || !appConfig.languages) return;
+		
+		    // Byg listen af sprog baseret på nøglerne i config.json (da, en, de osv.)
+		    langSelect.innerHTML = Object.keys(appConfig.languages).map(langKey => {
+		        const lang = appConfig.languages[langKey];
+		        return `<option value="${langKey}" ${userSettings.lang === langKey ? 'selected' : ''}>
+		            ${lang.label}
+		        </option>`;
+		    }).join('');
+		}
+		
 		async function handleLangChange(langCode, shouldRender = true) {
 		    userSettings.lang = langCode;
 		    const langData = appConfig.languages[langCode];
@@ -2050,6 +2063,7 @@
 					saveSettings(); // Gem de gættede indstillinger
 				}
 				
+				renderLanguageOptions();				
 				await handleLangChange(userSettings.lang, false); // false = genindlæs ikke hele siden endnu		
 			} catch (err) {
 				console.error("Fejl under opstart:", err);
@@ -2089,4 +2103,5 @@
     </script>
 </body>
 </html>
+
 
