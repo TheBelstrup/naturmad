@@ -1945,7 +1945,7 @@
 		    window.history.back();
 		}
 		
-		function initApp() {
+		async function initApp() {
 			try {
 				// 1. Hent konfigurationen
 				const response = await fetch('config.json');
@@ -1991,6 +1991,7 @@
 		    window.history.replaceState({ pageId: 'start' }, "", "");
 		    render('start');
 		}
+		
 		window.onpopstate = function(event) {
 		    if (event.state) {
 		        render(event.state.pageId, event.state.data);
@@ -2073,6 +2074,7 @@
     </script>
 </body>
 </html>
+
 
 
 
