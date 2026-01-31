@@ -2009,7 +2009,22 @@
 		function goBack() {
 		    window.history.back();
 		}
-		
+
+		async function getGuessedLocation() {
+		    try {
+		        const response = await fetch('https://ipapi.co/json/');
+		        const data = await response.json();
+		        
+		        // Returnerer f.eks. { languages: "de-DE", country_code: "DE" }
+		        return {
+		            lang: data.languages.split(',')[0].split('-')[0], // f.eks. "de"
+		            country: data.country_code // f.eks. "DE"
+		        };
+		    } catch (e) {
+		        return null; // Fallback hvis tjenesten er nede
+		    }
+		}
+
 		async function initApp() {
 			try {
 				// 1. Hent konfigurationen
@@ -2022,19 +2037,21 @@
 					userSettings = JSON.parse(saved);
 				} else {
 					// Gæt sprog fra browser
-					let browserLang = navigator.language.split('-')[0];
+					const urlLang = new URLSearchParams(window.location.search).get('lang');
+					const geo = await getGuessedLocation();
+					let finalLang = urlLang || (geo ? geo.lang : null) || navigator.language.split('-')[0];
 					
-					// Hvis browser-sproget ikke findes i vores config, brug 'en' som fallback
-					if (!appConfig.languages[browserLang]) {
-						browserLang = 'en';
+					// Hvis browser-sproget ikke findes i vores config, brug 'da' som fallback
+					if (!appConfig.languages[finalLang]) {
+						finalLang = 'da';
 					}
 		
 					// Find standard-landet for det gættede sprog
-					const langData = appConfig.languages[browserLang];
+					const langData = appConfig.languages[finalLang];
 					const countryCode = langData.defaultCountry;
 		
 					userSettings = {
-						lang: browserLang,
+						lang: finalLang,
 						country: countryCode,
 						region: langData.countries[countryCode].regions[0] // Tag første region som default
 					};
@@ -2082,41 +2099,3 @@
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
