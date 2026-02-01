@@ -408,15 +408,15 @@
 			const response = await fetch(`data/wizardMushroomData_${countryCode}.json${cacheBuster}`);
 			const wizardMushroomData = await response.json();
 			
-			wizardMushroomData = ui.wizardMushroomData[langCode] || ui.wizardMushroomData[langCode];
-
 			// 1. Opdater indstillingerne
 		    userSettings.country = countryCode;
 		    
 		    // 2. Find regionerne for det valgte land i det valgte sprog
 		    const langConfig = appConfig.languages[userSettings.lang];
 		    const countryConfig = langConfig.countries[countryCode];
-		    
+
+			wizardMushroomData = ui.wizardMushroomData[langConfig] || ui.wizardMushroomData[langConfig];
+			
 		    // 3. Opdater regions-dropdown i menuen
 		    const regionSelect = document.getElementById('region-select');
 		    if (regionSelect) {
@@ -1842,6 +1842,7 @@
     </script>
 </body>
 </html>
+
 
 
 
