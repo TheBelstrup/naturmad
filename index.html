@@ -6,7 +6,7 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="#064e3b">
-    <title>SikkerNatur Pro</title>
+    <title>Wildly</title>
 	<link rel="manifest" href="manifest.json">
 	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 	<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -100,7 +100,7 @@
             <button id="back-btn" onclick="goBack()" class="hidden w-10 h-10 flex items-center justify-center bg-stone-100 rounded-full btn-active">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 19l-7-7 7-7"/></svg>
             </button>
-            <h1 class="text-2xl font-black tracking-tighter uppercase italic sans">Natur<span class="text-green-800">Mad</span></h1>
+            <h1 class="text-2xl font-black tracking-tighter uppercase italic sans">Wild<span class="text-green-800">ly</span></h1>
         </div>
     </header>
 
@@ -110,15 +110,15 @@
         <div class="grid grid-cols-5 h-16">
             <button onclick="navigate('start')" class="flex flex-col items-center justify-center gap-1 btn-active">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
-                <span class="text-[9px] font-black uppercase sans text-stone-600">Hjem</span>
+                <span data-i18n="menu_home" class="text-[9px] font-black uppercase sans text-stone-600">Hjem</span>
             </button>
             <button onclick="navigate('all')" class="flex flex-col items-center justify-center gap-1 btn-active">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/></svg>
-                <span class="text-[9px] font-black uppercase sans text-stone-600">Bibliotek</span>
+                <span data-i18n="menu_library" class="text-[9px] font-black uppercase sans text-stone-600">Bibliotek</span>
             </button>
             <button onclick="navigate('wizard', 'START')" class="flex flex-col items-center justify-center gap-1 btn-active text-green-800">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h20M12 2v20M4.93 4.93l14.14 14.14M19.07 4.93 4.93 19.07"/></svg>
-                <span class="text-[9px] font-black uppercase sans">Svampe-ID</span>
+                <span data-i18n="menu_mushroom_id" class="text-[9px] font-black uppercase sans">Svampe-ID</span>
             </button>
             
             <div class="season-trigger btn-active">
@@ -129,22 +129,22 @@
                         <line x1="8" y1="2" x2="8" y2="6"></line>
                         <line x1="3" y1="10" x2="21" y2="10"></line>
                     </svg>
-                    <span id="season-label" class="text-[9px] font-black uppercase sans text-stone-600">Hele Året</span>
+                    <span data-i18n="all_year" id="season-label" class="text-[9px] font-black uppercase sans text-stone-600">Hele Året</span>
                 </div>
                 <select id="season-picker" onchange="handleSeasonChange(this.value)" class="season-select-overlay">
-                    <option value="all">Hele Året</option>
-                    <option value="jan">Jan</option>
-                    <option value="feb">Feb</option>
-                    <option value="mar">Mar</option>
-                    <option value="apr">Apr</option>
-                    <option value="maj">Maj</option>
-                    <option value="jun">Jun</option>
-                    <option value="jul">Jul</option>
-                    <option value="aug">Aug</option>
-                    <option value="sep">Sep</option>
-                    <option value="okt">Okt</option>
-                    <option value="nov">Nov</option>
-                    <option value="dec">Dec</option>
+                    <option data-i18n="all_year" value="all">Hele Året</option>
+                    <option data-i18n="month_jan" value="jan">Jan</option>
+                    <option data-i18n="month_feb" value="feb">Feb</option>
+                    <option data-i18n="month_mar" value="mar">Mar</option>
+                    <option data-i18n="month_apr" value="apr">Apr</option>
+                    <option data-i18n="month_may" value="maj">Maj</option>
+                    <option data-i18n="month_jun" value="jun">Jun</option>
+                    <option data-i18n="month_jul" value="jul">Jul</option>
+                    <option data-i18n="month_aug" value="aug">Aug</option>
+                    <option data-i18n="month_sep" value="sep">Sep</option>
+                    <option data-i18n="month_oct" value="okt">Okt</option>
+                    <option data-i18n="month_nov" value="nov">Nov</option>
+                    <option data-i18n="month_dec" value="dec">Dec</option>
                 </select>
             </div>
 
@@ -154,7 +154,7 @@
 			        <line x1="3" y1="6" x2="21" y2="6"></line>
 			        <line x1="3" y1="18" x2="21" y2="18"></line>
 			    </svg>
-			    <span class="text-[9px] font-black uppercase sans">Menu</span>
+			    <span data-i18n="menu_menu" class="text-[9px] font-black uppercase sans">Menu</span>
 			</button>
         </div>
     </nav>
@@ -205,7 +205,24 @@
 	</div>
 	
     <script>
-        const database = {
+		//GLOBALS
+		let ui = {}; // Vores eneste globale objekt til interface-tekster
+		let map; // Global variabel til kortet
+		let activeMarkers = {};
+		let currentPageId = 'start';
+		// Global variable to track where we are in the tree
+		let currentWizardNode = wizardMushroomData;
+		let isLoggedIn = false;
+		let userSettings = JSON.parse(localStorage.getItem('userSettings')) || {
+		    lang: 'da',
+		    country: 'DK',
+		    region: 'Hele landet'
+		};		
+        let activeSeason = 'all';
+        const typeOrder = { "svamp": 1, "bær": 2, "plante": 3, "nød": 4 };
+        const monthOrder = ["jan", "feb", "mar", "apr", "maj", "jun", "jul", "aug", "sep", "okt", "nov", "dec"];
+
+		const database = {
 		  res_hyben: { name: "Rynket Rose (Hyben)", type: "bær", habitats: ["Kyst", "Have"], extended_habitat: "Kystnære områder, sommerhusgrunde og læhegn. Invasiv i Danmark.", latin: "Rosa rugosa", months: ["jun","jul","aug","sep"], traits: "Store orange/røde bær, voldsomme torne", extended_traits: "Store flade bær. Blomsterne dufter kraftigt og er enten hvide eller mørkerøde.", not_this_if: ["Busk mangler torne", "Bærrene er små og aflange (det er dog også hyben, bare andre arter)"], usage: "Bær bruges til marmelade (fjern kerner). Kronblade til sirup eller snaps.", cleaning: "Halvér bærret og skrab de kradsende kerner ud med en teske.", preservation: "Bær kan fryses efter rensning eller tørres.", naturbasen: "https://www.naturbasen.dk/art/4367/rynket-rose", id_keys: { bær: "Store, kødfulde.", blade: "Rynkede, læderagtige.", vækst: "Tæt buskads m. mange torne." }, twin: { name: "Ingen", diff: "Let genkendelig på bær og duft.", toxic: false } },
 		  res_jordbaer: { name: "Skovjordbær", type: "bær", habitats: ["Skov"], extended_habitat: "Skovbryn, lysninger og skrænter med sol.", latin: "Fragaria vesca", months: ["jun","jul"], traits: "Små røde bær, hvide blomster", extended_traits: "Ligner små havejordbær. Bærrene hænger ofte nedad og er ekstremt aromatiske.", not_this_if: ["Bærrene er smagløse og peger opad (Indisk Prydjordbær - uspiseligt)"], usage: "Spises rå på stedet. Smagsintensiteten er langt højere end havejordbær.", cleaning: "Kræver sjældent rensning udover et hurtigt tjek for insekter.", preservation: "Bør spises straks. Kan fryses, men mister struktur.", naturbasen: "https://www.naturbasen.dk/art/3601/skov-jordbaerr", id_keys: { blade: "Tredelte, savtakkede.", bær: "Små, røde m. frø på ydersiden." }, twin: { name: "Indisk Prydjordbær", diff: "Gule blomster. Bær peger opad. Smager af ingenting.", toxic: false } },
 		  res_gran: { name: "Rødgran (Skud)", type: "plante", habitats: ["Skov"], extended_habitat: "Nåleskove over hele landet.", latin: "Picea abies", months: ["maj","jun"], traits: "Lysegrønne bløde skud", extended_traits: "Kun de helt nye, lysegrønne og bløde skud i maj/juni er spiselige.", not_this_if: ["Skuddene er mørkegrønne og stive", "Nålene er flade og har hvide striber (Ædelgran - smager anderledes)"], usage: "Granskudssirup, snaps eller som syrligt drys i salater.", cleaning: "Skyl for støv.", preservation: "Lægges i sukker (sirup) eller fryses straks.", naturbasen: "https://www.naturbasen.dk/art/4198/roed-grann", id_keys: { skud: "Bløde, syrlige, lysegrønne.", vækst: "For enden af grenene." }, twin: { name: "Taks", diff: "Bløde nåle, røde bær. Mangler harpiksduft. Dødelig giftig!", toxic: true } },
@@ -728,22 +745,6 @@
 			]
 		};
 		
-		let map; // Global variabel til kortet
-		let activeMarkers = {};
-		let currentPageId = 'start';
-		// Global variable to track where we are in the tree
-		let currentWizardNode = wizardMushroomData;
-		let isLoggedIn = false;
-		let userSettings = JSON.parse(localStorage.getItem('userSettings')) || {
-		    lang: 'da',
-		    country: 'DK',
-		    region: 'Hele landet'
-		};
-		
-        let activeSeason = 'all';
-        const typeOrder = { "svamp": 1, "bær": 2, "plante": 3, "nød": 4 };
-        const monthOrder = ["jan", "feb", "mar", "apr", "maj", "jun", "jul", "aug", "sep", "okt", "nov", "dec"];
-
 		function toggleMenu() {
 		    const menu = document.getElementById('side-menu');
 		    const overlay = document.getElementById('menu-overlay');
@@ -782,11 +783,41 @@
 		        </option>`;
 		    }).join('');
 		}
-		
+
+		async function loadInterfaceTranslations(langCode) {
+		    try {
+		        const response = await fetch('data/translations.json');
+		        const allTranslations = await response.json();
+		        
+		        // Vi gemmer KUN det sprog vi skal bruge i 'ui'
+		        // Hvis f.eks. 'da' ikke findes i filen, tager vi 'en' som fallback
+		        ui = allTranslations[langCode] || allTranslations['en'];
+		        
+		        console.log(`Interface oversat til: ${langCode}`);
+		        
+		        // Opdater de statiske elementer i HTML'en med det samme
+		        applyStaticTranslations(); 
+		    } catch (err) {
+		        console.error("Kunne ikke indlæse oversættelser:", err);
+		    }
+		}
+
+		function applyStaticTranslations() {
+		    document.querySelectorAll('[data-i18n]').forEach(el => {
+		        const key = el.getAttribute('data-i18n');
+		        if (ui[key]) {
+		            // Håndter både almindelig tekst og input-placeholders
+		            if (el.tagName === 'INPUT') el.placeholder = ui[key];
+		            else el.innerText = ui[key];
+		        }
+		    });
+		}
+
 		async function handleLangChange(langCode, shouldRender = true) {
 		    userSettings.lang = langCode;
 		    const langData = appConfig.languages[langCode];
-		    
+			await loadInterfaceTranslations(langCode);
+			
 		    // Sæt automatisk til det nye sprogs standardland
 		    const newCountry = langData.defaultCountry;
 		    
@@ -2236,6 +2267,7 @@
     </script>
 </body>
 </html>
+
 
 
 
