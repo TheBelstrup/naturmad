@@ -363,7 +363,7 @@
 		        // Vi gemmer KUN det sprog vi skal bruge i 'ui'
 		        // Hvis f.eks. 'da' ikke findes i filen, tager vi 'en' som fallback
 		        ui = allTranslations[langCode] || allTranslations['en'];
-				wizardMushroomData = ui.wizardMushroomData;
+				wizardMushroomData = ui.wizardMushroomData[langCode] || allTranslations['en'];
 				currentWizardNode = wizardMushroomData;
 		        
 		        console.log(`Interface oversat til: ${langCode}`);
@@ -1840,6 +1840,7 @@
     </script>
 </body>
 </html>
+
 
 
 
