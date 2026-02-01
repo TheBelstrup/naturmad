@@ -359,15 +359,12 @@
 				const allTranslations = await response.json();
 		        
 		        // Vi gemmer KUN det sprog vi skal bruge i 'ui'
-		        // Hvis f.eks. 'da' ikke findes i filen, tager vi 'en' som fallback
 		        ui = allTranslations[langCode] || allTranslations['en'];
-		        
-		        console.log(`Interface oversat til: ${langCode}`);
 		        
 		        // Opdater de statiske elementer i HTML'en med det samme
 		        applyStaticTranslations(); 
 		    } catch (err) {
-		        console.error("Kunne ikke indlæse oversættelser:", err);
+		        console.error("Could load translations:", err);
 		    }
 		}
 
@@ -443,10 +440,10 @@
 		async function loadDatabase(countryCode) {
 		    try {
 		        const response = await fetch(`data_${countryCode.toLowerCase()}.json`);
-		        if (!response.ok) throw new Error("Fil ikke fundet");
+		        if (!response.ok) throw new Error("File not found");
 		        database = await response.json();
 		    } catch (err) {
-		        console.error("Database fejl:", err);
+		        console.error("Database error:", err);
 		        database = {}; 
 		    }
 		}
@@ -466,17 +463,17 @@
 		    if (!isLoggedIn) {
 		        container.innerHTML = `
 		            <section class="bg-emerald-900 text-white p-4 rounded-2xl shadow-md mb-2">
-		                <h3 class="font-black italic uppercase text-sm mb-1">Gem i skyen</h3>
-		                <p class="text-[10px] opacity-80 mb-3">Log ind for at sikre dine fund på tværs af enheder.</p>
+		                <h3 class="font-black italic uppercase text-sm mb-1">${ui.save_in_cloud}</h3>
+		                <p class="text-[10px] opacity-80 mb-3">${ui.save_in_cloud_expl}.</p>
 		                <button onclick="handleLogin()" class="w-full bg-white text-emerald-900 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest">
-		                    Log ind / Opret
+		                    ${ui.save_in_cloud_expl}
 		                </button>
 		            </section>
 		            
 		            <button onclick="navigate('my-spots')" class="w-full text-left py-3 px-3 flex items-center gap-3">
 		                <span class="text-lg">📍</span> 
 		                <div class="flex flex-col">
-		                    <span class="font-bold text-sm">Mine Fund</span>
+		                    <span class="font-bold text-sm">${ui.my_spots}</span>
 		                </div>
 		                ${countBadge}
 		            </button>
@@ -1842,6 +1839,7 @@
     </script>
 </body>
 </html>
+
 
 
 
