@@ -1,0 +1,22 @@
+{
+  "da": {
+    "search_placeholder": "Søg efter planter...",
+    "btn_save": "Gem fund",
+    "btn_delete": "Slet",
+    "btn_add_photo": "Tilføj foto",
+    "tab_map": "Kort",
+    "tab_my_spots": "Mine fund",
+    "no_photos": "Ingen billeder endnu",
+    "msg_loading": "Henter data..."
+  },
+  "en": {
+    "search_placeholder": "Search plants...",
+    "btn_save": "Save find",
+    "btn_delete": "Delete",
+    "btn_add_photo": "Add photo",
+    "tab_map": "Map",
+    "tab_my_spots": "My spots",
+    "no_photos": "No photos yet",
+    "msg_loading": "Loading data..."
+  }
+}
