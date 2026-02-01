@@ -76,6 +76,21 @@
             background-color: #f1f1f1;
             color: #626262;
         }
+
+		/* Galleri */
+	    /* Skjul scrollbar i galleriet */
+	    .no-scrollbar::-webkit-scrollbar {
+	        display: none;
+	    }
+	    .no-scrollbar {
+	        -ms-overflow-style: none;
+	        scrollbar-width: none;
+	    }
+	    
+	    /* Gør swipe mere responsiv på iOS */
+	    #swipe-gallery {
+	        -webkit-overflow-scrolling: touch;
+	    }
     </style>
 </head>
 <body class="min-h-screen flex flex-col">
@@ -1575,10 +1590,12 @@
 		                <span class="text-xs font-medium">Ingen billeder endnu</span>
 		            </div>`;
 		    } else {
+				const allPhotoSrcs = photos.map(p => p.data);
+				
 		        grid.innerHTML = photos.map(photo => `
 		            <div class="relative aspect-square group">
 		                <img src="${photo.data}" 
-		                     onclick="openFullImage(this.src)"
+				             onclick='openFullImage(${JSON.stringify(allPhotoSrcs)}, ${index})'
 		                     class="w-full h-full object-cover rounded-xl shadow-sm border border-stone-100 cursor-zoom-in active:opacity-80 transition-opacity">
 		                
 		                <button onclick="event.stopPropagation(); deleteSinglePhoto('${spotUid}', ${photo.id})" 
@@ -1603,20 +1620,31 @@
 		    }
 		}
 
-		function openFullImage(imgSrc) {
-		    // Lav elementet dynamisk
+		function openFullImage(photoArray, startIndex) {
 		    const overlay = document.createElement('div');
-		    overlay.className = 'fixed inset-0 bg-black z-[2000] flex items-center justify-center animate-in fade-in duration-200';
-		    overlay.onclick = () => document.body.removeChild(overlay); // Luk når man trykker
+		    overlay.className = 'fixed inset-0 bg-black z-[2000] animate-in fade-in duration-200 overflow-hidden';
 		    
+		    // Vi bruger CSS Scroll Snapping til swipe
 		    overlay.innerHTML = `
-		        <div class="relative w-full h-full p-4 flex items-center justify-center">
-		            <img src="${imgSrc}" class="max-w-full max-h-full object-contain shadow-2xl rounded-lg">
-		            <button class="absolute top-4 right-4 text-white bg-black/50 w-10 h-10 rounded-full flex items-center justify-center text-xl font-bold">✕</button>
+		        <div class="flex h-full w-full overflow-x-auto snap-x snap-mandatory no-scrollbar" id="swipe-gallery">
+		            ${photoArray.map((src, i) => `
+		                <div class="min-w-full h-full snap-center flex items-center justify-center p-4">
+		                    <img src="${src}" class="max-w-full max-h-full object-contain shadow-2xl rounded-sm">
+		                </div>
+		            `).join('')}
+		        </div>
+		        		        
+		        <div class="absolute bottom-10 left-0 right-0 text-center text-white/70 text-xs font-mono z-[2001] pointer-events-none">
+		            SWIPE FOR FLERE
 		        </div>
 		    `;
-		    
+		
 		    document.body.appendChild(overlay);
+		
+		    // Scroll hen til det billede, brugeren klikkede på
+		    const gallery = document.getElementById('swipe-gallery');
+		    const width = window.innerWidth;
+		    gallery.scrollLeft = startIndex * width;
 		}
 
 		async function deleteFullSpot(spotUid) {
@@ -2193,6 +2221,7 @@
     </script>
 </body>
 </html>
+
 
 
 
