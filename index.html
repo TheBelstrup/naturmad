@@ -787,7 +787,7 @@
 		async function loadInterfaceTranslations(langCode) {
 		    try {
 				const cacheBuster = `?v=${new Date().getTime()}`;
-				const response = await fetch('data/translations.json${cacheBuster}');
+				const response = await fetch(`data/translations.json${cacheBuster}`);
 		        const allTranslations = await response.json();
 		        
 		        // Vi gemmer KUN det sprog vi skal bruge i 'ui'
@@ -2269,6 +2269,7 @@
     </script>
 </body>
 </html>
+
 
 
 
