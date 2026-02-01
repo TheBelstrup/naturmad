@@ -1591,12 +1591,14 @@
 			                <span class="text-xs font-medium">Ingen billeder endnu</span>
 			            </div>`;
 		        } else {
-					const allPhotoSrcs = photos.map(p => p.data);
+					// Vi gemmer billederne i en global variabel eller på window-objektet 
+			        // for at undgå at sende gigantiske strenge direkte i HTML-attributten
+			        window.currentSpotPhotos = photos.map(p => p.data);
 					
-			        grid.innerHTML = photos.map(photo => `
+			        grid.innerHTML = photos.map((photo, index) => `
 			            <div class="relative aspect-square group">
 			                <img src="${photo.data}" 
-					             onclick='openFullImage(${JSON.stringify(allPhotoSrcs)}, ${index})'
+					             onclick='openFullImage(window.currentSpotPhotos, ${index})'
 			                     class="w-full h-full object-cover rounded-xl shadow-sm border border-stone-100 cursor-zoom-in active:opacity-80 transition-opacity">
 			                
 			                <button onclick="event.stopPropagation(); deleteSinglePhoto('${spotUid}', ${photo.id})" 
@@ -1622,6 +1624,7 @@
 		            renderSpot(spotUid);
 		        };
 		        reader.readAsDataURL(input.files[0]);
+				input.value = "";
 		    }
 		}
 
@@ -2226,6 +2229,7 @@
     </script>
 </body>
 </html>
+
 
 
 
