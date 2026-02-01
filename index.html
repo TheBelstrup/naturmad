@@ -194,7 +194,7 @@
 					<span class="text-lg">⚠</span> <span data-i18n="menu_safety" class="font-bold text-sm">Sikkerhed</span>
 				</button>
 				<button onclick="reportBug()" class="w-full text-left py-3 border-b border-stone-100 flex items-center gap-3">
-					<span class="text-lg">✉</span> <span data-i18n="menu_feecback" class="font-bold text-sm">Giv tilbagemelding</span>
+					<span class="text-lg">✉</span> <span data-i18n="menu_feedback" class="font-bold text-sm">Giv tilbagemelding</span>
 				</button>
 			</nav>
 		</div>
@@ -1799,8 +1799,8 @@
 				}
 				
 				renderLanguageOptions();
-				renderUserSection();
 				await handleLangChange(userSettings.lang, false); // false = genindlæs ikke hele siden endnu		
+				renderUserSection();
 			} catch (err) {
 				console.error("Fejl under opstart:", err);
 			}
@@ -1839,32 +1839,3 @@
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
