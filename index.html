@@ -191,16 +191,16 @@
 				<div id="user-section" class="bg-stone-100 rounded-3xl p-2 space-y-1">
     			</div>
 				<button onclick="navigate('safety')" class="w-full text-left py-3 border-b border-stone-100 flex items-center gap-3">
-					<span class="text-lg">⚠</span> <span class="font-bold text-sm">Sikkerhed</span>
+					<span class="text-lg">⚠</span> <span data-i18n="menu_safety" class="font-bold text-sm">Sikkerhed</span>
 				</button>
 				<button onclick="reportBug()" class="w-full text-left py-3 border-b border-stone-100 flex items-center gap-3">
-					<span class="text-lg">✉</span> <span class="font-bold text-sm">Giv tilbagemelding</span>
+					<span class="text-lg">✉</span> <span data-i18n="menu_feecback" class="font-bold text-sm">Giv tilbagemelding</span>
 				</button>
 			</nav>
 		</div>
 		
 		<div class="mt-auto pt-6 text-[8px] text-stone-400 uppercase tracking-widest text-center">
-			SikkerNatur v2.0 • Pro Version
+			Wildy v2.0
 		</div>
 	</div>
 	
@@ -219,8 +219,6 @@
 		    region: 'Hele landet'
 		};		
         let activeSeason = 'all';
-        const typeOrder = { "svamp": 1, "bær": 2, "plante": 3, "nød": 4 };
-        const monthOrder = ["jan", "feb", "mar", "apr", "maj", "jun", "jul", "aug", "sep", "okt", "nov", "dec"];
 
 		const database = {
 		  res_hyben: { name: "Rynket Rose (Hyben)", type: "bær", habitats: ["Kyst", "Have"], extended_habitat: "Kystnære områder, sommerhusgrunde og læhegn. Invasiv i Danmark.", latin: "Rosa rugosa", months: ["jun","jul","aug","sep"], traits: "Store orange/røde bær, voldsomme torne", extended_traits: "Store flade bær. Blomsterne dufter kraftigt og er enten hvide eller mørkerøde.", not_this_if: ["Busk mangler torne", "Bærrene er små og aflange (det er dog også hyben, bare andre arter)"], usage: "Bær bruges til marmelade (fjern kerner). Kronblade til sirup eller snaps.", cleaning: "Halvér bærret og skrab de kradsende kerner ud med en teske.", preservation: "Bær kan fryses efter rensning eller tørres.", naturbasen: "https://www.naturbasen.dk/art/4367/rynket-rose", id_keys: { bær: "Store, kødfulde.", blade: "Rynkede, læderagtige.", vækst: "Tæt buskads m. mange torne." }, twin: { name: "Ingen", diff: "Let genkendelig på bær og duft.", toxic: false } },
@@ -1153,7 +1151,7 @@
 					return habitats.includes(h);
 				})		
 				.filter(d => activeSeason === 'all' || (d[1].months && d[1].months.includes(activeSeason)))
-                .sort((a, b) => (typeOrder[a[1].type] - typeOrder[b[1].type]) || a[1].name.localeCompare(b[1].name));
+                .sort((a, b) => a[1].name.localeCompare(b[1].name));
 
             document.getElementById('app-content').innerHTML = `
                 <div class="fade-in space-y-4">
@@ -1187,7 +1185,7 @@
         function getSeasonalityHtml(plantMonths) {
             return `
                 <div class="flex gap-1 w-full mt-2">
-                    ${monthOrder.map(m => {
+                    ${ui.monthOrder.map(m => {
                         const isActive = plantMonths.includes(m);
                         return `<div class="month-pill ${isActive ? 'month-active' : 'month-inactive'}">${m[0]}</div>`;
                     }).join('')}
@@ -2269,6 +2267,7 @@
     </script>
 </body>
 </html>
+
 
 
 
