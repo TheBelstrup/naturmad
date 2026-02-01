@@ -406,7 +406,7 @@
 		async function handleCountryChange(countryCode, shouldRender = true) {
 			const cacheBuster = `?v=${new Date().getTime()}`;
 			const response = await fetch(`data/wizardMushroomData_${countryCode}.json${cacheBuster}`);
-			const wizardMushroomData = await response.json();
+			const uiWizard = await response.json();
 			
 			// 1. Opdater indstillingerne
 		    userSettings.country = countryCode;
@@ -415,7 +415,7 @@
 		    const langConfig = appConfig.languages[userSettings.lang];
 		    const countryConfig = langConfig.countries[countryCode];
 
-			wizardMushroomData = ui.wizardMushroomData[langConfig] || ui.wizardMushroomData[langConfig];
+			wizardMushroomData = uiWizard[userSettings.lang] ||uiWizard['en'];
 			
 		    // 3. Opdater regions-dropdown i menuen
 		    const regionSelect = document.getElementById('region-select');
@@ -1842,6 +1842,7 @@
     </script>
 </body>
 </html>
+
 
 
 
