@@ -162,26 +162,26 @@
 	
 	<div id="side-menu" class="fixed top-0 left-0 h-full w-[80%] max-w-[320px] bg-[#fdfcfb] z-[3001] shadow-2xl transform -translate-x-full transition-transform duration-300 ease-in-out p-6 flex flex-col">
 		<div class="flex justify-between items-center mb-8">
-			<h2 class="text-2xl font-black italic uppercase tracking-tighter">Menu</h2>
+			<h2 data-i18n="menu_menu" class="text-2xl font-black italic uppercase tracking-tighter">Menu</h2>
 			<button onclick="toggleMenu()" class="text-2xl">✕</button>
 		</div>
 	
 		<div class="space-y-6 flex-1 overflow-y-auto">
 			<section class="bg-stone-100 rounded-2xl overflow-hidden divide-y divide-stone-200">
 			    <div class="flex items-center px-4 py-2 justify-between">
-			        <span class="text-[10px] font-bold uppercase tracking-widest text-stone-500">Sprog</span>
+			        <span data-i18n="menu_language" class="text-[10px] font-bold uppercase tracking-widest text-stone-500">Sprog</span>
 			        <select id="lang-select" onchange="handleLangChange(this.value)" class="bg-transparent text-sm font-bold text-emerald-900 border-none focus:ring-0 py-1 text-right">
 			        </select>
 			    </div>
 			
 			    <div class="flex items-center px-4 py-2 justify-between">
-			        <span class="text-[10px] font-bold uppercase tracking-widest text-stone-500">Land</span>
+			        <span data-i18n="menu_country" class="text-[10px] font-bold uppercase tracking-widest text-stone-500">Land</span>
 			        <select id="country-select" onchange="handleCountryChange(this.value)" class="bg-transparent text-sm font-bold text-emerald-900 border-none focus:ring-0 py-1 text-right">
 			        </select>
 			    </div>
 			
 			    <div class="flex items-center px-4 py-2 justify-between">
-			        <span class="text-[10px] font-bold uppercase tracking-widest text-stone-500">Region</span>
+			        <span data-i18n="menu_region" class="text-[10px] font-bold uppercase tracking-widest text-stone-500">Region</span>
 			        <select id="region-select" onchange="updateSetting('region', this.value)" class="bg-transparent text-sm font-bold text-emerald-900 border-none focus:ring-0 py-1 text-right">
 			        </select>
 			    </div>
@@ -2269,6 +2269,7 @@
     </script>
 </body>
 </html>
+
 
 
 
