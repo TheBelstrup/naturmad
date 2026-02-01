@@ -1,436 +1,583 @@
 {
   "da": {
-     wizardMushroomData: {
-			prompt: "Kig på svampen",
-			choices: [
-  					{
-  						match: "Svampen er formet som en bold eller pære",
-  						text_more: "Uden synlige lameller eller rør",
-  						prompt: "Gennemskær svampen vertikalt. Hvordan ser kødet ud indeni?",
-  						description: "Tryk forsigtigt på svampen. En god støvbold giver efter og popper tilbage som en svamp. Den giftige Bruskbold føles derimod stenhård og giver sig ikke",
-  						choices: [
-  							{
-  								match: "Jeg ser omridset af en lille svamp med hat og lameller inde i det hvide kød.",
-  								warning: "LIVSFARLIG: Fluesvamp-æg"
-  							},
-  							{
-  								match: "Kødet har et tykt lag gennemsigtig gelé under huden og en mørk kerne.",
-  								notice: "Uspiselig. Hekseæg (Stinksvamp). Lad den være."
-  							},
-  							{
-  								match: "Kødet er hårdt, mørkelilla eller sort indeni.",
-  								warning: "GIFTIG: Bruskbold"
-  							},
-  							{
-  								match: "Kødet er gult, grønt eller brunt støvende.",
-  								text_more: "Uspiselig: Gammel svamp",
-  								notice: "Når støvbolde bliver modne, bliver kødet til støv. De er kun spiselige, når de er helt hvide indeni."
-  							},
-  							{
-  								match: "Kødet er helt hvidt, blødt og ensartet (som mozzarella eller skumfidus)",
-  								prompt: "Hvor stor er svampen, og hvor vokser den?",
-  								choices: [
-  									{
-  										match: "Den er enorm (større end en håndbold) og vokser på græs eller i have/park",
-  										text_more: "Kæmpestøvbold",
-  										id: "res_kaampestoevbold"
-  									},
-  									{
-  										match: "Har en markant lang stok (svampen er 10-20 cm høj) og ligner en stor kølle",
-  										text_more: "Højstokket Støvbold",
-  										id: "res_hoejstokket_stoevbold"
-  									},
-  									{
-  										match: "Overfladen har store hvide flager/skæl, der skaller af som pergament",
-  										text_more: "Skællet Støvbold",
-  										id: "res_skaallet_stoevbold"
-  									},
-  									{
-  										match: "Den er mindre (2-8 cm) og vokser i tætte klynger direkte på dødt træ eller en træstub",
-  										text_more: "Pære-støvbold",
-  										id: "res_paere_stoevbold"
-  									},
-  									{
-  										match: "Lille til mellem (3-8 cm) og pæreformet og vokser på jorden.",
-  										prompt: "Kig grundigt på piggene på toppen og gnub nogle af dem af med tommelfingeren. Hvad ser du?",
-  										choices: [
-  											{
-  												match: "Piggene er hvide. Når de gnubbes af, efterlades et tydeligt, lyst 'fiskenet-mønster'.",
-  												text_more: "Krystalstøvbold",
-  												id: "res_krystal_stoevbold"
-  											},
-  											{
-  												match: "Piggene er meget mørke (brune/sorte). Når de gnubbes af, efterlades intet tydeligt mønster.",
-  												notice: "Uspiselig. Det er en Sortagtig Støvbold (Lycoperdon nigrescens)"
-  											},
-  											{
-  												match: "Piggene er ekstremt lange (5-6 mm) og brune. Svampen ligner et lille pindsvin.",
-  												notice: "Uspiselig. Det er en Pindsvinestøvbold (Lycoperdon echinatum)"
-  											}
-  										]
-  									}
-  								]
-  							}
-  						]
-  					},
-  					{
-  						match: "Svampen vokser i klynger eller lag på træ.",
-  						prompt: "Hvilken type træ vokser svampen på?", 
-  						choices: [
-  							{
-  								match: "Den vokser på nåletræ (gran, fyr). Svampen er helt hvid og meget tyndkødet.",
-  								warning: "Det kan være en giftig Kridthat (Pleurocybella porrigens)"
-  							},
-  							{
-  								match: "Den vokser på løvtræ (bøg, eg, pil, elm, poppel etc.).",
-  								prompt: "Hvordan ser svampen ud, og hvad er der på undersiden?",
-  								choices: [
-  									{
-  										match: "Den er knaldgul eller orange, vifteformet og har små huller (porer) på undersiden.",
-  										text_more: "Svovlporesvamp (Chicken of the Woods)",
-  										id: "res_svovlporesvamp"
-  									},
-  									{
-  										match: "Den er kridhvid, ekstremt slimet og har lameller. Der er en ring på stokken.",
-  										text_more: "Porcelænshat",
-  										id: "res_porcelaenshat"
-  									},
-  									{
-  										match: "Den er muslingeformet med lameller, men er IKKE ekstremt slimet.",
-  										prompt: "Tjek farve og årstid for at finde den rette østershat:",
-  										choices: [
-  											{
-  												match: "Det er efterår/vinter (eller koldt forår). Hatten er mørkegrå, blågrå eller brunlig.",
-  												text_more: "Almindelig Østershat",
-  												id: "res_almindelig_oestershat"
-  											},
-  											{
-  												match: "Det er sommer. Hatten er lys (hvidlig, bleg-gul eller beige).",
-  												text_more: "Sommer-Østershat",
-  												id: "res_sommer_oestershat"
-  											}
-  										]
-  									}
-  								]
-  							},
-  							{
-  								match: "Svampen er geléagtig og vokser på træ.",
-  								prompt: "Hvilken farve og form har den geléagtige svamp?",
-  								choices: [
-  									{
-  										match: "Den er rødbrun og formet som et øre eller en musling med en tydelig inderside og yderside. Vokser på hyld.",
-  										text_more: "Judasøre",
-  										id: "res_judasoere"
-  									},
-  									{
-  										match: "Den er lysende gul eller orange og ligner en krøllet hjerne.",
-  										text_more: "Guldgul Bævresvamp",
-  										notice: "Ikke giftig, men betragtes som uspiselig da den mangler konsistens og smag."
-  									}
-  								]
-  							}
-  						]
-  					},
-  					{
-  						match: "Svampen vokser på jorden og har en tydelig hat",
-  						text_more: "Med lameller, rør, pigge eller ribber",
-  						prompt: "Kig på hatten",
-  						choices: [
-  						{
-  						  match: "Undersiden har rør/huller",
-  						  prompt: "Kontrollér stokkens overflade",
-  						  choices: [
-    							{
-    							  match: "Stokken har små 'skægstubbe' (sorte/brune skæl)",
-    							  mushroom: "Slægten Leccinum",
-    							  prompt: "Kontrollér evt. farveskift i stokken",
-    							  description: "Skær svampen igennem fra vertikalt fra hat til stokbasis",
-    							  choices: [
-      								{ match: "Kødet i stokbasis bliver tydeligt BLÅGRØNT/SØGRØNT", text_more: "Flammet skælrørhat", id: "res_flammet_skaelroerhat" },
-      								{ match: "Kødet blåner primært i bunden, mens resten først bliver rødligt/gråt?", text_more: "Poppel-skælrørhat", id: "res_poppel_skaelroerhat" },
-      								{
-      								  match: "Kødet skifter til grålilla/gråsort:",
-      								  prompt: "Hvilket træ vokser svampen under?",
-      								  description: "Identificer træer inden for 10 meter (Birk, Lærk, Fyr, Eg, Bøg)",
-      								  choices: [
-        									{ match: "Under Birk (brun hat, grå skæl)?", text_more: "Brun skælrørhat", id: "res_birkeskael" },
-        									{ match: "Under Asp (orange/rød hat, hvide skæl bliver sorte)?", text_more: "Aspe-skælrørhat", id: "res_aspe_skael" },
-        									{ match: "Under Birk (orange/rød hat, hvide skæl bliver brune)?", text_more: "Orange Skælrørhat", id: "res_orange_skael" },
-        									{ match: "Under Eg/Bøg/Hassel (skæl ikke kulsorte)?", text_more: "Rustrød skælrørhat", id: "res_rustroed_skaelroerhat" }
-      								  ]
-      								}
-    							  ]
-    							},
-    							{
-    							  match: "Stokken har en ring eller hatten er meget klistret/slimet",
-    							  mushroom: "Slægten Suillus",
-    							  prompt: "Kontrollér om stokken er hul",
-    							  description: "Skær svampens stok over",
-    							  choices: [
-      								{ 
-                        match: "Stokken er kamret/hul indvendig", 
-                        text_more: "Hulstokket slimrørhat", 
-                        id: "res_hulstokket_slimroerhat" 
-                      },
-      								{
-      								  match: "Stokken er massiv",
-      								  prompt: "Hvilket træ vokser svampen under?",
-      								  description: "Identificer træer inden for 10 meter (Birk, Lærk, Fyr, Eg, Bøg)",
-      								  choices: [
-        									{ match: "Under Lærk (gul hat/stok, ring)?", text_more: "Lærke-slimrørhat", id: "res_laerke" },
-        									{ match: "Under Fyr (brun hat, mørke prikker på stok, ring)?", text_more: "Brungul slimrørhat", id: "res_brungul_slimroerhat" }
-      								  ]
-      								}
-    							  ]
-    							},
-    							{
-    							  match: "Stokken har et tydeligt netmønster",
-    							  extended_text: "Kør en negl over stokkens overflade for at bekræfte at netmønsteret er et relief",
-    							  mushroom: "Netstokket-gruppen",
-    							  choices: [
-    								  { match: "Netmønsteret er mørkt, brunligt og groft", warning: "Hold dig fra den! Det er en bitter Galderørhat" },
-    								  { match: "Netmønsteret er hvidt til gulligt netmønster og stokken er kraftigt rød (især nederst)", warning: "Hold dig fra den! Det er en bitter Skønfodet rørhat" },
-      								{
-      								  match: "Rørene er RØDE eller ORANGE",
-      								  prompt: "Kontrollér evt. farveskift i stokken",
-      								  description: "Skær svampen igennem vertikalt fra hat til stokbasis",
-      								  choices: [
-        									{ match: "Hatten er mørk (brun/oliven). Kødet blåner lynhurtigt sortblåt (OBS: Spiselig efter 20 min. stegning, men giftig rå/med alkohol).", text_more: "Netstokket Indigo-rørhat", id: "res_netstokket_indigo" },
-        									{ match: "Hatten er lys (hvidlig/lysgrå). Kødet blåner moderat/svagt", warning: "Hold dig fra den! Det er giftig Satans rørhat (lugter af ådsel som gammel)" },
-        									{ match: "Hatten er lysgrå med pink toner. Kun kødet i hatten blåner", warning: "Hold dig fra den! Det er en giftig Djævle-rørhat" },
-        									{ match: "Hatten har purpur/røde pletter. Blåner ekstremt kraftigt", warning: "Hold dig fra den! Det er en Purpur-Rørhat (Boletus rhodopurpureus)" }
-      								  ]
-      								},
-      								{
-      								  match: "Rørene er GULE eller LYSE",
-      								  prompt: "Undersøg svampen",
-      								  choices: [
-        									{ match: "Hatten er glat/fedtet (som læder), stokken har et lyst netmønster øverst på brun baggrund", text_more: "Karl Johan", id: "res_karljohan" },
-        									{ match: "Hatten er tør og fint filtet (som ruskind), stokken har et tydeligt hvidt/lyst net hele vejen ned", text_more: "Sommer-rørhat", id: "res_sommer_karljohan" },
-        									{ match: "Hatten er ujævn/knubbet og mørkt vinrød/rødbrun, stokken er meget kraftig og rødbrun-spættet", text_more: "Rødbrun rørhat", id: "res_roedbrun_karljohan" },
-        									{ match: "Hatten er glat og læderbrun, stokken er rodformet tilspidset og mangler netmønster (kun små brune prikker)", text_more: "Tenstokket rørhat", id: "res_tenstokket_roerhat" }
-      								  ]
-      								}
-    							  ]
-    							},
-    							{
-    							  match: "Stokken er glat eller fint punktret (ingen net eller skæl)",
-    							  mushroom: "Glatstokket-gruppen",
-    							  prompt: "Kontrollér evt. farveskift i stokken",
-    							  description: "Skær svampen igennem vertikalt fra hat til stokbasis",
-    							  choices: [
-      								{
-      								  match: "Kødet blåner øjeblikkeligt sortblåt ved gennemskæring",
-      								  prompt: "Undersøg svampens rør under hatten",
-      								  choices: [
-        									{ match: "Rørene er GULE?", text_more: "Sortblånende rørhat", id: "res_sortblaanende_roerhat" },
-        									{ match: "Rørene er RØDE/ORANGE?", text_more: "Glatstokket Indigo-rørhat", id: "res_glatstokket_indigo" }
-      								  ]
-      								},
-        								{
-      								  match: "Kødet blåner kun svagt eller slet ikke",
-      								  prompt: "Undersøg svampen",
-      								  choices: [
-        									{ match: "Svampen er meget lille, rørene er kanelfarvede og smagen er stærk (Betragtes ikke som spiselig. Vokser ofte sammen med rød fluesvamp.)", text_more: "Peber-rørhat", id: "res_peber_roerhat" },
-        									{ match: "Kødet i stokbasis er rabarber-rødt, vokser meget vådt", text_more: "Sump-rørhat", id: "res_sump_roerhat" },
-        									{ match: "Hatten er rød-sprukket, kødet er rødt lige under hathuden", text_more: "Rødsprukken rørhat", id: "res_roedsprukken_roerhat" },
-        									{ match: "Hatten er bleg/hvid-sprukket", text_more: "Hvidsprukken rørhat", id: "res_hvidsprukken_roerhat" },
-        									{ match: "Hatten har blådug (som en blomme)", text_more: "Dugget rørhat", id: "res_dugget_roerhat" },
-        									{ match: "Rørene er store og kantede, hatten filtet", text_more: "Filtet rørhat", id: "res_filtet_roerhat" },
-        									{ match: "Blåner kun på rørene ved tryk (stokken ofte mørkebrun)", text_more: "Brunstokket rørhat", id: "res_brunstokket" },
-        									{ match: "Gule prikker i bunden af stokkens kød", text_more: "Blodrød rørhat", id: "res_blodroed_roerhat" }
-      								  ]
-      								}
-    							  ]
-    							}
-  						  ]
-  						},
-  						{
-  							match: "Undersiden har ribber (ikke lameller) eller er glat",
-  							text_more: "Ribberne kan ikke skrabes af med en negl, og de løber altid et stykke ned ad stokken",
-  							prompt: "Undersøg stokken",
-  							choices: [
-    							{
-    								match: "Stokken er HUL",
-    								text_more: "Tragt- og trompetsvampe",
-    								prompt: "Kontrollér undersiden",
-    								choices: [
-    								{
-    									match: "Den har tydelige ribber",
-    									prompt: "Kontrollér svampen",
-    									choices: [
-    										{ match: "Hatten er brun og stokken gul", text_more: "Tragt-kantarel", id: "res_tragt" },
-    										{ match: "Hele svampen er mørkegrå/sort", text_more: "Grå kantarel", id: "res_graa_kantarel" }
-    									]
-    								},
-    								{
-    									match: "Den er glat eller rynket",
-    									prompt: "Kontrollér svampen",
-    									choices: [
-    										{ match: "Svampen er helt sort/grå og formet som en dyb trompet", text_more: "Sort trompetsvamp", id: "res_sort_trompetsvamp" },
-    										{ match: "Stokken er stærkt gul/orange og undersiden næsten glat", text_more: "Gylden kantarel", id: "res_gylden_kantarel" },
-    										{ match: "Kanten er meget kruset og farven gråbrun", text_more: "Liden kantarel", id: "res_liden_kantarel" },
-    										{ match: "Den er gul-grålig, men bliver sort ved berøring", text_more: "Sværtende kantarel", id: "res_svaertende_kantarel" }
-    									]
-    								}
-  								]
-  							},
-  							{
-  								match: "Stokken er MASSIV",
-  								text_more: "De 'ægte' kantareller",
-  								prompt: "Undersøg svampen",
-  								choices: [
-  									{ match: "Hatten er dækket af små lilla/violette skæl", text_more: "Ametyst-kantarel", id: "res_ametyst_kantarel" },
-  									{ match: "Hatten er hvidlig/pudret og meget tung/fast", text_more: "Bleg kantarel", id: "res_bleg_kantarel" },
-  									{ match: "Svampen er lille (1-3 cm) og kraftigt orange/pink", text_more: "Abrikos-kantarel", id: "res_abrikos_kantarel" },
-  									{ match: "Den er klassisk æggegul overalt", text_more: "Almindelig kantarel", id: "res_kantarel" }
-  								]
-  							}
-							]
-						},
-						{
-							match: "Undersiden har små, tætte pigge",
-							text_more: "ligner korte hår eller pigge på et pindsvin",
-							prompt: "Hvordan mærkes svampen, og hvilken farve har den?",
-							choices: [
-								{
-									match: "Svampen er bleg-gul, orange eller rødbrun. Kødet er sprødt og knækker let (som kridt).",
-									prompt: "Kig på hattens midte. Er der en tydelig fordybning (en navle)?",
-									choices: [
-										{
-											match: "Ja, hatten har en tydelig, dyb navle i midten (ofte lille og mørkere orange-brun)",
-											text_more: "Navle-pigsvamp",
-											id: "res_navle_pigsvamp"
-										},
-										{
-											match: "Nej, hatten er plan eller uregelmæssig uden en dyb navle",
-											prompt: "Kig nu på piggene under hatten. Løber de et stykke ned ad stokken?",
-											choices: [
-												{
-													match: "Ja, piggene løber tydeligt et stykke ned ad stokken. Svampen er ofte stor og bleg-gul.",
-													text_more: "Almindelig Pigsvamp",
-													id: "res_almindelig_pigsvamp"
-												},
-												{
-													match: "Nej, piggene stopper brat ved stokken. Svampen er mindre, spinklere og mere orange.",
-													text_more: "Rødgul Pigsvamp",
-													id: "res_roedgul_pigsvamp"
-												}
-											]
-										}
-									]
-								},
-								{
-									match: "Svampen er mørkebrun, grålig eller sortagtig. Kødet er sejt, læderagtigt eller korkagtigt.",
-									text_more: "Uspiselige pigsvampe",
-									notice: "Dette er sandsynligvis en kork- eller kødpigsvamp. De er ikke giftige, men for seje eller bitre til at spise."
-								}
-							]
-						},
-						{
-							match: "Undersiden har lameller (blatlignende skiver)",
-							prompt: "Hvilken farve har lamellerne?",
-							choices: [
-								{
-									match: "Lamellerne er hvide eller meget lyse",
-									warning: "VÆR FORSIGTIG: Mange dødeligt giftige svampe (f.eks. Grøn og Hvid Fluesvamp) har hvide lameller. Spis kun hvis du er 100% sikker."
-								},
-								{
-									match: "Lamellerne er lyserøde, chokoladebrune eller sorte",
-									prompt: "Har svampen en ring på stokken, og hvor vokser den?",
-									choices: [
-										{
-											match: "Vokser på græs/eng, har en ring på stokken og lamellerne skifter fra pink til brune.",
-											text_more: "Mark-champignon",
-											id: "res_champignon"
-										},
-										{
-											match: "Vokser i skovbunden, har hvide/grå skæl på hatten og bliver sort/blækagtig i kanten.",
-											notice: "Det kunne være en blækhat (se den specifikke kategori i hovedmenuen)."
-										}
-									]
-								}
-							]
-						},
-						{
-							match: "Hatten har enten huller (som en vaskesvamp), hjerneagtige folder eller er skålformet",
-							text_more: "Svampen mangler lameller og rør",
-							prompt: "Hvilken form har svampen?",
-							choices: [
-								{ 
-									match: "Svampen er formet som en åben skål og lugter kraftigt af klor (svømmehal)", 
-									text_more: "Klor-bægermorkel", 
-									id: "res_klor_baegermorkel" 
-								},
-								{ 
-									match: "Hatten ligner en 'hjerne' eller knyttet næve.", 
-									warning: "Hold dig fra den! Dette kan være den dødeligt giftige Stenmorkel (Gyromitra esculenta)."
-								},
-								{
-									match: "Hatten har huller eller rynker, og hele svampen er 100% hul indvendig",
-									prompt: "Hvordan sidder hatten fast på stokken?",
-									choices: [
-										{
-											match: "Klokke-test: Hatten sidder LØST",
-											text_more: "Kanten er fri og kan vippes op som en nederdel",
-											prompt: "Hvordan ser hattens overflade ud?",
-											choices: [
-												{ 
-													match: "Hatten er næsten glat eller har kun milde rynker", 
-													text_more: "Glat Klokkemorkel", 
-													id: "res_glat_klokkemorkel" 
-												},
-												{ 
-													match: "Hatten er kraftigt rynket og foldet (men stadig 100% hul indvendig)", 
-													text_more: "Klokkemorkel", 
-													id: "res_klokkemorkel" 
-												},
-												{ 
-													match: "Hatten har tydelige huller/gruber (ligner en vaskesvamp på toppen af en stok)", 
-													text_more: "Hætte-morkel", 
-													id: "res_haette_morkel" 
-												}
-											]
-										},
-										{
-											match: "Fast-test: Hatten sidder helt FAST",
-											text_more: "Hatten er vokset sammen med stokken hele vejen ned til kanten",
-											prompt: "Hvilken form og farve har hatten?",
-											choices: [
-												{ 
-													match: "Hatten er rund/oval (som et æg) og gulbrun med uregelmæssige huller", 
-													text_more: "Spiselig Morkel", 
-													id: "res_spiselig_morkel" 
-												},
-												{ 
-													match: "Hatten er spids (kegleformet) med mørke, lodrette ribber", 
-													text_more: "Kegle-morkel", 
-													id: "res_kegle_morkel" 
-												}
-											]
-										}
-									]
-								}
-							]
-						},
-						{
-							match: "Hatten er hvid og cylinderformet med masser af 'paryk-agtige' skæl. Svampen er høj.",
-							prompt: "Kig på bunden af hatten. Er den helt hvid eller begyndt at blive sort?",
-							choices: [
-								{
-									match: "Den er helt hvid hele vejen ned.",
-									text_more: "Paryk-blækhat",
-									id: "res_parykhat",
-								},
-								{
-									match: "Kanten er begyndt at blive sort eller flydende.",
-									notice: "Uspiselig: Gammel blækhat"
-								}
-							]
-						}
-					]
-				}
-			]
-		}
+    "wizardMushroomData": {
+      "prompt": "Kig på svampen",
+      "choices": [
+        {
+          "match": "Svampen er formet som en bold eller pære",
+          "text_more": "Uden synlige lameller eller rør",
+          "prompt": "Gennemskær svampen vertikalt. Hvordan ser kødet ud indeni?",
+          "description": "Tryk forsigtigt på svampen. En god støvbold giver efter og popper tilbage som en svamp. Den giftige Bruskbold føles derimod stenhård og giver sig ikke",
+          "choices": [
+            {
+              "match": "Jeg ser omridset af en lille svamp med hat og lameller inde i det hvide kød.",
+              "warning": "LIVSFARLIG: Fluesvamp-æg"
+            },
+            {
+              "match": "Kødet har et tykt lag gennemsigtig gelé under huden og en mørk kerne.",
+              "notice": "Uspiselig. Hekseæg (Stinksvamp). Lad den være."
+            },
+            {
+              "match": "Kødet er hårdt, mørkelilla eller sort indeni.",
+              "warning": "GIFTIG: Bruskbold"
+            },
+            {
+              "match": "Kødet er gult, grønt eller brunt støvende.",
+              "text_more": "Uspiselig: Gammel svamp",
+              "notice": "Når støvbolde bliver modne, bliver kødet til støv. De er kun spiselige, når de er helt hvide indeni."
+            },
+            {
+              "match": "Kødet er helt hvidt, blødt og ensartet (som mozzarella eller skumfidus)",
+              "prompt": "Hvor stor er svampen, og hvor vokser den?",
+              "choices": [
+                {
+                  "match": "Den er enorm (større end en håndbold) og vokser på græs eller i have/park",
+                  "text_more": "Kæmpestøvbold",
+                  "id": "res_kaampestoevbold"
+                },
+                {
+                  "match": "Har en markant lang stok (svampen er 10-20 cm høj) og ligner en stor kølle",
+                  "text_more": "Højstokket Støvbold",
+                  "id": "res_hoejstokket_stoevbold"
+                },
+                {
+                  "match": "Overfladen har store hvide flager/skæl, der skaller af som pergament",
+                  "text_more": "Skællet Støvbold",
+                  "id": "res_skaallet_stoevbold"
+                },
+                {
+                  "match": "Den er mindre (2-8 cm) og vokser i tætte klynger direkte på dødt træ eller en træstub",
+                  "text_more": "Pære-støvbold",
+                  "id": "res_paere_stoevbold"
+                },
+                {
+                  "match": "Lille til mellem (3-8 cm) og pæreformet og vokser på jorden.",
+                  "prompt": "Kig grundigt på piggene på toppen og gnub nogle af dem af med tommelfingeren. Hvad ser du?",
+                  "choices": [
+                    {
+                      "match": "Piggene er hvide. Når de gnubbes af, efterlades et tydeligt, lyst 'fiskenet-mønster'.",
+                      "text_more": "Krystalstøvbold",
+                      "id": "res_krystal_stoevbold"
+                    },
+                    {
+                      "match": "Piggene er meget mørke (brune/sorte). Når de gnubbes af, efterlades intet tydeligt mønster.",
+                      "notice": "Uspiselig. Det er en Sortagtig Støvbold (Lycoperdon nigrescens)"
+                    },
+                    {
+                      "match": "Piggene er ekstremt lange (5-6 mm) og brune. Svampen ligner et lille pindsvin.",
+                      "notice": "Uspiselig. Det er en Pindsvinestøvbold (Lycoperdon echinatum)"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "match": "Svampen vokser i klynger eller lag på træ.",
+          "prompt": "Hvilken type træ vokser svampen på?",
+          "choices": [
+            {
+              "match": "Den vokser på nåletræ (gran, fyr). Svampen er helt hvid og meget tyndkødet.",
+              "warning": "Det kan være en giftig Kridthat (Pleurocybella porrigens)"
+            },
+            {
+              "match": "Den vokser på løvtræ (bøg, eg, pil, elm, poppel etc.).",
+              "prompt": "Hvordan ser svampen ud, og hvad er der på undersiden?",
+              "choices": [
+                {
+                  "match": "Den er knaldgul eller orange, vifteformet og har små huller (porer) på undersiden.",
+                  "text_more": "Svovlporesvamp (Chicken of the Woods)",
+                  "id": "res_svovlporesvamp"
+                },
+                {
+                  "match": "Den er kridhvid, ekstremt slimet og har lameller. Der er en ring på stokken.",
+                  "text_more": "Porcelænshat",
+                  "id": "res_porcelaenshat"
+                },
+                {
+                  "match": "Den er muslingeformet med lameller, men er IKKE ekstremt slimet.",
+                  "prompt": "Tjek farve og årstid for at finde den rette østershat:",
+                  "choices": [
+                    {
+                      "match": "Det er efterår/vinter (eller koldt forår). Hatten er mørkegrå, blågrå eller brunlig.",
+                      "text_more": "Almindelig Østershat",
+                      "id": "res_almindelig_oestershat"
+                    },
+                    {
+                      "match": "Det er sommer. Hatten er lys (hvidlig, bleg-gul eller beige).",
+                      "text_more": "Sommer-Østershat",
+                      "id": "res_sommer_oestershat"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "match": "Svampen er geléagtig og vokser på træ.",
+              "prompt": "Hvilken farve og form har den geléagtige svamp?",
+              "choices": [
+                {
+                  "match": "Den er rødbrun og formet som et øre eller en musling med en tydelig inderside og yderside. Vokser på hyld.",
+                  "text_more": "Judasøre",
+                  "id": "res_judasoere"
+                },
+                {
+                  "match": "Den er lysende gul eller orange og ligner en krøllet hjerne.",
+                  "text_more": "Guldgul Bævresvamp",
+                  "notice": "Ikke giftig, men betragtes som uspiselig da den mangler konsistens og smag."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "match": "Svampen vokser på jorden og har en tydelig hat",
+          "text_more": "Med lameller, rør, pigge eller ribber",
+          "prompt": "Kig på hatten",
+          "choices": [
+            {
+              "match": "Undersiden har rør/huller",
+              "prompt": "Kontrollér stokkens overflade",
+              "choices": [
+                {
+                  "match": "Stokken har små 'skægstubbe' (sorte/brune skæl)",
+                  "mushroom": "Slægten Leccinum",
+                  "prompt": "Kontrollér evt. farveskift i stokken",
+                  "description": "Skær svampen igennem fra vertikalt fra hat til stokbasis",
+                  "choices": [
+                    {
+                      "match": "Kødet i stokbasis bliver tydeligt BLÅGRØNT/SØGRØNT",
+                      "text_more": "Flammet skælrørhat",
+                      "id": "res_flammet_skaelroerhat"
+                    },
+                    {
+                      "match": "Kødet blåner primært i bunden, mens resten først bliver rødligt/gråt?",
+                      "text_more": "Poppel-skælrørhat",
+                      "id": "res_poppel_skaelroerhat"
+                    },
+                    {
+                      "match": "Kødet skifter til grålilla/gråsort:",
+                      "prompt": "Hvilket træ vokser svampen under?",
+                      "description": "Identificer træer inden for 10 meter (Birk, Lærk, Fyr, Eg, Bøg)",
+                      "choices": [
+                        {
+                          "match": "Under Birk (brun hat, grå skæl)?",
+                          "text_more": "Brun skælrørhat",
+                          "id": "res_birkeskael"
+                        },
+                        {
+                          "match": "Under Asp (orange/rød hat, hvide skæl bliver sorte)?",
+                          "text_more": "Aspe-skælrørhat",
+                          "id": "res_aspe_skael"
+                        },
+                        {
+                          "match": "Under Birk (orange/rød hat, hvide skæl bliver brune)?",
+                          "text_more": "Orange Skælrørhat",
+                          "id": "res_orange_skael"
+                        },
+                        {
+                          "match": "Under Eg/Bøg/Hassel (skæl ikke kulsorte)?",
+                          "text_more": "Rustrød skælrørhat",
+                          "id": "res_rustroed_skaelroerhat"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "match": "Stokken har en ring eller hatten er meget klistret/slimet",
+                  "mushroom": "Slægten Suillus",
+                  "prompt": "Kontrollér om stokken er hul",
+                  "description": "Skær svampens stok over",
+                  "choices": [
+                    {
+                      "match": "Stokken er kamret/hul indvendig",
+                      "text_more": "Hulstokket slimrørhat",
+                      "id": "res_hulstokket_slimroerhat"
+                    },
+                    {
+                      "match": "Stokken er massiv",
+                      "prompt": "Hvilket træ vokser svampen under?",
+                      "description": "Identificer træer inden for 10 meter (Birk, Lærk, Fyr, Eg, Bøg)",
+                      "choices": [
+                        {
+                          "match": "Under Lærk (gul hat/stok, ring)?",
+                          "text_more": "Lærke-slimrørhat",
+                          "id": "res_laerke"
+                        },
+                        {
+                          "match": "Under Fyr (brun hat, mørke prikker på stok, ring)?",
+                          "text_more": "Brungul slimrørhat",
+                          "id": "res_brungul_slimroerhat"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "match": "Stokken har et tydeligt netmønster",
+                  "extended_text": "Kør en negl over stokkens overflade for at bekræfte at netmønsteret er et relief",
+                  "mushroom": "Netstokket-gruppen",
+                  "choices": [
+                    {
+                      "match": "Netmønsteret er mørkt, brunligt og groft",
+                      "warning": "Hold dig fra den! Det er en bitter Galderørhat"
+                    },
+                    {
+                      "match": "Netmønsteret er hvidt til gulligt netmønster og stokken er kraftigt rød (især nederst)",
+                      "warning": "Hold dig fra den! Det er en bitter Skønfodet rørhat"
+                    },
+                    {
+                      "match": "Rørene er RØDE eller ORANGE",
+                      "prompt": "Kontrollér evt. farveskift i stokken",
+                      "description": "Skær svampen igennem vertikalt fra hat to stokbasis",
+                      "choices": [
+                        {
+                          "match": "Hatten er mørk (brun/oliven). Kødet blåner lynhurtigt sortblåt (OBS: Spiselig efter 20 min. stegning, men giftig rå/med alkohol).",
+                          "text_more": "Netstokket Indigo-rørhat",
+                          "id": "res_netstokket_indigo"
+                        },
+                        {
+                          "match": "Hatten er lys (hvidlig/lysgrå). Kødet blåner moderat/svagt",
+                          "warning": "Hold dig fra den! Det er giftig Satans rørhat (lugter af ådsel som gammel)"
+                        },
+                        {
+                          "match": "Hatten er lysgrå med pink toner. Kun kødet i hatten blåner",
+                          "warning": "Hold dig fra den! Det er en giftig Djævle-rørhat"
+                        },
+                        {
+                          "match": "Hatten har purpur/røde pletter. Blåner ekstremt kraftigt",
+                          "warning": "Hold dig fra den! Det er en Purpur-Rørhat (Boletus rhodopurpureus)"
+                        }
+                      ]
+                    },
+                    {
+                      "match": "Rørene er GULE eller LYSE",
+                      "prompt": "Undersøg svampen",
+                      "choices": [
+                        {
+                          "match": "Hatten er glat/fedtet (som læder), stokken har et lyst netmønster øverst på brun baggrund",
+                          "text_more": "Karl Johan",
+                          "id": "res_karljohan"
+                        },
+                        {
+                          "match": "Hatten er tør og fint filtet (som ruskind), stokken har et tydeligt hvidt/lyst net hele vejen ned",
+                          "text_more": "Sommer-rørhat",
+                          "id": "res_sommer_karljohan"
+                        },
+                        {
+                          "match": "Hatten er ujævn/knubbet og mørkt vinrød/rødbrun, stokken er meget kraftig og rødbrun-spættet",
+                          "text_more": "Rødbrun rørhat",
+                          "id": "res_roedbrun_karljohan"
+                        },
+                        {
+                          "match": "Hatten er glat og læderbrun, stokken er rodformet tilspidset og mangler netmønster (kun små brune prikker)",
+                          "text_more": "Tenstokket rørhat",
+                          "id": "res_tenstokket_roerhat"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "match": "Stokken er glat eller fint punktret (ingen net eller skæl)",
+                  "mushroom": "Glatstokket-gruppen",
+                  "prompt": "Kontrollér evt. farveskift i stokken",
+                  "description": "Skær svampen igennem vertikalt fra hat to stokbasis",
+                  "choices": [
+                    {
+                      "match": "Kødet blåner øjeblikkeligt sortblåt ved gennemskæring",
+                      "prompt": "Undersøg svampens rør under hatten",
+                      "choices": [
+                        {
+                          "match": "Rørene er GULE?",
+                          "text_more": "Sortblånende rørhat",
+                          "id": "res_sortblaanende_roerhat"
+                        },
+                        {
+                          "match": "Rørene er RØDE/ORANGE?",
+                          "text_more": "Glatstokket Indigo-rørhat",
+                          "id": "res_glatstokket_indigo"
+                        }
+                      ]
+                    },
+                    {
+                      "match": "Kødet blåner kun svagt eller slet ikke",
+                      "prompt": "Undersøg svampen",
+                      "choices": [
+                        {
+                          "match": "Svampen er meget lille, rørene er kanelfarvede og smagen er stærk (Betragtes ikke som spiselig. Vokser ofte sammen med rød fluesvamp.)",
+                          "text_more": "Peber-rørhat",
+                          "id": "res_peber_roerhat"
+                        },
+                        {
+                          "match": "Kødet i stokbasis er rabarber-rødt, vokser meget vådt",
+                          "text_more": "Sump-rørhat",
+                          "id": "res_sump_roerhat"
+                        },
+                        {
+                          "match": "Hatten er rød-sprukken, kødet er rødt lige under hathuden",
+                          "text_more": "Rødsprukken rørhat",
+                          "id": "res_roedsprukken_roerhat"
+                        },
+                        {
+                          "match": "Hatten er bleg/hvid-sprukket",
+                          "text_more": "Hvidsprukken rørhat",
+                          "id": "res_hvidsprukken_roerhat"
+                        },
+                        {
+                          "match": "Hatten har blådug (som en blomme)",
+                          "text_more": "Dugget rørhat",
+                          "id": "res_dugget_roerhat"
+                        },
+                        {
+                          "match": "Rørene er store og kantede, hatten filtet",
+                          "text_more": "Filtet rørhat",
+                          "id": "res_filtet_roerhat"
+                        },
+                        {
+                          "match": "Blåner kun på rørene ved tryk (stokken ofte mørkebrun)",
+                          "text_more": "Brunstokket rørhat",
+                          "id": "res_brunstokket"
+                        },
+                        {
+                          "match": "Gule prikker i bunden af stokkens kød",
+                          "text_more": "Blodrød rørhat",
+                          "id": "res_blodroed_roerhat"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "match": "Undersiden har ribber (ikke lameller) eller er glat",
+              "text_more": "Ribberne kan ikke skrabes af med en negl, og de løber altid et stykke ned ad stokken",
+              "prompt": "Undersøg stokken",
+              "choices": [
+                {
+                  "match": "Stokken er HUL",
+                  "text_more": "Tragt- og trompetsvampe",
+                  "prompt": "Kontrollér undersiden",
+                  "choices": [
+                    {
+                      "match": "Den har tydelige ribber",
+                      "prompt": "Kontrollér svampen",
+                      "choices": [
+                        {
+                          "match": "Hatten er brun og stokken gul",
+                          "text_more": "Tragt-kantarel",
+                          "id": "res_tragt"
+                        },
+                        {
+                          "match": "Hele svampen er mørkegrå/sort",
+                          "text_more": "Grå kantarel",
+                          "id": "res_graa_kantarel"
+                        }
+                      ]
+                    },
+                    {
+                      "match": "Den øre glat eller rynket",
+                      "prompt": "Kontrollér svampen",
+                      "choices": [
+                        {
+                          "match": "Svampen er helt sort/grå og formet som en dyb trompet",
+                          "text_more": "Sort trompetsvamp",
+                          "id": "res_sort_trompetsvamp"
+                        },
+                        {
+                          "match": "Stokken er stærkt gul/orange og undersiden næsten glat",
+                          "text_more": "Gylden kantarel",
+                          "id": "res_gylden_kantarel"
+                        },
+                        {
+                          "match": "Kanten er meget kruset og farven gråbrun",
+                          "text_more": "Liden kantarel",
+                          "id": "res_liden_kantarel"
+                        },
+                        {
+                          "match": "Den er gul-grålig, men bliver sort ved berøring",
+                          "text_more": "Sværtende kantarel",
+                          "id": "res_svaertende_kantarel"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "match": "Stokken er MASSIV",
+                  "text_more": "De 'ægte' kantareller",
+                  "prompt": "Undersøg svampen",
+                  "choices": [
+                    {
+                      "match": "Hatten er dækket af små lilla/violette skæl",
+                      "text_more": "Ametyst-kantarel",
+                      "id": "res_ametyst_kantarel"
+                    },
+                    {
+                      "match": "Hatten er hvidlig/pudret og meget tung/fast",
+                      "text_more": "Bleg kantarel",
+                      "id": "res_bleg_kantarel"
+                    },
+                    {
+                      "match": "Svampen er lille (1-3 cm) og kraftigt orange/pink",
+                      "text_more": "Abrikos-kantarel",
+                      "id": "res_abrikos_kantarel"
+                    },
+                    {
+                      "match": "Den er klassisk æggegul overalt",
+                      "text_more": "Almindelig kantarel",
+                      "id": "res_kantarel"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "match": "Undersiden har små, tætte pigge",
+              "text_more": "ligner korte hår eller pigge på et pindsvin",
+              "prompt": "Hvordan mærkes svampen, og hvilken farve har den?",
+              "choices": [
+                {
+                  "match": "Svampen er bleg-gul, orange eller rødbrun. Kødet er sprødt og knækker let (som kridt).",
+                  "prompt": "Kig på hattens midte. Er der en tydelig fordybning (en navle)?",
+                  "choices": [
+                    {
+                      "match": "Ja, hatten har en tydelig, dyb navle i midten (ofte lille og mørkere orange-brun)",
+                      "text_more": "Navle-pigsvamp",
+                      "id": "res_navle_pigsvamp"
+                    },
+                    {
+                      "match": "Nej, hatten er plan eller uregelmæssig uden en dyb navle",
+                      "prompt": "Kig nu på piggene under hatten. Løber de et stykke ned ad stokken?",
+                      "choices": [
+                        {
+                          "match": "Ja, piggene løber tydeligt et stykke ned ad stokken. Svampen er ofte stor og bleg-gul.",
+                          "text_more": "Almindelig Pigsvamp",
+                          "id": "res_almindelig_pigsvamp"
+                        },
+                        {
+                          "match": "Nej, piggene stopper brat ved stokken. Svampen er mindre, spinklere og mere orange.",
+                          "text_more": "Rødgul Pigsvamp",
+                          "id": "res_roedgul_pigsvamp"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "match": "Svampen er mørkebrun, grålig eller sortagtig. Kødet er sejt, læderagtigt eller korkagtigt.",
+                  "text_more": "Uspiselige pigsvampe",
+                  "notice": "Dette er sandsynligvis en kork- eller kødpigsvamp. De er ikke giftige, men for seje eller bitre til at spise."
+                }
+              ]
+            },
+            {
+              "match": "Undersiden har lameller (blatlignende skiver)",
+              "prompt": "Hvilken farve har lamellerne?",
+              "choices": [
+                {
+                  "match": "Lamellerne er hvide eller meget lyse",
+                  "warning": "VÆR FORSIGTIG: Mange dødeligt giftige svampe (f.eks. Grøn og Hvid Fluesvamp) har hvide lameller. Spis kun hvis du er 100% sikker."
+                },
+                {
+                  "match": "Lamellerne er lyserøde, chokoladebrune eller sorte",
+                  "prompt": "Har svampen en ring på stokken, og hvor vokser den?",
+                  "choices": [
+                    {
+                      "match": "Vokser på græs/eng, har en ring på stokken og lamellerne skifter fra pink til brune.",
+                      "text_more": "Mark-champignon",
+                      "id": "res_champignon"
+                    },
+                    {
+                      "match": "Vokser i skovbunden, har hvide/grå skæl på hatten og bliver sort/blækagtig i kanten.",
+                      "notice": "Det kunne være en blækhat (se den specifikke kategori i hovedmenuen)."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "match": "Hatten har enten huller (som en vaskesvamp), hjerneagtige folder eller er skålformet",
+              "text_more": "Svampen mangler lameller og rør",
+              "prompt": "Hvilken form har svampen?",
+              "choices": [
+                {
+                  "match": "Svampen er formet som en åben skål og lugter kraftigt af klor (svømmehal)",
+                  "text_more": "Klor-bægermorkel",
+                  "id": "res_klor_baegermorkel"
+                },
+                {
+                  "match": "Hatten ligner en 'hjerne' eller knyttet næve.",
+                  "warning": "Hold dig fra den! Dette kan være den dødeligt giftige Stenmorkel (Gyromitra esculenta)."
+                },
+                {
+                  "match": "Hatten har huller eller rynker, og hele svampen er 100% hul indvendig",
+                  "prompt": "Hvordan sidder hatten fast på stokken?",
+                  "choices": [
+                    {
+                      "match": "Klokke-test: Hatten sidder LØST",
+                      "text_more": "Kanten er fri og kan vippes op som en nederdel",
+                      "prompt": "Hvordan ser hattens overflade ud?",
+                      "choices": [
+                        {
+                          "match": "Hatten er næsten glat eller har kun milde rynker",
+                          "text_more": "Glat Klokkemorkel",
+                          "id": "res_glat_klokkemorkel"
+                        },
+                        {
+                          "match": "Hatten er kraftigt rynket og foldet (men stadig 100% hul indvendig)",
+                          "text_more": "Klokkemorkel",
+                          "id": "res_klokkemorkel"
+                        },
+                        {
+                          "match": "Hatten har tydelige huller/gruber (ligner en vaskesvamp på toppen af en stok)",
+                          "text_more": "Hætte-morkel",
+                          "id": "res_haette_morkel"
+                        }
+                      ]
+                    },
+                    {
+                      "match": "Fast-test: Hatten sidder helt FAST",
+                      "text_more": "Hatten er vokset sammen med stokken hele vejen ned til kanten",
+                      "prompt": "Hvilken form og farve har hatten?",
+                      "choices": [
+                        {
+                          "match": "Hatten er rund/oval (som et æg) og gulbrun med uregelmæssige huller",
+                          "text_more": "Spiselig Morkel",
+                          "id": "res_spiselig_morkel"
+                        },
+                        {
+                          "match": "Hatten er spids (kegleformet) med mørke, lodrette ribber",
+                          "text_more": "Kegle-morkel",
+                          "id": "res_kegle_morkel"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "match": "Hatten er hvid og cylinderformet med masser af 'paryk-agtige' skæl. Svampen er høj.",
+              "prompt": "Kig på bunden af hatten. Er den helt hvid eller begyndt at blive sort?",
+              "choices": [
+                {
+                  "match": "Den er helt hvid hele vejen ned.",
+                  "text_more": "Paryk-blækhat",
+                  "id": "res_parykhat"
+                },
+                {
+                  "match": "Kanten er begyndt at blive sort eller flydende.",
+                  "notice": "Uspiselig: Gammel blækhat"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
   }
 }
