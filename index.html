@@ -211,7 +211,7 @@
 		let activeMarkers = {};
 		let currentPageId = 'start';
 		// Global variable to track where we are in the tree
-		let currentWizardNode = wizardMushroomData;
+		let currentWizardNode = {};
 		let isLoggedIn = false;
 		let userSettings = JSON.parse(localStorage.getItem('userSettings')) || {
 		    lang: 'da',
@@ -792,6 +792,7 @@
 		        // Vi gemmer KUN det sprog vi skal bruge i 'ui'
 		        // Hvis f.eks. 'da' ikke findes i filen, tager vi 'en' som fallback
 		        ui = allTranslations[langCode] || allTranslations['en'];
+				currentWizardNode = wizardMushroomData;
 		        
 		        console.log(`Interface oversat til: ${langCode}`);
 		        
@@ -2267,6 +2268,7 @@
     </script>
 </body>
 </html>
+
 
 
 
