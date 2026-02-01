@@ -357,14 +357,10 @@
 				const cacheBuster = `?v=${new Date().getTime()}`;
 				let response = await fetch(`data/translations.json${cacheBuster}`);
 				const allTranslations = await response.json();
-				response = await fetch(`data/wizardMushroomData_${langCode}.json${cacheBuster}`);
-		        const wizardMushroomData = await response.json();
 		        
 		        // Vi gemmer KUN det sprog vi skal bruge i 'ui'
 		        // Hvis f.eks. 'da' ikke findes i filen, tager vi 'en' som fallback
 		        ui = allTranslations[langCode] || allTranslations['en'];
-				wizardMushroomData = ui.wizardMushroomData[langCode] || allTranslations['en'];
-				currentWizardNode = wizardMushroomData;
 		        
 		        console.log(`Interface oversat til: ${langCode}`);
 		        
@@ -408,7 +404,13 @@
 		}	
 		
 		async function handleCountryChange(countryCode, shouldRender = true) {
-		    // 1. Opdater indstillingerne
+			const cacheBuster = `?v=${new Date().getTime()}`;
+			const response = await fetch(`data/wizardMushroomData_${countryCode}.json${cacheBuster}`);
+			const wizardMushroomData = await response.json();
+			
+			wizardMushroomData = ui.wizardMushroomData[langCode] || ui.wizardMushroomData[langCode];
+
+			// 1. Opdater indstillingerne
 		    userSettings.country = countryCode;
 		    
 		    // 2. Find regionerne for det valgte land i det valgte sprog
@@ -1840,6 +1842,7 @@
     </script>
 </body>
 </html>
+
 
 
 
