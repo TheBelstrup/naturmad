@@ -1627,32 +1627,39 @@
 				input.value = "";
 		    }
 		}
-
+		
 		function openFullImage(photoArray, startIndex) {
 		    const overlay = document.createElement('div');
-		    overlay.className = 'fixed inset-0 bg-black z-[2000] animate-in fade-in duration-200 overflow-hidden';
+		    overlay.className = 'fixed inset-0 bg-black z-[2000] animate-in fade-in duration-200 overflow-hidden cursor-zoom-out';
 		    
-		    // Vi bruger CSS Scroll Snapping til swipe
+		    // Luk når man klikker på selve overlay-baggrunden
+		    overlay.onclick = (e) => {
+		        // Vi tjekker at man ikke klikker på selve billedet (valgfrit)
+		        // Hvis man vil kunne klikke overalt for at lukke:
+		        document.body.removeChild(overlay);
+		    };
+			
 		    overlay.innerHTML = `
 		        <div class="flex h-full w-full overflow-x-auto snap-x snap-mandatory no-scrollbar" id="swipe-gallery">
 		            ${photoArray.map((src, i) => `
 		                <div class="min-w-full h-full snap-center flex items-center justify-center p-4">
-		                    <img src="${src}" class="max-w-full max-h-full object-contain shadow-2xl rounded-sm">
+		                    <img src="${src}" class="max-w-full max-h-full object-contain shadow-2xl">
 		                </div>
 		            `).join('')}
 		        </div>
-		        		        
-		        <div class="absolute bottom-10 left-0 right-0 text-center text-white/70 text-xs font-mono z-[2001] pointer-events-none">
-		            SWIPE FOR FLERE
+		        
+		        <button class="absolute top-10 right-6 text-white bg-black/40 backdrop-blur-md w-12 h-12 rounded-full flex items-center justify-center text-2xl font-bold z-[2001]">✕</button>
+		        
+		        <div class="absolute bottom-10 left-0 right-0 text-center text-white/50 text-[10px] font-black uppercase tracking-widest z-[2001] pointer-events-none">
+		            Swipe for fotos • Klik for at lukke
 		        </div>
 		    `;
 		
 		    document.body.appendChild(overlay);
 		
-		    // Scroll hen til det billede, brugeren klikkede på
+		    // Scroll til det rigtige billede
 		    const gallery = document.getElementById('swipe-gallery');
-		    const width = window.innerWidth;
-		    gallery.scrollLeft = startIndex * width;
+		    gallery.scrollLeft = startIndex * window.innerWidth;
 		}
 
 		async function deleteFullSpot(spotUid) {
@@ -2229,6 +2236,7 @@
     </script>
 </body>
 </html>
+
 
 
 
