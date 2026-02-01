@@ -22,7 +22,11 @@
     "month_sep": "Sep",
     "month_oct": "Okt",
     "month_nov": "Nov",
-    "month_dec": "Dec"
+    "month_dec": "Dec",
+    "save_in_cloud": "Gem dine fund i skyen",
+    "save_in_cloud_expl": "Log ind for at gemme dine fund sikkert online",
+    "log_in_register": "Log ind / Opret",
+    "my_spots": "Mine Fund"
   },
   "en": {
     "menu_home": "Home",
@@ -35,7 +39,7 @@
     "menu_safety": "Safety",
     "menu_feedback": "Send feedback",
     "monthOrder": ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"],
-    "all_year": "All",
+    "all_year": "All Year",
     "month_jan": "Jan",
     "month_feb": "Feb",
     "month_mar": "Mar",
@@ -47,6 +51,10 @@
     "month_sep": "Sep",
     "month_oct": "Oct",
     "month_nov": "Nov",
-    "month_dec": "Dec"
+    "month_dec": "Dec",
+    "save_in_cloud": "Save spots online",
+    "save_in_cloud_expl": "Log in to securely save your spots online",
+    "log_in_register": "Log in / Register",
+    "my_spots": "My Spots"
   }
 }
