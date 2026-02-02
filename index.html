@@ -1766,7 +1766,8 @@
 		async function initApp() {
 			try {
 				// 1. Hent konfigurationen
-				const response = await fetch('config.json');
+				const cacheBuster = `?v=${new Date().getTime()}`;
+				const response = await fetch(`config.json${cacheBuster}`);
 				appConfig = await response.json();
 		
 				// 2. Tjek om vi har gemte indstillinger, ellers start "Gæt-processen"
@@ -1837,4 +1838,5 @@
     </script>
 </body>
 </html>
+
 
