@@ -9,18 +9,22 @@
     },
     "en": {
       "label": "English",
-      "defaultCountry": "UK",
+      "defaultCountry": "DK",
       "countries": {
-        "UK": { "name": "United Kingdom", "regions": ["All regions", "Scotland"] },
         "DK": { "name": "Denmark", "regions": ["All regions", "Zealand"] },
+      },
+      "_countries": {
+        "UK": { "name": "United Kingdom", "regions": ["All regions", "Scotland"] },
         "US": { "name": "USA", "regions": ["All regions", "Oregon"] }
       }
     },
     "de": {
       "label": "Deutsch",
-      "defaultCountry": "DE",
+      "defaultCountry": "DK",
       "countries": {
-        "DE": { "name": "Deutschland", "regions": ["Bundesweit", "Bayern"] },
+        "DK": { "name": "Dänemark", "regions": ["Ganzes Land", "Nordjütland"] }
+      },
+      "_countries": {
         "DK": { "name": "Dänemark", "regions": ["Ganzes Land", "Nordjütland"] }
       }
     }
