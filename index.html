@@ -364,7 +364,7 @@
 		        // Opdater de statiske elementer i HTML'en med det samme
 		        applyStaticTranslations(); 
 		    } catch (err) {
-		        console.error("Could load translations:", err);
+		        console.error("Could not load translations:", err);
 		    }
 		}
 
@@ -493,7 +493,7 @@
 		            <button onclick="navigate('my-spots')" class="w-full text-left py-3 px-3 flex items-center gap-3 bg-white rounded-xl">
 		                <span class="text-lg">📍</span> 
 		                <div class="flex flex-col text-emerald-900">
-		                    <span class="font-bold text-sm">Mine Fund</span>
+		                    <span data-i18n="my_spots" class="font-bold text-sm">Mine Fund</span>
 		                </div>
 		                ${countBadge}
 		            </button>
@@ -506,7 +506,7 @@
 		    // Her integreres senere Firebase Auth eller lignende.
 
 			// Her ville din rigtige login-kode være
-		    console.log("Logger ind...");
+		    console.log("Logging in...");
 		    
 		    // For test: Lad os lade som om login lykkedes
 		    isLoggedIn = true;
@@ -517,10 +517,10 @@
 		    closeMenuIfOpen();
 		    
 		    // Vi gør emnet og teksten lidt mere generel
-		    const subject = encodeURIComponent("Tilbagemelding fra NaturMad app");
-		    const body = encodeURIComponent("Hej NaturMad,\n\nJeg har følgende tilbagemelding/idé:\n\n");
+		    const subject = encodeURIComponent("${ui.feedback_subject}");
+			const body = encodeURIComponent(`${ui.feedback_content} (${ui.menu_language}: ${userSettings.lang}, ${ui.menu_country}: ${userSettings.country})`);
 		    
-		    window.location.href = `mailto:support@naturmad.dk?subject=${subject}&body=${body}`;
+		    window.location.href = `mailto:support@wild.ly?subject=${subject}&body=${body}`;
 		}
 	
 		function render(pageId, data) {
@@ -1838,6 +1838,7 @@
     </script>
 </body>
 </html>
+
 
 
 
