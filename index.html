@@ -396,7 +396,8 @@
 		            </option>`
 		        ).join('');
 		    }
-		
+
+			renderUserSection();			
 		    await handleCountryChange(newCountry, shouldRender);
 		}	
 		
@@ -466,7 +467,7 @@
 		                <h3 class="font-black italic uppercase text-sm mb-1">${ui.save_in_cloud}</h3>
 		                <p class="text-[10px] opacity-80 mb-3">${ui.save_in_cloud_expl}.</p>
 		                <button onclick="handleLogin()" class="w-full bg-white text-emerald-900 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest">
-		                    ${ui.save_in_cloud_expl}
+		                    ${ui.log_in_register}
 		                </button>
 		            </section>
 		            
@@ -929,8 +930,6 @@
 		    // 4. Luk editoren og naviger direkte til den nye fund-side
 		    closeLocationEditor();
 
-			renderUserSection();
-	
 		    // Vi bruger 'view_spot' og sender vores nye unikke spotUid med
 		    navigate('view_spot', { spotId: spotUid });
 		}
@@ -1800,7 +1799,6 @@
 				
 				renderLanguageOptions();
 				await handleLangChange(userSettings.lang, false); // false = genindlæs ikke hele siden endnu		
-				renderUserSection();
 			} catch (err) {
 				console.error("Fejl under opstart:", err);
 			}
@@ -1839,3 +1837,4 @@
     </script>
 </body>
 </html>
+
