@@ -11,7 +11,7 @@
       "label": "English",
       "defaultCountry": "DK",
       "countries": {
-        "DK": { "name": "Denmark", "regions": ["All regions", "Zealand"] },
+        "DK": { "name": "Denmark", "regions": ["All regions", "Zealand"] }
       },
       "_countries": {
         "UK": { "name": "United Kingdom", "regions": ["All regions", "Scotland"] },
@@ -25,7 +25,7 @@
         "DK": { "name": "Dänemark", "regions": ["Ganzes Land", "Nordjütland"] }
       },
       "_countries": {
-        "DK": { "name": "Dänemark", "regions": ["Ganzes Land", "Nordjütland"] }
+        "DE": { "name": "Deutschland", "regions": ["Bundesweit", "Bayern"] }
       }
     }
   }
