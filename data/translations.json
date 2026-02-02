@@ -26,7 +26,9 @@
     "save_in_cloud": "Gem dine fund i skyen",
     "save_in_cloud_expl": "Log ind for at gemme dine fund sikkert online",
     "log_in_register": "Log ind / Opret",
-    "my_spots": "Mine Fund"
+    "my_spots": "Mine Fund",
+    "feedback_subject": "Tilbagemelding til Wildly app",
+    "feedback_content": "Hej Wildly,\n\nMin feedback:\n\n\n\n---\nTeknisk info"
   },
   "en": {
     "menu_home": "Home",
@@ -55,6 +57,8 @@
     "save_in_cloud": "Save spots online",
     "save_in_cloud_expl": "Log in to securely save your spots online",
     "log_in_register": "Log in / Register",
-    "my_spots": "My Spots"
+    "my_spots": "My Spots",
+    "feedback_subject": "Feedback for Wildly app",
+    "feedback_content": "Hej Wildly,\n\nMy feedback:\n\n\n\n---\nTechnical info"
   }
 }
