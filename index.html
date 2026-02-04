@@ -383,7 +383,7 @@
 		    userSettings.lang = langCode;
 		    const langData = appConfig.languages[langCode];
 			await loadInterfaceTranslations(langCode);
-			
+			a
 		    // Sæt automatisk til det nye sprogs standardland
 		    const newCountry = langData.defaultCountry;
 		    
@@ -572,13 +572,13 @@
                 iconCont.classList.add('text-green-800');
                 label.classList.remove('text-stone-600');
             } else {
-                label.innerText = 'HELE ÅRET';
+                label.innerText = ui.all_year;
                 iconCont.classList.remove('text-green-800');
                 label.classList.add('text-stone-600');
             }
 
 			const appContent = document.getElementById('app-content');
-		    if (appContent.innerHTML.includes('Mine Fund')) {
+		    if (appContent.innerHTML.includes(ui.my_spots)) {
 		        renderMySpots(); // Opdater listen med det samme
 		    } else {
 		        render(); // Ellers kør din normale forside-render
@@ -590,12 +590,12 @@
                 <div class="fade-in space-y-6">
                     <div class="p-10 card bg-green-900 text-white border-0 shadow-xl overflow-hidden relative">
                         <div class="relative z-10">
-                            <h2 class="text-3xl font-black italic sans uppercase tracking-tighter leading-none">Vild Mad</h2>
-                            <p class="text-green-200 text-[10px] font-bold uppercase tracking-[0.2em] mt-3 sans">Guide til Danmark</p>
+                            <h2 class="text-3xl font-black italic sans uppercase tracking-tighter leading-none">${ui.start_title}</h2>
+                            <p class="text-green-200 text-[10px] font-bold uppercase tracking-[0.2em] mt-3 sans">${ui.start_guide} ${appConfig.languages[langCode].countries[code].name}</p>
                         </div>
                         <div class="absolute -right-4 -bottom-4 w-24 h-24 bg-white/10 rounded-full blur-2xl"></div>
                     </div>
-
+					//HERTIL
 					<div class="grid grid-cols-2 gap-4">
 						${['Kyst', 'Eng', 'Have'].map(h => `
 							<button onclick="navigate('view_${h.toLowerCase()}')" class="p-6 card flex flex-col items-center justify-center gap-2 btn-active">
@@ -1838,6 +1838,7 @@
     </script>
 </body>
 </html>
+
 
 
 
