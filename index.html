@@ -403,8 +403,6 @@
 		
 		async function handleCountryChange(countryCode, shouldRender = true) {
 			const cacheBuster = `?v=${new Date().getTime()}`;
-			const response = await fetch(`data/wizardMushroomData_${countryCode}.json${cacheBuster}`);
-			const uiWizard = await response.json();
 			
 			// 1. Opdater indstillingerne
 		    userSettings.country = countryCode;
@@ -412,8 +410,6 @@
 		    // 2. Find regionerne for det valgte land i det valgte sprog
 		    const langConfig = appConfig.languages[userSettings.lang];
 		    const countryConfig = langConfig.countries[countryCode];
-
-			wizardMushroomData = uiWizard[userSettings.lang] ||uiWizard['en'];
 			
 		    // 3. Opdater regions-dropdown i menuen
 		    const regionSelect = document.getElementById('region-select');
@@ -433,14 +429,14 @@
 			const cacheBuster = `?v=${new Date().getTime()}`;
 			const response = await fetch(`data/wizardMushroomData_${userSettings.country}.json${cacheBuster}`);
 			const uiWizard = await response.json();
-			
+
 			// 1. Opdater indstillingerne
 			const regionSelect = document.getElementById('region-select');
 			userSettings.region = regionSelect.value;
 		    
 		    // 2. Find regionerne for det valgte land i det valgte sprog
 			wizardMushroomData = uiWizard[userSettings.lang] ||uiWizard['en'];
-			wizardMushoomData = uiWizard[userSettings.region];
+			wizardMushoomData = wizardMushoomData[userSettings.region];
 			
 		    // 4. Gem de nye indstillinger permanent
 		    saveSettings();
@@ -1854,6 +1850,7 @@
     </script>
 </body>
 </html>
+
 
 
 
