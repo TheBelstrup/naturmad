@@ -30,7 +30,15 @@
     "feedback_subject": "Tilbagemelding til Wildly app",
     "feedback_content": "Hej Wildly,\n\nMin feedback:\n\n\n\n---\nTeknisk info",
     "start_title": "Vild Mad",
-    "start_guide": "Guide til"
+    "start_guide": "Guide til",
+    "start_explore": "Udforsk",
+    "start_forest_type": "Vælg skovtype",
+    "hab_coast": "Kyst",
+    "hab_meadow": "Eng",
+    "hab_garden": "Have",
+    "hab_forest": "Skov",
+    "hab_deciduous": "Løvskov",
+    "hab_coniferous": "Nåleskov"
   },
   "en": {
     "menu_home": "Home",
@@ -63,6 +71,14 @@
     "feedback_subject": "Feedback for Wildly app",
     "feedback_content": "Hej Wildly,\n\nMy feedback:\n\n\n\n---\nTechnical info",
     "start_title": "Wild Food",
-    "start_guide": "Guide to"
+    "start_guide": "Guide to",
+    "start_explore": "Explore",
+    "start_forest_type": "Select forest type",
+    "hab_coast": "Coast",
+    "hab_meadow": "Meadow",
+    "hab_garden": "Garden",
+    "hab_forest": "Forest",
+    "hab_deciduous": "Deciduous forest",
+    "hab_coniferous": "Coniferous forest"
   }
 }
