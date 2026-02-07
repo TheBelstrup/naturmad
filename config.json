@@ -4,28 +4,28 @@
       "label": "Dansk",
       "defaultCountry": "DK",
       "countries": {
-        "DK": { "name": "Danmark", "regions": ["Hele landet"] }
+        "DK": { "name": "Danmark", "regions": ["Hele landet"], "activeHabitats": ["coast", "meadow", "garden", "forest"] }
       }
     },
     "en": {
       "label": "English",
       "defaultCountry": "DK",
       "countries": {
-        "DK": { "name": "Denmark", "regions": ["All regions", "Zealand"] }
+        "DK": { "name": "Denmark", "regions": ["All regions", "Zealand"], "activeHabitats": ["coast", "meadow", "garden", "forest"] }
       },
       "_countries": {
-        "UK": { "name": "United Kingdom", "regions": ["All regions", "Scotland"] },
-        "US": { "name": "USA", "regions": ["All regions", "Oregon"] }
+        "UK": { "name": "United Kingdom", "regions": ["All regions", "Scotland"], "activeHabitats": ["coast", "meadow", "garden", "forest"] },
+        "US": { "name": "USA", "regions": ["All regions", "Oregon"], "activeHabitats": ["coast", "meadow", "garden", "forest"] }
       }
     },
     "de": {
       "label": "Deutsch",
       "defaultCountry": "DK",
       "countries": {
-        "DK": { "name": "Dänemark", "regions": ["Ganzes Land", "Nordjütland"] }
+        "DK": { "name": "Dänemark", "regions": ["Ganzes Land", "Nordjütland"], "activeHabitats": ["coast", "meadow", "garden", "forest"] }
       },
       "_countries": {
-        "DE": { "name": "Deutschland", "regions": ["Bundesweit", "Bayern"] }
+        "DE": { "name": "Deutschland", "regions": ["Bundesweit", "Bayern"], "activeHabitats": ["coast", "meadow", "garden", "forest"] }
       }
     }
   }
