@@ -1,5 +1,5 @@
 {
-  "da": [
+  "da": {
     "Hele landet": {
       "prompt": "Kig på svampen",
       "choices": [
@@ -579,5 +579,5 @@
         }
       ]
     }
-  ]
+  }
 }
