@@ -435,6 +435,7 @@
 			const uiWizard = await response.json();
 			
 			// 1. Opdater indstillingerne
+			const regionSelect = document.getElementById('region-select');
 			userSettings.region = regionSelect.value;
 		    
 		    // 2. Find regionerne for det valgte land i det valgte sprog
@@ -1854,6 +1855,7 @@
     </script>
 </body>
 </html>
+
 
 
 
