@@ -474,14 +474,6 @@
 		
 		    if (!isLoggedIn) {
 		        container.innerHTML = `
-		            <section class="bg-emerald-900 text-white p-4 rounded-2xl shadow-md mb-2">
-		                <h3 class="font-black italic uppercase text-sm mb-1">${ui.save_in_cloud}</h3>
-		                <p class="text-[10px] opacity-80 mb-3">${ui.save_in_cloud_expl}.</p>
-		                <button onclick="handleLogin()" class="w-full bg-white text-emerald-900 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest">
-		                    ${ui.log_in_register}
-		                </button>
-		            </section>
-		            
 		            <button onclick="navigate('my-spots')" class="w-full text-left py-3 px-3 flex items-center gap-3">
 		                <span class="text-lg">📍</span> 
 		                <div class="flex flex-col">
@@ -489,18 +481,16 @@
 		                </div>
 		                ${countBadge}
 		            </button>
+		            <section class="bg-emerald-900 text-white p-4 rounded-2xl shadow-md mb-2">
+		                <h3 class="font-black italic uppercase text-sm mb-1">${ui.save_in_cloud}</h3>
+		                <p class="text-[10px] opacity-80 mb-3">${ui.save_in_cloud_expl}.</p>
+		                <button onclick="handleLogin()" class="w-full bg-white text-emerald-900 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest">
+		                    ${ui.log_in_register}
+		                </button>
+		            </section>		            
 		        `;
 		    } else {
 		        container.innerHTML = `
-		            <div class="flex items-center gap-3 p-3 bg-white rounded-2xl shadow-sm mb-1">
-		                <div class="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center text-emerald-700 font-bold italic">
-		                    ${userSettings.name ? userSettings.name[0] : 'U'}
-		                </div>
-		                <div class="flex flex-col">
-		                    <span class="font-bold text-sm italic">Profilnavn</span>
-		                </div>
-		            </div>
-		
 		            <button onclick="navigate('my-spots')" class="w-full text-left py-3 px-3 flex items-center gap-3 bg-white rounded-xl">
 		                <span class="text-lg">📍</span> 
 		                <div class="flex flex-col text-emerald-900">
@@ -508,6 +498,14 @@
 		                </div>
 		                ${countBadge}
 		            </button>
+		            <div class="flex items-center gap-3 p-3 bg-white rounded-2xl shadow-sm mb-1">
+		                <div class="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center text-emerald-700 font-bold italic">
+		                    ${userSettings.name ? userSettings.name[0] : 'U'}
+		                </div>
+		                <div class="flex flex-col">
+		                    <span class="font-bold text-sm italic">Profilnavn</span>
+		                </div>
+		            </div>		
 		        `;
 		    }
 		}
@@ -1713,8 +1711,7 @@
 				currentWizardNode = wizardMushroomData;
 				node = currentWizardNode;
 			}
-
-			if (node.warning) {
+			else if (node.warning) {
 				// CASE: Warning / Dead End
 				content = renderWarning(node.warning);
 			}
@@ -1849,6 +1846,7 @@
     </script>
 </body>
 </html>
+
 
 
 
