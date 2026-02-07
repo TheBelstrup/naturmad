@@ -604,18 +604,17 @@
                         </div>
                         <div class="absolute -right-4 -bottom-4 w-24 h-24 bg-white/10 rounded-full blur-2xl"></div>
                     </div>
-					//HERTIL
 					<div class="grid grid-cols-2 gap-4">
 						${['Kyst', 'Eng', 'Have'].map(h => `
 							<button onclick="navigate('view_${h.toLowerCase()}')" class="p-6 card flex flex-col items-center justify-center gap-2 btn-active">
 								<span class="font-black text-stone-900 uppercase italic sans text-lg">${h}</span>
-								<span class="text-[9px] font-bold text-stone-600 uppercase sans">Udforsk</span>
+								<span data-i18n="start_explore" class="text-[9px] font-bold text-stone-600 uppercase sans">Udforsk</span>
 							</button>
 						`).join('')}
 
 						<button onclick="navigate('view_skov_typer')" class="p-6 card flex flex-col items-center justify-center gap-2 btn-active">
 							<span class="font-black text-stone-900 uppercase italic sans text-lg">Skov</span>
-							<span class="text-[9px] font-bold text-green-700 uppercase sans font-black text-center">Vælg skovtype →</span>
+							<span data-i18n="start_forest_type" class="text-[9px] font-bold text-green-700 uppercase sans font-black text-center">Vælg skovtype →</span>
 						</button>
 					</div>
                     
@@ -1846,6 +1845,7 @@
     </script>
 </body>
 </html>
+
 
 
 
