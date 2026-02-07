@@ -182,7 +182,7 @@
 			
 			    <div class="flex items-center px-4 py-2 justify-between">
 			        <span data-i18n="menu_region" class="text-[10px] font-bold uppercase tracking-widest text-stone-500">Region</span>
-			        <select id="region-select" onchange="updateSetting('region', this.value)" class="bg-transparent text-sm font-bold text-emerald-900 border-none focus:ring-0 py-1 text-right">
+			        <select id="region-select" onchange="handleRegionChange()" class="bg-transparent text-sm font-bold text-emerald-900 border-none focus:ring-0 py-1 text-right">
 			        </select>
 			    </div>
 			</section>
@@ -425,6 +425,22 @@
 		        // Sæt regionen til den første i listen (f.eks. "Hele landet")
 		        userSettings.region = regionSelect.value;
 		    }
+
+			await handleRegionChange();
+		}
+		
+		async function handleRegionChange() {
+			const cacheBuster = `?v=${new Date().getTime()}`;
+			const response = await fetch(`data/wizardMushroomData_${userSettings.country}.json${cacheBuster}`);
+			const uiWizard = await response.json();
+			
+			// 1. Opdater indstillingerne
+			userSettings.region = regionSelect.value;
+		    
+		    // 2. Find regionerne for det valgte land i det valgte sprog
+			wizardMushroomData = uiWizard[userSettings.lang] ||uiWizard['en'];
+			wizardMushoomData = uiWizard[userSettings.region];
+			
 		
 		    // 4. Gem de nye indstillinger permanent
 		    saveSettings();
@@ -437,7 +453,7 @@
 		        render('start');
 		    }
 		}
-
+		
 		async function loadDatabase(countryCode) {
 		    try {
 		        const response = await fetch(`data_${countryCode.toLowerCase()}.json`);
@@ -1838,6 +1854,7 @@
     </script>
 </body>
 </html>
+
 
 
 
