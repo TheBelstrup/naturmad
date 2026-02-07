@@ -435,8 +435,7 @@
 			userSettings.region = regionSelect.value;
 		    
 		    // 2. Find regionerne for det valgte land i det valgte sprog
-			wizardMushroomData = uiWizard[userSettings.lang] ||uiWizard['en'];
-			wizardMushoomData = wizardMushoomData[userSettings.region];
+			wizardMushroomData = uiWizard[userSettings.lang][userSettings.region];
 			
 		    // 4. Gem de nye indstillinger permanent
 		    saveSettings();
@@ -1850,6 +1849,7 @@
     </script>
 </body>
 </html>
+
 
 
 
