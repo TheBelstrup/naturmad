@@ -4,7 +4,7 @@
       "label": "Dansk",
       "defaultCountry": "DK",
       "countries": {
-        "DK": { "name": "Danmark", "regions": ["Hele landet", "Nordjylland", "Sjælland"] }
+        "DK": { "name": "Danmark", "regions": ["Hele landet"] }
       }
     },
     "en": {
