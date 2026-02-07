@@ -426,10 +426,10 @@
 		        userSettings.region = regionSelect.value;
 		    }
 
-			await handleRegionChange();
+			await handleRegionChange(shouldRender);
 		}
 		
-		async function handleRegionChange() {
+		async function handleRegionChange(shouldRender = true) {
 			const cacheBuster = `?v=${new Date().getTime()}`;
 			const response = await fetch(`data/wizardMushroomData_${userSettings.country}.json${cacheBuster}`);
 			const uiWizard = await response.json();
@@ -442,7 +442,6 @@
 			wizardMushroomData = uiWizard[userSettings.lang] ||uiWizard['en'];
 			wizardMushoomData = uiWizard[userSettings.region];
 			
-		
 		    // 4. Gem de nye indstillinger permanent
 		    saveSettings();
 		
@@ -1855,6 +1854,7 @@
     </script>
 </body>
 </html>
+
 
 
 
