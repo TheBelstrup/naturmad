@@ -598,7 +598,7 @@
 			const activeHabitats = appConfig.languages[userSettings.lang].countries[userSettings.country].activeHabitats;
 
 			document.getElementById('app-content').innerHTML = `
-                <div class="fade-in space-y-6">
+				<div class="fade-in space-y-6">
                     <div class="p-10 card bg-green-900 text-white border-0 shadow-xl overflow-hidden relative">
                         <div class="relative z-10">
                             <h2 class="text-3xl font-black italic sans uppercase tracking-tighter leading-none">${ui.start_title}</h2>
@@ -607,21 +607,26 @@
                         <div class="absolute -right-4 -bottom-4 w-24 h-24 bg-white/10 rounded-full blur-2xl"></div>
                     </div>
 					<div class="grid grid-cols-2 gap-4">
-						${activeHabitats.map(h => `
-							if (id === 'forest') {
-					            return `
-					                <button onclick="navigate('view_forest')" class="p-6 card flex flex-col items-center justify-center gap-2 btn-active">
-					                    <span class="font-black text-stone-900 uppercase italic sans text-lg">${label}</span>
-					                    <span class="text-[9px] font-bold text-green-700 uppercase sans font-black text-center">
-					                        ${ui.start_forest_type || 'Vælg skovtype'} →
-					                    </span>
-					                </button>`;
-					        }
-							<button onclick="navigate('view_${h.id}')" class="p-6 card flex flex-col items-center justify-center gap-2 btn-active">
-		                        <span class="font-black text-stone-900 uppercase italic sans text-lg"${ui[`hab_${id}`]}</span>
-		                        <span class="text-[9px] font-bold text-stone-600 uppercase sans">${ui.start_explore || 'Udforsk'}</span>
-		                    </button>
-		                `).join('')}
+						${activeHabitats.map(id => {
+							const label = ui[`hab_${id}`] || id;
+						    const isForest = (id === 'forest');
+							
+							return isForest ? `
+								<button onclick="navigate('view_skov_typer')" class="p-6 card flex flex-col items-center justify-center gap-2 btn-active">
+									<span class="font-black text-stone-900 uppercase italic sans text-lg">${label}</span>
+									<span class="text-[9px] font-bold text-green-700 uppercase sans font-black text-center">
+										${ui.start_forest_type || 'Vælg skovtype'} →
+									</span>
+								</button>
+							` : `
+								<button onclick="navigate('view_${id}')" class="p-6 card flex flex-col items-center justify-center gap-2 btn-active">
+									<span class="font-black text-stone-900 uppercase italic sans text-lg">${label}</span>
+									<span class="text-[9px] font-bold text-stone-600 uppercase sans">
+										${ui.start_explore || 'Udforsk'}
+									</span>
+								</button>
+							`;
+		                }).join('')}
 					</div>
                     --HERTIL
                     <button onclick="navigate('all')" class="w-full p-6 card flex items-center justify-between btn-active">
@@ -1861,6 +1866,7 @@
     </script>
 </body>
 </html>
+
 
 
 
