@@ -42,7 +42,9 @@
     "hab_coniferous": "Nåleskov",
     "hab_coniferous_description": "Gran, Fyr, Lærk",
     "hab_mixed": "Blandingsskov",
-    "hab_mixed_description": "Mix af nåle- og løvtræer"
+    "hab_mixed_description": "Mix af nåle- og løvtræer",
+    "search_placeholder": "Søg på navn eller type...",
+    "no_search_results": "Ingen resultater fundet..."
   },
   "en": {
     "menu_home": "Home",
@@ -87,6 +89,8 @@
     "hab_coniferous": "Coniferous forest",
     "hab_coniferous_description": "Spruce, Pine, Larch",
     "hab_mixed": "Mixed forest",
-    "hab_mixed_description": "Mix of deciduous and coniferous trees"
+    "hab_mixed_description": "Mix of deciduous and coniferous trees",
+    "search_placeholder": "Search for name or type...",
+    "no_search_results": "No resultats found..."
   }
 }
