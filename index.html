@@ -672,7 +672,7 @@
 						<button onclick="navigate('view_forest')" class="p-6 card flex items-center justify-between btn-active">
 							<div class="text-left">
 								<span class="block font-black text-stone-900 uppercase italic sans text-xl">${ui.hab_mixed}</span>
-								<span class="text-xs font-bold text-stone-600 uppercase">>${ui.hab_mixed_description}</span>
+								<span class="text-xs font-bold text-stone-600 uppercase">${ui.hab_mixed_description}</span>
 							</div>
 						</button>
 					</div>
@@ -697,7 +697,7 @@
                         <div class="flex items-center justify-between w-full mb-2">
                             <div>
                                 <div class="font-black text-stone-900 text-lg sans uppercase italic tracking-tighter leading-none">${data.name}</div>
-                                <div class="text-[10px] font-bold text-stone-600 uppercase sans mt-1">${data.type} • ${data.habitats.join('/')}</div>
+                                <div class="text-[10px] font-bold text-stone-600 uppercase sans mt-1">${data.type} • ${data.habitats.map(h => ui[`hab_${h}`] || h).join('/')}</div>
                             </div>
                             <span class="type-badge badge-${data.type}">${data.type[0]}</span>
                         </div>
@@ -705,14 +705,14 @@
                     </button>
                 `).join('');
 
-                document.getElementById('search-results').innerHTML = listHtml || '<p class="text-center py-10 text-stone-600 italic sans">Ingen resultater fundet...</p>';
+                document.getElementById('search-results').innerHTML = listHtml || '<p class="text-center py-10 text-stone-600 italic sans">${ui.no_search_results}</p>';
             };
 
             appContent.innerHTML = `
                 <div class="fade-in space-y-4">
-                    <h2 class="text-3xl font-black text-stone-900 italic uppercase tracking-tighter sans mb-4">Bibliotek</h2>
+                    <h2 class="text-3xl font-black text-stone-900 italic uppercase tracking-tighter sans mb-4">${ui.menu_library}</h2>
                     <div class="relative mb-6">
-                        <input type="text" id="search-input" placeholder="Søg på navn eller type..." 
+                        <input type="text" id="search-input" placeholder="${ui.search_placeholder}" 
                             class="w-full p-4 pl-12 rounded-2xl border-none bg-stone-100 sans font-bold text-stone-900 focus:ring-2 focus:ring-green-800 outline-none transition-all">
                         <div class="absolute left-4 top-1/2 -translate-y-1/2 text-stone-600">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
@@ -1866,6 +1866,7 @@
     </script>
 </body>
 </html>
+
 
 
 
