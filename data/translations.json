@@ -38,7 +38,11 @@
     "hab_garden": "Have",
     "hab_forest": "Skov",
     "hab_deciduous": "Løvskov",
-    "hab_coniferous": "Nåleskov"
+    "hab_deciduous_description": "Bøg, Eg, Ask, Birk",
+    "hab_coniferous": "Nåleskov",
+    "hab_coniferous_description": "Gran, Fyr, Lærk",
+    "hab_mixed": "Blandingsskov",
+    "hab_mixed_description": "Mix af nåle- og løvtræer"
   },
   "en": {
     "menu_home": "Home",
@@ -79,6 +83,10 @@
     "hab_garden": "Garden",
     "hab_forest": "Forest",
     "hab_deciduous": "Deciduous forest",
-    "hab_coniferous": "Coniferous forest"
+    "hab_deciduous_description": "Beech, Oak, Ash, Birch",
+    "hab_coniferous": "Coniferous forest",
+    "hab_coniferous_description": "Spruce, Pine, Larch",
+    "hab_mixed": "Mixed forest",
+    "hab_mixed_description": "Mix of deciduous and coniferous trees"
   }
 }
