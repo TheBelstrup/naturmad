@@ -1731,7 +1731,8 @@
 				currentWizardNode = wizardMushroomData;
 				node = currentWizardNode;
 			}
-			else if (node.warning) {
+			
+			if (node.warning) {
 				// CASE: Warning / Dead End
 				content = renderWarning(node.warning);
 			}
@@ -1866,6 +1867,7 @@
     </script>
 </body>
 </html>
+
 
 
 
