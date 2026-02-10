@@ -628,26 +628,27 @@
 							`;
 		                }).join('')}
 					</div>
-                    --HERTIL
+
                     <button onclick="navigate('all')" class="w-full p-6 card flex items-center justify-between btn-active">
                         <div class="flex items-center gap-4">
-                            <div class="w-12 h-12 bg-stone-100 rounded-2xl flex items-center justify-center font-bold text-green-800 italic sans text-xl">A-Å</div>
+                            <div class="w-12 h-12 bg-stone-100 rounded-2xl flex items-center justify-center font-bold text-green-800 italic sans text-xl">${ui.start_letter_range || 'A-Å'}</div>
                             <div class="text-left">
-                                <div class="font-black text-stone-900 uppercase italic sans text-lg">Biblioteket</div>
-                                <div class="text-[9px] font-bold text-stone-600 uppercase sans">Alle ${Object.keys(database).length} arter</div>
+                                <div class="font-black text-stone-900 uppercase italic sans text-lg">${ui.start_library || 'Biblioteket'}</div>
+                                <div class="text-[9px] font-bold text-stone-600 uppercase sans">Alle ${Object.keys(database).length} ${ui.start_library_species || 'arter'}</div>
                             </div>
                         </div>
                     </button>
 
 					<button onclick="navigate('my-spots')" 
 							class="w-full p-4 border-2 border-stone-200 text-stone-600 rounded-[24px] font-black text-[11px] uppercase tracking-widest text-center mt-4">
-						Mine hemmelige steder 📍
+						${ui.start_my_spots || 'Mine hemmelige steder'} 📍
 					</button>
                 </div>
             `;
         }
 
 		function renderForestMenu() {
+			//HERTIL
 			document.getElementById('app-content').innerHTML = `
 				<div class="fade-in space-y-6">
 					<div class="flex items-center gap-3">
@@ -1867,6 +1868,7 @@
     </script>
 </body>
 </html>
+
 
 
 
