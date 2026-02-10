@@ -634,7 +634,7 @@
                             <div class="w-12 h-12 bg-stone-100 rounded-2xl flex items-center justify-center font-bold text-green-800 italic sans text-xl">${ui.start_letter_range || 'A-Å'}</div>
                             <div class="text-left">
                                 <div class="font-black text-stone-900 uppercase italic sans text-lg">${ui.start_library || 'Biblioteket'}</div>
-                                <div class="text-[9px] font-bold text-stone-600 uppercase sans">Alle ${Object.keys(database).length} ${ui.start_library_species || 'arter'}</div>
+                                <div class="text-[9px] font-bold text-stone-600 uppercase sans">${ui.start_library_all || 'Alle'} ${Object.keys(database).length} ${ui.start_library_species || 'arter'}</div>
                             </div>
                         </div>
                     </button>
@@ -1868,6 +1868,7 @@
     </script>
 </body>
 </html>
+
 
 
 
