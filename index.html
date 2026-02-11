@@ -441,25 +441,97 @@
 		    saveSettings();
 		
 		    // 5. Hent den nye lande-database (f.eks. data_dk.json)
-		    //await loadDatabase(countryCode);
+		    //await loadDatabase();
 		
 		    // 6. Hvis vi skal opdatere skærmen med det samme (f.eks. når man skifter i menuen)
 		    if (shouldRender && currentPageId === 'start') {
 		        render('start');
 		    }
 		}
+
+		async function loadDatabase() {
+			const lang = userSettings.lang;
+			const country = userSettings.country;
+			const region = userSettings.region;
+			
+			//TODO: MODIFY THIS TO FIT WITH THE NEW DATABASE
+			/*
+				{
+				  "res_hyben": {
+				    "universal": {
+				      "id": "res_hyben",
+				      "latin": "Rosa rugosa",
+				      "habitats": ["coast", "garden"]
+				    },
+				    "i18n": {
+				      "da": { "name": "Rynket Rose", "traits": "Store orange bær..." },
+				      "en": { "name": "Rugosa Rose", "traits": "Large orange berries..." }
+				    },
+				    "regional": {
+				      "DK": {
+				        "all": {
+				          "common": {
+				            "months": ["jun", "jul", "aug", "sep"]
+				          },
+				          "i18n": {
+				            "da": {
+				              "extended_habitat": "Kystnære områder i Danmark.",
+				              "twin": { "name": "Ingen", "toxic": false }
+				            },
+				            "en": {
+				              "extended_habitat": "Coastal areas in Denmark.",
+				              "twin": { "name": "None", "toxic": false }
+				            }
+				          }
+				        },
+				        "nordjylland": {
+				          "common": { "months": ["jul", "aug"] }
+				          /* Her kan du tilføje i18n hvis Nordjylland har en specifik lokal beskrivelse */
+				        }
+				      }
+				    }
+				  }
+				}
+			*/
+
+			try {
+				const response = await fetch(`data_${country.toLowerCase()}.json`);
+				if (!response.ok) throw new Error("File not found");
+				const rawDB = await response.json();
+			} catch (err) {
+				console.error("Database error:", err);
+				rawDB = {}; 
+			}
 		
-		async function loadDatabase(countryCode) {
-		    try {
-		        const response = await fetch(`data_${countryCode.toLowerCase()}.json`);
-		        if (!response.ok) throw new Error("File not found");
-		        database = await response.json();
-		    } catch (err) {
-		        console.error("Database error:", err);
-		        database = {}; 
+			const flattened = {};
+		
+		    for (const [key, plant] of Object.entries(rawDb)) {
+		        // 1. Start med universelle data (ID, latin, habitats, etc.)
+		        const universal = plant.universal || {};
+		
+		        // 2. Find de generelle oversættelser (da/en/de)
+		        const mainI18n = plant.i18n?.[lang] || plant.i18n?.['da'] || {};
+		
+		        // 3. Find regionale data (Land -> Region)
+		        const countryBlock = plant.regional?.[country] || {};
+		        const regionBlock = countryBlock[region] || countryBlock['all'] || {};
+		
+		        // 4. Hent regionale fællesdata (fx måneder) og regionale oversættelser
+		        const regCommon = regionBlock.common || {};
+		        const regI18n = regionBlock.i18n?.[lang] || regionBlock.i18n?.['da'] || {};
+		
+		        // 5. Kombiner alt i prioriteret rækkefølge (sidste lag vinder)
+		        flattened[key] = {
+		            ...universal,
+		            ...mainI18n,
+		            ...regCommon,
+		            ...regI18n
+		        };
 		    }
-		}
 		
+		    return flattened;
+		}
+
 		// Hjælpefunktion til at gemme i localStorage
 		function saveSettings() {
 		    localStorage.setItem('userSettings', JSON.stringify(userSettings));
@@ -648,7 +720,6 @@
         }
 
 		function renderForestMenu() {
-			//HERTIL
 			document.getElementById('app-content').innerHTML = `
 				<div class="fade-in space-y-6">
 					<div class="flex items-center gap-3">
@@ -1868,6 +1939,7 @@
     </script>
 </body>
 </html>
+
 
 
 
