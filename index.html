@@ -220,6 +220,8 @@
 		    region: 'Hele landet'
 		};		
         let activeSeason = 'all';
+		let appConfig = {};
+		let geoData = {};
 
 		const database = {
 		  res_hyben: { name: "Rynket Rose (Hyben)", type: "bær", habitats: ["coast", "garden"], extended_habitat: "Kystnære områder, sommerhusgrunde og læhegn. Invasiv i Danmark.", latin: "Rosa rugosa", months: ["jun","jul","aug","sep"], traits: "Store orange/røde bær, voldsomme torne", extended_traits: "Store flade bær. Blomsterne dufter kraftigt og er enten hvide eller mørkerøde.", not_this_if: ["Busk mangler torne", "Bærrene er små og aflange (det er dog også hyben, bare andre arter)"], usage: "Bær bruges til marmelade (fjern kerner). Kronblade til sirup eller snaps.", cleaning: "Halvér bærret og skrab de kradsende kerner ud med en teske.", preservation: "Bær kan fryses efter rensning eller tørres.", naturbasen: "https://www.naturbasen.dk/art/4367/rynket-rose", id_keys: { bær: "Store, kødfulde.", blade: "Rynkede, læderagtige.", vækst: "Tæt buskads m. mange torne." }, twin: { name: "Ingen", diff: "Let genkendelig på bær og duft.", toxic: false } },
@@ -384,45 +386,64 @@
 		    const langData = appConfig.languages[langCode];
 			await loadInterfaceTranslations(langCode);
 			
-		    // Sæt automatisk til det nye sprogs standardland
-		    const newCountry = langData.defaultCountry;
-		    
+			// 1. Find ud af hvilket land vi skal bruge
+		    let activeCountry = userSettings.country;
+		
+		    // Tjek om landet mangler ELLER om det nuværende land ikke findes i det nye sprogs liste
+		    if (!activeCountry || !langData.countries[activeCountry]) {
+		        activeCountry = langData.defaultCountry;
+		    }
+		
+		    // Opdater userSettings med det valgte/validerede land
+		    userSettings.country = activeCountry;
+			
 		    // Opdater lande-vælgeren i menuen
 		    const countrySelect = document.getElementById('country-select');
 		    if (countrySelect) {
 		        countrySelect.innerHTML = Object.keys(langData.countries).map(code => 
-		            `<option value="${code}" ${newCountry === code ? 'selected' : ''}>
+		            `<option value="${code}" ${activeCountry === code ? 'selected' : ''}>
 		                ${langData.countries[code].name}
 		            </option>`
 		        ).join('');
 		    }
 
 			renderUserSection();			
-		    await handleCountryChange(newCountry, shouldRender);
+		    await handleCountryChange(activeCountry, shouldRender);
 		}	
 		
 		async function handleCountryChange(countryCode, shouldRender = true) {
-			const cacheBuster = `?v=${new Date().getTime()}`;
-			
-			// 1. Opdater indstillingerne
+		    // 1. Opdater indstillingerne for land
 		    userSettings.country = countryCode;
-		    
-		    // 2. Find regionerne for det valgte land i det valgte sprog
-		    const langConfig = appConfig.languages[userSettings.lang];
-		    const countryConfig = langConfig.countries[countryCode];
-			
-		    // 3. Opdater regions-dropdown i menuen
+		
+		    // 2. Hent geografiske data for det valgte land fra geoData
+		    const countryConfig = geoData[countryCode];
+		    		
+		    const regionIds = Object.keys(countryConfig.regions);
+		    const currentRegion = userSettings.region;
+		
+		    // 3. Valider region: Behold nuværende hvis den findes i det nye land, 
+		    // ellers vælg den første (typisk 'all')
+		    if (!currentRegion || !countryConfig.regions[currentRegion]) {
+		        userSettings.region = regionIds[0]; 
+		    }
+		
+		    // 4. Opdater regions-dropdown i menuen
 		    const regionSelect = document.getElementById('region-select');
 		    if (regionSelect) {
-		        regionSelect.innerHTML = countryConfig.regions.map(r => 
-		            `<option value="${r}" ${userSettings.region === r ? 'selected' : ''}>${r}</option>`
-		        ).join('');
-		        
-		        // Sæt regionen til den første i listen (f.eks. "Hele landet")
-		        userSettings.region = regionSelect.value;
+		        regionSelect.innerHTML = Object.entries(countryConfig.regions).map(([id, data]) => {
+		            // Vi henter label baseret på det aktive sprog, fallback til ID
+		            const label = data.label[userSettings.lang] || data.label['da'] || id;
+		            const isSelected = userSettings.region === id;
+		            
+		            return `<option value="${id}" ${isSelected ? 'selected' : ''}>${label}</option>`;
+		        }).join('');
 		    }
-
-			await handleRegionChange(shouldRender);
+			
+		    // 5. Gem de nye indstillinger og kør evt. database-fladgøring
+		    saveSettings(); 
+		    		
+		    // 6. Kør region-skiftet (som ofte håndterer rendering)
+		    await handleRegionChange(shouldRender);
 		}
 		
 		async function handleRegionChange(shouldRender = true) {
@@ -1868,9 +1889,13 @@
 			try {
 				// 1. Hent konfigurationen
 				const cacheBuster = `?v=${new Date().getTime()}`;
-				const response = await fetch(`config.json${cacheBuster}`);
-				appConfig = await response.json();
-		
+				const [configRes, geoRes] = await Promise.all([
+				        fetch(`config.json${cacheBuster}`),
+				        fetch('geo_data.json${cacheBuster}`')
+				    ]);
+				appConfig = await configRes.json();
+			    geoData = await geoRes.json();
+				
 				// 2. Tjek om vi har gemte indstillinger, ellers start "Gæt-processen"
 				const saved = localStorage.getItem('userSettings');
 				if (saved) {
@@ -1893,7 +1918,7 @@
 					userSettings = {
 						lang: finalLang,
 						country: countryCode,
-						region: langData.countries[countryCode].regions[0] // Tag første region som default
+						region: geoData[countryCode].regions[0] // Tag første region som default
 					};
 					
 					saveSettings(); // Gem de gættede indstillinger
@@ -1939,6 +1964,7 @@
     </script>
 </body>
 </html>
+
 
 
 
