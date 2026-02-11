@@ -2,20 +2,18 @@
   "languages": {
     "da": {
       "label": "Dansk",
+      "defaultCountry": "DK",
       "countries": ["DK"]
     },
     "en": {
       "label": "English",
+      "defaultCountry": "DK",
       "countries": ["DK", "UK"]
     },
     "de": {
       "label": "Deutsch",
+      "defaultCountry": "DK",
       "countries": ["DK", "DE"]
     }
   },
-  "default": {
-    "lang": "da",
-    "country": "DK",
-    "region": "all"
-  }
 }
