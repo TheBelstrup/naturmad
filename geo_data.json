@@ -1,0 +1,26 @@
+{
+  "DK": {
+    "regions": {
+      "all": {
+        "activeHabitats": ["coast", "meadow", "garden", "forest"],
+        "label": { "da": "Hele landet", "en": "All regions", "de": "Ganzes Land" }
+      },
+      "nordjylland": {
+        "activeHabitats": ["coast", "forest"],
+        "label": { "da": "Nordjylland", "en": "North Jutland", "de": "Nordjütland" }
+      },
+      "sjaelland": {
+        "activeHabitats": ["coast", "meadow", "forest"],
+        "label": { "da": "Sjælland", "en": "Zealand", "de": "Seeland" }
+      }
+    }
+  },
+  "UK": {
+    "regions": {
+      "all": {
+        "activeHabitats": ["meadow", "forest"],
+        "label": { "da": "Hele Storbritannien", "en": "United Kingdom", "de": "Vereinigtes Königreich" }
+      }
+    }
+  }
+}
