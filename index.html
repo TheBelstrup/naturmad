@@ -687,7 +687,7 @@
         }
 		
         function renderStart() {
-			const activeHabitats = appConfig.languages[userSettings.lang].countries[userSettings.country].activeHabitats;
+			const activeHabitats = geoData[userSettings.country].regions[userSettings.region].activeHabitats;
 
 			document.getElementById('app-content').innerHTML = `
 				<div class="fade-in space-y-6">
@@ -1963,6 +1963,7 @@
     </script>
 </body>
 </html>
+
 
 
 
