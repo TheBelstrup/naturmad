@@ -12,18 +12,18 @@
       "label": "English",
       "defaultCountry": "DK",
       "countries": {
-        "DK": { "name": "Denmark" },
-        "UK": { "name": "United Kingdom" },
-        "DE": { "name": "Germany" }
+        "DK": { "label": "Denmark" },
+        "UK": { "label": "United Kingdom" },
+        "DE": { "label": "Germany" }
       }
     },
     "de": {
       "label": "Deutsch",
       "defaultCountry": "DK",
       "countries": {
-        "DK": { "name": "Dänemark" },
-        "UK": { "name": "Grossbritannien" },
-        "DE": { "name": "Deutschland" }
+        "DK": { "label": "Dänemark" },
+        "UK": { "label": "Grossbritannien" },
+        "DE": { "label": "Deutschland" }
       }
     }
   }
