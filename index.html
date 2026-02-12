@@ -1890,7 +1890,7 @@
 				const cacheBuster = `?v=${new Date().getTime()}`;
 				const [configRes, geoRes] = await Promise.all([
 				        fetch(`config.json${cacheBuster}`),
-				        fetch('geo_data.json${cacheBuster}`')
+				        fetch('geo_data.json${cacheBuster}`)
 				    ]);
 				appConfig = await configRes.json();
 			    geoData = await geoRes.json();
@@ -1963,6 +1963,7 @@
     </script>
 </body>
 </html>
+
 
 
 
