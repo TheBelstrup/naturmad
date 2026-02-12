@@ -3,17 +3,28 @@
     "da": {
       "label": "Dansk",
       "defaultCountry": "DK",
-      "countries": ["DK"]
+      "countries": {
+        "DK": { "label": "Danmark" },
+        "DE": { "label": "Tyskland" }
+      }
     },
     "en": {
       "label": "English",
       "defaultCountry": "DK",
-      "countries": ["DK", "UK"]
+      "countries": {
+        "DK": { "name": "Denmark" },
+        "UK": { "name": "United Kingdom" },
+        "DE": { "name": "Germany" }
+      }
     },
     "de": {
       "label": "Deutsch",
       "defaultCountry": "DK",
-      "countries": ["DK", "DE"]
+      "countries": {
+        "DK": { "name": "Dänemark" },
+        "UK": { "name": "Grossbritannien" },
+        "DE": { "name": "Deutschland" }
+      }
     }
   }
 }
