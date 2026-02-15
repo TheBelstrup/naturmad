@@ -465,8 +465,8 @@
 		    //await loadDatabase();
 		
 		    // 6. Hvis vi skal opdatere skærmen med det samme (f.eks. når man skifter i menuen)
-		    if (shouldRender && currentPageId === 'start') {
-		        render('start');
+		    if (shouldRender) {
+		        render(currentPageId);
 		    }
 		}
 
@@ -1963,6 +1963,7 @@
     </script>
 </body>
 </html>
+
 
 
 
