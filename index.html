@@ -1023,7 +1023,6 @@
 		}
 		
 		function saveFinalLocation(resId, accuracy) {
-			//HERTIL
 			const center = map.getCenter();
 		    
 		    // 1. Skab et unikt ID for dette specifikke fund
@@ -1066,7 +1065,7 @@
 		const getPreciseLocation = () => {
 			return new Promise((resolve, reject) => {
 				if (!navigator.geolocation) {
-					reject(new Error("GPS er ikke understøttet af din browser."));
+					reject(new Error(ui.map_no_gps));
 				}
 				navigator.geolocation.getCurrentPosition(
 					(pos) => resolve({
@@ -1086,7 +1085,7 @@
 		    try {
 		        const btn = e.currentTarget;
 				const originalContent = btn.innerHTML;
-		        btn.innerHTML = "Finder din position...";
+		        btn.innerHTML = ui.spot_finding_location;
 		        const location = await getPreciseLocation();
 		        
 		        // Åbner editoren og sender ID med
@@ -1094,14 +1093,14 @@
 		        
 		        btn.innerHTML = originalContent;
 		    } catch (error) {
-		        alert("GPS fejl: " + error.message);
+		        alert(ui.spot_gps_error + " " + error.message);
 		    }
 		}
 
 		async function renderMySpots(filterId = null) {
 		    const container = document.getElementById('app-content');
-		    container.innerHTML = `<div class="p-20 text-center animate-pulse text-stone-400">Beregner afstande...</div>`;
-		    
+		    container.innerHTML = `<div class="p-20 text-center animate-pulse text-stone-400">${ui.spot_calculating_distances}</div>`;
+		    //hertil
 		    let userPos = null;
 		    try {
 		        userPos = await getPreciseLocation();
@@ -1964,5 +1963,6 @@
     </script>
 </body>
 </html>
+
 
 
