@@ -56,6 +56,10 @@
     "spot_editor_set_location": "Præcisér sted",
     "spot_location": "Her gemmes fundet",
     "spot_confirm": "Bekræft præcis placering",
+    "spot_no_gps": "GPS er ikke understøttet af din browser.",
+    "spot_finding_location": "Finder din position...",
+    "spot_gps_error": "GPS fejl:",
+    "spot_calculating_distances": "Beregner afstande...",
     "cancel": "Annullér"
   },
   "en": {
@@ -115,6 +119,10 @@
     "spot_editor_set_location": "Specify Location",
     "spot_location": "The find is stored here",
     "spot_confirm": "Confirm exact location",
+    "spot_no_gps": "GPS is not supported by your browser.",
+    "spot_finding_location": "Locating your position...",
+    "spot_gps_error": "GPS error:",
+    "spot_calculating_distances": "Calculating distances...",
     "cancel": "Cancel"
   }
 }
