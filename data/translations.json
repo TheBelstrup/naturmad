@@ -60,6 +60,8 @@
     "spot_finding_location": "Finder din position...",
     "spot_gps_error": "GPS fejl:",
     "spot_calculating_distances": "Beregner afstande...",
+    "spot_gps_not_available": "GPS ikke tilgængelig for sortering",
+    "spot_no_saved": "Ingen gemte steder",
     "cancel": "Annullér"
   },
   "en": {
@@ -123,6 +125,8 @@
     "spot_finding_location": "Locating your position...",
     "spot_gps_error": "GPS error:",
     "spot_calculating_distances": "Calculating distances...",
+    "spot_gps_not_available": "GPS not available for sorting",
+    "spot_no_saved": "No saved spots found",
     "cancel": "Cancel"
   }
 }
