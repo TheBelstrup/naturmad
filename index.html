@@ -1499,8 +1499,7 @@
 						
 						<div class="p-8 pb-4 bg-white flex justify-between items-start">
 							<div>
-								<h3 class="text-3xl font-black uppercase italic tracking-tighter text-stone-900 leading-none">Gem dine fund</h3>
-								<p class="text-green-800 text-[10px] font-black uppercase tracking-[0.2em] mt-2">Den ultimative konserveringsguide</p>
+								<h3 class="text-3xl font-black uppercase italic tracking-tighter text-stone-900 leading-none">${ui.detail_preservation}</h3>
 							</div>
 							<button onclick="closePreservationGuide()" class="h-12 w-12 rounded-full bg-stone-100 flex items-center justify-center font-bold text-stone-500 hover:bg-stone-200 transition-all active:scale-90">✕</button>
 						</div>
@@ -1511,16 +1510,16 @@
 								<div class="flex items-center gap-3 mb-4">
 									<div class="w-12 h-12 rounded-2xl bg-amber-50 flex items-center justify-center text-2xl border border-amber-100">☀️</div>
 									<div>
-										<h4 class="font-black uppercase text-sm tracking-widest text-stone-800 italic leading-none">Tørring</h4>
-										<span class="text-[10px] text-amber-600 font-bold uppercase tracking-tighter">Bedst til: Rørhatte & Tragt-kantareller</span>
+										<h4 class="font-black uppercase text-sm tracking-widest text-stone-800 italic leading-none">${ui.detail_preservation_drying}</h4>
+										<span class="text-[10px] text-amber-600 font-bold uppercase tracking-tighter">${ui.detail_preservation_drying_best_for}</span>
 									</div>
 								</div>
 								<div class="text-sm text-stone-600 space-y-3 leading-relaxed border-l-2 border-stone-100 pl-6 ml-6">
-									<p><strong>Klargøring:</strong> Skær svampene i helt jævne skiver på <strong>3-5 mm</strong>. Brug kun sunde, faste eksemplarer.</p>
-									<p><strong>I ovn:</strong> Fordel skiverne på en <strong>bagerist</strong> (ikke plade). Sæt ovnen på <strong>40-45°C</strong> varmluft. <strong>Vigtigt:</strong> Sæt en træske i klemme i ovndøren, så dampen kan slippe ud.</p>
-									<p><strong>Tid:</strong> Typisk <strong>6-12 timer</strong>. De er færdige, når de "knækker" sprødt. Hvis de bøjer, er de ikke tørre nok og vil mugne i glasset.</p>
+									<p>${ui.detail_preservation_preparation}</p>
+									<p>${ui.detail_preservation_oven}</p>
+									<p>${ui.detail_preservation_time}</p>
 									<div class="bg-amber-50/50 p-3 rounded-xl border border-amber-100 text-[12px] italic">
-										<strong>Tip:</strong> Mal de tørre svampe til mel i en kaffekværn. Det er den ultimative "Umami-støv" til saucer.
+										${ui.detail_preservation_tip}
 									</div>
 								</div>
 							</section>
@@ -1670,12 +1669,22 @@
 
 								${res.preservation ? `
 								<div class="pt-5 border-t border-stone-200/60">
-									<div class="text-[9px] font-black uppercase tracking-widest text-green-800 mb-2 sans opacity-60">Opbevaring & Konservering
-										<button onclick="showPreservationGuide()" class="flex items-center gap-1 bg-green-100 px-2 py-0.5 rounded-full text-[8px] font-black text-green-800 uppercase tracking-tighter italic">
-											<span>💡</span> Metoder
-										</button>
-									</div>
-									<p class="text-sm text-stone-800 italic leading-relaxed">${res.preservation}</p>
+									<div class="text-[9px] font-black uppercase tracking-widest text-green-800 mb-2 sans opacity-60">
+								        Opbevaring & Konservering
+								    </div>
+								    <p class="text-sm text-stone-800 italic leading-relaxed mb-4">${res.preservation}</p>
+								    
+								    <button onclick="showPreservationGuide()" 
+								            class="w-full flex items-center justify-between bg-white border border-green-200 p-3 rounded-2xl shadow-sm active:scale-[0.98] transition-all">
+								        <div class="flex items-center gap-3">
+								            <span class="text-lg">🍯</span>
+								            <div class="text-left">
+								                <div class="text-[10px] font-black uppercase text-green-800 leading-none">Lær teknikkerne</div>
+								                <div class="text-xs text-stone-500 italic">Se guide til tørring, frysning og syltning</div>
+								            </div>
+								        </div>
+								        <span class="text-green-800 text-xs">→</span>
+								    </button>
 								</div>
 								` : ''}
 							</div>
@@ -1961,6 +1970,7 @@
     </script>
 </body>
 </html>
+
 
 
 
