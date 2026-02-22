@@ -62,7 +62,12 @@
     "spot_calculating_distances": "Beregner afstande...",
     "spot_gps_not_available": "GPS ikke tilgængelig for sortering",
     "spot_no_saved": "Ingen gemte steder",
-    "cancel": "Annullér"
+    "spot_change_month": "Skift måned i menuen for at se dine andre fund.",
+    "spot_map_empty": "Dit kort er tomt.",
+    "spot_finds_of": "Fund af",
+    "spot_all_species": "Vis alle planter",
+    "cancel": "Annullér",
+    "go_to_home": "Gå til forsiden"
   },
   "en": {
     "menu_home": "Home",
@@ -127,6 +132,10 @@
     "spot_calculating_distances": "Calculating distances...",
     "spot_gps_not_available": "GPS not available for sorting",
     "spot_no_saved": "No saved spots found",
-    "cancel": "Cancel"
+    "spot_change_month": "Change month in the menu to see your other finds.",
+    "spot_map_empty": "Your map is empty.",
+    "spot_all_species": "Show all species",
+    "cancel": "Cancel",
+    "go_to_home": "Go to home page"
   }
 }
