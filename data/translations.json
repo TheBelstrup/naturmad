@@ -150,7 +150,7 @@
     "spot_change_month": "Change month in the menu to see your other finds.",
     "spot_map_empty": "Your map is empty.",
     "spot_all_species": "Show all species",
-    "spot_delete_confirm": Do you want to erase this find and all attached photos?",    
+    "spot_delete_confirm": "Do you want to erase this find and all attached photos?",    
     "spot_delete_all": "Erase ALL spots",
     "spot_delete_all_confirm": "Are you SURE you want to erase ALL your secret spots and images? This action cannot be undone.",
     "spot_deleted_all": "All data has been erased.",
