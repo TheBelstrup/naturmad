@@ -1132,7 +1132,7 @@
 		    if (userPos) {
 		        processedSpots.sort((a, b) => a.dist - b.dist);
 		    }
-//hertil		
+
 		    if (processedSpots.length === 0) {
 		        // ... (behold din eksisterende 'tom liste' HTML herfra) ...
 		        const hasAnySpots = (JSON.parse(localStorage.getItem('mySpots')) || []).length > 0;
@@ -1144,26 +1144,26 @@
 		                </h3>
 		                <p class="text-stone-500 text-sm italic leading-relaxed mb-8">
 		                    ${hasAnySpots 
-		                        ? 'Skift måned i menuen for at se dine andre fund.' 
-		                        : 'Dit kort er tomt. Gå ud og find noget!'}
+		                        ? '${ui.spot_change_month}' 
+		                        : '${ui.spot_map_empty}'}
 		                </p>
 		                <button onclick="navigate('start')" class="px-8 py-4 bg-green-800 text-white rounded-full font-black text-[10px] uppercase tracking-widest shadow-lg">
-		                    Gå til forsiden
+		                    ${ui.go_to_home}
 		                </button>
 		            </div>
 		        `;
 		        return; 
 		    }
-		    
+
 			const title = filterId && processedSpots.length > 0 
-			        ? `Fund af ${processedSpots[0].info.name} 📍` 
-			        : `Mine Fund 📍`;
+			        ? `${ui.spot_finds_of} af ${processedSpots[0].info.name} 📍` 
+			        : `${ui.my_spots} 📍`;
 			
 			container.innerHTML = `
 		        <div class="fade-in space-y-6 pb-20">
 		            <div class="text-center px-4">
 		                <h2 class="text-3xl font-black text-stone-900 uppercase italic tracking-tighter">${title}</h2>
-						${filterId ? `<button onclick="renderMySpots()" class="text-[9px] font-bold text-emerald-600 uppercase">← Vis alle planter</button>` : ''}
+						${filterId ? `<button onclick="renderMySpots()" class="text-[9px] font-bold text-emerald-600 uppercase">← ${ui.spot_all_species}</button>` : ''}
 		            </div>
 		
 		            <div class="card overflow-hidden shadow-xl border-stone-100 mx-4">
@@ -1204,6 +1204,7 @@
 		}
 		
 		async function clearAllSpots() {
+		    //hertil
 		    if (confirm("Er du HELT sikker på, at du vil slette ALLE dine hemmelige steder og alle tilhørende billeder? Dette kan ikke fortrydes.")) {
 		        
 		        // 1. Ryd localStorage (kort-markører og metadata)
@@ -1963,6 +1964,7 @@
     </script>
 </body>
 </html>
+
 
 
 
