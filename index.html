@@ -1208,7 +1208,7 @@
 		}
 		
 		async function clearAllSpots() {
-		    if (confirm(ui.spot_delete_all)) {
+		    if (confirm(ui.spot_delete_all_confirm)) {
 		        
 		        // 1. Ryd localStorage (kort-markører og metadata)
 		        localStorage.removeItem('mySpots');
@@ -1964,6 +1964,7 @@
     </script>
 </body>
 </html>
+
 
 
 
