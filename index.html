@@ -1338,13 +1338,11 @@
 		}
 
 		async function addPhotoToSpot(spotUid, input) {
-			//hertil
 		    if (input.files && input.files[0]) {
 		        const reader = new FileReader();
 		        reader.onload = async function(e) {
 		            // Gem billedet i IndexedDB
 		            await photoStorage.add(spotUid, e.target.result);
-		            // Genindlæs siden
 		            renderSpot(spotUid);
 		        };
 		        reader.readAsDataURL(input.files[0]);
@@ -1358,8 +1356,6 @@
 		    
 		    // Luk når man klikker på selve overlay-baggrunden
 		    overlay.onclick = (e) => {
-		        // Vi tjekker at man ikke klikker på selve billedet (valgfrit)
-		        // Hvis man vil kunne klikke overalt for at lukke:
 		        document.body.removeChild(overlay);
 		    };
 			
@@ -1375,7 +1371,7 @@
 		        <button class="absolute top-10 right-6 text-white bg-black/40 backdrop-blur-md w-12 h-12 rounded-full flex items-center justify-center text-2xl font-bold z-[2001]">✕</button>
 		        
 		        <div class="absolute bottom-10 left-0 right-0 text-center text-white/50 text-[10px] font-black uppercase tracking-widest z-[2001] pointer-events-none">
-		            Swipe for fotos • Klik for at lukke
+		            ${ui.gallery_swipe_or_click_to_close}
 		        </div>
 		    `;
 		
@@ -1387,7 +1383,7 @@
 		}
 
 		async function deleteFullSpot(spotUid) {
-		    if (confirm('Vil du slette dette fund og alle tilhørende billeder?')) {
+		    if (confirm(ui.spot_delete_confirm)) {
 		        // 1. Slet fra localStorage (markøren og data)
 		        let existing = JSON.parse(localStorage.getItem('mySpots')) || [];
 		        existing = existing.filter(s => s.uid !== spotUid);
@@ -1404,14 +1400,14 @@
 		}
 		
 		async function deleteSinglePhoto(spotUid, photoId) {
-		    if (confirm('Slet billede?')) {
+		    if (confirm(ui.gallery_delete_image)) {
 		        await photoStorage.delete(photoId);
 		        renderSpot(spotUid); // Opdater visningen
 		    }
 		}
 		
 		const photoStorage = {
-		    dbName: "SikkerNaturDB",
+		    dbName: "WildlyDB",
 		    storeName: "photos",
 		
 		    // Åbner databasen
@@ -1428,7 +1424,7 @@
 		                }
 		            };
 		            request.onsuccess = () => resolve(request.result);
-		            request.onerror = () => reject("Kunne ikke åbne IndexedDB");
+		            request.onerror = () => reject("Could not open IndexedDB");
 		        });
 		    },
 		
@@ -1478,8 +1474,8 @@
 						</div>
 
 						<div class="flex flex-col text-left">
-							<span class="text-[9px] font-black text-blue-900 uppercase tracking-widest leading-none mb-1">Ekstern database</span>
-							<span class="text-[15px] font-bold text-stone-900 leading-tight group-hover:underline">Se/Bekræft på Naturbasen.dk</span>
+							<span class="text-[9px] font-black text-blue-900 uppercase tracking-widest leading-none mb-1">${ui.naturbasen_external_db}</span>
+							<span class="text-[15px] font-bold text-stone-900 leading-tight group-hover:underline">${ui.naturbasen_see_confirm}</span>
 						</div>
 
 						<svg xmlns="http://www.w3.org/2000/svg" class="ml-auto h-5 w-5 text-stone-300 group-hover:text-blue-900 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -1487,13 +1483,14 @@
 						</svg>
 					</a>
 					<p class="mt-2 text-[10px] text-stone-600 text-center px-6 italic">
-						Naturbasen er Danmarks nationale artsportal. Se billeder af planten i forskellige stadier og tjek, om andre har fundet den i dit lokalområde netop nu.
+						${ui.naturbasen_explainer}
 					</p>
 				</div>
 			`;
 		}
 
 		function showPreservationGuide() {
+			//hertil
 			const modalHtml = `
 				<div id="preservation-modal" class="fixed inset-0 z-[100] flex items-center justify-center p-4">
 					<div class="fixed inset-0 bg-stone-900/90 backdrop-blur-md" onclick="closePreservationGuide()"></div>
@@ -1964,6 +1961,7 @@
     </script>
 </body>
 </html>
+
 
 
 
