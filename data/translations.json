@@ -102,9 +102,17 @@
     "detail_see_finds": "Se dine tidligere fund",
     "detail_not_this_if": "Det er IKKE denne hvis:",
     "detail_out_of_season": "Udenfor sæson? Vær ekstra varsom.",
+    "detail_traits": "Kendetegn",
+    "detail_growing_location": "Voksested",
+    "detail_usage_and_preservation": "Anvendelse & Opbevaring",
+    "detail_cleaning": "Rensning",
+    "detail_usage": "Anvendelse",
+    "detail_learn_techniques": "Lær teknikkerne",
+    "detail_learn_techniques_guide": "Se guide til tørring, frysning og syltning",
     "cancel": "Annullér",
     "go_to_home": "Gå til forsiden",
-    "close": "Luk"
+    "close": "Luk",
+    "unknown": "Ukendt"
   },
   "en": {
     "menu_home": "Home",
@@ -208,8 +216,16 @@
     "detail_see_finds": "See earlier finds",
     "detail_not_this_if": "It's NOT this if:",
     "detail_out_of_season": "Outside of season? Be extra cautious.",
+    "detail_traits": "Traits",
+    "detail_growing_location": "Growth Location",
+    "detail_usage_and_preservation": "Usage & Preservation",
+    "detail_cleaning": "Cleaning",
+    "detail_usage": "Usage",
+    "detail_learn_techniques": "Learn the techniques",
+    "detail_learn_techniques_guide": "See guide to drying, freezing, and preserving",
     "cancel": "Cancel",
     "go_to_home": "Go to home page",
-    "close": "Close"
+    "close": "Close",
+    "unknown": "Unknown"
   }
 }
