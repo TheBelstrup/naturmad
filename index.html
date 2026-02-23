@@ -1490,7 +1490,6 @@
 		}
 
 		function showPreservationGuide() {
-			//hertil
 			const modalHtml = `
 				<div id="preservation-modal" class="fixed inset-0 z-[100] flex items-center justify-center p-4">
 					<div class="fixed inset-0 bg-stone-900/90 backdrop-blur-md" onclick="closePreservationGuide()"></div>
@@ -1515,11 +1514,11 @@
 									</div>
 								</div>
 								<div class="text-sm text-stone-600 space-y-3 leading-relaxed border-l-2 border-stone-100 pl-6 ml-6">
-									<p>${ui.detail_preservation_preparation}</p>
-									<p>${ui.detail_preservation_oven}</p>
-									<p>${ui.detail_preservation_time}</p>
+									<p>${ui.detail_preservation_drying_preparation}</p>
+									<p>${ui.detail_preservation_drying_oven}</p>
+									<p>${ui.detail_preservation_drying_time}</p>
 									<div class="bg-amber-50/50 p-3 rounded-xl border border-amber-100 text-[12px] italic">
-										${ui.detail_preservation_tip}
+										${ui.detail_preservation_drying_tip}
 									</div>
 								</div>
 							</section>
@@ -1528,15 +1527,15 @@
 								<div class="flex items-center gap-3 mb-4">
 									<div class="w-12 h-12 rounded-2xl bg-blue-50 flex items-center justify-center text-2xl border border-blue-100">❄️</div>
 									<div>
-										<h4 class="font-black uppercase text-sm tracking-widest text-stone-800 italic leading-none">Stegning & Frys</h4>
-										<span class="text-[10px] text-blue-600 font-bold uppercase tracking-tighter">Bedst til: Kantareller & Pigsvampe</span>
+										<h4 class="font-black uppercase text-sm tracking-widest text-stone-800 italic leading-none">${ui.detail_preservation_frying}</h4>
+										<span class="text-[10px] text-blue-600 font-bold uppercase tracking-tighter">${ui.detail_preservation_frying_best_for}</span>
 									</div>
 								</div>
 								<div class="text-sm text-stone-600 space-y-3 leading-relaxed border-l-2 border-stone-100 pl-6 ml-6">
-									<p><strong>Metode:</strong> Svampe må aldrig fryses rå (undtagen Karl Johan). De skal "smides af" først for at fjerne overskydende vand.</p>
-									<p><strong>Proces:</strong> Læg svampene på en <strong>tør pande</strong> ved middel varme. Når vandet vælter ud, lader du det koge helt væk. Tilsæt derefter en smule neutral olie (længere holdbarhed end smør) og steg let i 2 min.</p>
-									<p><strong>Frys:</strong> Køl helt af og pak i poser. Pres luften ud for at undgå frostbrand.</p>
-									<p><strong>Holdbarhed:</strong> 6 mdr. med smør, 12 mdr. med olie eller helt uden fedt.</p>
+									<p>${ui.detail_preservation_frying_method}</p>
+									<p>${ui.detail_preservation_frying_process}</p>
+									<p>${ui.detail_preservation_frying_freeze}</p>
+									<p>${ui.detail_preservation_frying_shelf_life}</p>
 								</div>
 							</section>
 
@@ -1544,21 +1543,20 @@
 								<div class="flex items-center gap-3 mb-4">
 									<div class="w-12 h-12 rounded-2xl bg-rose-50 flex items-center justify-center text-2xl border border-rose-100">🧪</div>
 									<div>
-										<h4 class="font-black uppercase text-sm tracking-widest text-stone-800 italic leading-none">Gourmet Syltning</h4>
-										<span class="text-[10px] text-rose-600 font-bold uppercase tracking-tighter">Bedst til: Små, faste rørhatte</span>
+										<h4 class="font-black uppercase text-sm tracking-widest text-stone-800 italic leading-none">${ui.detail_preservation_pickling}</h4>
+										<span class="text-[10px] text-rose-600 font-bold uppercase tracking-tighter">${ui.detail_preservation_pickling_best_for}</span>
 									</div>
 								</div>
 								<div class="text-sm text-stone-600 space-y-3 leading-relaxed border-l-2 border-stone-100 pl-6 ml-6">
-									<p><strong>Lage:</strong> 1 del eddike (min 5%), 1 del sukker, 1 del vand. Kog op med laurbær og peber.</p>
-									<p><strong>Proces:</strong> Giv svampene et opkog direkte i lagen i <strong>5-8 minutter</strong>. Skum urenheder af undervejs.</p>
-									<p><strong>Tip:</strong> Hæld på skoldede glas og lad dem modne mindst 2 uger før brug. Eddiken skal have tid til at "falde til ro".</p>
+									<p>${ui.detail_preservation_pickling_brine}</p>
+									<p>${ui.detail_preservation_pickling_process}</p>
+									<p>${ui.detail_preservation_pickling_tip}</p>
 								</div>
 							</section>
-
 						</div>
 
 						<div class="p-8 bg-stone-50 border-t border-stone-100">
-							<button onclick="closePreservationGuide()" class="w-full p-5 bg-stone-900 text-white rounded-[24px] font-black text-xs uppercase tracking-[0.2em] shadow-xl active:scale-95 transition-all">Ok</button>
+							<button onclick="closePreservationGuide()" class="w-full p-5 bg-stone-900 text-white rounded-[24px] font-black text-xs uppercase tracking-[0.2em] shadow-xl active:scale-95 transition-all">${ui.close}</button>
 						</div>
 					</div>
 				</div>
@@ -1567,6 +1565,7 @@
 		}
 
 		function closePreservationGuide() {
+			//hertil
 			const modal = document.getElementById('preservation-modal');
 			if (modal) {
 				modal.classList.add('opacity-0');
@@ -1970,6 +1969,7 @@
     </script>
 </body>
 </html>
+
 
 
 
