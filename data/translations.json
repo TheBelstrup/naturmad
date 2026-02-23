@@ -99,6 +99,9 @@
     "detail_preservation_pickling_brine": "<strong>Lage:</strong> 1 del eddike (min 5%), 1 del sukker, 1 del vand. Kog op med laurbær og peber.",
     "detail_preservation_pickling_process": "<strong>Proces:</strong> Giv svampene et opkog direkte i lagen i <strong>5-8 minutter</strong>. Skum urenheder af undervejs.",
     "detail_preservation_pickling_tip": "<strong>Tip:</strong> Hæld på skoldede glas og lad dem modne mindst 2 uger før brug. Eddiken skal have tid til at 'falde til ro'.",
+    "detail_see_finds": "Se dine tidligere fund",
+    "detail_not_this_if": "Det er IKKE denne hvis:",
+    "detail_out_of_season": "Udenfor sæson? Vær ekstra varsom.",
     "cancel": "Annullér",
     "go_to_home": "Gå til forsiden",
     "close": "Luk"
@@ -193,7 +196,7 @@
     "detail_preservation_drying_tip": "<strong>Tip:</strong> Grind the dried mushrooms into flour in a coffee grinder. This is the ultimate 'umami dust' for sauces.",
     "detail_preservation_frying": "Frying & Freezing",
     "detail_preservation_frying_best_for": "Best for: Chanterelles & Hedgehog Mushrooms",
-    "detail_preservation_frying_method": "<strong>Method:</strong> Mushrooms should never be frozen raw (except Karl Johan) . They must be heated first so that they release their natural juices to remove excess water.",
+    "detail_preservation_frying_method": "<strong>Method:</strong> Mushrooms should never be frozen raw (except Porcini mushroom). They must be heated first so that they release their natural juices to remove excess water.",
     "detail_preservation_frying_process": "<strong>Process:</strong> Place the mushrooms in a <strong>dry pan</strong> over medium heat. When the water comes out, let it boil away completely. Then add a little neutral oil (longer shelf life than butter) and fry lightly for 2 minutes.",
     "detail_preservation_frying_freeze": "<strong>Freezing:</strong> Cool completely and pack in bags. Press out the air to avoid freezer burn.",
     "detail_preservation_frying_shelf_life": "<strong>Shelf life:</strong> 6 months with butter, 12 months with oil or without fat.",
@@ -202,6 +205,9 @@
     "detail_preservation_pickling_brine": "<strong>Brine:</strong> 1 part vinegar (min. 5%), 1 part sugar, 1 part water. Boil with bay leaves and pepper.",
     "detail_preservation_pickling_process": "<strong>Process:</strong> Boil the mushrooms directly in the brine for <strong>5-8 minutes</strong>. Skim off any impurities during cooking.",
     "detail_preservation_pickling_tip": "<strong>Tip:</strong> Pour into sterilised jars and leave to mature for at least 2 weeks before use. The vinegar needs time to 'settle'",
+    "detail_see_finds": "See earlier finds",
+    "detail_not_this_if": "It's NOT this if:",
+    "detail_out_of_season": "Outside of season? Be extra cautious.",
     "cancel": "Cancel",
     "go_to_home": "Go to home page",
     "close": "Close"
