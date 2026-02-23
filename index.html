@@ -1626,7 +1626,7 @@
                             <span class="text-stone-600">${
 								res.months && res.months.length > 0 
 									? `${res.months[0].toUpperCase()} - ${res.months[res.months.length - 1].toUpperCase()}`
-									: 'Ukendt'
+									: `${ui.unknown}`
 								}
 							</span>
                         </div>
@@ -1636,30 +1636,30 @@
 					` : ''}
 					
                     <div class="card p-8 border-l-[12px] border-green-800 shadow-md">
-                        <div class="id-label">Kendetegn</div>
+                        <div class="id-label">${ui.detail_traits}</div>
 						<p class="text-lg font-medium text-stone-900 italic leading-relaxed mb-6">${res.extended_traits || res.traits || ""}</p>
 						${notThisIf}
 						${res.extended_habitat ? `
-                        <div class="id-label">Voksested</div>
+                        <div class="id-label">${ui.detail_growing_location}</div>
                         <p class="text-lg font-medium text-stone-900 italic leading-relaxed mb-6">${res.extended_habitat}</p>
 						` : ''}
 						<details class="group border border-stone-200 rounded-3xl bg-stone-50 overflow-hidden transition-all shadow-sm">
 							<summary class="list-none cursor-pointer p-5 flex justify-between items-center bg-white group-open:bg-stone-100 transition-colors">
 								<div class="flex items-center gap-3">
-									<span class="text-[11px] font-black uppercase tracking-widest text-green-900 sans">Anvendelse & Opbevaring</span>
+									<span class="text-[11px] font-black uppercase tracking-widest text-green-900 sans">${ui.detail_usage_and_preservation}</span>
 								</div>
 								<span class="text-stone-400 group-open:rotate-180 transition-transform text-[10px]">▼</span>
 							</summary>
 							
 							<div class="p-6 space-y-6 bg-stone-50/50 border-t border-stone-100">
 								<div>
-									<div class="text-[9px] font-black uppercase tracking-widest text-green-800 mb-2 sans opacity-60">Anvendelse</div>
+									<div class="text-[9px] font-black uppercase tracking-widest text-green-800 mb-2 sans opacity-60">${ui.detail_usage}</div>
 									<p class="text-base font-medium text-stone-900 italic leading-relaxed">${res.usage}</p>
 								</div>
 
 								${res.cleaning ? `
 								<div class="pt-5 border-t border-stone-200/60">
-									<div class="text-[9px] font-black uppercase tracking-widest text-green-800 mb-2 sans opacity-60">Rensning</div>
+									<div class="text-[9px] font-black uppercase tracking-widest text-green-800 mb-2 sans opacity-60">${ui.detail_cleaning}</div>
 									<p class="text-sm text-stone-800 italic leading-relaxed">${res.cleaning}</p>
 								</div>
 								` : ''}
@@ -1667,7 +1667,7 @@
 								${res.preservation ? `
 								<div class="pt-5 border-t border-stone-200/60">
 									<div class="text-[9px] font-black uppercase tracking-widest text-green-800 mb-2 sans opacity-60">
-								        Opbevaring & Konservering
+								        ${ui.detail_usage_and_preservation}
 								    </div>
 								    <p class="text-sm text-stone-800 italic leading-relaxed mb-4">${res.preservation}</p>
 								    
@@ -1676,8 +1676,8 @@
 								        <div class="flex items-center gap-3">
 								            <span class="text-lg">🍯</span>
 								            <div class="text-left">
-								                <div class="text-[10px] font-black uppercase text-green-800 leading-none">Lær teknikkerne</div>
-								                <div class="text-xs text-stone-500 italic">Se guide til tørring, frysning og syltning</div>
+								                <div class="text-[10px] font-black uppercase text-green-800 leading-none">${ui.detail_learn_techniques}</div>
+								                <div class="text-xs text-stone-500 italic">{ui.detail_learn_techniques_guide}</div>
 								            </div>
 								        </div>
 								        <span class="text-green-800 text-xs">→</span>
@@ -1967,6 +1967,7 @@
     </script>
 </body>
 </html>
+
 
 
 
