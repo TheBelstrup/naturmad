@@ -1611,7 +1611,7 @@
 					<p class="text-amber-700 text-xs italic">${ui.detail_out_of_season}</p>
 				</div>
 			` : '';
-			//hertil
+
             document.getElementById('app-content').innerHTML = `
                 <div class="fade-in space-y-8 pb-10">
                     <div class="text-center">
@@ -1689,7 +1689,7 @@
                     </div>
 
                     <div class="card p-8 bg-stone-50 border-stone-100">
-                        <div class="id-label mb-4">Ekspert ID Nøgler</div>
+                        <div class="id-label mb-4">${ui.detail_expert_keys}</div>
                         <div class="space-y-5">
                             ${Object.entries(res.id_keys).map(([key, value]) => `
                                 <div>
@@ -1704,10 +1704,10 @@
                     <div class="p-8 rounded-[32px] ${res.twin.toxic ? 'bg-red-50 border-red-200' : 'bg-orange-50 border-orange-200'} border-2 shadow-sm">
                         <div class="flex items-center gap-4 mb-3">
 							${res.twin.toxic ? `
-                            <div class="w-15 h-10 px-2 rounded-full flex items-center justify-center bg-red-700 text-white font-bold">Giftig!</div>
+                            <div class="w-15 h-10 px-2 rounded-full flex items-center justify-center bg-red-700 text-white font-bold">${ui.detail_toxic}</div>
 							` : ''}
                             <div>
-                                <div class="text-[9px] font-black uppercase sans">Forveksling</div>
+                                <div class="text-[9px] font-black uppercase sans">${ui.detail_lookalike}</div>
                                 <div class="text-xl font-black text-stone-900 uppercase italic tracking-tighter sans">${res.twin.name}</div>
                             </div>
                         </div>
@@ -1716,16 +1716,16 @@
 					` : ''}
 
                     <div class="grid grid-cols-1 gap-3">
-                        <button onclick="window.open('https://www.google.com/search?tbm=isch&q=${encodeURIComponent(res.name + ' ' + res.latin)}', '_blank')" class="w-full p-6 bg-stone-900 text-white rounded-[24px] font-black text-[11px] uppercase tracking-widest text-center btn-active sans shadow-lg">Se billeder</button>
+                        <button onclick="window.open('https://www.google.com/search?tbm=isch&q=${encodeURIComponent(res.name + ' ' + res.latin)}', '_blank')" class="w-full p-6 bg-stone-900 text-white rounded-[24px] font-black text-[11px] uppercase tracking-widest text-center btn-active sans shadow-lg">${ui.detail_google_photos}</button>
                         ${hasTwin ? `
-                            <button onclick="window.open('https://www.google.com/search?tbm=isch&q=${encodeURIComponent(res.twin.name + ' identifikation')}', '_blank')" class="w-full p-6 border-2 border-red-700 text-red-700 rounded-[24px] font-black text-[11px] uppercase tracking-widest text-center btn-active sans shadow-lg">Tjek forveksling</button>
+                            <button onclick="window.open('https://www.google.com/search?tbm=isch&q=${encodeURIComponent(res.twin.name + ' identifikation')}', '_blank')" class="w-full p-6 border-2 border-red-700 text-red-700 rounded-[24px] font-black text-[11px] uppercase tracking-widest text-center btn-active sans shadow-lg">>${ui.detail_google_lookalike_photos}</button>
                         ` : ''}
                     </div>
 
 					<div class="mt-6">
 						<button onclick="handleSaveLocation('${id}', event)" 
 								class="w-full p-6 bg-green-800 text-white rounded-[24px] font-black text-[11px] uppercase tracking-widest text-center btn-active sans shadow-lg flex items-center justify-center gap-3">
-							<span>📍</span> Gem dette hemmelige sted
+							<span>📍</span> ${ui.detail_save_spot}
 						</button>
 						${mySpotsLink}
 					</div>
@@ -1967,6 +1967,7 @@
     </script>
 </body>
 </html>
+
 
 
 
