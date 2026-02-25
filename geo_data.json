@@ -13,7 +13,8 @@
         "activeHabitats": ["coast", "meadow", "forest"],
         "label": { "da": "Sjælland", "en": "Zealand", "de": "Seeland" }
       }
-    }
+    },
+    "poison_phone": "Giftslinjen: 82 12 12 12"
   },
   "UK": {
     "regions": {
@@ -21,6 +22,7 @@
         "activeHabitats": ["meadow", "forest"],
         "label": { "da": "Hele Storbritannien", "en": "United Kingdom", "de": "Vereinigtes Königreich" }
       }
-    }
+    },
+    "poison_phone": "NHS 111"
   }
 }
