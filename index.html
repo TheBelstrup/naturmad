@@ -414,7 +414,7 @@
 		async function handleCountryChange(countryCode, shouldRender = true) {
 		    // 1. Opdater indstillingerne for land
 		    userSettings.country = countryCode;
-		
+
 		    // 2. Hent geografiske data for det valgte land fra geoData
 		    const countryConfig = geoData[countryCode];
 		    		
@@ -1718,7 +1718,7 @@
                     <div class="grid grid-cols-1 gap-3">
                         <button onclick="window.open('https://www.google.com/search?tbm=isch&q=${encodeURIComponent(res.name + ' ' + res.latin)}', '_blank')" class="w-full p-6 bg-stone-900 text-white rounded-[24px] font-black text-[11px] uppercase tracking-widest text-center btn-active sans shadow-lg">${ui.detail_google_photos}</button>
                         ${hasTwin ? `
-                            <button onclick="window.open('https://www.google.com/search?tbm=isch&q=${encodeURIComponent(res.twin.name + ' identifikation')}', '_blank')" class="w-full p-6 border-2 border-red-700 text-red-700 rounded-[24px] font-black text-[11px] uppercase tracking-widest text-center btn-active sans shadow-lg">>${ui.detail_google_lookalike_photos}</button>
+                            <button onclick="window.open('https://www.google.com/search?tbm=isch&q=${encodeURIComponent(res.twin.name + ' ${ui.detail_lookalike_identification}')}', '_blank')" class="w-full p-6 border-2 border-red-700 text-red-700 rounded-[24px] font-black text-[11px] uppercase tracking-widest text-center btn-active sans shadow-lg">>${ui.detail_google_lookalike_photos}</button>
                         ` : ''}
                     </div>
 
@@ -1738,12 +1738,12 @@
         function renderSafety() {
             document.getElementById('app-content').innerHTML = `
                 <div class="fade-in space-y-6">
-                    <h2 class="text-3xl font-black text-red-700 italic uppercase tracking-tighter sans leading-none">Sikkerhed</h2>
+                    <h2 class="text-3xl font-black text-red-700 italic uppercase tracking-tighter sans leading-none">${ui.safety}</h2>
                     <div class="card p-8 space-y-6 border-red-100">
-                        <p class="italic text-stone-600 font-medium">1. Er du ikke 100% sikker, så lad den stå. Der findes ingen små fejl, når det gælder giftige arter.</p>
-                        <p class="italic text-stone-600 font-medium">2. Spis aldrig planter eller svampe fundet tæt på store veje eller industri.</p>
-                        <p class="italic text-stone-600 font-medium">3. Gem altid et lille råt eksemplar af det du spiser, i tilfælde af sygdom.</p>
-                        <div class="p-5 bg-red-700 text-white rounded-2xl text-center font-black sans uppercase text-sm shadow-lg">Giftslinjen: 82 12 12 12</div>
+                        <p class="italic text-stone-600 font-medium">${ui.safety_1}</p>
+                        <p class="italic text-stone-600 font-medium">${ui.safety_2}</p>
+                        <p class="italic text-stone-600 font-medium">${ui.safety_3}</p>
+                        <div class="p-5 bg-red-700 text-white rounded-2xl text-center font-black sans uppercase text-sm shadow-lg">${geoData[userSettings.country].poison_phone}</div>
                     </div>
                 </div>
             `;
@@ -1778,9 +1778,9 @@
                     <h2 class="text-2xl font-black italic sans text-stone-900">${title}</h2>
                     <p class="text-stone-600 italic px-4 font-medium">${desc}</p>
                     <div class="grid grid-cols-1 gap-3">${options}</div>
-                    <button onclick="navigate('start')" class="mt-4 text-[10px] uppercase font-bold text-stone-600 tracking-widest">Afbryd</button>
+                    <button onclick="navigate('start')" class="mt-4 text-[10px] uppercase font-bold text-stone-600 tracking-widest">${ui.abort]</button>
                 </div>`;
-                
+            //hertil
 			//Template for Option
             const btn = (index, text, text_more) => `
                 <button onclick="handleWizardChoice(${index})" class="p-6 card bg-white border border-stone-100 shadow-sm flex flex-col items-start btn-active group">
@@ -1967,6 +1967,7 @@
     </script>
 </body>
 </html>
+
 
 
 
