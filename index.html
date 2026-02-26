@@ -946,15 +946,15 @@
 							</div>							
 		                    <p class="text-xs text-gray-500 mb-2 font-sans">${new Date(spot.timestamp).toLocaleDateString()}</p>
 		                    <div class="flex flex-col gap-2">
-		                        <button onclick="navigate('view_spot', { spotId: '${spot.uid}' })" class="bg-emerald-600 text-white px-3 py-2 rounded text-xs font-bold">${ui.map_show_spot}</button>
-								<div class="grid grid-cols-2 gap-1.5">
-							        <button onclick="navigate('${spot.resId}')" class="border border-stone-300 bg-stone-50 text-stone-600 px-2 py-2 rounded text-[10px] font-bold uppercase tracking-wide flex items-center justify-center gap-1">
-							            ${ui.map_plant_info}
-							        </button>
-							        <button onclick="window.open('https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}', '_blank')" class="border border-blue-200 bg-blue-50 text-blue-700 px-2 py-2 rounded text-[10px] font-bold uppercase tracking-wide flex items-center justify-center gap-1">
-							            ${ui.spot_get_directions}
-							        </button>
-							    </div>
+		                        <button onclick="navigate('view_spot', { spotId: '${spot.uid}' })" class="bg-emerald-600 text-white px-3 py-2 rounded text-xs font-bold">
+									${ui.map_show_spot}
+								</button>
+								<button onclick="navigate('${spot.resId}')" class="border border-stone-300 bg-stone-50 text-stone-600 px-2 py-2 rounded text-[10px] font-bold uppercase tracking-wide flex items-center justify-center gap-1">
+									${ui.map_plant_info}
+								</button>
+								<button onclick="window.open('https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}', '_blank')" class="border border-blue-200 bg-blue-50 text-blue-700 px-2 py-2 rounded text-[10px] font-bold uppercase tracking-wide flex items-center justify-center gap-1">
+									${ui.spot_get_directions}
+								</button>
 		                    </div>
 		                </div>
 		            `);
@@ -1164,7 +1164,7 @@
 		    }
 
 			const title = filterId && processedSpots.length > 0 
-			        ? `${ui.spot_finds_of} ${ui.of} ${processedSpots[0].info.name} 📍` 
+			        ? `${ui.spot_finds_of} ${processedSpots[0].info.name} 📍` 
 			        : `${ui.my_spots} 📍`;
 			
 			container.innerHTML = `
@@ -1973,6 +1973,7 @@
     </script>
 </body>
 </html>
+
 
 
 
