@@ -1780,7 +1780,7 @@
                     <div class="grid grid-cols-1 gap-3">${options}</div>
                     <button onclick="navigate('start')" class="mt-4 text-[10px] uppercase font-bold text-stone-600 tracking-widest">${ui.abort}</button>
                 </div>`;
-            //hertil
+
 			//Template for Option
             const btn = (index, text, text_more) => `
                 <button onclick="handleWizardChoice(${index})" class="p-6 card bg-white border border-stone-100 shadow-sm flex flex-col items-start btn-active group">
@@ -1792,24 +1792,24 @@
 			const renderWarning = (text) => `
 				<div class="fade-in p-8 bg-red-50 border-4 border-red-700 rounded-[32px] text-center space-y-6 shadow-xl">
 					<div class="text-6xl">⚠️</div>
-					<h3 class="text-3xl font-black text-red-700 uppercase sans tracking-tighter">Advarsel</h3>
+					<h3 class="text-3xl font-black text-red-700 uppercase sans tracking-tighter">${ui.warning}</h3>
 					<p class="font-bold text-red-900 text-lg leading-relaxed">${text}</p>
-					<button onclick="navigate('start')" class="w-full p-5 bg-red-700 hover:bg-red-800 text-white rounded-2xl font-bold mt-4 sans uppercase tracking-widest transition-colors shadow-lg">Afslut</button>
+					<button onclick="navigate('start')" class="w-full p-5 bg-red-700 hover:bg-red-800 text-white rounded-2xl font-bold mt-4 sans uppercase tracking-widest transition-colors shadow-lg">${ui.close}</button>
 				</div>`;
 
 			// Template for Notices (Dead ends)
 			const renderNotice = (text) => `
 				<div class="fade-in p-8 bg-amber-50 border-4 border-amber-700 rounded-[32px] text-center space-y-6 shadow-xl">
 					<div class="text-6xl">✋</div>
-					<h3 class="text-3xl font-black text-amber-700 uppercase sans tracking-tighter">Bemærk</h3>
+					<h3 class="text-3xl font-black text-amber-700 uppercase sans tracking-tighter">${ui.notice}</h3>
 					<p class="font-bold text-amber-900 text-lg leading-relaxed">${text}</p>
-					<button onclick="navigate('start')" class="w-full p-5 bg-amber-700 hover:bg-amber-800 text-white rounded-2xl font-bold mt-4 sans uppercase tracking-widest transition-colors shadow-lg">Forstået</button>
+					<button onclick="navigate('start')" class="w-full p-5 bg-amber-700 hover:bg-amber-800 text-white rounded-2xl font-bold mt-4 sans uppercase tracking-widest transition-colors shadow-lg">${ui.understood}</button>
 				</div>`;
 		
 			if (!node || node === 'START') {
-				content = wrap("Sikkerheds-tjek", "Kig helt nede ved jorden. Sidder stokken i en 'pose' eller knold, og er der en ring på stokken?", `
-					<button onclick="navigate('wizard', 'STOP_POISON')" class="p-5 card bg-red-700 text-white font-black sans uppercase btn-active">JA - POSE & RING</button>
-					<button onclick="navigate('wizard', 'PROCEED')" class="p-5 card bg-green-700 text-white font-black sans uppercase btn-active">NEJ - INGEN POSE & RING</button>
+				content = wrap(`${ui.wizard}`, `${ui.wizard_observe}`, `
+					<button onclick="navigate('wizard', 'STOP_POISON')" class="p-5 card bg-red-700 text-white font-black sans uppercase btn-active">${ui.wizard_observe_yes}</button>
+					<button onclick="navigate('wizard', 'PROCEED')" class="p-5 card bg-green-700 text-white font-black sans uppercase btn-active">${ui.wizard_observe_no}</button>
 				`); 
 
 				document.getElementById('app-content').innerHTML = content;
@@ -1817,7 +1817,7 @@
 				return;
 			}
 			else if (node === 'STOP_POISON') {
-				content = `<div class="fade-in p-8 bg-red-50 border-4 border-red-700 rounded-[32px] text-center space-y-4"><h3 class="text-3xl font-black text-red-700 uppercase sans">STOP!</h3><p class="font-bold text-red-900 italic">Dette er kendetegn for dødelige Fluesvampe.</p><button onclick="navigate('start')" class="w-full p-4 bg-red-700 text-white rounded-2xl font-bold mt-4 sans uppercase">Afslut</button></div>`; 
+				content = `<div class="fade-in p-8 bg-red-50 border-4 border-red-700 rounded-[32px] text-center space-y-4"><h3 class="text-3xl font-black text-red-700 uppercase sans">${ui.wizard_stop}</h3><p class="font-bold text-red-900 italic">${ui.wizard_stop_description}</p><button onclick="navigate('start')" class="w-full p-4 bg-red-700 text-white rounded-2xl font-bold mt-4 sans uppercase">${ui.abort}</button></div>`; 
 
 				document.getElementById('app-content').innerHTML = content;
 				window.scrollTo(0,0);
@@ -1849,20 +1849,21 @@
 
 				// Use node.prompt for title, and node.description for instructions
 				content = wrap(
-					node.prompt || "Vælg venligst:", 
+					node.prompt || `${ui.wizard_please_choose}:`, 
 					node.description || "", 
 					optionsHtml
 				);
 			} 
 			else {
 				// Fallback
-				content = `<div class="text-center py-10"><p>Der skete en fejl.</p><button onclick="navigate('start')">Genstart</button></div>`;
+				content = `<div class="text-center py-10"><p>${ui.wizard_error}</p><button onclick="navigate('start')">${ui.wizard_restart}</button></div>`;
 			}
             document.getElementById('app-content').innerHTML = content;
             window.scrollTo(0,0);
         }
 		
         function navigate(pageId, data = null) {
+			//hertil
 			closeMenuIfOpen();
 			
 		    // Gemmer tilstanden i browserens historik
@@ -1967,6 +1968,7 @@
     </script>
 </body>
 </html>
+
 
 
 
