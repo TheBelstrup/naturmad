@@ -122,9 +122,21 @@
     "safety_3": "3. Gem altid et lille råt eksemplar af det du spiser, i tilfælde af sygdom.",
     "abort": "Afbryd",
     "cancel": "Annullér",
+    "notice": "Bemærk",
+    "understood": "Forstået",
     "go_to_home": "Gå til forsiden",
     "close": "Luk",
-    "unknown": "Ukendt"
+    "unknown": "Ukendt",
+    "warning": "Advarsel",
+    "wizard": "Sikkerheds-tjek",
+    "wizard_observe": "Kig helt nede ved jorden. Sidder stokken i en 'pose' eller knold, og er der en ring på stokken?",
+    "wizard_observe_yes": "JA - POSE & RING",
+    "wizard_observe_no": "NEJ - INGEN POSE & RING",
+    "wizard_stop": "STOP!",
+    "wizard_stop_description": "Dette er kendetegn for dødelige Fluesvampe.",
+    "wizard_please_choose": "Vælg venligst",
+    "wizard_error": "Der skete en fejl",
+    "wizard_restart": "Genstart"
   },
   "en": {
     "menu_home": "Home",
@@ -247,8 +259,20 @@
     "safety_3": "3. Always save a small raw sample of what you eat, in case of illness.",
     "abort": "Cancel",
     "cancel": "Cancel",
+    "notice": "Please Note",
+    "understood": "Understood",
     "go_to_home": "Go to home page",
     "close": "Close",
-    "unknown": "Unknown"
+    "unknown": "Unknown",
+    "warning": "Warning",
+    "wizard": "Safety check",
+    "wizard_observe": "Look down at the ground. Is the base of the stem in a 'bag' or cup, and is there a ring on the stem?",
+    "wizard_observe_yes": "YES - BAG & RING",
+    "wizard_observe_no": "NO - NO BAG & RING",
+    "wizard_stop": "STOP!",
+    "wizard_stop_description": "These are characteristics of deadly fly agaric mushrooms.",
+    "wizard_please_choose": "Please choose",
+    "wizard_error": "An error occurred",
+    "wizard_restart": "Restart"
   }
 }
