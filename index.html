@@ -588,7 +588,7 @@
 		            <button onclick="navigate('my-spots')" class="w-full text-left py-3 px-3 flex items-center gap-3 bg-white rounded-xl">
 		                <span class="text-lg">📍</span> 
 		                <div class="flex flex-col text-emerald-900">
-		                    <span data-i18n="my_spots" class="font-bold text-sm">Mine Fund</span>
+		                    <span class="font-bold text-sm">${ui.my_spots}</span>
 		                </div>
 		                ${countBadge}
 		            </button>
@@ -983,7 +983,7 @@
 		            <div class="p-6 flex justify-between items-center border-b">
 		                <div>
 		                    <h3 class="font-black uppercase italic tracking-tighter leading-none">${ui.spot_editor_set_location}</h3>
-		                    <p class="text-[10px] text-stone-400 font-bold uppercase mt-1">${name}</p>
+		                    <p class="text-[10px] text-stone-400 font-bold uppercase mt-1">${database[id].name}</p>
 		                </div>
 		                <button onclick="closeLocationEditor()" class="text-stone-400 font-bold text-sm">${ui.cancel}</button>
 		            </div>
@@ -1157,7 +1157,7 @@
 		    }
 
 			const title = filterId && processedSpots.length > 0 
-			        ? `${ui.spot_finds_of} af ${processedSpots[0].info.name} 📍` 
+			        ? `${ui.spot_finds_of} ${ui.of} ${processedSpots[0].info.name} 📍` 
 			        : `${ui.my_spots} 📍`;
 			
 			container.innerHTML = `
@@ -1624,7 +1624,7 @@
 					${res.months && res.months.length > 0 ? `
                     <div class="card p-6 border-stone-100">
                         <div class="id-label mb-2 flex justify-between items-center">
-                            <span>Sæson</span>
+                            <span>${ui.detail_season}</span>
                             <span class="text-stone-600">${
 								res.months && res.months.length > 0 
 									? `${res.months[0].toUpperCase()} - ${res.months[res.months.length - 1].toUpperCase()}`
@@ -1720,7 +1720,7 @@
                     <div class="grid grid-cols-1 gap-3">
                         <button onclick="window.open('https://www.google.com/search?tbm=isch&q=${encodeURIComponent(res.name + ' ' + res.latin)}', '_blank')" class="w-full p-6 bg-stone-900 text-white rounded-[24px] font-black text-[11px] uppercase tracking-widest text-center btn-active sans shadow-lg">${ui.detail_google_photos}</button>
                         ${hasTwin ? `
-                            <button onclick="window.open('https://www.google.com/search?tbm=isch&q=${encodeURIComponent(res.twin.name + ' ${ui.detail_lookalike_identification}')}', '_blank')" class="w-full p-6 border-2 border-red-700 text-red-700 rounded-[24px] font-black text-[11px] uppercase tracking-widest text-center btn-active sans shadow-lg">>${ui.detail_google_lookalike_photos}</button>
+                            <button onclick="window.open('https://www.google.com/search?tbm=isch&q=${encodeURIComponent(res.twin.name + ' ${ui.detail_lookalike_identification}')}', '_blank')" class="w-full p-6 border-2 border-red-700 text-red-700 rounded-[24px] font-black text-[11px] uppercase tracking-widest text-center btn-active sans shadow-lg">${ui.detail_google_lookalike_photos}</button>
                         ` : ''}
                     </div>
 
@@ -1954,3 +1954,4 @@
     </script>
 </body>
 </html>
+
