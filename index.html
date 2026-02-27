@@ -8,8 +8,10 @@
     <meta name="theme-color" content="#064e3b">
     <title>Wildly</title>
 	<link rel="manifest" href="manifest.json">
-	/* Interaktivt kort */
+
+	<!--Interaktivt kort-->
 	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
 	<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script> 
 	<script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -95,11 +97,23 @@
 
 		.floating-save-btn {
 		    position: fixed;
-		    bottom: 30px;
-		    right: 20px;
+		    bottom: 90px;
+		    left: 50%;
+		    transform: translateX(-50%); /* Centrerer knappen præcis */
 		    z-index: 100;
 		    box-shadow: 0 10px 25px -5px rgba(6, 78, 59, 0.4);
 		    animation: pop-in 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+		    display: flex;
+		    align-items: center;
+		    gap: 8px;
+		    padding: 12px 20px;
+		    background-color: #064e3b; /* Emerald 900 */
+		    color: white;
+		    border-radius: 9999px;
+		    border: 2px solid white;
+		    font-weight: bold;
+		    font-family: sans-serif;
+		    font-size: 14px;
 		}
 		
 		@keyframes pop-in {
@@ -1107,10 +1121,21 @@
 		// Håndterer "Gem"-knappen
 		async function handleSaveLocation(id, e) {
 		    try {
-		        const btn = e.currentTarget;
-				const originalContent = btn.innerHTML;
-		        btn.innerHTML = ui.spot_finding_location;
-		        const location = await getPreciseLocation();
+				const spinnerSvg = `
+		            <svg class="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+		                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+		                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+		            </svg>`;
+		
+		        // Hvis det er en bred knap (fx den i bunden), vis tekst + ikon
+		        if (btn.classList.contains('w-full')) {
+		            btn.innerHTML = `<div class="flex items-center justify-center gap-2">${spinnerSvg} <span>${ui.spot_finding_location}</span></div>`;
+		        } else {
+		            // Hvis det er en lille knap (FAB eller quick-save), vis kun ikonet
+		            btn.innerHTML = spinnerSvg;
+		        }
+				
+				const location = await getPreciseLocation();
 		        
 		        // Åbner editoren og sender ID med
 		        showLocationEditor(id, location);
@@ -1649,11 +1674,11 @@
 			` : '';
 
             document.getElementById('app-content').innerHTML = `
-		        <button onclick="handleSaveLocation('${id}', event)" 
-		                class="floating-save-btn w-14 h-14 bg-green-800 text-white rounded-full flex items-center justify-center text-xl shadow-2xl active:scale-90 transition-transform border-4 border-white">
-		            📍
-		        </button>
-		
+				<button onclick="handleSaveLocation('${id}', event)" class="floating-save-btn active:scale-95">
+				    <span>📍</span>
+				    <span>${ui.detail_save_spot}</span>
+				</button>
+				
 				<div class="fade-in space-y-8 pb-10">
                     <div class="text-center">
                         <span class="type-badge badge-${res.type} mb-3 inline-block">${res.type}</span>
@@ -1993,6 +2018,7 @@
     </script>
 </body>
 </html>
+
 
 
 
