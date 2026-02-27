@@ -104,7 +104,9 @@
 		    box-shadow: 0 10px 25px -5px rgba(6, 78, 59, 0.4);
 		    animation: pop-in 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 		    display: flex;
-		    align-items: center;
+			min-width: 140px;
+		    justify-content: center;			
+			align-items: center;
 		    gap: 8px;
 		    padding: 12px 20px;
 		    background-color: #064e3b; /* Emerald 900 */
@@ -1119,8 +1121,15 @@
 		};
 
 		// Håndterer "Gem"-knappen
-		async function handleSaveLocation(id, e) {
-		    try {
+		async function handleSaveLocation(id, btn) {
+			if (btn.disabled) return;
+			const originalContent = btn.innerHTML;
+    		const originalWidth = btn.offsetWidth;
+			
+			btn.style.width = originalWidth + 'px';
+    		btn.disabled = true;
+		
+			try {
 				const btn = e.currentTarget;
         		const originalContent = btn.innerHTML;
 				
@@ -1130,7 +1139,7 @@
 		                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
 		            </svg>`;
 		
-				btn.innerHTML = `<div class="flex items-center justify-center gap-2">${spinnerSvg} <span>${ui.spot_finding_location}</span></div>`;
+				btn.innerHTML = spinnerSvg;
 				
 				const location = await getPreciseLocation();
 		        
@@ -1138,8 +1147,13 @@
 		        showLocationEditor(id, location);
 		        
 		        btn.innerHTML = originalContent;
-		    } catch (error) {
-		        alert(ui.spot_gps_error + " " + error.message);
+			} catch (error) {
+		        console.error(error);
+		        alert((ui.spot_gps_error) + " " + error.message);
+		    } finally {
+		        btn.innerHTML = originalContent;
+		        btn.style.width = '';
+		        btn.disabled = false;
 		    }
 		}
 
@@ -1671,7 +1685,7 @@
 			` : '';
 
             document.getElementById('app-content').innerHTML = `
-				<button onclick="handleSaveLocation('${id}', event)" class="floating-save-btn active:scale-95">
+				<button onclick="handleSaveLocation('${id}', this)" class="floating-save-btn active:scale-95">
 				    <span>📍</span>
 				    <span>${ui.detail_save_spot}</span>
 				</button>
@@ -2007,6 +2021,7 @@
     </script>
 </body>
 </html>
+
 
 
 
