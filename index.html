@@ -1121,19 +1121,16 @@
 		// Håndterer "Gem"-knappen
 		async function handleSaveLocation(id, e) {
 		    try {
+				const btn = e.currentTarget;
+        		const originalContent = btn.innerHTML;
+				
 				const spinnerSvg = `
 		            <svg class="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
 		                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
 		                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
 		            </svg>`;
 		
-		        // Hvis det er en bred knap (fx den i bunden), vis tekst + ikon
-		        if (btn.classList.contains('w-full')) {
-		            btn.innerHTML = `<div class="flex items-center justify-center gap-2">${spinnerSvg} <span>${ui.spot_finding_location}</span></div>`;
-		        } else {
-		            // Hvis det er en lille knap (FAB eller quick-save), vis kun ikonet
-		            btn.innerHTML = spinnerSvg;
-		        }
+				btn.innerHTML = `<div class="flex items-center justify-center gap-2">${spinnerSvg} <span>${ui.spot_finding_location}</span></div>`;
 				
 				const location = await getPreciseLocation();
 		        
@@ -1788,14 +1785,6 @@
                         ` : ''}
                     </div>
 
-					<div class="mt-6">
-						<button onclick="handleSaveLocation('${id}', event)" 
-								class="w-full p-6 bg-stone-100 text-green-800 border-2 border-green-800 rounded-[24px] font-black text-[11px] uppercase tracking-widest text-center btn-active sans flex items-center justify-center gap-3">
-							<span>📍</span> ${ui.detail_save_spot}
-						</button>
-						${mySpotsLink}
-					</div>
-
 					${renderNaturbasenLink(res.naturbasen)}
                 </div>
             `;
@@ -2018,6 +2007,7 @@
     </script>
 </body>
 </html>
+
 
 
 
