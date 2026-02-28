@@ -11,6 +11,7 @@
         "aug",
         "sep"
       ],
+      "no_twin": true,
       "twin": {
         "toxic": false
       },
@@ -38,6 +39,7 @@
         "jun",
         "jul"
       ],
+      "no_twin": false,
       "twin": {
         "toxic": false
       },
@@ -64,6 +66,7 @@
         "maj",
         "jun"
       ],
+      "no_twin": false,
       "twin": {
         "toxic": true
       },
@@ -93,6 +96,7 @@
         "apr",
         "maj"
       ],
+      "no_twin": true,
       "twin": {
         "toxic": false
       },
@@ -124,6 +128,7 @@
         "aug",
         "sep"
       ],
+      "no_twin": false,
       "twin": {
         "toxic": false
       },
@@ -151,6 +156,7 @@
         "jun",
         "jul"
       ],
+      "no_twin": true,
       "twin": {
         "toxic": false
       },
@@ -181,6 +187,7 @@
         "sep",
         "okt"
       ],
+      "no_twin": false,
       "twin": {
         "toxic": false
       },
@@ -216,6 +223,7 @@
         "okt",
         "nov"
       ],
+      "no_twin": false,
       "twin": {
         "toxic": true
       },
@@ -250,6 +258,7 @@
         "nov",
         "dec"
       ],
+      "no_twin": false,
       "twin": {
         "toxic": true
       },
@@ -282,6 +291,7 @@
         "maj",
         "jun"
       ],
+      "no_twin": false,
       "twin": {
         "toxic": true
       },
@@ -313,6 +323,7 @@
         "jun",
         "jul"
       ],
+      "no_twin": false,
       "twin": {
         "toxic": true
       },
@@ -346,6 +357,7 @@
         "aug",
         "sep"
       ],
+      "no_twin": false,
       "twin": {
         "toxic": true
       },
@@ -375,6 +387,7 @@
         "maj",
         "jun"
       ],
+      "no_twin": false,
       "twin": {
         "toxic": false
       },
@@ -404,6 +417,7 @@
         "sep",
         "okt"
       ],
+      "no_twin": true,
       "twin": {
         "toxic": false
       },
@@ -430,6 +444,7 @@
         "apr",
         "maj"
       ],
+      "no_twin": true,
       "twin": {
         "toxic": false
       },
@@ -457,6 +472,7 @@
         "sep",
         "okt"
       ],
+      "no_twin": true,
       "twin": {
         "toxic": false
       },
@@ -485,6 +501,7 @@
         "maj",
         "jun"
       ],
+      "no_twin": true,
       "twin": {
         "toxic": false
       },
@@ -513,6 +530,7 @@
         "aug",
         "sep"
       ],
+      "no_twin": true,
       "twin": {
         "toxic": false
       },
@@ -540,6 +558,7 @@
         "jun",
         "jul"
       ],
+      "no_twin": true,
       "twin": {
         "toxic": false
       },
@@ -568,6 +587,7 @@
         "jul",
         "aug"
       ],
+      "no_twin": false,
       "twin": {
         "toxic": false
       },
@@ -605,6 +625,7 @@
         "nov",
         "dec"
       ],
+      "no_twin": false,
       "twin": {
         "toxic": true
       },
@@ -635,6 +656,7 @@
         "maj",
         "jun"
       ],
+      "no_twin": false,
       "twin": {
         "toxic": false
       },
@@ -665,6 +687,7 @@
         "sep",
         "okt"
       ],
+      "no_twin": false,
       "twin": {
         "toxic": false
       },
@@ -694,6 +717,7 @@
         "aug",
         "sep"
       ],
+      "no_twin": true,
       "twin": {
         "toxic": false
       },
@@ -723,6 +747,7 @@
         "sep",
         "okt"
       ],
+      "no_twin": false,
       "twin": {
         "toxic": true
       },
@@ -752,6 +777,7 @@
         "sep",
         "okt"
       ],
+      "no_twin": false,
       "twin": {
         "toxic": false
       },
@@ -779,6 +805,7 @@
         "nov",
         "dec"
       ],
+      "no_twin": true,
       "twin": {
         "toxic": false
       },
@@ -807,6 +834,7 @@
         "maj",
         "jun"
       ],
+      "no_twin": false,
       "twin": {
         "toxic": false
       },
@@ -836,6 +864,7 @@
         "aug",
         "sep"
       ],
+      "no_twin": true,
       "twin": {
         "toxic": false
       },
@@ -863,6 +892,7 @@
         "maj",
         "jun"
       ],
+      "no_twin": true,
       "twin": {
         "toxic": false
       },
@@ -892,6 +922,7 @@
         "sep",
         "okt"
       ],
+      "no_twin": false,
       "twin": {
         "toxic": true
       },
@@ -925,6 +956,7 @@
         "jul",
         "aug"
       ],
+      "no_twin": true,
       "twin": {
         "toxic": false
       },
@@ -952,6 +984,7 @@
         "jun",
         "jul"
       ],
+      "no_twin": true,
       "twin": {
         "toxic": false
       },
@@ -982,6 +1015,7 @@
         "aug",
         "sep"
       ],
+      "no_twin": false,
       "twin": {
         "toxic": false
       },
@@ -1010,6 +1044,7 @@
         "sep",
         "okt"
       ],
+      "no_twin": true,
       "twin": {
         "toxic": false
       },
@@ -1038,6 +1073,7 @@
         "aug",
         "sep"
       ],
+      "no_twin": true,
       "twin": {
         "toxic": false
       },
@@ -1065,6 +1101,7 @@
         "aug",
         "sep"
       ],
+      "no_twin": true,
       "twin": {
         "toxic": false
       },
@@ -1095,6 +1132,7 @@
         "okt",
         "nov"
       ],
+      "no_twin": false,
       "twin": {
         "toxic": false
       },
@@ -1128,6 +1166,7 @@
         "sep",
         "okt"
       ],
+      "no_twin": false,
       "twin": {
         "toxic": false
       },
@@ -1154,6 +1193,7 @@
         "okt",
         "nov"
       ],
+      "no_twin": false,
       "twin": {
         "toxic": false
       },
@@ -1185,6 +1225,7 @@
         "sep",
         "okt"
       ],
+      "no_twin": false,
       "twin": {
         "toxic": false
       },
@@ -1218,6 +1259,7 @@
         "okt",
         "nov"
       ],
+      "no_twin": false,
       "twin": {
         "toxic": false
       },
@@ -1251,6 +1293,7 @@
         "sep",
         "okt"
       ],
+      "no_twin": false,
       "twin": {
         "toxic": false
       },
@@ -1282,6 +1325,7 @@
         "sep",
         "okt"
       ],
+      "no_twin": false,
       "twin": {
         "toxic": false
       },
@@ -1313,6 +1357,7 @@
         "sep",
         "okt"
       ],
+      "no_twin": false,
       "twin": {
         "toxic": false
       },
@@ -1345,6 +1390,7 @@
         "sep",
         "okt"
       ],
+      "no_twin": false,
       "twin": {
         "toxic": false
       },
@@ -1377,6 +1423,7 @@
         "maj",
         "jun"
       ],
+      "no_twin": false,
       "twin": {
         "toxic": true
       },
@@ -1409,6 +1456,7 @@
         "apr",
         "maj"
       ],
+      "no_twin": false,
       "twin": {
         "toxic": false
       },
@@ -1440,6 +1488,7 @@
         "apr",
         "maj"
       ],
+      "no_twin": false,
       "twin": {
         "toxic": true
       },
@@ -1471,6 +1520,7 @@
         "apr",
         "maj"
       ],
+      "no_twin": false,
       "twin": {
         "toxic": false
       },
@@ -1502,6 +1552,7 @@
         "apr",
         "maj"
       ],
+      "no_twin": false,
       "twin": {
         "toxic": false
       },
@@ -1533,6 +1584,7 @@
         "apr",
         "maj"
       ],
+      "no_twin": false,
       "twin": {
         "toxic": false
       },
@@ -1567,6 +1619,7 @@
         "sep",
         "okt"
       ],
+      "no_twin": false,
       "twin": {
         "toxic": true
       },
@@ -1601,6 +1654,7 @@
         "sep",
         "okt"
       ],
+      "no_twin": false,
       "twin": {
         "toxic": false
       },
@@ -1633,6 +1687,7 @@
         "sep",
         "okt"
       ],
+      "no_twin": false,
       "twin": {
         "toxic": false
       },
@@ -1665,6 +1720,7 @@
         "jul",
         "aug"
       ],
+      "no_twin": false,
       "twin": {
         "toxic": false
       },
@@ -1699,6 +1755,7 @@
         "sep",
         "okt"
       ],
+      "no_twin": false,
       "twin": {
         "toxic": false
       },
@@ -1730,6 +1787,7 @@
         "sep",
         "okt"
       ],
+      "no_twin": false,
       "twin": {
         "toxic": false
       },
@@ -1764,6 +1822,7 @@
         "okt",
         "nov"
       ],
+      "no_twin": false,
       "twin": {
         "toxic": false
       },
@@ -1796,6 +1855,7 @@
         "sep",
         "okt"
       ],
+      "no_twin": false,
       "twin": {
         "toxic": false
       },
@@ -1828,6 +1888,7 @@
         "okt",
         "nov"
       ],
+      "no_twin": false,
       "twin": {
         "toxic": false
       },
@@ -1863,6 +1924,7 @@
         "okt",
         "nov"
       ],
+      "no_twin": false,
       "twin": {
         "toxic": false
       },
@@ -1896,6 +1958,7 @@
         "okt",
         "nov"
       ],
+      "no_twin": false,
       "twin": {
         "toxic": false
       },
@@ -1930,6 +1993,7 @@
         "sep",
         "okt"
       ],
+      "no_twin": false,
       "twin": {
         "toxic": false
       },
@@ -1963,6 +2027,7 @@
         "sep",
         "okt"
       ],
+      "no_twin": false,
       "twin": {
         "toxic": false
       },
@@ -1995,6 +2060,7 @@
         "sep",
         "okt"
       ],
+      "no_twin": false,
       "twin": {
         "toxic": false
       },
@@ -2028,6 +2094,7 @@
         "sep",
         "okt"
       ],
+      "no_twin": true,
       "twin": {
         "toxic": false
       },
@@ -2060,6 +2127,7 @@
         "sep",
         "okt"
       ],
+      "no_twin": false,
       "twin": {
         "toxic": false
       },
@@ -2091,6 +2159,7 @@
         "aug",
         "sep"
       ],
+      "no_twin": false,
       "twin": {
         "toxic": false
       },
@@ -2124,6 +2193,7 @@
         "sep",
         "okt"
       ],
+      "no_twin": false,
       "twin": {
         "toxic": false
       },
@@ -2157,6 +2227,7 @@
         "sep",
         "okt"
       ],
+      "no_twin": false,
       "twin": {
         "toxic": false
       },
@@ -2188,6 +2259,7 @@
         "sep",
         "okt"
       ],
+      "no_twin": false,
       "twin": {
         "toxic": false
       },
@@ -2220,6 +2292,7 @@
         "sep",
         "okt"
       ],
+      "no_twin": false,
       "twin": {
         "toxic": false
       },
@@ -2253,6 +2326,7 @@
         "sep",
         "okt"
       ],
+      "no_twin": false,
       "twin": {
         "toxic": false
       },
@@ -2286,6 +2360,7 @@
         "sep",
         "okt"
       ],
+      "no_twin": false,
       "twin": {
         "toxic": false
       },
@@ -2319,6 +2394,7 @@
         "okt",
         "nov"
       ],
+      "no_twin": false,
       "twin": {
         "toxic": false
       },
@@ -2351,6 +2427,7 @@
         "okt",
         "nov"
       ],
+      "no_twin": false,
       "twin": {
         "toxic": false
       },
@@ -2384,6 +2461,7 @@
         "okt",
         "nov"
       ],
+      "no_twin": false,
       "twin": {
         "toxic": false
       },
@@ -2417,6 +2495,7 @@
         "okt",
         "nov"
       ],
+      "no_twin": false,
       "twin": {
         "toxic": true
       },
@@ -2448,6 +2527,7 @@
         "okt",
         "nov"
       ],
+      "no_twin": false,
       "twin": {
         "toxic": false
       },
@@ -2483,6 +2563,7 @@
         "sep",
         "okt"
       ],
+      "no_twin": true,
       "twin": {
         "toxic": false
       },
@@ -2516,6 +2597,7 @@
         "okt",
         "nov"
       ],
+      "no_twin": false,
       "twin": {
         "toxic": false
       },
@@ -2549,6 +2631,7 @@
         "okt",
         "nov"
       ],
+      "no_twin": false,
       "twin": {
         "toxic": false
       },
@@ -2583,6 +2666,7 @@
         "jan",
         "feb"
       ],
+      "no_twin": false,
       "twin": {
         "toxic": false
       },
@@ -2615,6 +2699,7 @@
         "aug",
         "sep"
       ],
+      "no_twin": false,
       "twin": {
         "toxic": true
       },
@@ -2648,6 +2733,7 @@
         "okt",
         "nov"
       ],
+      "no_twin": true,
       "twin": {
         "toxic": false
       },
@@ -2681,6 +2767,7 @@
         "aug",
         "sep"
       ],
+      "no_twin": true,
       "twin": {
         "toxic": false
       },
@@ -2721,6 +2808,7 @@
         "nov",
         "dec"
       ],
+      "no_twin": false,
       "twin": {
         "toxic": false
       },
@@ -2754,6 +2842,7 @@
         "okt",
         "nov"
       ],
+      "no_twin": false,
       "twin": {
         "toxic": true
       },
