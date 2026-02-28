@@ -535,13 +535,14 @@
 			const lang = userSettings.lang;
 			const country = userSettings.country;
 			const region = userSettings.region;
+			const cacheBuster = `?v=${new Date().getTime()}`;
 
 			try {
 				// 1. Hent de tre nødvendige filer parallelt
 				const [uniRes, langRes, regRes] = await Promise.all([
-					fetch('data/universal.json'),
-					fetch(`data/lang/${lang}.json`),
-					fetch(`data/regions/${country}.json`)
+					fetch(`data/universal.json${cacheBuster}`),
+					fetch(`data/lang/${lang}.json${cacheBuster}`),
+					fetch(`data/regions/${country}.json${cacheBuster}`)
 				]);
 		
 				const universal = await uniRes.json();
@@ -2042,6 +2043,7 @@
     </script>
 </body>
 </html>
+
 
 
 
