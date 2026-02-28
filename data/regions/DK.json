@@ -1,0 +1,2777 @@
+{
+  "res_hyben": {
+    "common": {
+      "habitats": [
+        "coast",
+        "garden"
+      ],
+      "months": [
+        "jun",
+        "jul",
+        "aug",
+        "sep"
+      ],
+      "twin": {
+        "toxic": false
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Kystnære områder, sommerhusgrunde og læhegn. Invasiv i Danmark.",
+          "not_this_if": [
+            "Busk mangler torne",
+            "Bærrene er små og aflange (det er dog også hyben, bare andre arter)"
+          ],
+          "twin": {
+            "name": "Ingen",
+            "diff": "Let genkendelig på bær og duft."
+          }
+        }
+      }
+    }
+  },
+  "res_jordbaer": {
+    "common": {
+      "habitats": [
+        "forest"
+      ],
+      "months": [
+        "jun",
+        "jul"
+      ],
+      "twin": {
+        "toxic": false
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Skovbryn, lysninger og skrænter med sol.",
+          "not_this_if": [
+            "Bærrene er smagløse og peger opad (Indisk Prydjordbær - uspiseligt)"
+          ],
+          "twin": {
+            "name": "Indisk Prydjordbær",
+            "diff": "Gule blomster. Bær peger opad. Smager af ingenting."
+          }
+        }
+      }
+    }
+  },
+  "res_gran": {
+    "common": {
+      "habitats": [
+        "forest"
+      ],
+      "months": [
+        "maj",
+        "jun"
+      ],
+      "twin": {
+        "toxic": true
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Nåleskove over hele landet.",
+          "not_this_if": [
+            "Skuddene er mørkegrønne og stive",
+            "Nålene er flade og har hvide striber (Ædelgran - smager anderledes)"
+          ],
+          "twin": {
+            "name": "Taks",
+            "diff": "Bløde nåle, røde bær. Mangler harpiksduft. Dødelig giftig!"
+          }
+        }
+      }
+    }
+  },
+  "res_birk": {
+    "common": {
+      "habitats": [
+        "forest",
+        "garden"
+      ],
+      "months": [
+        "mar",
+        "apr",
+        "maj"
+      ],
+      "twin": {
+        "toxic": false
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Løvskove, moser og haver.",
+          "not_this_if": [
+            "Barken er ikke hvid"
+          ],
+          "twin": {
+            "name": "Ingen",
+            "diff": "Hvid bark er unik for birk."
+          }
+        }
+      }
+    }
+  },
+  "res_doevnaelde": {
+    "common": {
+      "habitats": [
+        "garden",
+        "forest"
+      ],
+      "months": [
+        "apr",
+        "maj",
+        "jun",
+        "jul",
+        "aug",
+        "sep"
+      ],
+      "twin": {
+        "toxic": false
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Sommerhusgrunde, vejkanter og skovbryn.",
+          "not_this_if": [
+            "Planten brænder (det er en brændenælde)"
+          ],
+          "twin": {
+            "name": "Brændenælde",
+            "diff": "Brænder. Mangler de store hvide blomster."
+          }
+        }
+      }
+    }
+  },
+  "res_kirsebaer": {
+    "common": {
+      "habitats": [
+        "forest",
+        "garden"
+      ],
+      "months": [
+        "jun",
+        "jul"
+      ],
+      "twin": {
+        "toxic": false
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Løvskove og gamle læhegn.",
+          "not_this_if": [
+            "Bærrene sidder i lange klaser (det er Hæg)"
+          ],
+          "twin": {
+            "name": "Ingen",
+            "diff": "Klassisk kirsebærtræ."
+          }
+        }
+      }
+    }
+  },
+  "res_karljohan": {
+    "common": {
+      "habitats": [
+        "deciduous",
+        "coniferous"
+      ],
+      "months": [
+        "jun",
+        "jul",
+        "aug",
+        "sep",
+        "okt"
+      ],
+      "twin": {
+        "toxic": false
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Løv og nåleskov i nærheden af træer. Særligt omkring bøg, gran, og ædelgran.",
+          "not_this_if": [
+            "Kødet eller rørene blåner ved berøring eller snit",
+            "Netmønsteret på stokken er mørkt, brunt eller groft",
+            "Rørene har et rosa eller lyserødt skær",
+            "Svampen smager bittert",
+            "Stokken har røde eller orange farver"
+          ],
+          "twin": {
+            "name": "Galderørhat (Tylopilus felleus)",
+            "diff": "Mørkt, groft netmønster. Rosa rør som ældre. Meget bitter, men ikke giftig."
+          }
+        }
+      }
+    }
+  },
+  "res_kantarel": {
+    "common": {
+      "habitats": [
+        "deciduous",
+        "coniferous"
+      ],
+      "months": [
+        "jun",
+        "jul",
+        "aug",
+        "sep",
+        "okt",
+        "nov"
+      ],
+      "twin": {
+        "toxic": true
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Løv og nåleskov. Sydvendt, bakket terræn under nedfaldne grene med fugtig jord.",
+          "not_this_if": [
+            "Undersiden har knivskarpe lameller der kan skrabes af med en negl",
+            "Svampen bliver mørkebrun ved tryk eller berøring",
+            "Kødet er orange eller blødt indeni",
+            "Svampen vokser direkte på træ",
+            "Stokken er hul"
+          ],
+          "twin": {
+            "name": "Alm. Netbladhat (Paxillus involutus)",
+            "diff": "Minder kun svagt om Alm. Kantarel, men forveksling kan være farlig. Har lameller der kan skrabes af. Bruner ved tryk. Kan være dødelig for nogle!"
+          }
+        }
+      }
+    }
+  },
+  "res_tragt": {
+    "common": {
+      "habitats": [
+        "deciduous",
+        "coniferous"
+      ],
+      "months": [
+        "aug",
+        "sep",
+        "okt",
+        "nov",
+        "dec"
+      ],
+      "twin": {
+        "toxic": true
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Løv og nåleskov. Ofte i fugtig nåleskov med mos.",
+          "not_this_if": [
+            "Stokken er massiv eller fyldt indeni",
+            "Undersiden har lameller i stedet for rynkede ribber",
+            "Svampen lugter af radise",
+            "Der er orangebrunt støv eller spindvævsrester på stokken",
+            "Hatten har en spids pukkel og er rødbrun"
+          ],
+          "twin": {
+            "name": "Puklet Gift-Slørhat (Cortinarius rubellus)",
+            "diff": "Begge svampe trives i de samme miljøer, ofte i fugtig nåleskov med mos. De kan bogstavelig talt vokse lige ved siden af hinanden. I skovbundens svage lys eller hvis man plukker hurtigt i en stor klynge, kan de brune farver minde om hinanden og en enkelt giftslørhat kan nemt smutte med. Har lameller og ofte orangebrunt støv/spind på stokken. Kan kendes på tydelig radiselugt. Tjek hver eneste svamp, du har plukket, individuelt når du renser dem. Hvis stokken ikke er hul, eller hvis undersiden har lameller i stedet for ribber, skal den smides ud med det samme. Dødeligt Giftige!"
+          }
+        }
+      }
+    }
+  },
+  "res_ramsloeg": {
+    "common": {
+      "habitats": [
+        "deciduous"
+      ],
+      "months": [
+        "mar",
+        "apr",
+        "maj",
+        "jun"
+      ],
+      "twin": {
+        "toxic": true
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Fugtig muldbund i løvskove. Danner ofte massive tæpper.",
+          "not_this_if": [
+            "Mangler hvidløgsduft",
+            "To blade på samme stængel",
+            "Blank underside"
+          ],
+          "twin": {
+            "name": "Liljekonval",
+            "diff": "Ingen hvidløgsduft. Blank underside. Dødelig!"
+          }
+        }
+      }
+    }
+  },
+  "res_soedskaerm": {
+    "common": {
+      "habitats": [
+        "forest",
+        "garden"
+      ],
+      "months": [
+        "apr",
+        "maj",
+        "jun",
+        "jul"
+      ],
+      "twin": {
+        "toxic": true
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Fugtig halvskygge, vejkanter og nær bebyggelse.",
+          "not_this_if": [
+            "Mangler lakridsduft",
+            "Røde pletter på stængel"
+          ],
+          "twin": {
+            "name": "Skarntyde",
+            "diff": "Lugter af mus/urin. Røde pletter på stængel. Giftig!"
+          }
+        }
+      }
+    }
+  },
+  "res_skvalder": {
+    "common": {
+      "habitats": [
+        "garden",
+        "forest"
+      ],
+      "months": [
+        "mar",
+        "apr",
+        "maj",
+        "jun",
+        "jul",
+        "aug",
+        "sep"
+      ],
+      "twin": {
+        "toxic": true
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Haver og lyse løvskove. Meget invasiv.",
+          "not_this_if": [
+            "Rund stængel",
+            "Røde pletter på stængel"
+          ],
+          "twin": {
+            "name": "Gifttyde",
+            "diff": "Rund stængel. Kamret rodstok. Dødelig!"
+          }
+        }
+      }
+    }
+  },
+  "res_skovsyre": {
+    "common": {
+      "habitats": [
+        "forest"
+      ],
+      "months": [
+        "mar",
+        "apr",
+        "maj",
+        "jun"
+      ],
+      "twin": {
+        "toxic": false
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Skyggefuld skovbund, ofte under nåletræer eller bøg.",
+          "not_this_if": [
+            "Bladene er runde",
+            "Mangler syrlig smag"
+          ],
+          "twin": {
+            "name": "Hvidkløver",
+            "diff": "Runde blade uden hjerteform. Ikke syrlig."
+          }
+        }
+      }
+    }
+  },
+  "res_hassel": {
+    "common": {
+      "habitats": [
+        "forest",
+        "garden"
+      ],
+      "months": [
+        "aug",
+        "sep",
+        "okt"
+      ],
+      "twin": {
+        "toxic": false
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Løvskove, bryn og læhegn.",
+          "not_this_if": [
+            "Frugten er blød eller mangler hård skal"
+          ],
+          "twin": {
+            "name": "Ingen",
+            "diff": "Meget sikker."
+          }
+        }
+      }
+    }
+  },
+  "res_boegeblade": {
+    "common": {
+      "habitats": [
+        "forest"
+      ],
+      "months": [
+        "apr",
+        "maj"
+      ],
+      "twin": {
+        "toxic": false
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Bøgeskove over hele landet.",
+          "not_this_if": [
+            "Bladene er mørkegrønne og læderagtige"
+          ],
+          "twin": {
+            "name": "Ingen",
+            "diff": "Meget let genkendeligt."
+          }
+        }
+      }
+    }
+  },
+  "res_havtorn": {
+    "common": {
+      "habitats": [
+        "coast"
+      ],
+      "months": [
+        "aug",
+        "sep",
+        "okt"
+      ],
+      "twin": {
+        "toxic": false
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Klitter og kystskrænter med masser af lys.",
+          "not_this_if": [
+            "Bærrene er sorte",
+            "Mangler torne"
+          ],
+          "twin": {
+            "name": "Ingen",
+            "diff": "Unik kystbusk."
+          }
+        }
+      }
+    }
+  },
+  "res_strandkaal": {
+    "common": {
+      "habitats": [
+        "coast"
+      ],
+      "months": [
+        "apr",
+        "maj",
+        "jun"
+      ],
+      "twin": {
+        "toxic": false
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Stenstrande og sandjord nær vandet.",
+          "not_this_if": [
+            "Bladene er tynde og ikke voksagtige"
+          ],
+          "twin": {
+            "name": "Ingen",
+            "diff": "Ligner kål på stranden."
+          }
+        }
+      }
+    }
+  },
+  "res_strandsennep": {
+    "common": {
+      "habitats": [
+        "coast"
+      ],
+      "months": [
+        "jun",
+        "jul",
+        "aug",
+        "sep"
+      ],
+      "twin": {
+        "toxic": false
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Helt nede i sandkanten på sandstrande.",
+          "not_this_if": [
+            "Mangler stærk smag"
+          ],
+          "twin": {
+            "name": "Ingen",
+            "diff": "Vokser i det bare sand."
+          }
+        }
+      }
+    }
+  },
+  "res_strandarve": {
+    "common": {
+      "habitats": [
+        "coast"
+      ],
+      "months": [
+        "maj",
+        "jun",
+        "jul"
+      ],
+      "twin": {
+        "toxic": false
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Sandstrande, danner ofte grønne 'puder'.",
+          "not_this_if": [
+            "Mangler agurkesmag"
+          ],
+          "twin": {
+            "name": "Ingen",
+            "diff": "Unik geometrisk form."
+          }
+        }
+      }
+    }
+  },
+  "res_strandtrehage": {
+    "common": {
+      "habitats": [
+        "coast"
+      ],
+      "months": [
+        "maj",
+        "jun",
+        "jul",
+        "aug"
+      ],
+      "twin": {
+        "toxic": false
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Fugtige strandenge og strandsumpe.",
+          "not_this_if": [
+            "Mangler korianderduft"
+          ],
+          "twin": {
+            "name": "Vand-trehage",
+            "diff": "Mindre, vokser i ferskvand. Ikke giftig."
+          }
+        }
+      }
+    }
+  },
+  "res_fuglegraes": {
+    "common": {
+      "habitats": [
+        "garden",
+        "meadow"
+      ],
+      "months": [
+        "jan",
+        "feb",
+        "mar",
+        "apr",
+        "maj",
+        "jun",
+        "jul",
+        "aug",
+        "sep",
+        "okt",
+        "nov",
+        "dec"
+      ],
+      "twin": {
+        "toxic": true
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Haver, marker og næringsrig jord.",
+          "not_this_if": [
+            "Hele stænglen er håret",
+            "Mangler hårstribe"
+          ],
+          "twin": {
+            "name": "Rød Arve",
+            "diff": "Røde blomster. Ingen hårstribe. Giftig."
+          }
+        }
+      }
+    }
+  },
+  "res_maelkeboette": {
+    "common": {
+      "habitats": [
+        "meadow",
+        "garden"
+      ],
+      "months": [
+        "mar",
+        "apr",
+        "maj",
+        "jun"
+      ],
+      "twin": {
+        "toxic": false
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Overalt på græsarealer.",
+          "not_this_if": [
+            "Stænglen er massiv og håret"
+          ],
+          "twin": {
+            "name": "Kongepen",
+            "diff": "Hårede blade, fast stængel."
+          }
+        }
+      }
+    }
+  },
+  "res_braendenaelde": {
+    "common": {
+      "habitats": [
+        "garden",
+        "forest"
+      ],
+      "months": [
+        "mar",
+        "apr",
+        "maj",
+        "sep",
+        "okt"
+      ],
+      "twin": {
+        "toxic": false
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Næringsrig jord nær boliger og i skovbryn.",
+          "not_this_if": [
+            "Planten brænder ikke"
+          ],
+          "twin": {
+            "name": "Døvnælde",
+            "diff": "Brænder ikke. Store hvide blomster."
+          }
+        }
+      }
+    }
+  },
+  "res_vejbred": {
+    "common": {
+      "habitats": [
+        "garden"
+      ],
+      "months": [
+        "maj",
+        "jun",
+        "jul",
+        "aug",
+        "sep"
+      ],
+      "twin": {
+        "toxic": false
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Stier og græsplæner. Tåler tråd.",
+          "not_this_if": [
+            "Mangler de seje strenge"
+          ],
+          "twin": {
+            "name": "Ingen",
+            "diff": "Meget karakteristisk."
+          }
+        }
+      }
+    }
+  },
+  "res_hyld": {
+    "common": {
+      "habitats": [
+        "garden",
+        "forest"
+      ],
+      "months": [
+        "jun",
+        "jul",
+        "sep",
+        "okt"
+      ],
+      "twin": {
+        "toxic": true
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Hegn og skovbryn. Busk m. hvid marv.",
+          "not_this_if": [
+            "Røde støvknapper (Sommerhyld)",
+            "Planten er en urt"
+          ],
+          "twin": {
+            "name": "Sommerhyld",
+            "diff": "Urt. Røde støvknapper. Giftig!"
+          }
+        }
+      }
+    }
+  },
+  "res_brombaer": {
+    "common": {
+      "habitats": [
+        "meadow",
+        "forest"
+      ],
+      "months": [
+        "aug",
+        "sep",
+        "okt"
+      ],
+      "twin": {
+        "toxic": false
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Skovbryn og hegn. Lange buede grene.",
+          "not_this_if": [
+            "Bærrene er røde og modne"
+          ],
+          "twin": {
+            "name": "Klynger",
+            "diff": "Bær har blålig dug. Også spiselige."
+          }
+        }
+      }
+    }
+  },
+  "res_slaaen": {
+    "common": {
+      "habitats": [
+        "garden"
+      ],
+      "months": [
+        "okt",
+        "nov",
+        "dec"
+      ],
+      "twin": {
+        "toxic": false
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Solrige bryn og hegn. Meget tæt buskads.",
+          "not_this_if": [
+            "Bærrene mangler sten"
+          ],
+          "twin": {
+            "name": "Ingen",
+            "diff": "Klassisk vinterbær."
+          }
+        }
+      }
+    }
+  },
+  "res_hvidloegsennep": {
+    "common": {
+      "habitats": [
+        "garden",
+        "forest"
+      ],
+      "months": [
+        "apr",
+        "maj",
+        "jun"
+      ],
+      "twin": {
+        "toxic": false
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Halvskygge i skovbryn og haver.",
+          "not_this_if": [
+            "Mangler hvidløgsduft"
+          ],
+          "twin": {
+            "name": "Nældebladet Klokke",
+            "diff": "Ingen hvidløgsduft."
+          }
+        }
+      }
+    }
+  },
+  "res_roedkloever": {
+    "common": {
+      "habitats": [
+        "meadow"
+      ],
+      "months": [
+        "maj",
+        "jun",
+        "jul",
+        "aug",
+        "sep"
+      ],
+      "twin": {
+        "toxic": false
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Vedvarende græsarealer og vejkanter.",
+          "not_this_if": [
+            "Mangler V-mærket på bladet"
+          ],
+          "twin": {
+            "name": "Ingen",
+            "diff": "Klassisk markblomst."
+          }
+        }
+      }
+    }
+  },
+  "res_engkarse": {
+    "common": {
+      "habitats": [
+        "meadow"
+      ],
+      "months": [
+        "apr",
+        "maj",
+        "jun"
+      ],
+      "twin": {
+        "toxic": false
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Fugtige enge og moser.",
+          "not_this_if": [
+            "Mangler karsesmag",
+            "Vokser meget tørt"
+          ],
+          "twin": {
+            "name": "Ingen",
+            "diff": "Let kendelig på habitat og smag."
+          }
+        }
+      }
+    }
+  },
+  "res_champignon": {
+    "common": {
+      "habitats": [
+        "meadow"
+      ],
+      "months": [
+        "jul",
+        "aug",
+        "sep",
+        "okt"
+      ],
+      "twin": {
+        "toxic": true
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Vokser på ugødede græsarealer, enge, overdrev og i haver. Findes aldrig direkte i dyb skov eller på træ. Vokser ofte i 'hekseringe' eller rækker.",
+          "not_this_if": [
+            "Kødet gulner kraftigt ved tryk eller snit især i bunden af stokken",
+            "Svampen lugter kemisk af karbol, blæk eller jod",
+            "Lamellerne er hvide eller forbliver lyse",
+            "Der er en knoldet skede eller pose ved stokkens basis",
+            "Svampen vokser i dyb skov eller direkte på træ"
+          ],
+          "twin": {
+            "name": "Karbol-champignon (Agaricus xanthodermus)",
+            "diff": "Gulner kraftigt ved tryk (især i bunden af stokken) eller hvis du skraber hatten med neglen. Lugter grimt af kemikalier/karbol (tænk på jod eller blæk). Giftig."
+          }
+        }
+      }
+    }
+  },
+  "res_gaasefod": {
+    "common": {
+      "habitats": [
+        "garden",
+        "Mark"
+      ],
+      "months": [
+        "maj",
+        "jun",
+        "jul",
+        "aug"
+      ],
+      "twin": {
+        "toxic": false
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Næringsrig jord, marker og køkkenhaver. Kendt som vild spinat.",
+          "not_this_if": [
+            "Bladene er meget mørke og lugter ubehageligt"
+          ],
+          "twin": {
+            "name": "Ingen",
+            "diff": "Meget almindeligt ukrudt."
+          }
+        }
+      }
+    }
+  },
+  "res_strandasters": {
+    "common": {
+      "habitats": [
+        "coast"
+      ],
+      "months": [
+        "maj",
+        "jun",
+        "jul"
+      ],
+      "twin": {
+        "toxic": false
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Strandenge og saltmarsk. Kendt som havets asparges.",
+          "not_this_if": [
+            "Vokser langt fra kysten",
+            "Bladene er tynde"
+          ],
+          "twin": {
+            "name": "Ingen",
+            "diff": "Meget karakteristisk kystplante."
+          }
+        }
+      }
+    }
+  },
+  "res_skivekamille": {
+    "common": {
+      "habitats": [
+        "garden",
+        "Vejkant"
+      ],
+      "months": [
+        "jun",
+        "jul",
+        "aug",
+        "sep"
+      ],
+      "twin": {
+        "toxic": false
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Trampestier, gårdspladser og vejkanter. Kendt som ananaskamille.",
+          "not_this_if": [
+            "Mangler ananasduft"
+          ],
+          "twin": {
+            "name": "Vellugtende Kamille",
+            "diff": "Har hvide kronblade. Dufter af kamille."
+          }
+        }
+      }
+    }
+  },
+  "res_hvidtjoern": {
+    "common": {
+      "habitats": [
+        "Hegn",
+        "forest"
+      ],
+      "months": [
+        "maj",
+        "sep",
+        "okt"
+      ],
+      "twin": {
+        "toxic": false
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Gamle læhegn, skovbryn og overdrev.",
+          "not_this_if": [
+            "Busk mangler torne"
+          ],
+          "twin": {
+            "name": "Ingen",
+            "diff": "Meget almindelig i hegn."
+          }
+        }
+      }
+    }
+  },
+  "res_merian": {
+    "common": {
+      "habitats": [
+        "meadow",
+        "forest"
+      ],
+      "months": [
+        "jul",
+        "aug",
+        "sep"
+      ],
+      "twin": {
+        "toxic": false
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Lysåbne skrænter og skovbryn, især på kalkrig jord. Vild oregano.",
+          "not_this_if": [
+            "Mangler krydret duft"
+          ],
+          "twin": {
+            "name": "Ingen",
+            "diff": "Ligner og dufter som fra køkkenhaven."
+          }
+        }
+      }
+    }
+  },
+  "res_vandmynte": {
+    "common": {
+      "habitats": [
+        "meadow"
+      ],
+      "months": [
+        "jul",
+        "aug",
+        "sep"
+      ],
+      "twin": {
+        "toxic": false
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Våde enge, ved søbredder og grøfter.",
+          "not_this_if": [
+            "Mangler mynteduft"
+          ],
+          "twin": {
+            "name": "Ingen",
+            "diff": "Kendes altid på den kraftige duft."
+          }
+        }
+      }
+    }
+  },
+  "res_brunstokket": {
+    "common": {
+      "habitats": [
+        "deciduous",
+        "coniferous"
+      ],
+      "months": [
+        "jul",
+        "aug",
+        "sep",
+        "okt",
+        "nov"
+      ],
+      "twin": {
+        "toxic": false
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Nåleskov (især under gran og fyr) og løvskov med sur bund. Vokser ofte på eller nær stubbe og mos.",
+          "not_this_if": [
+            "Stokken har et tydeligt mørkt eller lyst netmønster",
+            "Rørene har et rosa eller lyserødt skær",
+            "Svampen smager meget bittert",
+            "Rørene ændrer slet ikke farve ved tryk",
+            "Hatten er rød eller har meget skrigende farver"
+          ],
+          "twin": {
+            "name": "Galde-rørhat (Tylopilus felleus)",
+            "diff": "Har et meget tydeligt mørkt netmønster på stokken, lyserøde rør som moden og smager ekstremt bittert."
+          }
+        }
+      }
+    }
+  },
+  "res_bleg_kantarel": {
+    "common": {
+      "habitats": [
+        "deciduous"
+      ],
+      "months": [
+        "jun",
+        "jul",
+        "aug",
+        "sep",
+        "okt"
+      ],
+      "twin": {
+        "toxic": false
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Vokser primært i løvskov under bøg og eg, ofte på mere næringsrig, leret eller kalkholdig jord end den almindelige kantarel.",
+          "not_this_if": [],
+          "twin": {
+            "name": "Almindelig kantarel (Cantharellus cibarius)",
+            "diff": "Almindelig kantarel er gennemfarvet æggegul på både hat og ribber og er mindre robust."
+          }
+        }
+      }
+    }
+  },
+  "res_sort_trompetsvamp": {
+    "common": {
+      "habitats": [
+        "deciduous"
+      ],
+      "months": [
+        "aug",
+        "sep",
+        "okt",
+        "nov"
+      ],
+      "twin": {
+        "toxic": false
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Vokser især i gammel løvskov under bøg og eg. Foretrækker fugtig, leret og kalkrig bund. Ofte skjult under visne blade. Vokser ofte sammen med anemoner.",
+          "not_this_if": [
+            "Undersiden har tydelige ribber eller lameller",
+            "Svampen er ikke hul helt ned til bunden",
+            "Kødet er tykt eller fast",
+            "Svampen har en tydelig afgrænset stok som skiller sig ud fra hatten",
+            "Svampen vokser direkte på træ"
+          ],
+          "twin": {
+            "name": "Grå kantarel (Craterellus cinereus)",
+            "diff": "Grå kantarel har tydelige, forgrenede ribber på undersiden."
+          }
+        }
+      }
+    }
+  },
+  "res_liden_kantarel": {
+    "common": {
+      "habitats": [
+        "deciduous"
+      ],
+      "months": [
+        "aug",
+        "sep",
+        "okt"
+      ],
+      "twin": {
+        "toxic": false
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Vokser under bøg og eg, ofte på leret bund. Findes typisk i små klynger i skovbunden, hvor den camoufleres af efterårets blade.",
+          "not_this_if": [
+            "Undersiden har tydelige eller gaffeldelte ribber",
+            "Hatkanten er jævn og rund uden krusninger",
+            "Stokken er massiv og ikke hul",
+            "Svampen vokser direkte på træ",
+            "Kødet er tykt eller fast"
+          ],
+          "twin": {
+            "name": "Tragt-kantarel (Craterellus tubaeformis)",
+            "diff": "Tragtkantarel har tydelige ribber og en mere jævnt rund hatkant."
+          }
+        }
+      }
+    }
+  },
+  "res_gylden_kantarel": {
+    "common": {
+      "habitats": [
+        "deciduous",
+        "coniferous"
+      ],
+      "months": [
+        "aug",
+        "sep",
+        "okt",
+        "nov"
+      ],
+      "twin": {
+        "toxic": false
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Vokser typisk i fugtige nåleskove, ofte i tykke mospuder eller omkring skovmoser. Foretrækker kalkrig bund. Kan også findes i løvskov.",
+          "not_this_if": [
+            "Undersiden har tydelige eller gaffeldelte ribber",
+            "Svampen mangler den karakteristiske duft af abrikos",
+            "Stokken er massiv og ikke hul",
+            "Hatten er tyk og kødfuld",
+            "Svampen vokser direkte på dødt træ"
+          ],
+          "twin": {
+            "name": "Tragt-kantarel (Craterellus tubaeformis)",
+            "diff": "Tragtkantarel har tydelige, forgrenede ribber på undersiden og mangler den stærke abrikosduft."
+          }
+        }
+      }
+    }
+  },
+  "res_abrikos_kantarel": {
+    "common": {
+      "habitats": [
+        "deciduous",
+        "coniferous"
+      ],
+      "months": [
+        "jul",
+        "aug",
+        "sep",
+        "okt"
+      ],
+      "twin": {
+        "toxic": false
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Vokser under bøg og eg på surbund, ofte gemt i mos eller visne blade i skrænter og bryn. Sjældnere end almindelig kantarel. Kan også findes i nåleskov.",
+          "not_this_if": [
+            "Stokken er helt eller delvist hul",
+            "Undersiden har knivskarpe lameller frem for foldede ribber",
+            "Svampen er stor og kødfuld med en hatbredde over 5 cm",
+            "Svampen vokser direkte på træ",
+            "Farven er bleg gul, brunlig eller grålig"
+          ],
+          "twin": {
+            "name": "Almindelig Kantarel (Cantharellus cibarius)",
+            "diff": "Almindelig kantarel er større, mere æggegul og har mere kødfuld hat."
+          }
+        }
+      }
+    }
+  },
+  "res_svaertende_kantarel": {
+    "common": {
+      "habitats": [
+        "deciduous"
+      ],
+      "months": [
+        "aug",
+        "sep",
+        "okt"
+      ],
+      "twin": {
+        "toxic": false
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Vokser i løvskov, især under bøg og eg på kalkrig jord. Er meget sjælden i Danmark og rødlistet.",
+          "not_this_if": [
+            "Kødet eller overfladen ændrer ikke farve til sort ved berøring eller gennemskæring",
+            "Undersiden har knivskarpe lameller frem for rynkede ribber",
+            "Svampen vokser direkte på træ",
+            "Stokken mangler helt de gule farvetoner",
+            "Svampen har en markant duft af abrikos"
+          ],
+          "twin": {
+            "name": "Grå kantarel (Cantharellus cinereus)",
+            "diff": "Grå kantarel er grå/sort fra starten og har ikke de gule farver i hatten eller det sværtende kød."
+          }
+        }
+      }
+    }
+  },
+  "res_graa_kantarel": {
+    "common": {
+      "habitats": [
+        "deciduous"
+      ],
+      "months": [
+        "aug",
+        "sep",
+        "okt"
+      ],
+      "twin": {
+        "toxic": false
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Vokser primært i gammel bøgeskov på kalkrig jord. Findes ofte samme steder som Sort trompetsvamp.",
+          "not_this_if": [
+            "Undersiden er glat eller kun let rynket uden egentlige ribber",
+            "Stokken er massiv og ikke helt hul",
+            "Svampen mangler den karakteristiske frugtagtige duft",
+            "Svampen vokser direkte på dødt træ",
+            "Undersiden har knivskarpe lameller i stedet for foldede ribber"
+          ],
+          "twin": {
+            "name": "Sort trompetsvamp (Craterellus cornucopioides)",
+            "diff": "Sort trompetsvamp har en næsten glat eller rynket underside uden ribber."
+          }
+        }
+      }
+    }
+  },
+  "res_ametyst_kantarel": {
+    "common": {
+      "habitats": [
+        "deciduous"
+      ],
+      "months": [
+        "jul",
+        "aug",
+        "sep",
+        "okt"
+      ],
+      "twin": {
+        "toxic": false
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Vokser primært i løvskov under bøg og eg, ofte på leret eller kalkrig bund. Findes sjældent under nåletræer.",
+          "not_this_if": [
+            "Hathuden er helt glat og jævnt gul uden skyggen af violette skæl",
+            "Undersiden har knivskarpe lameller der kan skrabes af",
+            "Stokken er hul",
+            "Kødet eller overfladen bliver sort ved tryk",
+            "Svampen vokser direkte på træ"
+          ],
+          "twin": {
+            "name": "Almindelig kantarel (Cantharellus cibarius)",
+            "diff": "Almindelig kantarel har en glat, jævnt gul hathud uden lilla skæl."
+          }
+        }
+      }
+    }
+  },
+  "res_spiselig_morkel": {
+    "common": {
+      "habitats": [
+        "deciduous",
+        "garden"
+      ],
+      "months": [
+        "apr",
+        "maj",
+        "jun"
+      ],
+      "twin": {
+        "toxic": true
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Findes ofte på kalkrig jord under bøg, ask eller i gamle frugthaver. Kan også dukke op på forstyrret jord eller i flis.",
+          "not_this_if": [
+            "Svampen er ikke helt hul men har kamre eller kødfuldt fyld indvendigt",
+            "Hatten har hjerneagtige folder i stedet for huller",
+            "Hattens nederste kant sidder løst omkring stokken som en klokke",
+            "Hatten er mørkt rødbrun eller chokoladebrun",
+            "Svampen vokser i efterårsmånederne"
+          ],
+          "twin": {
+            "name": "Stenmorkel (Gyromitra esculenta)",
+            "diff": "Stenmorkel har hjerneagtige folder (ikke huller) og er giftig. Morkler er hule, Stenmorkel er fyldt med 'kamre'."
+          }
+        }
+      }
+    }
+  },
+  "res_klor_baegermorkel": {
+    "common": {
+      "habitats": [
+        "deciduous",
+        "garden"
+      ],
+      "months": [
+        "mar",
+        "apr",
+        "maj"
+      ],
+      "twin": {
+        "toxic": false
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Findes ofte under bøg, ask eller el på fugtig, leret og kalkrig bund. Dukker op tidligt om foråret.",
+          "not_this_if": [
+            "Svampen mangler den karakteristiske lugt af klor ved brud",
+            "Indersiden af skålen er helt glat uden rynker eller årer",
+            "Svampen vokser direkte på dødt træ",
+            "Svampen findes i efteråret",
+            "Kødet er elastisk eller sejt frem for skørt og voksagtigt"
+          ],
+          "twin": {
+            "name": "Bægersvampe",
+            "diff": "Andre bægersvampe mangler klorlugten og de tydelige årer/rynker. De er ofte uspiselige."
+          }
+        }
+      }
+    }
+  },
+  "res_klokkemorkel": {
+    "common": {
+      "habitats": [
+        "deciduous"
+      ],
+      "months": [
+        "mar",
+        "apr",
+        "maj"
+      ],
+      "twin": {
+        "toxic": true
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Findes ofte på fugtig bund i løvskove, gerne under ask, el eller poppel. Foretrækker kalkrig jord.",
+          "not_this_if": [
+            "Hatten er vokset sammen med stokken hele vejen ned (Spiselig Morkel)",
+            "Stokken er fyldt med kamre eller kød frem for at være hul eller fyldt med vatagtigt væv",
+            "Hattens overflade har dybe, regelmæssige huller (gruber) i stedet for hjerneagtige rynker",
+            "Svampen vokser i efteråret",
+            "Svampen vokser direkte på træ"
+          ],
+          "twin": {
+            "name": "Stenmorkel (Gyromitra esculenta)",
+            "diff": "Stenmorkel er massiv/kamret indvendig, mens Klokkemorkel er helt hul i stokken."
+          }
+        }
+      }
+    }
+  },
+  "res_glat_klokkemorkel": {
+    "common": {
+      "habitats": [
+        "deciduous",
+        "garden"
+      ],
+      "months": [
+        "apr",
+        "maj"
+      ],
+      "twin": {
+        "toxic": false
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Vokser ofte i lyse løvskove, skovbryn eller gamle haver, gerne under træer i rosenfamilien (f.eks. hvidtjørn eller vilde frugttræer).",
+          "not_this_if": [
+            "Hatten har dybe huller eller gruber (Hætte-morkel eller Spiselig Morkel)",
+            "Hatten er vokset sammen med stokken langs kanten eller hele vejen ned",
+            "Overfladen er kraftigt hjerneagtig foldet (Klokkemorkel)",
+            "Svampen findes uden for forårsmånederne april og maj",
+            "Stokken er massiv og fyldt med fast kød"
+          ],
+          "twin": {
+            "name": "Hætte-morkel (Morchella semilibera)",
+            "diff": "Hætte-morkel har tydelige morkel-huller (gruber), mens Klokkemorkel har en næsten glat hat. Begge er spiselige"
+          }
+        }
+      }
+    }
+  },
+  "res_kegle_morkel": {
+    "common": {
+      "habitats": [
+        "coniferous",
+        "garden"
+      ],
+      "months": [
+        "apr",
+        "maj"
+      ],
+      "twin": {
+        "toxic": false
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Findes ofte i nåleskove (især gran), men er også kendt for at dukke op i barkflis i haver eller på steder, hvor der har været skovbrand.",
+          "not_this_if": [
+            "Hattens nederste kant er løs og kan løftes fra stokken",
+            "Svampen er ikke hul, men har kamre eller kød indvendigt",
+            "Hatten er rund eller æggeformet uden tydelige lodrette ribber",
+            "Svampen vokser i efteråret",
+            "Hatten har hjerneagtige folder i stedet for rækker af huller"
+          ],
+          "twin": {
+            "name": "Hætte-morkel (Morchella semilibera)",
+            "diff": "Hættemorkel har en hat, der hænger løst forneden (fri kant), mens Kegle-morklens hat er vokset sammen med stokken."
+          }
+        }
+      }
+    }
+  },
+  "res_haette_morkel": {
+    "common": {
+      "habitats": [
+        "deciduous",
+        "garden"
+      ],
+      "months": [
+        "apr",
+        "maj"
+      ],
+      "twin": {
+        "toxic": false
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Vokser ofte i fugtige løvskove under ask og el, eller i parker og haver med rig jord. Ses tit i nærheden af vandløb.",
+          "not_this_if": [
+            "Hatten er vokset sammen med stokken hele vejen ned til kanten",
+            "Hatten er glat eller kun svagt rynket uden dybe huller",
+            "Svampen er ikke hul, men har kødfulde kamre indvendigt",
+            "Hatten sidder kun fast i det absolutte øverste punkt (som et fingerbøl)",
+            "Svampen vokser i efteråret"
+          ],
+          "twin": {
+            "name": "Glat Klokkemorkel (Verpa conica)",
+            "diff": "Klokkemorkel har en næsten glat hat, mens Hætte-morkel har tydelige morkel-huller (gruber). Begge er spiselige."
+          }
+        }
+      }
+    }
+  },
+  "res_indigo": {
+    "common": {
+      "habitats": [
+        "deciduous",
+        "coniferous"
+      ],
+      "months": [
+        "jun",
+        "jul",
+        "aug",
+        "sep",
+        "okt"
+      ],
+      "twin": {
+        "toxic": true
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Løvskov og nåleskov. Findes ofte under bøg og eg på både sur og kalkholdig bund.",
+          "not_this_if": [
+            "Stokken har et tydeligt netmønster (Netstokket Indigo-rørhat)",
+            "Hatten er meget lys, gråhvid eller læderfarvet (Satans Rørhat)",
+            "Kødet ændrer ikke farve til blå ved gennemskæring",
+            "Rørene på undersiden er hvide eller gule",
+            "Svampen smager meget bittert"
+          ],
+          "twin": {
+            "name": "Satans Rørhat (Rubroboletus Satanas)",
+            "diff": "Satans rørhat har meget lys (gråhvid) hat, aldrig mørkebrun, og rødt netmønster. Giftig!"
+          }
+        }
+      }
+    }
+  },
+  "res_laerke": {
+    "common": {
+      "habitats": [
+        "coniferous",
+        "garden"
+      ],
+      "months": [
+        "jun",
+        "jul",
+        "aug",
+        "sep",
+        "okt"
+      ],
+      "twin": {
+        "toxic": false
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Vokser kun under lærketræer. Findes både i skove, parker og haver hvor lærk findes.",
+          "not_this_if": [
+            "Der findes ingen lærketræer i nærheden",
+            "Stokken mangler en ring",
+            "Kødet blåner kraftigt ved gennemskæring",
+            "Hatten er tør eller filtet i fugtigt vejr",
+            "Rørene på undersiden er røde eller orange"
+          ],
+          "twin": {
+            "name": "Brungul Slimrørhat",
+            "diff": "Vokser under fyr. Hatten er mere brunlig, stokken har små brune kirtelpunkter."
+          }
+        }
+      }
+    }
+  },
+  "res_birkeskael": {
+    "common": {
+      "habitats": [
+        "deciduous"
+      ],
+      "months": [
+        "jul",
+        "aug",
+        "sep",
+        "okt"
+      ],
+      "twin": {
+        "toxic": false
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Vokser næsten altid under birk. Findes både i skov, moser og haver.",
+          "not_this_if": [
+            "Der er ingen birketræer i nærheden",
+            "Kødet blåner kraftigt ved gennemskæring eller tryk",
+            "Hatten er kraftig orange eller rødbrun",
+            "Stokken har et netmønster i stedet for skæl",
+            "Rørene på undersiden er lyserøde"
+          ],
+          "twin": {
+            "name": "Orange Skælrørhat (Leccinum versipelle)",
+            "diff": "Hatten er mere orange. Denne er også spiselig, men nogle kan være allergiske."
+          }
+        }
+      }
+    }
+  },
+  "res_sommer_karljohan": {
+    "common": {
+      "habitats": [
+        "deciduous"
+      ],
+      "months": [
+        "maj",
+        "jun",
+        "jul",
+        "aug"
+      ],
+      "twin": {
+        "toxic": false
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Løvskov, især under bøg og eg. Foretrækker varme og findes ofte i vejkanter eller lysninger.",
+          "not_this_if": [
+            "Stokken har et mørkt eller groft netmønster",
+            "Svampen smager meget bittert",
+            "Rørene har et rosa eller lyserødt skær",
+            "Kødet blåner ved gennemskæring eller tryk",
+            "Hatten er slimet eller glat (som hos den almindelige Karl Johan)"
+          ],
+          "twin": {
+            "name": "Galderørhat (Tylopilus felleus)",
+            "diff": "Galderørhat har mørkt, groft netmønster og er meget bitter."
+          }
+        }
+      }
+    }
+  },
+  "res_roedbrun_karljohan": {
+    "common": {
+      "habitats": [
+        "deciduous",
+        "coniferous"
+      ],
+      "months": [
+        "maj",
+        "jun",
+        "aug",
+        "sep",
+        "okt"
+      ],
+      "twin": {
+        "toxic": false
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Vokser primært i nåleskov under fyr i sandet jord, men kan også findes under bøgetræer især i år med varme somre.",
+          "not_this_if": [
+            "Kødet blåner ved gennemskæring eller tryk",
+            "Stokken har et mørkt eller sort netmønster",
+            "Svampen smager bittert",
+            "Rørene er røde eller orange",
+            "Hatten er lys læderbrun uden rødlige toner"
+          ],
+          "twin": {
+            "name": "Karl Johan (Boletus edulis)",
+            "diff": "Karl Johan mangler de vinrøde toner i hatten og er mindre kompakt."
+          }
+        }
+      }
+    }
+  },
+  "res_aspe_skael": {
+    "common": {
+      "habitats": [
+        "deciduous"
+      ],
+      "months": [
+        "aug",
+        "sep",
+        "okt"
+      ],
+      "twin": {
+        "toxic": false
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Orangebrun hat. Vokser kun sammen med asp. Almindelig i lysninger og skovbryn.",
+          "not_this_if": [
+            "Der er ingen aspetræer i nærheden",
+            "Stokken har et netmønster i stedet for skæl",
+            "Kødet ændrer slet ikke farve ved gennemskæring",
+            "Hatten er mørkebrun eller lædergul",
+            "Svampen vokser i foråret"
+          ],
+          "twin": {
+            "name": "Rustrød skælrørhat (Leccinum quercinum)",
+            "diff": "Vokser under eg/bøg. Skællene på stokken er hvide til rødbrune. Denne er også spiselig."
+          }
+        }
+      }
+    }
+  },
+  "res_orange_skael": {
+    "common": {
+      "habitats": [
+        "deciduous"
+      ],
+      "months": [
+        "jun",
+        "jul",
+        "aug",
+        "sep",
+        "okt",
+        "nov"
+      ],
+      "twin": {
+        "toxic": false
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Orange hat, sorte skæl, vokser især under birk, gerne på næringsfattig og tør jord.",
+          "not_this_if": [
+            "Der er ingen birketræer i nærheden",
+            "Stokken har et netmønster i stedet for skæl",
+            "Kødet ændrer slet ikke farve ved gennemskæring",
+            "Hatten er bleg gul eller mørkebrun",
+            "Svampen smager bittert"
+          ],
+          "twin": {
+            "name": "Aspe-skælrørhat (Leccinum albostipitatum)",
+            "diff": "Vokser under asp, ikke birk. Skællene på stokken er sorte næsten fra starten."
+          }
+        }
+      }
+    }
+  },
+  "res_rustroed_skaelroerhat": {
+    "common": {
+      "habitats": [
+        "deciduous"
+      ],
+      "months": [
+        "jul",
+        "aug",
+        "sep",
+        "okt"
+      ],
+      "twin": {
+        "toxic": false
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Løvskov, specifikt knyttet til eg, bævreasp, poppel og bøg. Foretrækker leret eller kalkholdig jord.",
+          "not_this_if": [
+            "Der er ingen løvtræer som eg, bøg eller poppel i nærheden",
+            "Stokken har et netmønster i stedet for skæl",
+            "Kødet ændrer slet ikke farve ved gennemskæring",
+            "Skællene på stokken er kulsorte fra starten (Aspe-skælrørhat)",
+            "Hatten er slimet eller glat"
+          ],
+          "twin": {
+            "name": "Aspe-skælrørhat (Leccinum albostipitatum)",
+            "diff": "Vokser udelukkende under asp og har hvidlige skæl på stokken, der hurtigt bliver helt sorte. Kan være svær at kende forskel hos ældre svampe. Begge er spiselige."
+          }
+        }
+      }
+    }
+  },
+  "res_brungul_slimroerhat": {
+    "common": {
+      "habitats": [
+        "coniferous"
+      ],
+      "months": [
+        "aug",
+        "sep",
+        "okt",
+        "nov"
+      ],
+      "twin": {
+        "toxic": false
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Vokser udelukkende under to-nålede fyrretræer. Meget almindelig i plantager. Ofte på sandbund.",
+          "not_this_if": [
+            "Der findes ingen fyrretræer i nærheden",
+            "Stokken mangler en ring",
+            "Kødet blåner ved gennemskæring",
+            "Hatten er tør, filtet eller har skæl",
+            "Rørene på undersiden er røde eller orange"
+          ],
+          "twin": {
+            "name": "Lærke-slimrørhat (Suillus grevillei)",
+            "diff": "Vokser under lærk og er meget mere gul/orange i farven."
+          }
+        }
+      }
+    }
+  },
+  "res_roedsprukken_roerhat": {
+    "common": {
+      "habitats": [
+        "deciduous",
+        "garden"
+      ],
+      "months": [
+        "jun",
+        "jul",
+        "aug",
+        "sep",
+        "okt",
+        "nov"
+      ],
+      "twin": {
+        "toxic": false
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Løvskov og parker, ofte under bøg. Kan også findes i nåleskov.",
+          "not_this_if": [
+            "Hathuden er hel og uden sprækker (Dugget Rørhat)",
+            "Kødet under hathuden er hvidt eller gult uden røde nuancer",
+            "Stokken har et netmønster (som hos Karl Johan)",
+            "Rørene på undersiden er hvide eller røde",
+            "Svampen er stor og meget kødfuld (over 10-12 cm i hatbredde)"
+          ],
+          "twin": {
+            "name": "Dugget Rørhat (Xerocomellus pruinatus)",
+            "diff": "Hatten sprækker ikke på samme måde og har en hvidlig 'dug'. Begge er spiselige."
+          }
+        }
+      }
+    }
+  },
+  "res_dugget_roerhat": {
+    "common": {
+      "habitats": [
+        "deciduous",
+        "coniferous"
+      ],
+      "months": [
+        "aug",
+        "sep",
+        "okt",
+        "nov"
+      ],
+      "twin": {
+        "toxic": false
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Løvskov, især under bøg og eg, og nåleskov. Foretrækker varme.",
+          "not_this_if": [
+            "Hathuden sprækker kraftigt op i firkanter med rødt kød synligt i revnerne (Rødsprukken Rørhat)",
+            "Kødet er hvidt og blåner ikke (Karl Johan-typer)",
+            "Stokken har et tydeligt netmønster",
+            "Rørene på undersiden er hvide",
+            "Svampen har en ring på stokken"
+          ],
+          "twin": {
+            "name": "Rødsprukken Rørhat (Xerocomellus chrysenteron)",
+            "diff": "Hatten sprækker meget oftere op, og kødet er mindre fast."
+          }
+        }
+      }
+    }
+  },
+  "res_netstokket_indigo": {
+    "common": {
+      "habitats": [
+        "deciduous",
+        "garden"
+      ],
+      "months": [
+        "jun",
+        "jul",
+        "aug",
+        "sep",
+        "okt"
+      ],
+      "twin": {
+        "toxic": false
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Løvskov på kalkholdig bund, parker og alléer under gamle egetræer. Altid på næringsrig jord og i vejkanter.",
+          "not_this_if": [
+            "Stokken har røde punkter i stedet for et netmønster (Punktstokket Indigo-rørhat)",
+            "Hatten er meget lys, hvidlig eller sølvgrå (Satans Rørhat)",
+            "Kødet ændrer ikke farve ved brud",
+            "Rørene på undersiden er hvide eller gule uden røde mundinger",
+            "Svampen findes i nåleskov på meget sur bund"
+          ],
+          "twin": {
+            "name": "Punktstokket Indigo-rørhat (Neoboletus luridiformis)",
+            "diff": "Mangler netmønster på stokken (har røde punkter i stedet). Er mere sikker at spise."
+          }
+        }
+      }
+    }
+  },
+  "res_poppel_skaelroerhat": {
+    "common": {
+      "habitats": [
+        "deciduous",
+        "garden"
+      ],
+      "months": [
+        "jul",
+        "aug",
+        "sep",
+        "okt"
+      ],
+      "twin": {
+        "toxic": false
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Vokser udelukkende under poppel-arter (især Gråpoppel og Sølvpoppel). Findes ofte i parker, alléer eller skovbryn.",
+          "not_this_if": [
+            "Der findes ingen poppeltræer i nærheden",
+            "Stokken er blød eller svampet",
+            "Kødet i stokbasis ændrer ikke farve til blågrøn",
+            "Hatten er orange eller rødbrun",
+            "Stokken har et netmønster i stedet for skæl"
+          ],
+          "twin": {
+            "name": "Brun skælrørhat (Leccinum scabrum)",
+            "diff": "Vokser under birk. Har meget blødere kød i hatten og mangler den blågrønne farve i stokbasis."
+          }
+        }
+      }
+    }
+  },
+  "res_tenstokket_roerhat": {
+    "common": {
+      "habitats": [
+        "deciduous"
+      ],
+      "months": [
+        "jul",
+        "aug",
+        "sep",
+        "okt"
+      ],
+      "twin": {
+        "toxic": false
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Vokser i varme løvskove på kalkrig bund, primært under bøg og eg. Findes ofte på sydvendte skrænter. Forekommer sjældent i nåleskov.",
+          "not_this_if": [
+            "Rørene eller stokken har røde eller orange farver (Indigo-rørhatte)",
+            "Kødet blåner lynhurtigt og kraftigt blåt ved brud",
+            "Svampen smager meget bittert (Galderørhat)",
+            "Stokken er helt cylindrisk og mangler netmønster øverst",
+            "Hatten er mørkebrun og fløjlsagtig (Punktstokket Indigo-rørhat)"
+          ],
+          "twin": {
+            "name": "Netstokket Indigo-rørhat (Suillellus luridus)",
+            "diff": "Netstokket Indigo-rørhat har orange/røde rørmundinger og blåner meget kraftigere. Har ofte et rødt net. Spiselig, men ikke sammen med alkohol."
+          }
+        }
+      }
+    }
+  },
+  "res_hvidsprukken_roerhat": {
+    "common": {
+      "habitats": [
+        "deciduous",
+        "coniferous"
+      ],
+      "months": [
+        "jul",
+        "aug",
+        "sep",
+        "okt"
+      ],
+      "twin": {
+        "toxic": false
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Findes i både løv- og nåleskov, ofte under bøg eller eg. Foretrækker muldrig bund.",
+          "not_this_if": [
+            "Kødet i sprækkerne eller lige under hathuden er rødt (Rødsprukken rørhat)",
+            "Hatten er dækket af en fin hvidlig dug og sprækker ikke (Dugget rørhat)",
+            "Stokken har et tydeligt netmønster",
+            "Kødet er meget fast og blåner ikke",
+            "Rørene på undersiden er hvide (unge Karl Johan)"
+          ],
+          "twin": {
+            "name": "",
+            "diff": ""
+          }
+        }
+      }
+    }
+  },
+  "res_sump_roerhat": {
+    "common": {
+      "habitats": [
+        "deciduous"
+      ],
+      "months": [
+        "juli",
+        "aug",
+        "sep",
+        "okt"
+      ],
+      "twin": {
+        "toxic": false
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Vokser på meget fugtig bund, ofte direkte i dynd eller mos. Knyttet til pil, poppel og el i moser, ved søbredder eller i fugtige lavninger.",
+          "not_this_if": [
+            "Voksestedet er tørt (fx en almindelig bøgeskov eller græsplæne)",
+            "Der findes ingen pil, poppel eller el i nærheden",
+            "Kødet i stokbasis er hvidt eller gult uden røde nuancer",
+            "Stokken har et tydeligt netmønster eller mørke skæl",
+            "Svampen er stor og kraftig (over 6-7 cm i hatbredde)"
+          ],
+          "twin": {
+            "name": "Rødsprukken rørhat (Xerocomellus chrysenteron)",
+            "diff": "Vokser på mere tør bund i skove og parker. Mangler det mørkerøde kød i stokbasis."
+          }
+        }
+      }
+    }
+  },
+  "res_glatstokket_indigo": {
+    "common": {
+      "habitats": [
+        "deciduous"
+      ],
+      "months": [
+        "jul",
+        "aug",
+        "sep"
+      ],
+      "twin": {
+        "toxic": false
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Vokser på varm, kalkrig jord under bøg og eg. Sjælden i Danmark og findes typisk i gamle herregårdsparker eller sydvendte løvskovsbryn.",
+          "not_this_if": [
+            "Stokken har et tydeligt netmønster (Netstokket Indigo-rørhat)",
+            "Stokken er dækket af fine, tætte røde punkter (Punktstokket Indigo-rørhat)",
+            "Kødet i stokbasis er gult eller hvidligt",
+            "Hatten er meget lys eller gråhvid (Satans Rørhat)",
+            "Rørene på undersiden er hvide eller rene gule"
+          ],
+          "twin": {
+            "name": "Netstokket Indigo-rørhat (Suillellus luridus)",
+            "diff": "Har et tydeligt, groft netmønster på stokken. Glatstokket Indigo er helt jævn på stokoverfladen."
+          }
+        }
+      }
+    }
+  },
+  "res_blodroed_roerhat": {
+    "common": {
+      "habitats": [
+        "deciduous",
+        "garden"
+      ],
+      "months": [
+        "jul",
+        "aug",
+        "sep",
+        "okt"
+      ],
+      "twin": {
+        "toxic": false
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Vokser i skove, parker, haver og vejkanter under løvtræer (ofte eg eller bøg). Foretrækker solrige steder med græs eller dybe lag bøgeløv.",
+          "not_this_if": [
+            "Hatten er brun eller gråbrun (Rødsprukken rørhat)",
+            "Kødet i stokbasis mangler de orange prikker",
+            "Svampen er stor og kraftig (over 6-8 cm i hatbredde)",
+            "Stokken har et tydeligt netmønster",
+            "Rørene på undersiden er røde eller orange"
+          ],
+          "twin": {
+            "name": "Rødsprukken Rørhat (Xerocomellus chrysenteron)",
+            "diff": "Hatten sprækker meget oftere op og er mere brunlig-rød. Mangler de gule prikker i stokbasis."
+          }
+        }
+      }
+    }
+  },
+  "res_sortblaanende_roerhat": {
+    "common": {
+      "habitats": [
+        "deciduous",
+        "garden"
+      ],
+      "months": [
+        "jul",
+        "aug",
+        "sep",
+        "okt"
+      ],
+      "twin": {
+        "toxic": false
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Vokser i løvskove, parker og ofte i vejkanter under eg og bøg. Foretrækker næringsrig eller leret jord.",
+          "not_this_if": [
+            "Rørmundingerne er røde eller orange (Indigo-rørhatte)",
+            "Stokken har et tydeligt netmønster eller skæl",
+            "Farvereaktionen til blå er langsom eller svag",
+            "Svampen smager bittert",
+            "Hatten er meget lys eller gråhvid"
+          ],
+          "twin": {
+            "name": "Glatstokket Indigo-rørhat (Suillellus queletii)",
+            "diff": "Indigo-rørhatten har røde/orange rørmundinger. Sortblånende rørhat har altid gule rør."
+          }
+        }
+      }
+    }
+  },
+  "res_hulstokket_slimroerhat": {
+    "common": {
+      "habitats": [
+        "coniferous"
+      ],
+      "months": [
+        "aug",
+        "sep",
+        "okt"
+      ],
+      "twin": {
+        "toxic": false
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Vokser kun sammen med Lærk. Foretrækker ofte lidt sur bund.",
+          "not_this_if": [
+            "Stokken er massiv og fyldt indvendigt",
+            "Der findes ingen lærketræer i nærheden",
+            "Hatten er helt glat og meget slimet (Lærkerørhat)",
+            "Rørmundingerne er små og runde",
+            "Kødet blåner ved gennemskæring"
+          ],
+          "twin": {
+            "name": "Lærkerørhat (Suillus grevillei)",
+            "diff": "Lærke-slimrørhat er meget slimet, har en glat (ikke filt-skællet) gul/orange hat og har en massiv (ikke hul) stok. Den er er bedre spisesvamp."
+          }
+        }
+      }
+    }
+  },
+  "res_flammet_skaelroerhat": {
+    "common": {
+      "habitats": [
+        "deciduous"
+      ],
+      "months": [
+        "jul",
+        "aug",
+        "sep",
+        "okt"
+      ],
+      "twin": {
+        "toxic": false
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Vokser udelukkende under birk. Findes typisk på fugtig bund, f.eks. i tørvemoser, ved søbredder eller i fugtige lavninger i skoven.",
+          "not_this_if": [
+            "Der findes ingen birketræer i nærheden",
+            "Hatten er ensfarvet lysebrun uden pletter (Brun skælrørhat)",
+            "Kødet i stokbasis ændrer ikke farve til blågrøn",
+            "Stokken har et netmønster i stedet for skæl",
+            "Hatten er orange eller teglrød"
+          ],
+          "twin": {
+            "name": "Brun skælrørhat",
+            "diff": "Brun skælrørhat har en mere jævnt brun hat uden pletter og blåner/grønner normalt ikke i stokbasis."
+          }
+        }
+      }
+    }
+  },
+  "res_filtet_roerhat": {
+    "common": {
+      "habitats": [
+        "deciduous",
+        "coniferous"
+      ],
+      "months": [
+        "jul",
+        "aug",
+        "sep",
+        "okt"
+      ],
+      "twin": {
+        "toxic": false
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Meget almindelig i både løvskov og nåleskov. Findes ofte langs skovveje eller i mosdækket bund.",
+          "not_this_if": [
+            "Kødet er rødt lige under hathuden eller i bunden af stokken",
+            "Hatten er slimet eller glat (som hos slimrørhatte)",
+            "Stokken har et tydeligt netmønster (som hos Karl Johan)",
+            "Rørene er hvide eller røde",
+            "Kødet blåner lynhurtigt og kraftigt"
+          ],
+          "twin": {
+            "name": "Rødsprukken rørhat",
+            "diff": "Rødsprukken rørhat har rødt kød lige under hathuden og blåner tydeligere."
+          }
+        }
+      }
+    }
+  },
+  "res_peber_roerhat": {
+    "common": {
+      "habitats": [
+        "deciduous",
+        "coniferous"
+      ],
+      "months": [
+        "jul",
+        "aug",
+        "sep",
+        "okt"
+      ],
+      "twin": {
+        "toxic": false
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Almindelig i både nåle- og løvskov, ofte sammen med rødgran eller birk. Findes tit de samme steder som Rød Fluesvamp.",
+          "not_this_if": [
+            "Smagen er mild eller bitter (ikke brændende skarp)",
+            "Rørene er gule eller hvide",
+            "Stokken har et netmønster eller skæl",
+            "Kødet blåner ved gennemskæring",
+            "Svampen er stor og kødfuld (over 6-7 cm i hatbredde)"
+          ],
+          "twin": {
+            "name": "Filtet rørhat",
+            "diff": "Filtet rørhat er større, har gule rør og en mild smag."
+          }
+        }
+      }
+    }
+  },
+  "res_almindelig_pigsvamp": {
+    "common": {
+      "habitats": [
+        "deciduous",
+        "coniferous"
+      ],
+      "months": [
+        "aug",
+        "sep",
+        "okt",
+        "nov"
+      ],
+      "twin": {
+        "toxic": false
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Findes ofte i store hekseringe eller rækker under både bøg og gran. Elsker mosset bund.",
+          "not_this_if": [
+            "Svampen har  eller rør under hatten",
+            "Piggene er mørkebrune eller sorte",
+            "Kødet er sejt eller læderagtigt",
+            "Svampen vokser direkte på træ",
+            "Hatten er skællet og mørkebrun (Sarkodon-arter)"
+          ],
+          "twin": {
+            "name": "Navle-Pigsvamp (Hydnum umbilicatum)",
+            "diff": "Navle-pigsvamp er mindre og har en dyb navle i hatten og er generelt mørkere. Begge er spiselige."
+          }
+        }
+      }
+    }
+  },
+  "res_navle_pigsvamp": {
+    "common": {
+      "habitats": [
+        "deciduous",
+        "coniferous"
+      ],
+      "months": [
+        "sep",
+        "okt",
+        "nov"
+      ],
+      "twin": {
+        "toxic": false
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "En alsidig svamp, der findes i både løvskov (især bøg) og nåleskov. Den elsker fugtige, mosede områder og ses ofte fra sensommeren og helt ind i det sene efterår.",
+          "not_this_if": [
+            "Hatten mangler den centrale navle/fordybning",
+            "Svampen er meget stor og bleg (Almindelig Pigsvamp)",
+            "Piggene er mørke eller lilla",
+            "Svampen har  i stedet for pigge",
+            "Kødet er sejt og læderagtigt"
+          ],
+          "twin": {
+            "name": "Almindelig Pigsvamp (Hydnum repandum)",
+            "diff": "Almindelig Pigsvamp er større, blegere og mangler den dybe navle i midten af hatten. Begge er spiselige."
+          }
+        }
+      }
+    }
+  },
+  "res_roedgul_pigsvamp": {
+    "common": {
+      "habitats": [
+        "deciduous",
+        "coniferous"
+      ],
+      "months": [
+        "aug",
+        "sep",
+        "okt",
+        "nov"
+      ],
+      "twin": {
+        "toxic": false
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Findes både i løv- og nåleskov, ofte på mager eller sur bund dækket af mos. Den vokser ofte i flokke, men sjældnere i de store hekseringe, man ser hos almindelig pigsvamp.",
+          "not_this_if": [
+            "Piggene løber tydeligt ned ad stokken (Almindelig Pigsvamp)",
+            "Piggene er mørkebrune eller grå",
+            "Svampen har en dyb navle i midten (Navle-pigsvamp)",
+            "Kødet er sejt og læderagtigt",
+            "Svampen vokser direkte på træstammer"
+          ],
+          "twin": {
+            "name": "Almindelig Pigsvamp (Hydnum repandum)",
+            "diff": "Almindelig Pigsvamp er større, blegere, og dens pigge løber tydeligt ned ad stokken. Begge er spiselige."
+          }
+        }
+      }
+    }
+  },
+  "res_krystal_stoevbold": {
+    "common": {
+      "habitats": [
+        "deciduous",
+        "coniferous"
+      ],
+      "months": [
+        "aug",
+        "sep",
+        "okt",
+        "nov"
+      ],
+      "twin": {
+        "toxic": true
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Meget almindelig i både løv- og nåleskov, hvor den vokser på jorden, ofte i grupper. Foretrækker skovbunden frem for åbne arealer.",
+          "not_this_if": [
+            "Kødet indeni er mørkt, sort eller lilla (Bruskbolde – GIFTIGE)",
+            "Svampen vokser på dødt træ (Kæmpestøvbold eller Pære-støvbold)",
+            "Kødet er gulligt eller brunt (Svampen er for gammel til at spise)",
+            "Svampen har , rør eller pigge under en hat"
+          ],
+          "twin": {
+            "name": "Bruskbolde (Giftig)",
+            "diff": "Bruskbolde er hårde og mørke/sorte indeni, aldrig hvide og bløde."
+          }
+        }
+      }
+    }
+  },
+  "res_paere_stoevbold": {
+    "common": {
+      "habitats": [
+        "deciduous",
+        "coniferous"
+      ],
+      "months": [
+        "sep",
+        "okt",
+        "nov"
+      ],
+      "twin": {
+        "toxic": false
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Vokser udelukkende på dødt træ, som gamle stubbe eller begravede rødder. Ses ofte i meget store, tætte klynger.",
+          "not_this_if": [
+            "Svampen vokser direkte på jorden",
+            "Overfladen har tydelige, kegleformede pigge",
+            "Kødet indeni er mørkt eller lilla (Bruskbolde)",
+            "Kødet er gulligt eller brunt (svampen er for gammel)",
+            "Svampen er enorm (som en fodbold eller større)"
+          ],
+          "twin": {
+            "name": "Krystalstøvbold (Lycoperdon perlatum)",
+            "diff": "Krystalstøvbold vokser på jorden og har tydelige vorter/pigge."
+          }
+        }
+      }
+    }
+  },
+  "res_kaampestoevbold": {
+    "common": {
+      "habitats": [
+        "meadow",
+        "garden",
+        "deciduous"
+      ],
+      "months": [
+        "jun",
+        "jul",
+        "aug",
+        "sep",
+        "okt"
+      ],
+      "twin": {
+        "toxic": false
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Findes på næringsrig jord, ofte på græsarealer, i parker, haver eller lyse løvskove.",
+          "not_this_if": [
+            "Svampen er lille (under 8-10 cm)",
+            "Der er tydelige pigge på overfladen",
+            "Kødet indeni er mørkt eller lilla (Bruskbolde)",
+            "Svampen vokser på en træstub",
+            "Kødet er blevet gulligt eller brunt (svampen er overmoden)"
+          ],
+          "twin": {
+            "name": "Ingen",
+            "diff": "Grundet størrelsen kan den praktisk talt ikke forveksles med andre."
+          }
+        }
+      }
+    }
+  },
+  "res_hoejstokket_stoevbold": {
+    "common": {
+      "habitats": [
+        "deciduous",
+        "meadow"
+      ],
+      "months": [
+        "aug",
+        "sep",
+        "okt",
+        "nov"
+      ],
+      "twin": {
+        "toxic": false
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Findes både i lyse skove, skovbryn og på overdrev. Den skiller sig ud ved sin meget markante og lange stokdel.",
+          "not_this_if": [
+            "Svampen mangler den lange, markante stokdel",
+            "Svampen er enorm og kuglerund (Kæmpestøvbold)",
+            "Kødet indeni er mørkt, sort eller lilla (Bruskbolde)",
+            "Svampen vokser på dødt træ (Pære-støvbold)",
+            "Kødet er begyndt at blive gult eller brunt"
+          ],
+          "twin": {
+            "name": "Krystalstøvbold (Lycoperdon perlatum)",
+            "diff": "Højstokket støvbold er markant højere og har en meget længere stok."
+          }
+        }
+      }
+    }
+  },
+  "res_skaallet_stoevbold": {
+    "common": {
+      "habitats": [
+        "deciduous"
+      ],
+      "months": [
+        "jul",
+        "aug",
+        "sep",
+        "okt",
+        "nov"
+      ],
+      "twin": {
+        "toxic": false
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Sjælden. Findes primært i kalkrige løvskove under bøg.",
+          "not_this_if": [
+            "Overfladen har små, spidse vorter eller 'krystaller' (Krystalstøvbold)",
+            "Svampen har en meget lang og rynket stok (Højstokket støvbold)",
+            "Svampen vokser på dødt træ (Pære-støvbold)",
+            "Kødet indeni er mørkt eller lilla (Bruskbolde)",
+            "Svampen er glat som læder og enorm (Kæmpestøvbold)"
+          ],
+          "twin": {
+            "name": "Krystalstøvbold  (Lycoperdon perlatum)",
+            "diff": "Skællet støvbold har store flagede skæl, mens krystalstøvbold har små spidse vorter."
+          }
+        }
+      }
+    }
+  },
+  "res_almindelig_oestershat": {
+    "common": {
+      "habitats": [
+        "deciduous"
+      ],
+      "months": [
+        "sep",
+        "okt",
+        "nov",
+        "dec",
+        "jan",
+        "feb"
+      ],
+      "twin": {
+        "toxic": false
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Vokser på døde eller svækkede løvtræer, især bøg. Er unik ved at kunne findes hele vinteren, da den tåler frost.",
+          "not_this_if": [
+            "Svampen vokser direkte på jorden",
+            "Lamellerne stopper brat ved stokken og løber ikke ned",
+            "Hatten er dækket af orange eller gule hår (Orange østershat)",
+            "Kødet er ekstremt tyndt og gennemsigtigt",
+            "Stokken sidder centralt midt under hatten"
+          ],
+          "twin": {
+            "name": "Korkagtig Østershat (Pleurotus dryinus)",
+            "diff": "Hatoverfladen føles filtet/skællet. Stokken har en ringzone eller slørrester. Mindre, lysere og meget sej/læderagtig konsistens. Uspiselig."
+          }
+        }
+      }
+    }
+  },
+  "res_sommer_oestershat": {
+    "common": {
+      "habitats": [
+        "deciduous"
+      ],
+      "months": [
+        "jun",
+        "jul",
+        "aug",
+        "sep"
+      ],
+      "twin": {
+        "toxic": true
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Muslingeformet og vifteformet. Vokser på løvtræsstubbe og stammer i de varme måneder. Minder meget om almindelig østershat, men er lysere og spinklere.",
+          "not_this_if": [
+            "Svampen vokser på nåletræ (risiko for den giftige Kridthat).",
+            "Der er en ring eller tydelige slørrester på stokken.",
+            "Hatten er dækket af små skæl eller føles tydeligt filtet (Korkagtig Østershat).",
+            "Kødet er ekstremt tyndt og næsten gennemsigtigt.",
+            "Svampen har en kraftig lugt af klor, mel eller parfume.",
+            "Lamellerne stopper brat ved stokken og løber ikke ned ad den."
+          ],
+          "twin": {
+            "name": "Kridthat (Pleurocybella porrigens)",
+            "diff": "Vokser udelukkende på nåletræ (især mørke stubbe). Er kridhvid, tyndere og mangler helt stok. Kan være giftig for visse persongrupper."
+          }
+        }
+      }
+    }
+  },
+  "res_porcelaenshat": {
+    "common": {
+      "habitats": [
+        "deciduous"
+      ],
+      "months": [
+        "aug",
+        "sep",
+        "okt",
+        "nov"
+      ],
+      "twin": {
+        "toxic": false
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Vokser udelukkende på bøg, ofte højt oppe på døde grene eller svækkede stammer. Kan ses på lang afstand pga. den hvide farve.",
+          "not_this_if": [
+            "Svampen vokser på jorden",
+            "Hatten er tør eller kun svagt fedtet",
+            "Svampen mangler en ring på stokken",
+            "Svampen vokser på nåletræ"
+          ],
+          "twin": {
+            "name": "Ingen",
+            "diff": "Kombinationen af den hvide farve, den ekstreme slim og voksestedet på bøg gør den unik."
+          }
+        }
+      }
+    }
+  },
+  "res_svovlporesvamp": {
+    "common": {
+      "habitats": [
+        "deciduous",
+        "garden"
+      ],
+      "months": [
+        "maj",
+        "jun",
+        "jul",
+        "aug",
+        "sep"
+      ],
+      "twin": {
+        "toxic": false
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Vokser som en konsol på levende eller døde løvtræer, især eg, pil og poppel.",
+          "not_this_if": [
+            "Svampen har lameller under hatten (f.eks. Østershat)",
+            "Farven er brun eller mørk (mange andre poresvampe)",
+            "Kødet er hårdt og træagtigt (gamle eksemplarer)",
+            "Svampen vokser på jorden",
+            "Overfladen er dækket af hår eller pigge"
+          ],
+          "twin": {
+            "name": "Ingen",
+            "diff": "Dens skrigende gule farve og vifteform på træ gør den umulig at forveksle med giftige arter."
+          }
+        }
+      }
+    }
+  },
+  "res_judasoere": {
+    "common": {
+      "habitats": [
+        "deciduous"
+      ],
+      "months": [
+        "jan",
+        "feb",
+        "mar",
+        "apr",
+        "maj",
+        "jun",
+        "jul",
+        "aug",
+        "sep",
+        "okt",
+        "nov",
+        "dec"
+      ],
+      "twin": {
+        "toxic": false
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Vokser næsten udelukkende på Hyld (både levende og døde stammer/grene).",
+          "not_this_if": [
+            "Svampen vokser på nåletræ",
+            "Svampen har lameller eller porer",
+            "Farven er knaldgul eller sort",
+            "Svampen er hård og træagtig",
+            "Svampen vokser på jorden"
+          ],
+          "twin": {
+            "name": "Bævresvampe",
+            "diff": "Bævresvampen er meget lysere, knaldgul til orange, og har ikke en tydelig inderside og yderside."
+          }
+        }
+      }
+    }
+  },
+  "res_parykhat": {
+    "common": {
+      "habitats": [
+        "meadow",
+        "garden"
+      ],
+      "months": [
+        "aug",
+        "sep",
+        "okt",
+        "nov"
+      ],
+      "twin": {
+        "toxic": true
+      },
+      "i18n": {
+        "da": {
+          "extended_habitat": "Vokser på næringsrig bund, ofte i græsplæner eller langs stier. Ses ofte i store flokke.",
+          "not_this_if": [
+            "Hatten er grå og glat uden store skæl (Almindelig Blækhat)",
+            "Svampen er allerede begyndt at blive sort eller 'smelte'",
+            "Svampen vokser dybt inde i en mørk skov på træ (denne foretrækker lysninger og græs)",
+            "Svampen har porer eller pigge under hatten"
+          ],
+          "twin": {
+            "name": "Almindelig Blækhat (Coprinopsis atramentaria)",
+            "diff": "Almindelig Blækhat er grå, glat (mangler skæl) og er giftig sammen med alkohol."
+          }
+        }
+      }
+    }
+  }
+}
