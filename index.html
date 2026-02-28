@@ -481,7 +481,7 @@
 		        }).join('');
 		    }
 			
-		    // 5. Gem de nye indstillinger og kør evt. database-fladgøring
+		    // 5. Gem de nye indstillinger
 		    saveSettings(); 
 		    		
 		    // 6. Kør region-skiftet (som ofte håndterer rendering)
@@ -504,7 +504,7 @@
 		    saveSettings();
 		
 		    // 5. Hent den nye lande-database (f.eks. data_dk.json)
-		    //await loadDatabase();
+		    await loadDatabase();
 		
 		    // 6. Hvis vi skal opdatere skærmen med det samme (f.eks. når man skifter i menuen)
 		    if (shouldRender) {
@@ -512,86 +512,101 @@
 		    }
 		}
 
+		// Hjælpefunktion til at flette (merge) objekter dybt sammen
+		function deepMerge(target, ...sources) {
+		    if (!sources.length) return target;
+		    const source = sources.shift();
+		
+		    if (target && typeof target === 'object' && !Array.isArray(target) && 
+		        source && typeof source === 'object' && !Array.isArray(source)) {
+		        for (const key in source) {
+		            if (source[key] && typeof source[key] === 'object' && !Array.isArray(source[key])) {
+		                if (!target[key]) Object.assign(target, { [key]: {} });
+		                deepMerge(target[key], source[key]);
+		            } else {
+		                Object.assign(target, { [key]: source[key] });
+		            }
+		        }
+		    }
+		    return deepMerge(target, ...sources);
+		}
+		
 		async function loadDatabase() {
 			const lang = userSettings.lang;
 			const country = userSettings.country;
 			const region = userSettings.region;
-			
-			//TODO: MODIFY THIS TO FIT WITH THE NEW DATABASE
-			/*
-				{
-				  "res_hyben": {
-				    "universal": {
-				      "id": "res_hyben",
-				      "latin": "Rosa rugosa",
-				      "habitats": ["coast", "garden"]
-				    },
-				    "i18n": {
-				      "da": { "name": "Rynket Rose", "traits": "Store orange bær..." },
-				      "en": { "name": "Rugosa Rose", "traits": "Large orange berries..." }
-				    },
-				    "regional": {
-				      "DK": {
-				        "all": {
-				          "common": {
-				            "months": ["jun", "jul", "aug", "sep"]
-				          },
-				          "i18n": {
-				            "da": {
-				              "extended_habitat": "Kystnære områder i Danmark.",
-				              "twin": { "name": "Ingen", "toxic": false }
-				            },
-				            "en": {
-				              "extended_habitat": "Coastal areas in Denmark.",
-				              "twin": { "name": "None", "toxic": false }
-				            }
-				          }
-				        },
-				        "nordjylland": {
-				          "common": { "months": ["jul", "aug"] }
-				        }
-				      }
-				    }
-				  }
-				}
-			*/
 
 			try {
-				const response = await fetch(`data_${country.toLowerCase()}.json`);
-				if (!response.ok) throw new Error("File not found");
-				const rawDB = await response.json();
-			} catch (err) {
-				console.error("Database error:", err);
-				rawDB = {}; 
+				// 1. Hent de tre nødvendige filer parallelt
+				const [uniRes, langRes, regRes] = await Promise.all([
+					fetch('data/universal.json'),
+					fetch(`data/lang/${lang}.json`),
+					fetch(`data/regions/${country}.json`)
+				]);
+		
+				const universal = await uniRes.json();
+				const langData = await langRes.json();
+				const regionData = await regRes.json();
+		
+				const flatDatabase = {};
+		
+				// 2. Loop KUN over de arter, der findes i det valgte land
+				for (const id in regionData) {
+					const regObj = regionData[id];
+					const commonData = regObj.all || {};
+					const specificRegionData = regObj[region];
+		
+					// SIKKERHEDS-TJEK: Vokser den overhovedet her?
+					// Hvis der ikke er nogen 'common' data, og den heller ikke er nævnt 
+					// i den valgte region, så spring den over.
+					if (Object.keys(commonData).length === 0 && !specificRegionData) {
+						continue; 
+					}
+		
+					let entry = { id: id };
+		
+					// A: Start med at hente de universelle grunddata (type, latin)
+					if (universal[id]) {
+						deepMerge(entry, universal[id]);
+					}
+		
+					// B: Læg de globale sprog-tekster på (navn, traits, id_keys)
+					if (langData[id]) {
+						deepMerge(entry, langData[id]);
+					}
+		
+					// C: Pålæg Common Base Data for landet (habitats, months osv.)
+					let commonBase = { ...commonData };
+					delete commonBase.i18n; // Undgå at overskrive med hele i18n objektet
+					deepMerge(entry, commonBase);
+		
+					// D: Pålæg Common Sprog Data for landet (f.eks. dansk extended_habitat)
+					if (commonData.i18n && commonData.i18n[lang]) {
+						deepMerge(entry, commonData.i18n[lang]);
+					}
+		
+					// E: Hvis brugerens valgte region har unikke data, så overskriv med dem!
+					if (specificRegionData) {
+						let specificBase = { ...specificRegionData };
+						delete specificBase.i18n;
+						deepMerge(entry, specificBase); // Kan f.eks. ændre 'months' for Nordjylland
+		
+						// F: Regionale sprog-variationer (f.eks. lokal forvekslingsfare)
+						if (specificRegionData.i18n && specificRegionData.i18n[lang]) {
+							deepMerge(entry, specificRegionData.i18n[lang]);
+						}
+					}
+		
+					// 3. Tilføj det færdige, skræddersyede objekt til appens database
+					flatDatabase[id] = entry;
+				}
+				console.log(JSON.stringify(flatDatabase, null, 2)));
+				return flatDatabase;
+		
+			} catch (error) {
+				console.error("Could not parse and build database:", error);
+				return null;
 			}
-		
-			const flattened = {};
-		
-		    for (const [key, plant] of Object.entries(rawDb)) {
-		        // 1. Start med universelle data (ID, latin, habitats, etc.)
-		        const universal = plant.universal || {};
-		
-		        // 2. Find de generelle oversættelser (da/en/de)
-		        const mainI18n = plant.i18n?.[lang] || plant.i18n?.['da'] || {};
-		
-		        // 3. Find regionale data (Land -> Region)
-		        const countryBlock = plant.regional?.[country] || {};
-		        const regionBlock = countryBlock[region] || countryBlock['all'] || {};
-		
-		        // 4. Hent regionale fællesdata (fx måneder) og regionale oversættelser
-		        const regCommon = regionBlock.common || {};
-		        const regI18n = regionBlock.i18n?.[lang] || regionBlock.i18n?.['da'] || {};
-		
-		        // 5. Kombiner alt i prioriteret rækkefølge (sidste lag vinder)
-		        flattened[key] = {
-		            ...universal,
-		            ...mainI18n,
-		            ...regCommon,
-		            ...regI18n
-		        };
-		    }
-		
-		    return flattened;
 		}
 
 		// Hjælpefunktion til at gemme i localStorage
@@ -2027,6 +2042,7 @@
     </script>
 </body>
 </html>
+
 
 
 
