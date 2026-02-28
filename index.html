@@ -490,7 +490,7 @@
 		
 		async function handleRegionChange(shouldRender = true) {
 			const cacheBuster = `?v=${new Date().getTime()}`;
-			const response = await fetch(`data/wizardMushroomData_${userSettings.country}.json${cacheBuster}`);
+			const response = await fetch(`data/regions/${userSettings.country}_wizardMushroomData.json${cacheBuster}`);
 			const uiWizard = await response.json();
 
 			// 1. Opdater indstillingerne
@@ -2027,6 +2027,7 @@
     </script>
 </body>
 </html>
+
 
 
 
