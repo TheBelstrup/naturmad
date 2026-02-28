@@ -1,6 +1,6 @@
 {
   "res_hyben": {
-    "common": {
+    "all": {
       "habitats": [
         "coast",
         "garden"
@@ -30,7 +30,7 @@
     }
   },
   "res_jordbaer": {
-    "common": {
+    "all": {
       "habitats": [
         "forest"
       ],
@@ -56,7 +56,7 @@
     }
   },
   "res_gran": {
-    "common": {
+    "all": {
       "habitats": [
         "forest"
       ],
@@ -83,7 +83,7 @@
     }
   },
   "res_birk": {
-    "common": {
+    "all": {
       "habitats": [
         "forest",
         "garden"
@@ -111,7 +111,7 @@
     }
   },
   "res_doevnaelde": {
-    "common": {
+    "all": {
       "habitats": [
         "garden",
         "forest"
@@ -142,7 +142,7 @@
     }
   },
   "res_kirsebaer": {
-    "common": {
+    "all": {
       "habitats": [
         "forest",
         "garden"
@@ -169,7 +169,7 @@
     }
   },
   "res_karljohan": {
-    "common": {
+    "all": {
       "habitats": [
         "deciduous",
         "coniferous"
@@ -203,7 +203,7 @@
     }
   },
   "res_kantarel": {
-    "common": {
+    "all": {
       "habitats": [
         "deciduous",
         "coniferous"
@@ -238,7 +238,7 @@
     }
   },
   "res_tragt": {
-    "common": {
+    "all": {
       "habitats": [
         "deciduous",
         "coniferous"
@@ -272,7 +272,7 @@
     }
   },
   "res_ramsloeg": {
-    "common": {
+    "all": {
       "habitats": [
         "deciduous"
       ],
@@ -302,7 +302,7 @@
     }
   },
   "res_soedskaerm": {
-    "common": {
+    "all": {
       "habitats": [
         "forest",
         "garden"
@@ -332,7 +332,7 @@
     }
   },
   "res_skvalder": {
-    "common": {
+    "all": {
       "habitats": [
         "garden",
         "forest"
@@ -365,7 +365,7 @@
     }
   },
   "res_skovsyre": {
-    "common": {
+    "all": {
       "habitats": [
         "forest"
       ],
@@ -394,7 +394,7 @@
     }
   },
   "res_hassel": {
-    "common": {
+    "all": {
       "habitats": [
         "forest",
         "garden"
@@ -422,7 +422,7 @@
     }
   },
   "res_boegeblade": {
-    "common": {
+    "all": {
       "habitats": [
         "forest"
       ],
@@ -448,7 +448,7 @@
     }
   },
   "res_havtorn": {
-    "common": {
+    "all": {
       "habitats": [
         "coast"
       ],
@@ -476,7 +476,7 @@
     }
   },
   "res_strandkaal": {
-    "common": {
+    "all": {
       "habitats": [
         "coast"
       ],
@@ -503,7 +503,7 @@
     }
   },
   "res_strandsennep": {
-    "common": {
+    "all": {
       "habitats": [
         "coast"
       ],
@@ -531,7 +531,7 @@
     }
   },
   "res_strandarve": {
-    "common": {
+    "all": {
       "habitats": [
         "coast"
       ],
@@ -558,7 +558,7 @@
     }
   },
   "res_strandtrehage": {
-    "common": {
+    "all": {
       "habitats": [
         "coast"
       ],
@@ -586,7 +586,7 @@
     }
   },
   "res_fuglegraes": {
-    "common": {
+    "all": {
       "habitats": [
         "garden",
         "meadow"
@@ -624,7 +624,7 @@
     }
   },
   "res_maelkeboette": {
-    "common": {
+    "all": {
       "habitats": [
         "meadow",
         "garden"
@@ -653,7 +653,7 @@
     }
   },
   "res_braendenaelde": {
-    "common": {
+    "all": {
       "habitats": [
         "garden",
         "forest"
@@ -683,7 +683,7 @@
     }
   },
   "res_vejbred": {
-    "common": {
+    "all": {
       "habitats": [
         "garden"
       ],
@@ -712,7 +712,7 @@
     }
   },
   "res_hyld": {
-    "common": {
+    "all": {
       "habitats": [
         "garden",
         "forest"
@@ -742,7 +742,7 @@
     }
   },
   "res_brombaer": {
-    "common": {
+    "all": {
       "habitats": [
         "meadow",
         "forest"
@@ -770,7 +770,7 @@
     }
   },
   "res_slaaen": {
-    "common": {
+    "all": {
       "habitats": [
         "garden"
       ],
@@ -797,7 +797,7 @@
     }
   },
   "res_hvidloegsennep": {
-    "common": {
+    "all": {
       "habitats": [
         "garden",
         "forest"
@@ -825,7 +825,7 @@
     }
   },
   "res_roedkloever": {
-    "common": {
+    "all": {
       "habitats": [
         "meadow"
       ],
@@ -854,7 +854,7 @@
     }
   },
   "res_engkarse": {
-    "common": {
+    "all": {
       "habitats": [
         "meadow"
       ],
@@ -882,7 +882,7 @@
     }
   },
   "res_champignon": {
-    "common": {
+    "all": {
       "habitats": [
         "meadow"
       ],
@@ -914,7 +914,7 @@
     }
   },
   "res_gaasefod": {
-    "common": {
+    "all": {
       "habitats": [
         "garden",
         "Mark"
@@ -943,7 +943,7 @@
     }
   },
   "res_strandasters": {
-    "common": {
+    "all": {
       "habitats": [
         "coast"
       ],
@@ -971,7 +971,7 @@
     }
   },
   "res_skivekamille": {
-    "common": {
+    "all": {
       "habitats": [
         "garden",
         "Vejkant"
@@ -1000,7 +1000,7 @@
     }
   },
   "res_hvidtjoern": {
-    "common": {
+    "all": {
       "habitats": [
         "Hegn",
         "forest"
@@ -1028,7 +1028,7 @@
     }
   },
   "res_merian": {
-    "common": {
+    "all": {
       "habitats": [
         "meadow",
         "forest"
@@ -1056,7 +1056,7 @@
     }
   },
   "res_vandmynte": {
-    "common": {
+    "all": {
       "habitats": [
         "meadow"
       ],
@@ -1083,7 +1083,7 @@
     }
   },
   "res_brunstokket": {
-    "common": {
+    "all": {
       "habitats": [
         "deciduous",
         "coniferous"
@@ -1117,7 +1117,7 @@
     }
   },
   "res_bleg_kantarel": {
-    "common": {
+    "all": {
       "habitats": [
         "deciduous"
       ],
@@ -1144,7 +1144,7 @@
     }
   },
   "res_sort_trompetsvamp": {
-    "common": {
+    "all": {
       "habitats": [
         "deciduous"
       ],
@@ -1176,7 +1176,7 @@
     }
   },
   "res_liden_kantarel": {
-    "common": {
+    "all": {
       "habitats": [
         "deciduous"
       ],
@@ -1207,7 +1207,7 @@
     }
   },
   "res_gylden_kantarel": {
-    "common": {
+    "all": {
       "habitats": [
         "deciduous",
         "coniferous"
@@ -1240,7 +1240,7 @@
     }
   },
   "res_abrikos_kantarel": {
-    "common": {
+    "all": {
       "habitats": [
         "deciduous",
         "coniferous"
@@ -1273,7 +1273,7 @@
     }
   },
   "res_svaertende_kantarel": {
-    "common": {
+    "all": {
       "habitats": [
         "deciduous"
       ],
@@ -1304,7 +1304,7 @@
     }
   },
   "res_graa_kantarel": {
-    "common": {
+    "all": {
       "habitats": [
         "deciduous"
       ],
@@ -1335,7 +1335,7 @@
     }
   },
   "res_ametyst_kantarel": {
-    "common": {
+    "all": {
       "habitats": [
         "deciduous"
       ],
@@ -1367,7 +1367,7 @@
     }
   },
   "res_spiselig_morkel": {
-    "common": {
+    "all": {
       "habitats": [
         "deciduous",
         "garden"
@@ -1399,7 +1399,7 @@
     }
   },
   "res_klor_baegermorkel": {
-    "common": {
+    "all": {
       "habitats": [
         "deciduous",
         "garden"
@@ -1431,7 +1431,7 @@
     }
   },
   "res_klokkemorkel": {
-    "common": {
+    "all": {
       "habitats": [
         "deciduous"
       ],
@@ -1462,7 +1462,7 @@
     }
   },
   "res_glat_klokkemorkel": {
-    "common": {
+    "all": {
       "habitats": [
         "deciduous",
         "garden"
@@ -1493,7 +1493,7 @@
     }
   },
   "res_kegle_morkel": {
-    "common": {
+    "all": {
       "habitats": [
         "coniferous",
         "garden"
@@ -1524,7 +1524,7 @@
     }
   },
   "res_haette_morkel": {
-    "common": {
+    "all": {
       "habitats": [
         "deciduous",
         "garden"
@@ -1555,7 +1555,7 @@
     }
   },
   "res_indigo": {
-    "common": {
+    "all": {
       "habitats": [
         "deciduous",
         "coniferous"
@@ -1589,7 +1589,7 @@
     }
   },
   "res_laerke": {
-    "common": {
+    "all": {
       "habitats": [
         "coniferous",
         "garden"
@@ -1623,7 +1623,7 @@
     }
   },
   "res_birkeskael": {
-    "common": {
+    "all": {
       "habitats": [
         "deciduous"
       ],
@@ -1655,7 +1655,7 @@
     }
   },
   "res_sommer_karljohan": {
-    "common": {
+    "all": {
       "habitats": [
         "deciduous"
       ],
@@ -1687,7 +1687,7 @@
     }
   },
   "res_roedbrun_karljohan": {
-    "common": {
+    "all": {
       "habitats": [
         "deciduous",
         "coniferous"
@@ -1721,7 +1721,7 @@
     }
   },
   "res_aspe_skael": {
-    "common": {
+    "all": {
       "habitats": [
         "deciduous"
       ],
@@ -1752,7 +1752,7 @@
     }
   },
   "res_orange_skael": {
-    "common": {
+    "all": {
       "habitats": [
         "deciduous"
       ],
@@ -1786,7 +1786,7 @@
     }
   },
   "res_rustroed_skaelroerhat": {
-    "common": {
+    "all": {
       "habitats": [
         "deciduous"
       ],
@@ -1818,7 +1818,7 @@
     }
   },
   "res_brungul_slimroerhat": {
-    "common": {
+    "all": {
       "habitats": [
         "coniferous"
       ],
@@ -1850,7 +1850,7 @@
     }
   },
   "res_roedsprukken_roerhat": {
-    "common": {
+    "all": {
       "habitats": [
         "deciduous",
         "garden"
@@ -1885,7 +1885,7 @@
     }
   },
   "res_dugget_roerhat": {
-    "common": {
+    "all": {
       "habitats": [
         "deciduous",
         "coniferous"
@@ -1918,7 +1918,7 @@
     }
   },
   "res_netstokket_indigo": {
-    "common": {
+    "all": {
       "habitats": [
         "deciduous",
         "garden"
@@ -1952,7 +1952,7 @@
     }
   },
   "res_poppel_skaelroerhat": {
-    "common": {
+    "all": {
       "habitats": [
         "deciduous",
         "garden"
@@ -1985,7 +1985,7 @@
     }
   },
   "res_tenstokket_roerhat": {
-    "common": {
+    "all": {
       "habitats": [
         "deciduous"
       ],
@@ -2017,7 +2017,7 @@
     }
   },
   "res_hvidsprukken_roerhat": {
-    "common": {
+    "all": {
       "habitats": [
         "deciduous",
         "coniferous"
@@ -2050,7 +2050,7 @@
     }
   },
   "res_sump_roerhat": {
-    "common": {
+    "all": {
       "habitats": [
         "deciduous"
       ],
@@ -2082,7 +2082,7 @@
     }
   },
   "res_glatstokket_indigo": {
-    "common": {
+    "all": {
       "habitats": [
         "deciduous"
       ],
@@ -2113,7 +2113,7 @@
     }
   },
   "res_blodroed_roerhat": {
-    "common": {
+    "all": {
       "habitats": [
         "deciduous",
         "garden"
@@ -2146,7 +2146,7 @@
     }
   },
   "res_sortblaanende_roerhat": {
-    "common": {
+    "all": {
       "habitats": [
         "deciduous",
         "garden"
@@ -2179,7 +2179,7 @@
     }
   },
   "res_hulstokket_slimroerhat": {
-    "common": {
+    "all": {
       "habitats": [
         "coniferous"
       ],
@@ -2210,7 +2210,7 @@
     }
   },
   "res_flammet_skaelroerhat": {
-    "common": {
+    "all": {
       "habitats": [
         "deciduous"
       ],
@@ -2242,7 +2242,7 @@
     }
   },
   "res_filtet_roerhat": {
-    "common": {
+    "all": {
       "habitats": [
         "deciduous",
         "coniferous"
@@ -2275,7 +2275,7 @@
     }
   },
   "res_peber_roerhat": {
-    "common": {
+    "all": {
       "habitats": [
         "deciduous",
         "coniferous"
@@ -2308,7 +2308,7 @@
     }
   },
   "res_almindelig_pigsvamp": {
-    "common": {
+    "all": {
       "habitats": [
         "deciduous",
         "coniferous"
@@ -2341,7 +2341,7 @@
     }
   },
   "res_navle_pigsvamp": {
-    "common": {
+    "all": {
       "habitats": [
         "deciduous",
         "coniferous"
@@ -2373,7 +2373,7 @@
     }
   },
   "res_roedgul_pigsvamp": {
-    "common": {
+    "all": {
       "habitats": [
         "deciduous",
         "coniferous"
@@ -2406,7 +2406,7 @@
     }
   },
   "res_krystal_stoevbold": {
-    "common": {
+    "all": {
       "habitats": [
         "deciduous",
         "coniferous"
@@ -2438,7 +2438,7 @@
     }
   },
   "res_paere_stoevbold": {
-    "common": {
+    "all": {
       "habitats": [
         "deciduous",
         "coniferous"
@@ -2470,7 +2470,7 @@
     }
   },
   "res_kaampestoevbold": {
-    "common": {
+    "all": {
       "habitats": [
         "meadow",
         "garden",
@@ -2505,7 +2505,7 @@
     }
   },
   "res_hoejstokket_stoevbold": {
-    "common": {
+    "all": {
       "habitats": [
         "deciduous",
         "meadow"
@@ -2538,7 +2538,7 @@
     }
   },
   "res_skaallet_stoevbold": {
-    "common": {
+    "all": {
       "habitats": [
         "deciduous"
       ],
@@ -2571,7 +2571,7 @@
     }
   },
   "res_almindelig_oestershat": {
-    "common": {
+    "all": {
       "habitats": [
         "deciduous"
       ],
@@ -2605,7 +2605,7 @@
     }
   },
   "res_sommer_oestershat": {
-    "common": {
+    "all": {
       "habitats": [
         "deciduous"
       ],
@@ -2638,7 +2638,7 @@
     }
   },
   "res_porcelaenshat": {
-    "common": {
+    "all": {
       "habitats": [
         "deciduous"
       ],
@@ -2669,7 +2669,7 @@
     }
   },
   "res_svovlporesvamp": {
-    "common": {
+    "all": {
       "habitats": [
         "deciduous",
         "garden"
@@ -2703,7 +2703,7 @@
     }
   },
   "res_judasoere": {
-    "common": {
+    "all": {
       "habitats": [
         "deciduous"
       ],
@@ -2743,7 +2743,7 @@
     }
   },
   "res_parykhat": {
-    "common": {
+    "all": {
       "habitats": [
         "meadow",
         "garden"
