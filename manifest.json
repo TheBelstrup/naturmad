@@ -1,9 +1,19 @@
 {
-  "short_name": "NaturMad",
-  "name": "NaturMad Sanke-App",
+  "short_name": "Wildly",
+  "name": "Wildly – Wild Food Guide",
   "icons": [
     {
-      "src": "https://cdn-icons-png.flaticon.com/512/3571/3571714.png",
+      "src": "icons/icon-180.png",
+      "type": "image/png",
+      "sizes": "180x180"
+    },
+    {
+      "src": "icons/icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "icons/icon-512.png",
       "type": "image/png",
       "sizes": "512x512"
     }
@@ -13,6 +23,4 @@
   "display": "standalone",
   "scope": "./",
   "theme_color": "#064e3b"
-
 }
-
