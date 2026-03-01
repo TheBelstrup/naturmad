@@ -313,8 +313,7 @@
 
 		async function loadInterfaceTranslations(langCode) {
 		    try {
-				const cacheBuster = `?v=${new Date().getTime()}`;
-				let response = await fetch(`data/translations.json${cacheBuster}`);
+				let response = await fetch('data/translations.json');
 				const allTranslations = await response.json();
 		        
 		        // Vi gemmer KUN det sprog vi skal bruge i 'ui'
@@ -404,8 +403,7 @@
 		}
 		
 		async function handleRegionChange(shouldRender = true) {
-			const cacheBuster = `?v=${new Date().getTime()}`;
-			const response = await fetch(`data/regions/${userSettings.country}_wizardMushroomData.json${cacheBuster}`);
+			const response = await fetch(`data/regions/${userSettings.country}_wizardMushroomData.json`);
 			const uiWizard = await response.json();
 
 			// 1. Opdater indstillingerne
@@ -450,14 +448,13 @@
 			const lang = userSettings.lang;
 			const country = userSettings.country;
 			const region = userSettings.region;
-			const cacheBuster = `?v=${new Date().getTime()}`;
 
 			try {
 				// 1. Hent de tre nødvendige filer parallelt
 				const [uniRes, langRes, regRes] = await Promise.all([
-					fetch(`data/universal.json${cacheBuster}`),
-					fetch(`data/lang/${lang}.json${cacheBuster}`),
-					fetch(`data/regions/${country}.json${cacheBuster}`)
+					fetch('data/universal.json'),
+					fetch(`data/lang/${lang}.json`),
+					fetch(`data/regions/${country}.json`)
 				]);
 		
 				const universal = await uniRes.json();
@@ -1915,10 +1912,9 @@
 		async function initApp() {
 			try {
 				// 1. Hent konfigurationen
-				const cacheBuster = `?v=${new Date().getTime()}`;
 				const [configRes, geoRes] = await Promise.all([
-				        fetch(`config.json${cacheBuster}`),
-				        fetch(`geo_data.json${cacheBuster}`)
+				        fetch('config.json'),
+				        fetch('geo_data.json')
 				    ]);
 				appConfig = await configRes.json();
 			    geoData = await geoRes.json();
@@ -1989,6 +1985,7 @@
     </script>
 </body>
 </html>
+
 
 
 
