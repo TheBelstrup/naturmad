@@ -884,7 +884,26 @@
 
 	function initOverviewMap(spots) {
 		    setTimeout(() => {
-		        const mapContainer = L.DomUtil.get('overview-map');
+				const container = document.getElementById('overview-map');
+		        if (!container) return;
+		
+		        // 1. Tjek om vi er offline
+		        if (!navigator.onLine) {
+		            container.innerHTML = `
+		                <div class="h-full w-full flex flex-col items-center justify-center bg-stone-100 text-stone-500 p-8 text-center border-2 border-dashed border-stone-200 rounded-2xl">
+		                    <div class="text-4xl mb-3 opacity-50">📡</div>
+		                    <h3 class="font-bold text-lg mb-1">${ui.offline_map_title}</h3>
+		                    <p class="text-xs font-sans leading-relaxed">
+		                        ${ui.offline_map_msg}
+		                    </p>
+		                    <button onclick="render('start')" class="mt-4 text-xs font-bold uppercase tracking-widest text-emerald-700 border-b border-emerald-700 pb-1">
+		                        ${ui.offline_map_button}
+		                    </button>
+		                </div>`;
+		            return;
+		        }
+
+				const mapContainer = L.DomUtil.get('overview-map');
 		        if (mapContainer != null) mapContainer._leaflet_id = null;
 		
 		        const overviewMap = L.map('overview-map', { zoomControl: false, attributionControl: false });
@@ -1953,11 +1972,24 @@
 		};
 
 		document.addEventListener('DOMContentLoaded', () => {
-		    initApp();
+			// Registrer Service Worker til offline brug
+		    if ('serviceWorker' in navigator) {
+		        window.addEventListener('load', () => {
+		            navigator.serviceWorker.register('./sw.js')
+		                .then((registration) => {
+		                    console.log('ServiceWorker registrering succesfuld med scope: ', registration.scope);
+		                })
+		                .catch((error) => {
+		                    console.log('ServiceWorker registrering fejlede: ', error);
+		                });
+		        });
+		    }
+			initApp();
 		});
     </script>
 </body>
 </html>
+
 
 
 
